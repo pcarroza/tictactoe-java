@@ -1,0 +1,79 @@
+@startuml
+
+abstract class SquareBoundedCoordinate {
+- adapter: Coordinate
++ int getRow()
++ int getColumn()
++ void setRow(int)
++ void setColumn(int)
++ bool isValid()
++ bool isNull()
++ ClosedInterval getLimits()
+# {abstract} int getDimension()
++ Direction getDirection(SquareBoundedCoordinate)
+- bool inInverseDiagonal()
++ void random()
++ Coordinate copy()
++ String toString()
+}
+
+interface Coordinate {
+~ NULL: Coordinate
+~ bool isNull()
+~ Direction getDirection(Coordinate)
+~ bool inHorizontal(Coordinate)
+~ bool inVertical(Coordinate)
+~ bool inDiagonal()
+}
+
+class ConcreteCoordinate {
+- row: int
+- column: int
++ int getColumn()
++ int getRow()
++ void setColumn(int)
++ void setRow(int)
++ ConcreteCoordinate copy()
++ void random()
++ bool isNull()
++ Direction getDirection(Coordinate)
++ bool inHorizontal(Coordinate)
++ bool inVertical(Coordinate)
++ bool inDiagonal()
++ String toString()
++ int hashCode()
++ bool equals(Object)
++ {static} void main(String[])
+}
+
+class NullCoordinate {
+- {static} instance: NullCoordinate
++ {static} Coordinate getInstance()
++ bool isNull()
++ Direction getDirection(Coordinate)
++ bool inHorizontal(Coordinate)
++ bool inVertical(Coordinate)
++ bool inDiagonal()
++ String toString()
++ int hashCode()
++ bool equals(Object)
+}
+
+class models.Coordinate {
++ {static} DIMENSION: int = 3
+# int getDimension()
++ String toString()
++ int hashCode()
++ bool equals(Object)
+}
+
+Coordinate <|.. ConcreteCoordinate
+Coordinate <|.. NullCoordinate
+Coordinate --> NullCoordinate
+NullCoordinate --> NullCoordinate
+SquareBoundedCoordinate --> Coordinate
+SquareBoundedCoordinate <|-- models.Coordinate
+models.Coordinate --> ConcreteCoordinate
+
+@enduml
+
