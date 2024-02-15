@@ -48,8 +48,6 @@ public abstract class SquareBoundedCoordinate {
         return new ClosedInterval<>(1, getDimension()).isIncluded(value);
     }
 
-    protected abstract int getDimension();
-
     public Direction getDirection(SquareBoundedCoordinate coordinate) {
         if (equals(coordinate) || coordinate.isNull() || isNull()) {
             return Direction.NON_EXISTENT;
@@ -69,15 +67,7 @@ public abstract class SquareBoundedCoordinate {
         return coordinate.getRow() + coordinate.getColumn() == getDimension() + 1;
     }
 
-    public void random() {
-        int row = getRandomValue(getDimension());
-        int column = getRandomValue(getDimension());
-        adapter = new ConcreteCoordinate(row, column);
-    }
-
-    private int getRandomValue(int max) {
-        return 1 + new Random(System.currentTimeMillis()).nextInt(max);
-    }
+    protected abstract int getDimension();
 
     @Override
     public String toString() {

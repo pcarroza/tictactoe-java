@@ -14,67 +14,67 @@ class LocalController {
     }
 
     protected Game getGame() {
-        return this.game;
+        return game;
     }
 
     protected int getNumberOfPlayers() {
-        return this.game.getNumberOfPlayers();
+        return game.getNumberOfPlayers();
     }
 
     public Color take() {
-        return this.game.take();
+        return game.take();
     }
 
     public void put(Coordinate target) {
         assert target != null;
-        this.game.put(target);
+        game.put(target);
     }
 
     public void remove(Coordinate origin) {
         assert origin != null;
-        this.game.remove(origin);
+        game.remove(origin);
     }
 
     public void clear() {
-        this.game.clear();
+        game.clear();
     }
 
     public boolean existTicTacToe() {
-        return this.game.existTicTacToe();
+        return game.existTicTacToe();
     }
 
     public void switchTurn() {
-        this.game.switchTurn();
+        game.switchTurn();
     }
 
     public boolean isEmpty(Coordinate coordinate) {
         assert coordinate != null;
-        return this.game.isEmpty(coordinate);
+        return game.isEmpty(coordinate);
     }
 
     public boolean isOccupiedByCurrentPlayer(Coordinate coordinate) {
         assert coordinate != null;
-        return this.game.isOccupiedByCurrentPlayer(coordinate);
+        return game.isOccupiedByCurrentPlayer(coordinate);
     }
 
     public Color getColor(Coordinate coordinate) {
         assert coordinate != null;
-        return this.game.getColor(coordinate);
+        return game.getColor(coordinate);
     }
 
     public void initialize() {
-        this.game.initialize();
+        game.initialize();
     }
 
     public void end() {
-        this.game.end();
+        game.end();
     }
 
     public void begin() {
-        this.game.begin();
+        game.begin();
     }
 
     public void exit() {
-        this.game.exit();
+        game.exit();
     }
 }

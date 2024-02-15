@@ -101,11 +101,6 @@ public class Board extends Subject {
         return coordinates.length < Coordinate.DIMENSION;
     }
 
-    private Direction getFirstCoordinateDirection() {
-        Coordinate[] coordinates = getCoordinatesCurrentPlayer();
-        return coordinates[0].getDirection(coordinates[1]);
-    }
-
     private boolean isNotTheCoordinateInDirection() {
         Direction direction = getFirstCoordinateDirection();
         return direction == Direction.NON_EXISTENT;
@@ -120,6 +115,11 @@ public class Board extends Subject {
             }
         }
         return true;
+    }
+
+    private Direction getFirstCoordinateDirection() {
+        Coordinate[] coordinates = getCoordinatesCurrentPlayer();
+        return coordinates[0].getDirection(coordinates[1]);
     }
 
     private Coordinate[] getCoordinatesCurrentPlayer() {

@@ -14,11 +14,11 @@ public class InGameState extends State {
 
     @Override
     State end() {
-        return this.statesBuilder.getEndState();
+        return statesBuilder.getEndState();
     }
 
     @Override
     LocalOperationController getController() {
-        return this.builder.getPlacementController();
+        return builder.getPlacementController();
     }
 }

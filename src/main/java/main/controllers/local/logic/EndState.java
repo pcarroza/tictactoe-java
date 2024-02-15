@@ -10,21 +10,21 @@ class EndState extends State {
 
     EndState(StatesBuilder statesBuilder, LocalOperationControllerBuilder builder) {
         super(statesBuilder);
-        this.localContinueController = builder.getContinueController();
+        localContinueController = builder.getContinueController();
     }
 
     @Override
     State initialize() {
-        return this.statesBuilder.getInitialState();
+        return statesBuilder.getInitialState();
     }
 
     @Override
     State exit() {
-        return this.statesBuilder.getExistState();
+        return statesBuilder.getExistState();
     }
 
     @Override
     LocalOperationController getController() {
-        return this.localContinueController;
+        return localContinueController;
     }
 }

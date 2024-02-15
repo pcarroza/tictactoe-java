@@ -14,31 +14,31 @@ public class LocalLogic implements Logic, Observer {
         Game game = new Game(this);
         LocalOperationControllerBuilder builder = new LocalOperationControllerBuilder(game);
         builder.build();
-        this.actualState = new StatesBuilder(builder).getInitialState();
+        actualState = new StatesBuilder(builder).getInitialState();
     }
 
     @Override
     public void initialize() {
-        this.actualState = this.actualState.initialize();
+        actualState = actualState.initialize();
     }
 
     @Override
     public void begin() {
-        this.actualState = this.actualState.begin();
+        actualState = actualState.begin();
     }
 
     @Override
     public void end() {
-        this.actualState = this.actualState.end();
+        actualState = actualState.end();
     }
 
     @Override
     public void exit() {
-        this.actualState = this.actualState.exit();
+        actualState = actualState.exit();
     }
 
     @Override
     public OperationController getController() {
-        return this.actualState.getController();
+        return actualState.getController();
     }
 }

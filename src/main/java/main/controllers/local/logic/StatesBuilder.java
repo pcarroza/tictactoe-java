@@ -13,25 +13,25 @@ public class StatesBuilder {
     private final ExitState exitState;
 
     public StatesBuilder(LocalOperationControllerBuilder builder) {
-        this.initialState = new InitialState(this, builder);
-        this.inGameState = new InGameState(this, builder);
-        this.finalState = new EndState(this, builder);
-        this.exitState = new ExitState(this);
+        initialState = new InitialState(this, builder);
+        inGameState = new InGameState(this, builder);
+        finalState = new EndState(this, builder);
+        exitState = new ExitState(this);
     }
 
     InitialState getInitialState() {
-        return this.initialState;
+        return initialState;
     }
 
     InGameState getInGameState() {
-        return this.inGameState;
+        return inGameState;
     }
 
     EndState getEndState() {
-        return this.finalState;
+        return finalState;
     }
 
     ExitState getExistState() {
-        return this.exitState;
+        return exitState;
     }
 }

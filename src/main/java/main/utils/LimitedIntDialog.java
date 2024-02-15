@@ -30,6 +30,6 @@ public class LimitedIntDialog {
     }
 
     public int read(String title, int max) {
-        return this.read(title, 1, max);
+        return read(title, 1, max);
     }
 }

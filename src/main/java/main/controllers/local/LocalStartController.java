@@ -12,13 +12,13 @@ public class LocalStartController extends LocalOperationController implements St
     public LocalStartController(Game game, LocalOperationControllerBuilder builder) {
         super(game);
         assert builder != null;
-        this.localOperationControllerBuilder = builder;
+        localOperationControllerBuilder = builder;
     }
 
     public void start(int users) {
-        assert new ClosedInterval<>(0, this.getNumberOfPlayers()).isIncluded(users);
-        this.localOperationControllerBuilder.build(users);
-        this.begin();
+        assert new ClosedInterval<>(0, getNumberOfPlayers()).isIncluded(users);
+        localOperationControllerBuilder.build(users);
+        super.begin();
     }
 
     @Override

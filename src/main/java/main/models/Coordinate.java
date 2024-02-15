@@ -3,6 +3,8 @@ package main.models;
 import main.models.board.ConcreteCoordinate;
 import main.models.board.SquareBoundedCoordinate;
 
+import java.util.Random;
+
 public class Coordinate extends SquareBoundedCoordinate {
 
     public static final int DIMENSION = 3;
@@ -17,6 +19,16 @@ public class Coordinate extends SquareBoundedCoordinate {
 
     public Coordinate() {
         this(0, 0);
+    }
+
+    public static Coordinate getCoordinateRandom() {
+        int row = getRandomValue();
+        int column = getRandomValue();
+        return new Coordinate(row, column);
+    }
+
+    private static int getRandomValue() {
+        return 1 + new Random(System.currentTimeMillis()).nextInt(Coordinate.DIMENSION);
     }
 
     @Override

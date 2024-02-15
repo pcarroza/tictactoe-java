@@ -11,9 +11,9 @@ public class LocalUserPlacementControllerBuilder extends LocalPlacementControlle
     @Override
     public void buildPlacementController() {
         LocalCoordinateController[] controllers = {
-                new LocalUserCoordinateController(this.game),
-                new LocalUserCoordinateController(this.game)
+                new LocalUserCoordinateController(super.game),
+                new LocalUserCoordinateController(super.game)
         };
-        this.buildPlacementController(controllers);
+        super.buildPlacementController(controllers);
     }
 }

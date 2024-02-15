@@ -18,34 +18,34 @@ public class LocalOperationControllerBuilder {
     }
 
     public void build() {
-        this.localStartController = new LocalStartController(this.game, this);
-        this.builders = new LocalPlacementControllerBuilder[this.game.getNumberOfPlayers()];
-        this.localContinueController = new LocalContinueController(this.game);
+        localStartController = new LocalStartController(game, this);
+        builders = new LocalPlacementControllerBuilder[game.getNumberOfPlayers()];
+        localContinueController = new LocalContinueController(game);
     }
 
     void build(int users) {
-        assert new ClosedInterval<>(0, this.game.getNumberOfPlayers()).isIncluded(users);
-        for (int i = 0; i < this.game.getNumberOfPlayers(); i++) {
+        assert new ClosedInterval<>(0, game.getNumberOfPlayers()).isIncluded(users);
+        for (int i = 0; i < game.getNumberOfPlayers(); i++) {
             if (i < users) {
-                this.builders[i] = new LocalUserPlacementControllerBuilder(this.game);
+                builders[i] = new LocalUserPlacementControllerBuilder(game);
             } else {
-                this.builders[i] = new LocalRandomPlacementControllerBuilder(this.game);
+                builders[i] = new LocalRandomPlacementControllerBuilder(game);
             }
-            this.builders[i].buildPlacementController();
+            builders[i].buildPlacementController();
         }
     }
 
     public LocalPlacementController getPlacementController() {
-        assert this.builders != null;
-        assert this.builders[this.game.getIndexCurrentPlayer()] != null;
-        return this.builders[this.game.getIndexCurrentPlayer()].getPlacementController();
+        assert builders != null;
+        assert builders[game.getIndexCurrentPlayer()] != null;
+        return builders[game.getIndexCurrentPlayer()].getPlacementController();
     }
 
     public LocalContinueController getContinueController() {
-        return this.localContinueController;
+        return localContinueController;
     }
 
     public LocalStartController getStartController() {
-        return this.localStartController;
+        return localStartController;
     }
 }

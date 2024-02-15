@@ -30,6 +30,6 @@ public abstract class LocalPlacementController extends LocalOperationController
 
     @Override
     public CoordinateController getCoordinateController() {
-        return this.coordinateController;
+        return coordinateController;
     }
 }
