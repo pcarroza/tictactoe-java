@@ -14,17 +14,17 @@ public class ErrorReportView implements ErrorReportVisitor  {
 
     @Override
     public void visit(NotEmptyErrorReport notEmptyErrorReport) {
-        this.write("Esta casilla está ocupada.", notEmptyErrorReport);
+        write("Esta casilla está ocupada.", notEmptyErrorReport);
     }
 
     @Override
     public void visit(NotPropertyErrorReport notPropertyErrorReport) {
-        this.write("Esta casilla no está ocupada por ninguna casilla.", notPropertyErrorReport);
+        write("Esta casilla no está ocupada por ninguna casilla.", notPropertyErrorReport);
     }
 
     @Override
     public void visit(RepeatedCoordinateErrorReport repeatedCoordinateErrorReport) {
-        this.write("No se puede poner donde se quito", repeatedCoordinateErrorReport);
+        write("No se puede poner donde se quito", repeatedCoordinateErrorReport);
     }
 
     private void write(String message, ErrorReport errorReport) {

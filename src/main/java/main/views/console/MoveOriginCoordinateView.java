@@ -15,18 +15,18 @@ public class MoveOriginCoordinateView extends PlacementCoordinateView {
 
     @Override
     Coordinate getCoordinate() {
-        this.origin = this.getCoordinateController().getOrigin();
-        this.getCoordinateController().accept(this);
-        return this.origin;
+        origin = getCoordinateController().getOrigin();
+        getCoordinateController().accept(this);
+        return origin;
     }
 
     @Override
     public void visit(UserCoordinateController userCoordinateController) {
-        CoordinateView.getInstance().read("De", this.origin);
+        CoordinateView.getInstance().read("De", origin);
     }
 
     @Override
     public void visit(RandomCoordinateController randomCoordinateController) {
-        this.show("quita de", this.origin);
+        this.show("quita de", origin);
     }
 }

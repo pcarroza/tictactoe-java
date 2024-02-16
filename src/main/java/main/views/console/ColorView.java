@@ -19,7 +19,7 @@ public class ColorView {
     private ColorView() {}
 
     void write(String title, Color color) {
-        Terminal.getInstance().write(title + this.getColor(color));
+        Terminal.getInstance().write(title + getColor(color));
     }
 
     void writeln(String title, Color color) {
@@ -32,7 +32,7 @@ public class ColorView {
         Terminal.getInstance().write(victory);
         final int MAX = 3;
         for (int i = 0; i < MAX; i++) {
-            Terminal.getInstance().write(this.getColor(color) + "! ");
+            Terminal.getInstance().write(getColor(color) + "! ");
         }
         Terminal.getInstance().writeln(victory);
     }

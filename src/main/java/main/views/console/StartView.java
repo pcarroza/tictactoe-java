@@ -14,6 +14,6 @@ public class StartView {
     void interact(StartController startController) {
         int users = LimitedIntDialog.instance().read("¿Cúantos Jugadores?", 0, 2);
         startController.start(users);
-        this.boardView.write(startController);
+        boardView.write(startController);
     }
 }

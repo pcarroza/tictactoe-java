@@ -14,7 +14,7 @@ public class ClosedIntervalView {
     }
 
     public void writeln() {
-        Terminal.getInstance().writeln(this.title + " " + this);
+        Terminal.getInstance().writeln(title + " " + this);
     }
 
     @Override
