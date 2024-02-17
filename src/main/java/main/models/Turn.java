@@ -12,12 +12,12 @@ public class Turn {
         value = 0;
     }
 
-    public Player getColorCurrentPlayer() {
+    public Player getCurrentPlayer() {
         return Player.values()[value];
     }
 
     public int getIndexCurrentPlayer() {
-        return this.getColorCurrentPlayer().ordinal();
+        return this.getCurrentPlayer().ordinal();
     }
 
     public void switchTurn() {

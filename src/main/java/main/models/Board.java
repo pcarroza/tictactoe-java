@@ -162,7 +162,7 @@ public class Board extends Subject {
     }
 
     public Player getColorCurrentPlayer() {
-        return turn.getColorCurrentPlayer();
+        return turn.getCurrentPlayer();
     }
 
     @Override
