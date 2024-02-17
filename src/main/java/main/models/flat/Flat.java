@@ -1,11 +1,10 @@
 package main.models.flat;
 
 import main.models.Board;
-import main.models.Color;
+import main.models.Player;
 import main.models.Coordinate;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public interface Flat {
@@ -14,11 +13,11 @@ public interface Flat {
 
     int getNumberOfPlayers();
 
-    Color getColor(Coordinate coordinate);
+    Player getColor(Coordinate coordinate);
 
     boolean isComplete();
 
-    Color take();
+    Player take();
 
     int currentPlayer();
 

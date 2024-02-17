@@ -5,7 +5,7 @@ import main.controllers.PlacementController;
 import main.controllers.PlacementControllerVisitor;
 import main.controllers.PutController;
 import main.controllers.errors.ErrorReport;
-import main.models.Color;
+import main.models.Player;
 import main.models.Coordinate;
 
 import java.util.function.Function;
@@ -46,7 +46,7 @@ public class GameView implements PlacementControllerVisitor {
         showGame(controller);
     }
 
-    private void titleMovement(String title, Color color) {
+    private void titleMovement(String title, Player color) {
         ColorView.instance().writeln(title + " el jugador ", color);
     }
 

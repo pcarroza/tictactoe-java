@@ -1,7 +1,7 @@
 package main.models.flat;
 
 import main.models.Board;
-import main.models.Color;
+import main.models.Player;
 import main.models.Coordinate;
 import main.models.Turn;
 
@@ -13,12 +13,12 @@ public class MapFlat implements Flat {
 
     private final Turn turn;
 
-    public final Map<Color, Set<Coordinate>> flat;
+    public final Map<Player, Set<Coordinate>> flat;
 
     public MapFlat() {
         this.flat = new HashMap<>();
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
-            this.flat.put(Color.values()[i], new HashSet<>());
+            this.flat.put(Player.values()[i], new HashSet<>());
         }
         this.turn = new Turn();
     }
@@ -34,7 +34,7 @@ public class MapFlat implements Flat {
     }
 
     @Override
-    public Color getColor(Coordinate coordinate) {
+    public Player getColor(Coordinate coordinate) {
         return null;
     }
 
@@ -44,7 +44,7 @@ public class MapFlat implements Flat {
     }
 
     @Override
-    public Color take() {
+    public Player take() {
         return null;
     }
 

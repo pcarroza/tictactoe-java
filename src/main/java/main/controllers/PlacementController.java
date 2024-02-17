@@ -1,12 +1,12 @@
 package main.controllers;
 
 import main.controllers.errors.ErrorReport;
-import main.models.Color;
+import main.models.Player;
 import main.models.Coordinate;
 
 public interface PlacementController extends OperationController, PresenterController {
 
-    Color take();
+    Player take();
 
     void put(Coordinate target);
 

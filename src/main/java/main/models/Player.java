@@ -1,6 +1,6 @@
 package main.models;
 
-public enum Color {
+public enum Player {
     OS,
     XS,
     NONE

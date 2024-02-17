@@ -12,8 +12,8 @@ public class Turn {
         value = 0;
     }
 
-    public Color getColorCurrentPlayer() {
-        return Color.values()[value];
+    public Player getColorCurrentPlayer() {
+        return Player.values()[value];
     }
 
     public int getIndexCurrentPlayer() {
@@ -21,6 +21,6 @@ public class Turn {
     }
 
     public void switchTurn() {
-        this.value = (value + 1) % (Color.values().length - 1);
+        this.value = (value + 1) % (Player.values().length - 1);
     }
 }
