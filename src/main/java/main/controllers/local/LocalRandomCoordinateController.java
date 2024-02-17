@@ -43,4 +43,3 @@ public class LocalRandomCoordinateController extends LocalCoordinateController
         coordinateControllerVisitor.visit(this);
     }
 }
-

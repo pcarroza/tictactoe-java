@@ -56,7 +56,7 @@ public class Game {
     }
 
     public Player getColor(Coordinate coordinate) {
-        return this.board.getColor(coordinate);
+        return this.board.getPlayer(coordinate);
     }
 
     public List<Coordinate> emptyCoordinates() {
