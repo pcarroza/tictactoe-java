@@ -1,10 +1,9 @@
 package main.models.builders;
 
 import main.models.Board;
-import main.models.Color;
+import main.models.Player;
 import main.models.Coordinate;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -15,7 +14,9 @@ public class BoardBuilder {
 
     private List<String> rows;
 
-    private static final Predicate<Character> COLORS = c -> c == 'X' || c == 'x' || c == 'O' || c == 'o';
+    private static final Predicate<Character> OS = c -> c == 'O' || c == 'o';
+
+    private static final Predicate<Character> XS = c -> c == 'X' || c == 'x';
 
     public BoardBuilder build() {
         board = new Board();
@@ -46,57 +47,63 @@ public class BoardBuilder {
     }
 
     private void buildBoardFromRows() {
-        for (int i = 0; i < this.rows.size(); i++) {
-            String rows = this.rows.get(i).replaceAll("\\s", "");
-            for (int j = 0; j < rows.length(); j++) {
-                char cell = rows.charAt(j);
-                if (COLORS.test(cell)) {
-                    Color player = cell == 'O' || cell == 'o' ? Color.OS : Color.XS;
-                    switchTurnIfNeeded(player);
-                    board.put(new Coordinate(i + 1, j + 1));
-                }
-            }
-        }
-    }
-
-    private void buildSceneryBoardFromRows() {
-        for (int i = 0; i < this.rows.size(); i++) {
-            String rows = this.rows.get(i).replaceAll("\\s", "");
-            for (int j = 0; j < rows.length(); j++) {
-                Coordinate coordinate = new Coordinate(i + 1, j + 1);
-                char cell = rows.charAt(j);
+        for (int i = 1; i <= rows.size(); i++) {
+            String rows = this.rows.get(i - 1).replaceAll("\\s", "");
+            for (int j = 1; j <= rows.length(); j++) {
+                Coordinate coordinate = new Coordinate(i, j);
+                char cell = rows.charAt(j - 1);
                 if (cell == '-' && !board.isEmpty(coordinate)) {
-                    board.remove(coordinate);
-                } else if (COLORS.test(cell)) {
-                    Color player = cell == 'O' || cell == 'o' ? Color.OS : Color.XS;
-                    switchTurnIfNeeded(player);
-                    board.put(new Coordinate(i + 1, j + 1));
+                    handleEmptyCell(coordinate);
+                } else {
+                    handleNonEmptyCell(cell, coordinate);
                 }
             }
         }
     }
 
-    private BoardBuilder switchTurnToPlayerOS() {
-        switchTurnIfNeeded(Color.OS);
+    private void handleEmptyCell(Coordinate coordinate) {
+        if (board.getPlayerCoordinates().contains(coordinate)) {
+            board.remove(coordinate);
+        } else {
+            board.switchTurn();
+            board.remove(coordinate);
+        }
+    }
+
+    private void handleNonEmptyCell(char cell, Coordinate coordinate) {
+        Player player = null;
+        if (OS.test(cell) && board.isEmpty(coordinate)) {
+            player = Player.OS;
+        } else if (XS.test(cell) && board.isEmpty(coordinate)) {
+            player = Player.XS;
+        }
+        if (player != null) {
+            switchTurnIfNeeded(player);
+            board.put(coordinate);
+        }
+    }
+
+    public BoardBuilder switchTurnToPlayerOS() {
+        switchTurnIfNeeded(Player.OS);
         return this;
     }
 
-    private BoardBuilder switchTurnToPlayerXS() {
-        switchTurnIfNeeded(Color.XS);
+    public BoardBuilder switchTurnToPlayerXS() {
+        switchTurnIfNeeded(Player.XS);
         return this;
     }
 
-    private void switchTurnIfNeeded(Color player) {
+    private void switchTurnIfNeeded(Player player) {
         if (board.getColorCurrentPlayer() != player) {
             board.switchTurn();
         }
     }
 
-    private BoardBuilder loadScenery() {
+    public BoardBuilder loadScenery() {
         return closeScenery();
     }
 
-    private BoardBuilder closeScenery() {
+    public BoardBuilder closeScenery() {
         buildBoardFromRows();
         rows.clear();
         return this;
@@ -114,25 +121,34 @@ public class BoardBuilder {
                 .put("- - -")
                 .loadScenery()
                 .put("O O -")
-                .put("- X X")
+                .put("- X -")
                 .put("- - -")
                 .loadScenery()
                 .put("O O -")
-                .put("- X X")
-                .put("- - O")
+                .put("- X -")
+                .put("- - X")
                 .loadScenery()
                 .put("O O -")
-                .put("X X X")
-                .put("- - O")
+                .put("- X -")
+                .put("- O X")
                 .loadScenery()
-                .put("O O -")
-                .put("X X X")
-                .put("- - O")
+                .put("O O X")
+                .put("- X -")
+                .put("- O X")
+                .loadScenery()
+                .put("O O X")
+                .put("- X -")
+                .put("O - X")
+                .loadScenery()
+                .put("O O X")
+                .put("- - X")
+                .put("O - X")
                 .closeScenery()
                 .switchTurnToPlayerXS()
                 .getBoard();
 
         System.out.println(board.existTicTacToe());
         board.showFlat();
+
     }
 }

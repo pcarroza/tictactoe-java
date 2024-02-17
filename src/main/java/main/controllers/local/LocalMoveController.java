@@ -19,10 +19,10 @@ public class LocalMoveController extends LocalPlacementController implements Mov
     @Override
     public void put(Coordinate target) {
         assert target != null;
-        assert this.origin != null;
-        assert this.validateTarget(this.origin, target) == null;
+        assert origin != null;
+        assert validateTarget(origin, target) == null;
         super.put(target);
-        this.origin = null;
+        origin = null;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class LocalMoveController extends LocalPlacementController implements Mov
     @Override
     public void remove(Coordinate origin) {
         assert origin != null;
-        assert this.validateOrigin(origin) == null;
+        assert validateOrigin(origin) == null;
         this.origin = origin;
         super.remove(origin);
     }

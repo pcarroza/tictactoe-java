@@ -19,19 +19,19 @@ public class MoveTargetCoordinateView extends PlacementCoordinateView {
 
     @Override
     Coordinate getCoordinate() {
-        this.getCoordinateController().accept(this);
-        return this.target;
+        getCoordinateController().accept(this);
+        return target;
     }
 
     @Override
     public void visit(UserCoordinateController userCoordinateController) {
-        this.target = userCoordinateController.getTarget();
-        CoordinateView.getInstance().read("A", this.target);
+        target = userCoordinateController.getTarget();
+        CoordinateView.getInstance().read("A", target);
     }
 
     @Override
     public void visit(RandomCoordinateController randomCoordinateController) {
-        this.target = randomCoordinateController.getTarget(this.origin);
-        this.show("pone en: ", this.target);
+        target = randomCoordinateController.getTarget(origin);
+        super.show("pone en: ", target);
     }
 }

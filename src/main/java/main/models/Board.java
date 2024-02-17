@@ -5,35 +5,33 @@ import main.utils.Direction;
 
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Board extends Subject {
 
     private static final int NUMBER_OF_PLAYERS = 2;
 
-    public final Map<Color, Set<Coordinate>> flat;
+    public final Map<Player, Set<Coordinate>> flat;
 
     private final Turn turn;
 
     public Board() {
         flat = new HashMap<>();
         for (int i = 0; i < getNumberOfPlayers(); i++) {
-            flat.put(Color.values()[i], new HashSet<>());
+            flat.put(Player.values()[i], new HashSet<>());
         }
         turn = new Turn();
     }
 
     public void put(Coordinate coordinate) {
         assert coordinate != null : "La 'coordinate' NO puede ser 'null'";
-        assert isEmpty(coordinate) : "La casilla debe estar vacía " + coordinate.toString();
+        assert isEmpty(coordinate) : "La casilla debe estar vacía " + coordinate;
         assert isIncluded(coordinate.getRow()): "La 'row' debe estar entre [1 - 3]";
         assert isIncluded(coordinate.getColumn()): "La 'column' debe estar entre [1 - 3]";
 
         flat.get(getColorCurrentPlayer()).add(coordinate);
 
         assert isMaxNumberOfColorInBoard() : "Hay más de 3 'Colors' en el 'Board'";
-        assert isOccupiedByCurrentPlayer(coordinate) : "La casilla NO está ocupada por la " + coordinate.toString();
+        assert isOccupiedByCurrentPlayer(coordinate) : "La casilla NO está ocupada por la " + coordinate;
     }
 
     private boolean isIncluded(int value) {
@@ -49,16 +47,16 @@ public class Board extends Subject {
     }
 
     public void remove(Coordinate origin) {
-        assert origin != null;
-        assert !isEmpty(origin);
+        assert origin != null: "La coordinate no peude null";
+        assert !isEmpty(origin): "El no puede estar vacío";
         flat.get(getColorCurrentPlayer()).remove(origin);
-        assert isEmpty(origin);
+        assert isEmpty(origin) : "La " + origin + "debe estár eliminada.";
     }
 
     public boolean isComplete() {
         int numberOfTokens = flat.keySet()
                 .stream()
-                .mapToInt(color -> flat.get(color).size())
+                .mapToInt(player -> flat.get(player).size())
                 .sum();
         return numberOfTokens == Coordinate.DIMENSION * flat.keySet().size();
     }
@@ -74,15 +72,15 @@ public class Board extends Subject {
 
     public boolean isEmpty(Coordinate coordinate) {
         assert coordinate != null : "La 'coordinate' NO puede ser 'null'";
-        return isEmpty(Color.OS, coordinate) && isEmpty(Color.XS, coordinate);
+        return isEmpty(Player.OS, coordinate) && isEmpty(Player.XS, coordinate);
     }
 
-    private boolean isEmpty(Color color, Coordinate coordinate) {
-        return !flat.get(color).contains(coordinate);
+    private boolean isEmpty(Player player, Coordinate coordinate) {
+        return !flat.get(player).contains(coordinate);
     }
 
     public void clear() {
-        flat.keySet().forEach(color -> flat.get(color).clear());
+        flat.keySet().forEach(player -> flat.get(player).clear());
         turn.reset();
     }
 
@@ -101,11 +99,6 @@ public class Board extends Subject {
         return coordinates.length < Coordinate.DIMENSION;
     }
 
-    private Direction getFirstCoordinateDirection() {
-        Coordinate[] coordinates = getCoordinatesCurrentPlayer();
-        return coordinates[0].getDirection(coordinates[1]);
-    }
-
     private boolean isNotTheCoordinateInDirection() {
         Direction direction = getFirstCoordinateDirection();
         return direction == Direction.NON_EXISTENT;
@@ -122,6 +115,11 @@ public class Board extends Subject {
         return true;
     }
 
+    private Direction getFirstCoordinateDirection() {
+        Coordinate[] coordinates = getCoordinatesCurrentPlayer();
+        return coordinates[0].getDirection(coordinates[1]);
+    }
+
     private Coordinate[] getCoordinatesCurrentPlayer() {
         return this.flat.get(getColorCurrentPlayer()).toArray(new Coordinate[0]);
     }
@@ -131,11 +129,11 @@ public class Board extends Subject {
     }
 
     public List<Coordinate> getEmptyCoordinates() {
-        return getCoordinates(coordinate -> getColor(coordinate) == Color.NONE);
+        return getCoordinates(coordinate -> getPlayer(coordinate) == Player.NONE);
     }
 
     public List<Coordinate> getPlayerCoordinates() {
-        return getCoordinates(coordinate -> getColor(coordinate) == getColorCurrentPlayer());
+        return getCoordinates(coordinate -> getPlayer(coordinate) == getColorCurrentPlayer());
     }
 
     private List<Coordinate> getCoordinates(Predicate<Coordinate> predicate) {
@@ -151,20 +149,20 @@ public class Board extends Subject {
         return coordinates;
     }
 
-    public Color getColor(Coordinate coordinate) {
+    public Player getPlayer(Coordinate coordinate) {
         assert coordinate != null;
         return flat.keySet().stream()
                 .filter(color -> !isEmpty(color, coordinate))
                 .findFirst()
-                .orElse(Color.NONE);
+                .orElse(Player.NONE);
     }
 
     public int getIndexCurrentPlayer() {
         return turn.getIndexCurrentPlayer();
     }
 
-    public Color getColorCurrentPlayer() {
-        return turn.getColorCurrentPlayer();
+    public Player getColorCurrentPlayer() {
+        return turn.getCurrentPlayer();
     }
 
     @Override
@@ -174,20 +172,5 @@ public class Board extends Subject {
 
     public void showFlat() {
         System.out.println(flat);
-    }
-
-    public static void main(String[] args) {
-        Board board = new Board();
-        board.put(new Coordinate(1, 1));
-        board.switchTurn();
-        board.put(new Coordinate(2, 2));
-        board.switchTurn();
-        board.put(new Coordinate(1, 2));
-        board.switchTurn();
-        board.put(new Coordinate(3, 1));
-        board.switchTurn();
-        board.put(new Coordinate(1, 3));
-
-        System.out.println(board.existTicTacToe());
     }
 }

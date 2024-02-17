@@ -12,15 +12,15 @@ public class Turn {
         value = 0;
     }
 
-    public Color getColorCurrentPlayer() {
-        return Color.values()[value];
+    public Player getCurrentPlayer() {
+        return Player.values()[value];
     }
 
     public int getIndexCurrentPlayer() {
-        return this.getColorCurrentPlayer().ordinal();
+        return this.getCurrentPlayer().ordinal();
     }
 
     public void switchTurn() {
-        this.value = (value + 1) % (Color.values().length - 1);
+        this.value = (value + 1) % (Player.values().length - 1);
     }
 }

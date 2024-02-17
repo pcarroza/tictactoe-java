@@ -16,25 +16,24 @@ public class LocalRandomCoordinateController extends LocalCoordinateController
 
     @Override
     public Coordinate getOrigin() {
-        return this.getRandomCoordinate(this::isOccupiedByCurrentPlayer);
+        return getRandomCoordinate(this::isOccupiedByCurrentPlayer);
     }
 
     @Override
     public Coordinate getTarget() {
-        return this.getRandomCoordinate(this::isEmpty);
+        return getRandomCoordinate(this::isEmpty);
     }
 
     @Override
     public Coordinate getTarget(Coordinate origin) {
         assert origin != null;
-        return this.getRandomCoordinate((coordinate) -> !origin.equals(coordinate));
+        return getRandomCoordinate((coordinate) -> !origin.equals(coordinate));
     }
 
     private Coordinate getRandomCoordinate(Predicate<Coordinate> isTrue) {
-        Coordinate coordinate = new Coordinate();
-        coordinate.random();
+        Coordinate coordinate = Coordinate.getCoordinateRandom();
         while (!isTrue.test(coordinate)) {
-            coordinate.random();
+            coordinate = Coordinate.getCoordinateRandom();
         }
         return coordinate;
     }
@@ -44,4 +43,3 @@ public class LocalRandomCoordinateController extends LocalCoordinateController
         coordinateControllerVisitor.visit(this);
     }
 }
-

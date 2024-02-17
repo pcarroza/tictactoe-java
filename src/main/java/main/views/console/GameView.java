@@ -5,7 +5,7 @@ import main.controllers.PlacementController;
 import main.controllers.PlacementControllerVisitor;
 import main.controllers.PutController;
 import main.controllers.errors.ErrorReport;
-import main.models.Color;
+import main.models.Player;
 import main.models.Coordinate;
 
 import java.util.function.Function;
@@ -22,7 +22,7 @@ public class GameView implements PlacementControllerVisitor {
     public GameView(BoardView boardView) {
         assert boardView != null;
         this.boardView = boardView;
-        this.errorReportView = new ErrorReportView();
+        errorReportView = new ErrorReportView();
     }
 
     public void interact(PlacementController placementController) {
@@ -31,22 +31,22 @@ public class GameView implements PlacementControllerVisitor {
 
     @Override
     public void visit(PutController controller) {
-        this.titleMovement("Pone ", controller.take());
-        this.put(controller, new PutTargetCoordinateView(controller.getCoordinateController()));
-        this.changeToNextPlayer(controller);
-        this.showGame(controller);
+        titleMovement("Pone ", controller.take());
+        put(controller, new PutTargetCoordinateView(controller.getCoordinateController()));
+        changeToNextPlayer(controller);
+        showGame(controller);
     }
 
     @Override
     public void visit(MoveController controller) {
-        this.titleMovement("Mueve", controller.take());
-        this.remove(controller, new MoveOriginCoordinateView(controller.getCoordinateController()));
-        this.put(controller, new MoveTargetCoordinateView(controller.getCoordinateController(), this.origin));
-        this.changeToNextPlayer(controller);
-        this.showGame(controller);
+        titleMovement("Mueve", controller.take());
+        remove(controller, new MoveOriginCoordinateView(controller.getCoordinateController()));
+        put(controller, new MoveTargetCoordinateView(controller.getCoordinateController(), origin));
+        changeToNextPlayer(controller);
+        showGame(controller);
     }
 
-    private void titleMovement(String title, Color color) {
+    private void titleMovement(String title, Player color) {
         ColorView.instance().writeln(title + " el jugador ", color);
     }
 
@@ -70,7 +70,7 @@ public class GameView implements PlacementControllerVisitor {
         Coordinate target = view.get();
         ErrorReport errorReport = controller.apply(target);
         if (errorReport != null) {
-            this.errorReportView.write(errorReport);
+            errorReportView.write(errorReport);
             target = getCoordinate(controller, view);
         }
         return target;

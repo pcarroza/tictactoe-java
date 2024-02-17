@@ -13,18 +13,18 @@ public class PutTargetCoordinateView extends PlacementCoordinateView {
 
     @Override
     Coordinate getCoordinate() {
-        this.target = this.getCoordinateController().getTarget();
-        this.getCoordinateController().accept(this);
-        return this.target;
+        target = getCoordinateController().getTarget();
+        getCoordinateController().accept(this);
+        return target;
     }
 
     @Override
     public void visit(UserCoordinateController userCoordinateController) {
-        CoordinateView.getInstance().read("En ", this.target);
+        CoordinateView.getInstance().read("En ", target);
     }
 
     @Override
     public void visit(RandomCoordinateController randomCoordinateController) {
-        this.show("pone en", this.target);
+        super.show("pone en", target);
     }
 }

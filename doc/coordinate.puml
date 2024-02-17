@@ -1,0 +1,13 @@
+@startuml
+class main.models.Coordinate {
++ {static} int DIMENSION = 3
+# int getDimension()
++ String toString()
++ int hashCode()
++ boolean equals(Object)
+}
+
+
+main.models.coordinate.SquareBoundedCoordinate <|-- main.models.Coordinate
+
+@enduml

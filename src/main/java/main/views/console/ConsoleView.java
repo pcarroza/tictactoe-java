@@ -16,9 +16,9 @@ public class ConsoleView implements View {
 
     public ConsoleView() {
         BoardView boardView = new BoardView();
-        this.startView = new StartView(boardView);
-        this.gameView = new GameView(boardView);
-        this.continueView = new ContinueView();
+        startView = new StartView(boardView);
+        gameView = new GameView(boardView);
+        continueView = new ContinueView();
     }
 
     @Override
@@ -29,16 +29,16 @@ public class ConsoleView implements View {
 
     @Override
     public void visit(StartController startController) {
-        this.startView.interact(startController);
+        startView.interact(startController);
     }
 
     @Override
     public void visit(PlacementController placementController) {
-        this.gameView.interact(placementController);
+        gameView.interact(placementController);
     }
 
     @Override
     public void visit(ContinueController continueController) {
-        this.continueView.interact(continueController);
+        continueView.interact(continueController);
     }
 }

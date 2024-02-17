@@ -10,16 +10,16 @@ public class InitialState extends State {
 
     public InitialState(StatesBuilder statesBuilder, LocalOperationControllerBuilder builder) {
         super(statesBuilder);
-        this.localStartController = builder.getStartController();
+        localStartController = builder.getStartController();
     }
 
     @Override
     State begin() {
-        return this.statesBuilder.getInGameState();
+        return statesBuilder.getInGameState();
     }
 
     @Override
     LocalOperationController getController() {
-        return this.localStartController;
+        return localStartController;
     }
 }

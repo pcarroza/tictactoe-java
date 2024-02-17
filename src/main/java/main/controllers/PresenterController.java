@@ -1,9 +1,9 @@
 package main.controllers;
 
-import main.models.Color;
+import main.models.Player;
 import main.models.Coordinate;
 
 public interface PresenterController {
 
-    Color getColor(Coordinate coordinate);
+    Player getColor(Coordinate coordinate);
 }

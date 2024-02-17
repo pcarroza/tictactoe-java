@@ -34,11 +34,11 @@ public class AssertionErrorBoardPutMethodTest {
 
     @Test(expected = AssertionError.class)
     public void givenBoard_whenOneMoreTokenIsPutOnTheOSBoard_thenAssertionError() {
-        Board boardPlayerOS = createScenarioBoardPlayerOS();
+        Board boardPlayerOS = createSceneryBoardPlayerOS();
         boardPlayerOS.put(new Coordinate(2, 1));
     }
 
-    private Board createScenarioBoardPlayerOS() {
+    private Board createSceneryBoardPlayerOS() {
         return new BoardBuilder()
                 .build()
                 .put(new Coordinate(1, 1))
@@ -49,11 +49,11 @@ public class AssertionErrorBoardPutMethodTest {
 
     @Test(expected = AssertionError.class)
     public void givenBoard_whenOneMoreTokenIsPutOnTheXSBoard_thenAssertionError() {
-        Board boardPlayerXS = createScenarioBoardPlayerXS();
+        Board boardPlayerXS = createSceneryBoardPlayerXS();
         boardPlayerXS.put(new Coordinate(2, 1));
     }
 
-    private Board createScenarioBoardPlayerXS() {
+    private Board createSceneryBoardPlayerXS() {
         return new BoardBuilder()
                 .build()
                 .switchTurn()

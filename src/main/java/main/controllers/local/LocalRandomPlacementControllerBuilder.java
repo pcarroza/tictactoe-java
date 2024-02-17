@@ -11,9 +11,9 @@ public class LocalRandomPlacementControllerBuilder extends LocalPlacementControl
     @Override
     public void buildPlacementController() {
         LocalCoordinateController[] controllers = {
-                new LocalRandomCoordinateController(this.game),
-                new LocalRandomCoordinateController(this.game)
+                new LocalRandomCoordinateController(super.game),
+                new LocalRandomCoordinateController(super.game)
         };
-        this.buildPlacementController(controllers);
+        super.buildPlacementController(controllers);
     }
 }
