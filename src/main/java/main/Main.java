@@ -1,5 +1,6 @@
 package main;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -18,5 +19,8 @@ public class Main {
         String rows = "- - -";
 
         System.out.println(rows.replaceAll("\\s", ""));
+
+        var numberOfPlayer = List.of(2,3,4,5);
+        System.out.println(numberOfPlayer);
     }
 }

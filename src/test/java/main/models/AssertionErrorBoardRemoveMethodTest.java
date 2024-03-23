@@ -5,9 +5,9 @@ import org.junit.Test;
 
 public class AssertionErrorBoardRemoveMethodTest {
 
-    private static final int ROW_NOT_SPECIFIED = 1;
+    private static final int SOME_ROW = 1;
 
-    private static final int COLUMN_NOT_SPECIFIED = 5;
+    private static final int SOME_COLUMN = Coordinate.DIMENSION;
 
     @Test(expected = AssertionError.class)
     public void givenBoard_whenTheCoordinateIsNullInTheMethodRemove_thenAssertionError() {
@@ -18,16 +18,16 @@ public class AssertionErrorBoardRemoveMethodTest {
     @Test(expected = AssertionError.class)
     public void givenBoard_whenYouWantToRemoveColorThatDoesNotExist_thenAssertionError() {
         Board board = new BoardBuilder().build().getBoard();
-        board.remove(new Coordinate(ROW_NOT_SPECIFIED, COLUMN_NOT_SPECIFIED));
+        board.remove(new Coordinate(SOME_ROW, SOME_COLUMN));
     }
 
     @Test(expected = AssertionError.class)
-    public void givenBoard_whenToRemoveAnExisting_Color_then() {
+    public void givenBoard_whenToRemoveAnExistingColor_thenAssertionError() {
         Board board = new BoardBuilder().build().getBoard();
         board.switchTurn();
-        board.put(new Coordinate(ROW_NOT_SPECIFIED, COLUMN_NOT_SPECIFIED));
-        board.remove(new Coordinate(ROW_NOT_SPECIFIED, COLUMN_NOT_SPECIFIED));
-        board.remove(new Coordinate(ROW_NOT_SPECIFIED, COLUMN_NOT_SPECIFIED));
+        board.put(new Coordinate(SOME_ROW, SOME_COLUMN));
+        board.remove(new Coordinate(SOME_ROW, SOME_COLUMN));
+        board.remove(new Coordinate(SOME_ROW, SOME_COLUMN));
     }
 }
 

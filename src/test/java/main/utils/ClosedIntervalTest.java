@@ -32,32 +32,32 @@ public class ClosedIntervalTest {
 
     @Test
     public void givenClosedInterval_whenValueEqualsMinimum_thenIsTrue() {
-        assertThat(this.closedInterval.isIncluded(MIN), is(true));
+        assertThat(closedInterval.isIncluded(MIN), is(true));
     }
 
     @Test
     public void givenClosedInterval_whenValueEqualsMaximum_thenIsTrue() {
-        assertThat(this.closedInterval.isIncluded(MAX), is(true));
+        assertThat(closedInterval.isIncluded(MAX), is(true));
     }
 
     @Test
     public void givenClosedInterval_whenValueIsLessThanMinimum_thenIsFalse() {
-        assertThat(this.closedInterval.isIncluded(MIN - 1), is(false));
+        assertThat(closedInterval.isIncluded(MIN - 1), is(false));
     }
 
     @Test
     public void givenClosedInterval_whenValueIsGreaterMinimum_thenIsTrue() {
-        assertThat(this.closedInterval.isIncluded(MIN + 1), is(true));
+        assertThat(closedInterval.isIncluded(MIN + 1), is(true));
     }
 
     @Test
     public void givenClosedInterval_whenValueIsLessThanMaximum_thenIsTrue() {
-        assertThat(this.closedInterval.isIncluded(MAX - 1), is(true));
+        assertThat(closedInterval.isIncluded(MAX - 1), is(true));
     }
 
     @Test
     public void givenClosedInterval_whenValueIsGreaterThanMaximum_thenIsFalse() {
-        assertThat(this.closedInterval.isIncluded(MAX + 1), is(false));
+        assertThat(closedInterval.isIncluded(MAX + 1), is(false));
     }
 }
 

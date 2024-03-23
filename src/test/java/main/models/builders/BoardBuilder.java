@@ -1,12 +1,54 @@
 package main.models.builders;
 
 import main.models.Board;
-import main.models.Player;
 import main.models.Coordinate;
+import main.models.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+/*
+TIP
+La clase BoardBuilder tiene como objetivo abstraer la creación de un tablero 'Board'
+para facilitar la creación de escenarios de pruebas.
+
+ Board board = new BoardBuilder()
+                .build()
+                .put("O - -")
+                .put("- - -")
+                .put("- - -")
+                .loadScenery()
+                .put("O - -")
+                .put("- X -")
+                .put("- - -")
+                .loadScenery()
+                .put("O O -")
+                .put("- X -")
+                .put("- - -")
+                .loadScenery()
+                .put("O O -")
+                .put("- X -")
+                .put("- - X")
+                .loadScenery()
+                .put("O O -")
+                .put("- X -")
+                .put("- O X")
+                .loadScenery()
+                .put("O O X")
+                .put("- X -")
+                .put("- O X")
+                .loadScenery()
+                .put("O O X")
+                .put("- X -")
+                .put("O - X")
+                .loadScenery()
+                .put("O O X")
+                .put("- - X")
+                .put("O - X")
+                .closeScenery()
+                .switchTurnToPlayerXS()
+                .getBoard();
+*/
 
 public class BoardBuilder {
 
