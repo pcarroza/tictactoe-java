@@ -128,11 +128,11 @@ public class Board extends Subject {
         return Board.NUMBER_OF_PLAYERS;
     }
 
-    public List<Coordinate> getEmptyCoordinates() {
+    public List<Coordinate> getEmptyCoordinatesCurrentPlayer() {
         return getCoordinates(coordinate -> getPlayer(coordinate) == Player.NONE);
     }
 
-    public List<Coordinate> getPlayerCoordinates() {
+    public List<Coordinate> getOccupiedCoordinatesCurrentPlayer() {
         return getCoordinates(coordinate -> getPlayer(coordinate) == getColorCurrentPlayer());
     }
 

@@ -104,7 +104,7 @@ public class BoardBuilder {
     }
 
     private void handleEmptyCell(Coordinate coordinate) {
-        if (board.getPlayerCoordinates().contains(coordinate)) {
+        if (board.getOccupiedCoordinatesCurrentPlayer().contains(coordinate)) {
             board.remove(coordinate);
         } else {
             board.switchTurn();

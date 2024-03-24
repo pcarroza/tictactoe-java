@@ -60,11 +60,11 @@ public class Game {
     }
 
     public List<Coordinate> emptyCoordinates() {
-        return this.board.getEmptyCoordinates();
+        return this.board.getEmptyCoordinatesCurrentPlayer();
     }
 
     public List<Coordinate> playerCoordinates() {
-        return this.board.getPlayerCoordinates();
+        return this.board.getOccupiedCoordinatesCurrentPlayer();
     }
 
     public void initialize() {
