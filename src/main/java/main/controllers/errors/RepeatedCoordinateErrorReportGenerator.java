@@ -6,6 +6,6 @@ public class RepeatedCoordinateErrorReportGenerator extends ErrorReportGenerator
 
     @Override
     public ErrorReport getErrorReport(Game game) {
-        return new RepeatedCoordinateErrorReport(game.emptyCoordinates());
+        return new RepeatedCoordinateErrorReport(game.getEmptyCoordinatesCurrentPlayer());
     }
 }

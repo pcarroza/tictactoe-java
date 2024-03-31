@@ -55,15 +55,15 @@ public class Game {
         return this.board.existTicTacToe();
     }
 
-    public Player getColor(Coordinate coordinate) {
+    public Player getPlayer(Coordinate coordinate) {
         return this.board.getPlayer(coordinate);
     }
 
-    public List<Coordinate> emptyCoordinates() {
+    public List<Coordinate> getEmptyCoordinatesCurrentPlayer() {
         return this.board.getEmptyCoordinatesCurrentPlayer();
     }
 
-    public List<Coordinate> playerCoordinates() {
+    public List<Coordinate> getOccupiedCoordinatesCurrentPlayer() {
         return this.board.getOccupiedCoordinatesCurrentPlayer();
     }
 

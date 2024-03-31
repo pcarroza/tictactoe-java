@@ -59,7 +59,7 @@ class LocalController {
 
     public Player getColor(Coordinate coordinate) {
         assert coordinate != null;
-        return game.getColor(coordinate);
+        return game.getPlayer(coordinate);
     }
 
     public void initialize() {

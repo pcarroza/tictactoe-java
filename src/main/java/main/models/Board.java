@@ -95,8 +95,8 @@ public class Board extends Subject {
     }
 
     private boolean isSizeCoordinatesLessThanMaximum() {
-        Coordinate[] coordinates = getCoordinatesCurrentPlayer();
-        return coordinates.length < Coordinate.DIMENSION;
+        Coordinate[] arrayOfCoordinates = getArrayOfCoordinatesCurrentPlayer();
+        return arrayOfCoordinates.length < Coordinate.DIMENSION;
     }
 
     private boolean isNotTheCoordinateInDirection() {
@@ -105,7 +105,7 @@ public class Board extends Subject {
     }
 
     private boolean areCoordinatesInSameDirection() {
-        Coordinate[] coordinates = getCoordinatesCurrentPlayer();
+        Coordinate[] coordinates = getArrayOfCoordinatesCurrentPlayer();
         Direction direction = getFirstCoordinateDirection();
         for (int i = 1; i < Coordinate.DIMENSION - 1; i++) {
             if (coordinates[i].getDirection(coordinates[i + 1]) != direction) {
@@ -116,11 +116,11 @@ public class Board extends Subject {
     }
 
     private Direction getFirstCoordinateDirection() {
-        Coordinate[] coordinates = getCoordinatesCurrentPlayer();
+        Coordinate[] coordinates = getArrayOfCoordinatesCurrentPlayer();
         return coordinates[0].getDirection(coordinates[1]);
     }
 
-    private Coordinate[] getCoordinatesCurrentPlayer() {
+    private Coordinate[] getArrayOfCoordinatesCurrentPlayer() {
         return this.flat.get(getColorCurrentPlayer()).toArray(new Coordinate[0]);
     }
 
