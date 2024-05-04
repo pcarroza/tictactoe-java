@@ -24,7 +24,7 @@ public class AssertionErrorBoardRemoveMethodTest {
     @Test(expected = AssertionError.class)
     public void givenBoard_whenToRemoveAnExistingColor_thenAssertionError() {
         Board board = new BoardBuilder().build().getBoard();
-        board.switchTurn();
+        board.next();
         board.put(new Coordinate(ROW, COLUMN));
         board.remove(new Coordinate(ROW, COLUMN));
         board.remove(new Coordinate(ROW, COLUMN));

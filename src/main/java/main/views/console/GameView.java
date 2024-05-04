@@ -56,8 +56,7 @@ public class GameView implements PlacementControllerVisitor {
     }
 
     private void put(MoveController controller, PlacementCoordinateView view) {
-        Coordinate target = getCoordinate(coordinate -> controller.validateTarget(origin, coordinate),
-                view::getCoordinate);
+        Coordinate target = getCoordinate(coordinate -> controller.validateTarget(origin, coordinate), view::getCoordinate);
         controller.put(target);
     }
 

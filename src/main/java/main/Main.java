@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        List<Integer> numbers =  IntStream.rangeClosed(1, 10).boxed().collect(Collectors.toList());
+        List<Integer> numbers =  IntStream.rangeClosed(1, 10).boxed().toList();
 
         //System.out.println(numbers);
 

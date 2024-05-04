@@ -77,7 +77,7 @@ public class BoardBuilder {
     }
 
     public BoardBuilder switchTurn() {
-        board.switchTurn();
+        board.next();
         return this;
     }
 
@@ -107,7 +107,7 @@ public class BoardBuilder {
         if (board.getOccupiedCoordinatesCurrentPlayer().contains(coordinate)) {
             board.remove(coordinate);
         } else {
-            board.switchTurn();
+            board.next();
             board.remove(coordinate);
         }
     }
@@ -137,7 +137,7 @@ public class BoardBuilder {
 
     private void switchTurnIfNeeded(Player player) {
         if (board.getColorCurrentPlayer() != player) {
-            board.switchTurn();
+            board.next();
         }
     }
 
@@ -188,9 +188,5 @@ public class BoardBuilder {
                 .closeScenery()
                 .switchTurnToPlayerXS()
                 .getBoard();
-
-        System.out.println(board.existTicTacToe());
-        board.showFlat();
-
     }
 }

@@ -20,7 +20,7 @@ public class Turn {
         return this.getCurrentPlayer().ordinal();
     }
 
-    public void switchTurn() {
+    public void next() {
         this.value = (value + 1) % (Player.values().length - 1);
     }
 }

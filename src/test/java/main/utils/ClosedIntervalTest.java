@@ -16,7 +16,7 @@ public class ClosedIntervalTest {
 
     @Before
     public void setUp() {
-        this.closedInterval = new ClosedIntervalBuilder(MIN, MAX)
+        closedInterval = new ClosedIntervalBuilder(MIN, MAX)
                 .build()
                 .getClosedInterval();
     }

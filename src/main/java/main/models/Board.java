@@ -61,8 +61,8 @@ public class Board extends Subject {
         return numberOfTokens == Coordinate.DIMENSION * flat.keySet().size();
     }
 
-    public void switchTurn() {
-        turn.switchTurn();
+    public void next() {
+        turn.next();
     }
 
     public boolean isOccupiedByCurrentPlayer(Coordinate coordinate) {
@@ -121,7 +121,7 @@ public class Board extends Subject {
     }
 
     private Coordinate[] getArrayOfCoordinatesCurrentPlayer() {
-        return this.flat.get(getColorCurrentPlayer()).toArray(new Coordinate[0]);
+        return flat.get(getColorCurrentPlayer()).toArray(new Coordinate[0]);
     }
 
     public int getNumberOfPlayers() {
@@ -168,9 +168,5 @@ public class Board extends Subject {
     @Override
     public String toString() {
         return " " + flat;
-    }
-
-    public void showFlat() {
-        System.out.println(flat);
     }
 }
