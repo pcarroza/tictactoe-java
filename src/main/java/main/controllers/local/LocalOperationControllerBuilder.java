@@ -31,7 +31,7 @@ public class LocalOperationControllerBuilder {
             } else {
                 builders[i] = new LocalRandomPlacementControllerBuilder(game);
             }
-            builders[i].buildPlacementController();
+            builders[i].build();
         }
     }
 

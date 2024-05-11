@@ -56,7 +56,7 @@ public class AssertionErrorBoardPutMethodTest {
     private Board createSceneryBoardPlayerXS() {
         return new BoardBuilder()
                 .build()
-                .switchTurn()
+                .next()
                 .put(new Coordinate(1, 1))
                 .put(new Coordinate(1, 2))
                 .put(new Coordinate(1, 3))

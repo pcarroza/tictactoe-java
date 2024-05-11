@@ -21,7 +21,7 @@ public class CompleteBoardTest {
                 .put(new Coordinate(1, 1))
                 .put(new Coordinate(1, 2))
                 .put(new Coordinate(1, 3))
-                .switchTurn()
+                .next()
                 .put(new Coordinate(2, 1))
                 .put(new Coordinate(2, 2))
                 .put(new Coordinate(2, 3))
@@ -40,7 +40,7 @@ public class CompleteBoardTest {
                 .put(new Coordinate(1, 1))
                 .put(new Coordinate(1, 2))
                 .put(new Coordinate(1, 3))
-                .switchTurn()
+                .next()
                 .put(new Coordinate(2, 1))
                 .put(new Coordinate(2, 2))
                 .getBoard();

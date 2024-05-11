@@ -76,7 +76,7 @@ public class BoardBuilder {
         return this;
     }
 
-    public BoardBuilder switchTurn() {
+    public BoardBuilder next() {
         board.next();
         return this;
     }

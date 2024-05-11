@@ -17,15 +17,12 @@ public class LimitedIntDialog {
         assert title != null;
         ClosedInterval<Integer> limits = new ClosedInterval<>(min, max);
         ClosedIntervalView limitsView = new ClosedIntervalView("El valor debe estar entre ", limits);
-        int value;
-        boolean ok;
-        do {
-            value = Terminal.getInstance().readInt(title + " " + limitsView + ": ");
-            ok = limits.isIncluded(value);
-            if (!ok) {
-                limitsView.writeln();
-            }
-        } while (!ok);
+        int value = Terminal.getInstance().readInt(title + " " + limitsView + ": ");
+        boolean ok = limits.isIncluded(value);
+        if (!ok) {
+            limitsView.writeln();
+            value = read(title, min, max);
+        }
         return value;
     }
 

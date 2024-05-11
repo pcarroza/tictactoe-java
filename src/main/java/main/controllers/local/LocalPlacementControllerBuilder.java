@@ -16,9 +16,9 @@ public abstract class LocalPlacementControllerBuilder {
         controllers = new LocalPlacementController[2];
     }
 
-    public abstract void buildPlacementController();
+    public abstract void build();
 
-    void buildPlacementController(LocalCoordinateController[] localCoordinateControllers) {
+    void build(LocalCoordinateController[] localCoordinateControllers) {
         assert localCoordinateControllers != null;
         for (int i = 0; i < game.getNumberOfPlayers(); i++) {
             assert localCoordinateControllers[i] != null;

@@ -1,9 +1,7 @@
 package main.controllers.local;
 
 import main.controllers.CoordinateController;
-import main.controllers.OperationControllerVisitor;
 import main.controllers.PlacementController;
-import main.controllers.PlacementControllerVisitor;
 import main.controllers.errors.ErrorGeneratorType;
 import main.controllers.errors.ErrorReport;
 import main.models.Coordinate;
@@ -12,12 +10,12 @@ import main.models.Game;
 public abstract class LocalPlacementController extends LocalOperationController
     implements PlacementController {
 
-    private final LocalCoordinateController coordinateController;
+    private final LocalCoordinateController localCoordinateController;
 
-    public LocalPlacementController(Game game, LocalCoordinateController coordinateController) {
+    public LocalPlacementController(Game game, LocalCoordinateController localCoordinateController) {
         super(game);
-        assert coordinateController != null;
-        this.coordinateController = coordinateController;
+        assert localCoordinateController != null;
+        this.localCoordinateController = localCoordinateController;
     }
 
     @Override
@@ -28,8 +26,7 @@ public abstract class LocalPlacementController extends LocalOperationController
         return null;
     }
 
-    @Override
     public CoordinateController getCoordinateController() {
-        return coordinateController;
+        return localCoordinateController;
     }
 }
