@@ -26,7 +26,7 @@ public class RemoveMethodBoardTest {
 
     @Parameters
     public static Collection<Coordinate[]> parameters() {
-        return Arrays.asList(new Coordinate[][]{
+        return Arrays.asList(new Coordinate[][] {
                 {new Coordinate(1, 1)},
                 {new Coordinate(1, 2)},
                 {new Coordinate(1, 3)},

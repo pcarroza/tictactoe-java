@@ -7,7 +7,7 @@ import java.util.Random;
 
 public abstract class SquareBoundedCoordinate {
 
-    private Coordinate adapter;
+    private final Coordinate adapter;
 
     public SquareBoundedCoordinate(int row, int column) {
         adapter = new ConcreteCoordinate(row, column);
