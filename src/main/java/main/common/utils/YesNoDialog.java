@@ -1,4 +1,4 @@
-package main.utils;
+package main.common.utils;
 
 import java.util.function.Predicate;
 

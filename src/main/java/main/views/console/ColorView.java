@@ -1,7 +1,7 @@
 package main.views.console;
 
 import main.models.Player;
-import main.utils.Terminal;
+import main.common.utils.Terminal;
 
 public class ColorView {
 

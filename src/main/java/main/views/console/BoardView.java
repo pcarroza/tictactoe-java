@@ -2,9 +2,7 @@ package main.views.console;
 
 import main.controllers.PresenterController;
 import main.models.Coordinate;
-import main.utils.Terminal;
-
-import java.util.stream.IntStream;
+import main.common.utils.Terminal;
 
 public class BoardView {
 

@@ -1,8 +1,8 @@
 package main.views.console;
 
 import main.controllers.StartController;
-import main.utils.LimitedIntDialog;
-import main.utils.constants.Constants;
+import main.common.utils.LimitedIntDialog;
+import main.common.constants.Constants;
 
 public class StartView {
 

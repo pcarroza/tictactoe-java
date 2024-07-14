@@ -2,7 +2,7 @@ package main.controllers.local;
 
 import main.controllers.OperationControllerVisitor;
 import main.controllers.StartController;
-import main.utils.ClosedInterval;
+import main.common.utils.ClosedInterval;
 import main.models.Game;
 
 public class LocalStartController extends LocalOperationController implements StartController {

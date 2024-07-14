@@ -1,7 +1,7 @@
 package main.views.console;
 
 import main.controllers.ContinueController;
-import main.utils.YesNoDialog;
+import main.common.utils.YesNoDialog;
 
 public class ContinueView {
     public void interact(ContinueController continueController) {

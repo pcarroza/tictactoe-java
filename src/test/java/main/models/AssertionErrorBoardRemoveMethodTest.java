@@ -30,4 +30,3 @@ public class AssertionErrorBoardRemoveMethodTest {
         board.remove(new Coordinate(ROW, COLUMN));
     }
 }
-

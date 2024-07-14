@@ -1,7 +1,7 @@
 package main.controllers.local;
 
 import main.models.Game;
-import main.utils.ClosedInterval;
+import main.common.utils.ClosedInterval;
 
 public class LocalOperationControllerBuilder {
 

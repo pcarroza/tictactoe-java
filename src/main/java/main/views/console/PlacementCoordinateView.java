@@ -3,7 +3,7 @@ package main.views.console;
 import main.controllers.CoordinateController;
 import main.controllers.CoordinateControllerVisitor;
 import main.models.Coordinate;
-import main.utils.Terminal;
+import main.common.utils.Terminal;
 
 abstract class PlacementCoordinateView implements CoordinateControllerVisitor {
 

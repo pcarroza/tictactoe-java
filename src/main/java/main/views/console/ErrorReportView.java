@@ -2,7 +2,7 @@ package main.views.console;
 
 import main.controllers.errors.*;
 import main.models.Coordinate;
-import main.utils.Terminal;
+import main.common.utils.Terminal;
 
 import java.util.Iterator;
 

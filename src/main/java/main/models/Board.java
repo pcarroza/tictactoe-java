@@ -1,14 +1,15 @@
 package main.models;
 
-import main.utils.ClosedInterval;
-import main.utils.Direction;
+import main.common.utils.ClosedInterval;
+import main.common.utils.Direction;
+import main.common.constants.Constants;
 
 import java.util.*;
 import java.util.function.Predicate;
 
 public class Board extends Subject {
 
-    private static final int NUMBER_OF_PLAYERS = 2;
+    private static final int NUMBER_OF_PLAYERS = Constants.NUMBER_OF_PLAYERS;
 
     public final Map<Player, Set<Coordinate>> flat;
 

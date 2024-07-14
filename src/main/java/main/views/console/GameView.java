@@ -5,8 +5,8 @@ import main.controllers.PlacementController;
 import main.controllers.PlacementControllerVisitor;
 import main.controllers.PutController;
 import main.controllers.errors.ErrorReport;
-import main.models.Player;
 import main.models.Coordinate;
+import main.models.Player;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -56,7 +56,8 @@ public class GameView implements PlacementControllerVisitor {
     }
 
     private void put(MoveController controller, PlacementCoordinateView view) {
-        Coordinate target = getCoordinate(coordinate -> controller.validateTarget(origin, coordinate), view::getCoordinate);
+        Coordinate target;
+        target = getCoordinate(coordinate -> controller.validateTarget(origin, coordinate), view::getCoordinate);
         controller.put(target);
     }
 

@@ -1,6 +1,6 @@
 package main.models.board;
 
-import main.utils.Direction;
+import main.common.utils.Direction;
 
 public interface Coordinate {
 

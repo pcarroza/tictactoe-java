@@ -2,12 +2,13 @@ package main.models;
 
 import main.models.board.ConcreteCoordinate;
 import main.models.board.SquareBoundedCoordinate;
+import main.common.constants.Constants;
 
 import java.util.Random;
 
 public class Coordinate extends SquareBoundedCoordinate {
 
-    public static final int DIMENSION = 3;
+    public static final int DIMENSION = Constants.DIMENSION;
 
     public Coordinate(ConcreteCoordinate coordinate) {
         super(coordinate);

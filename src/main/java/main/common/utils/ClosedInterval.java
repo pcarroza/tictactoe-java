@@ -1,4 +1,4 @@
-package main.utils;
+package main.common.utils;
 
 public record ClosedInterval<T extends Number & Comparable<T>>(T min, T max) {
 

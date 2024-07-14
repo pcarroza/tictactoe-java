@@ -1,5 +1,6 @@
 package main.utils;
 
+import main.common.utils.ClosedInterval;
 import main.models.Coordinate;
 import main.utils.builder.ClosedIntervalBuilder;
 import org.junit.Before;

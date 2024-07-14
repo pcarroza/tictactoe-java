@@ -1,9 +1,7 @@
 package main.models.board;
 
-import main.utils.ClosedInterval;
-import main.utils.Direction;
-
-import java.util.Random;
+import main.common.utils.ClosedInterval;
+import main.common.utils.Direction;
 
 public abstract class SquareBoundedCoordinate {
 
@@ -44,7 +42,7 @@ public abstract class SquareBoundedCoordinate {
         return isIncluded(coordinate.getRow()) && isIncluded(coordinate.getColumn());
     }
 
-    public boolean isIncluded(int value) {
+    private boolean isIncluded(int value) {
         return new ClosedInterval<>(1, getDimension()).isIncluded(value);
     }
 

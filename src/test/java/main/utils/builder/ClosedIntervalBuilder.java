@@ -1,6 +1,6 @@
 package main.utils.builder;
 
-import main.utils.ClosedInterval;
+import main.common.utils.ClosedInterval;
 
 public class ClosedIntervalBuilder extends IntervalBuilder {
 

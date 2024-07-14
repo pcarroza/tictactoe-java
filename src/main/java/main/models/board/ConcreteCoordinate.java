@@ -1,7 +1,7 @@
 package main.models.board;
 
-import main.utils.ClosedInterval;
-import main.utils.Direction;
+import main.common.utils.ClosedInterval;
+import main.common.utils.Direction;
 
 import java.text.MessageFormat;
 import java.util.Objects;
