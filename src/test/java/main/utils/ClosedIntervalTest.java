@@ -12,7 +12,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ClosedIntervalTest {
 
     private final int MIN = 1;
+
     private final int MAX = Coordinate.DIMENSION;
+
     private ClosedInterval<Integer> closedInterval;
 
     @Before
