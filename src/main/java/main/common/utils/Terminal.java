@@ -19,47 +19,31 @@ public class Terminal {
     private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public String readString(String title) {
-        String input = null;
-        boolean ok = false;
-        do {
-            this.write(title);
-            try {
-                input = reader.readLine();
-                ok = true;
-            } catch (Exception ex) {
-                this.writeError("de cadena de caracteres.");
-            }
-        } while (!ok);
-        return input;
+        this.write(title);
+        try {
+            return reader.readLine();
+        } catch (Exception ex) {
+            this.writeError("de cadena de caracteres.");
+            return this.readString(title);
+        }
     }
 
     public int readInt(String title) {
-        int input = 0;
-        boolean ok = false;
-        do {
-            try {
-                input = Integer.parseInt(this.readString(title));
-                ok = true;
-            } catch (Exception ex) {
-                this.writeError("entero");
-            }
-        } while(!ok);
-        return input;
+        try {
+            return Integer.parseInt(this.readString(title));
+        } catch (Exception ex) {
+            this.writeError("entero");
+            return this.readInt(title);
+        }
     }
 
     public char readChar(String title) {
-        char charValue = ' ';
-        boolean ok = false;
-        do {
-            String input = this.readString(title);
-            if (input.length() != 1) {
-                this.writeError("caracter");
-            } else {
-                charValue = input.charAt(0);
-                ok = true;
-            }
-        } while (!ok);
-        return charValue;
+        String input = this.readString(title);
+        if (input.length() != 1) {
+            this.writeError("caracter");
+            return this.readChar(title);
+        }
+        return input.charAt(0);
     }
 
     public void writeln() {

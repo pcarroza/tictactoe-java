@@ -33,7 +33,7 @@ public class GameView implements PlacementControllerVisitor {
     public void visit(PutController controller) {
         titleMovement("Pone ", controller.take());
         put(controller, new PutTargetCoordinateView(controller.getCoordinateController()));
-        changeToNextPlayer(controller);
+        nextToPlayer(controller);
         showGame(controller);
     }
 
@@ -42,7 +42,7 @@ public class GameView implements PlacementControllerVisitor {
         titleMovement("Mueve", controller.take());
         remove(controller, new MoveOriginCoordinateView(controller.getCoordinateController()));
         put(controller, new MoveTargetCoordinateView(controller.getCoordinateController(), origin));
-        changeToNextPlayer(controller);
+        nextToPlayer(controller);
         showGame(controller);
     }
 
@@ -76,7 +76,7 @@ public class GameView implements PlacementControllerVisitor {
         return target;
     }
 
-    private void changeToNextPlayer(PlacementController placementController) {
+    private void nextToPlayer(PlacementController placementController) {
         if (!placementController.existTicTacToe()) {
             placementController.switchTurn();
         }

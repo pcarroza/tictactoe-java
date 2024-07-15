@@ -39,16 +39,6 @@ public class ConcreteCoordinate implements Coordinate {
         this.row = row;
     }
 
-    public ConcreteCoordinate copy() {
-        return new ConcreteCoordinate(getRow(), getColumn());
-    }
-
-    public void random() {
-        Random random = new Random(System.currentTimeMillis());
-        setRow(random.nextInt(main.models.Coordinate.DIMENSION));
-        setColumn(random.nextInt(main.models.Coordinate.DIMENSION));
-    }
-
     @Override
     public boolean isNull() {
         return false;

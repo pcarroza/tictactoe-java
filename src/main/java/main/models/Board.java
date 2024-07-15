@@ -1,8 +1,8 @@
 package main.models;
 
+import main.common.constants.Constants;
 import main.common.utils.ClosedInterval;
 import main.common.utils.Direction;
-import main.common.constants.Constants;
 
 import java.util.*;
 import java.util.function.Predicate;

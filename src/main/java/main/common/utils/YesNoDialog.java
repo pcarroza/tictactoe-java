@@ -18,12 +18,11 @@ public class YesNoDialog {
     public boolean read(String title) {
         assert title != null;
         char answer;
-        do {
-            answer = Terminal.getInstance().readChar(title + " (s/n):");
-            if (!ANSWERS.test(answer)) {
-                Terminal.getInstance().writeln("El valor de ser 's' o 'n'");
-            }
-        } while (!ANSWERS.test(answer));
+        answer = Terminal.getInstance().readChar(title + " (s/n):");
+        if (!ANSWERS.test(answer)) {
+            Terminal.getInstance().writeln("El valor de ser 's' o 'n'");
+            return this.read(title);
+        }
         return answer == 's' || answer == 'S';
     }
 }
