@@ -18,13 +18,10 @@ public abstract class TicTacToe {
     protected abstract View getView();
 
     public void run() {
-        OperationController controller;
-        do {
-            controller = this.logic.getController();
-            if (controller != null) {
-                this.view.interact(controller);
-            }
-        } while (controller != null);
+        OperationController controller = logic.getController();
+        if (controller != null) {
+            view.interact(controller);
+            run();
+        }
     }
 }
-

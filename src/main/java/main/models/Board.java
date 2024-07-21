@@ -63,7 +63,7 @@ public class Board extends Subject {
     }
 
     public void next() {
-        turn.next();
+        turn.switchToNextPlayer();
     }
 
     public boolean isOccupiedByCurrentPlayer(Coordinate coordinate) {
@@ -101,8 +101,7 @@ public class Board extends Subject {
     }
 
     private boolean isNotTheCoordinateInDirection() {
-        Direction direction = getFirstCoordinateDirection();
-        return direction == Direction.NON_EXISTENT;
+        return Direction.NON_EXISTENT == getFirstCoordinateDirection();
     }
 
     private boolean areCoordinatesInSameDirection() {

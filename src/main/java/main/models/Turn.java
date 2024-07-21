@@ -17,10 +17,10 @@ public class Turn {
     }
 
     public int getIndexCurrentPlayer() {
-        return this.getCurrentPlayer().ordinal();
+        return getCurrentPlayer().ordinal();
     }
 
-    public void next() {
+    public void switchToNextPlayer() {
         this.value = (value + 1) % (Player.values().length - 1);
     }
 }
