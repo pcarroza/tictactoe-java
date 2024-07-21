@@ -1,8 +1,8 @@
 package main.views.console;
 
-import main.models.Coordinate;
 import main.common.utils.LimitedIntDialog;
 import main.common.utils.Terminal;
+import main.models.Coordinate;
 
 public class CoordinateView {
 

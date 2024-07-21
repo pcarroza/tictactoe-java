@@ -2,8 +2,9 @@ package main.models.board;
 
 import main.common.utils.ClosedInterval;
 import main.common.utils.Direction;
+import main.models.flat.MapFlat;
 
-public abstract class SquareBoundedCoordinate {
+public abstract class SquareBoundedCoordinate extends MapFlat {
 
     private final Coordinate adapter;
 

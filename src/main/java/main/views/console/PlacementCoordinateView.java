@@ -24,5 +24,4 @@ abstract class PlacementCoordinateView implements CoordinateControllerVisitor {
     protected CoordinateController getCoordinateController() {
         return coordinateController;
     }
-
 }
