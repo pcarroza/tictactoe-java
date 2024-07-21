@@ -18,13 +18,9 @@ public class CompleteBoardTest {
     public Board createSceneryBoardComplete() {
         return new BoardBuilder()
                 .build()
-                .put(new Coordinate(1, 1))
-                .put(new Coordinate(1, 2))
-                .put(new Coordinate(1, 3))
-                .next()
-                .put(new Coordinate(2, 1))
-                .put(new Coordinate(2, 2))
-                .put(new Coordinate(2, 3))
+                .put("O O O")
+                .put("X X X")
+                .put("- - -")
                 .getBoard();
     }
 
@@ -37,12 +33,9 @@ public class CompleteBoardTest {
     public Board createSceneryBoardNotComplete() {
         return new BoardBuilder()
                 .build()
-                .put(new Coordinate(1, 1))
-                .put(new Coordinate(1, 2))
-                .put(new Coordinate(1, 3))
-                .next()
-                .put(new Coordinate(2, 1))
-                .put(new Coordinate(2, 2))
+                .put("O O O")
+                .put("X X -")
+                .put("- - -")
                 .getBoard();
     }
 }

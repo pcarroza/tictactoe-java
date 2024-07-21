@@ -19,9 +19,7 @@ public class ClosedIntervalTest {
 
     @Before
     public void setUp() {
-        closedInterval = new ClosedIntervalBuilder(MIN, MAX)
-                .build()
-                .getClosedInterval();
+        closedInterval = new ClosedIntervalBuilder(MIN, MAX).build().getClosedInterval();
     }
 
     @Test(expected = AssertionError.class)
