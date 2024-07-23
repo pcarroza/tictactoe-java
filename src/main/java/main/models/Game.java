@@ -28,7 +28,7 @@ public class Game {
     }
 
     public void switchTurn() {
-        this.board.next();
+        this.board.switchToNextPlayer();
     }
 
     public boolean isOccupiedByCurrentPlayer(Coordinate origin) {

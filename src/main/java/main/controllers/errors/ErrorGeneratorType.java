@@ -14,6 +14,6 @@ public enum ErrorGeneratorType {
     }
 
     public ErrorReport getErrorReport(Game game) {
-        return this.errorReportGenerator.getErrorReport(game);
+        return errorReportGenerator.getErrorReport(game);
     }
 }

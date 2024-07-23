@@ -1,11 +1,12 @@
 package main.views.console;
 
+import main.common.utils.Terminal;
 import main.controllers.CoordinateController;
 import main.controllers.CoordinateControllerVisitor;
 import main.models.Coordinate;
-import main.common.utils.Terminal;
+import main.views.console.tools.GameManager;
 
-abstract class PlacementCoordinateView implements CoordinateControllerVisitor {
+public abstract class PlacementCoordinateView implements CoordinateControllerVisitor {
 
     private final CoordinateController coordinateController;
 
@@ -14,7 +15,7 @@ abstract class PlacementCoordinateView implements CoordinateControllerVisitor {
         this.coordinateController = coordinateController;
     }
 
-    abstract Coordinate getCoordinate();
+    public abstract Coordinate getCoordinate();
 
     protected void show(String infix, Coordinate coordinate) {
         CoordinateView.getInstance().write("La maquina " + infix + " ", coordinate);
@@ -23,5 +24,9 @@ abstract class PlacementCoordinateView implements CoordinateControllerVisitor {
 
     protected CoordinateController getCoordinateController() {
         return coordinateController;
+    }
+
+    public void setCoordinateOrigin(Coordinate coordinate) {
+        assert false;
     }
 }

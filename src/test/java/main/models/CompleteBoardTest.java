@@ -11,31 +11,23 @@ public class CompleteBoardTest {
 
     @Test
     public void givenBoard_WhenSixTokenArePutOnBoard_ThenIsCompleteIsTrue() {
-        Board boardComplete = createSceneryBoardComplete();
-        assertThat(boardComplete.isComplete(), is(equalTo(true)));
-    }
-
-    public Board createSceneryBoardComplete() {
-        return new BoardBuilder()
+        Board boardComplete = new BoardBuilder()
                 .build()
                 .put("O O O")
                 .put("X X X")
                 .put("- - -")
                 .getBoard();
+        assertThat(boardComplete.isComplete(), is(equalTo(true)));
     }
 
     @Test
     public void givenBoard_WhenTokensLessThanSixArePutOnBoard_ThenIsCompleteIsFalse() {
-        Board boardNotComplete = createSceneryBoardNotComplete();
-        assertThat(boardNotComplete.isComplete(), is(false));
-    }
-
-    public Board createSceneryBoardNotComplete() {
-        return new BoardBuilder()
+        Board boardNotComplete = new BoardBuilder()
                 .build()
                 .put("O O O")
                 .put("X X -")
                 .put("- - -")
                 .getBoard();
+        assertThat(boardNotComplete.isComplete(), is(false));
     }
 }

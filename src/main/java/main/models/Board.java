@@ -62,7 +62,7 @@ public class Board extends Subject {
         return numberOfTokens == Coordinate.DIMENSION * flat.keySet().size();
     }
 
-    public void next() {
+    public void switchToNextPlayer() {
         turn.switchToNextPlayer();
     }
 

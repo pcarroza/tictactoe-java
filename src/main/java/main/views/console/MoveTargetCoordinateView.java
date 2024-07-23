@@ -1,13 +1,14 @@
 package main.views.console;
 
+import main.controllers.CoordinateController;
 import main.controllers.RandomCoordinateController;
 import main.controllers.UserCoordinateController;
-import main.controllers.CoordinateController;
 import main.models.Coordinate;
+import main.views.console.tools.GameManager;
 
 public class MoveTargetCoordinateView extends PlacementCoordinateView {
 
-    private final Coordinate origin;
+    private Coordinate origin;
 
     private Coordinate target;
 
@@ -18,9 +19,13 @@ public class MoveTargetCoordinateView extends PlacementCoordinateView {
     }
 
     @Override
-    Coordinate getCoordinate() {
+    public Coordinate getCoordinate() {
         getCoordinateController().accept(this);
         return target;
+    }
+
+    public void setCoordinateOrigin(Coordinate coordinate) {
+        origin = coordinate;
     }
 
     @Override

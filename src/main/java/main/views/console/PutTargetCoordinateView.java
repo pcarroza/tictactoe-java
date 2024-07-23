@@ -1,7 +1,10 @@
 package main.views.console;
 
-import main.controllers.*;
+import main.controllers.CoordinateController;
+import main.controllers.RandomCoordinateController;
+import main.controllers.UserCoordinateController;
 import main.models.Coordinate;
+import main.views.console.tools.GameManager;
 
 public class PutTargetCoordinateView extends PlacementCoordinateView {
 
@@ -12,7 +15,7 @@ public class PutTargetCoordinateView extends PlacementCoordinateView {
     }
 
     @Override
-    Coordinate getCoordinate() {
+    public Coordinate getCoordinate() {
         target = getCoordinateController().getTarget();
         getCoordinateController().accept(this);
         return target;

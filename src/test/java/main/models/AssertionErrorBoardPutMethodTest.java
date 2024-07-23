@@ -34,32 +34,24 @@ public class AssertionErrorBoardPutMethodTest {
 
     @Test(expected = AssertionError.class)
     public void givenBoard_whenOneMoreTokenIsPutOnTheOSBoard_thenAssertionError() {
-        Board boardPlayerOS = createSceneryBoardPlayerOS();
-        boardPlayerOS.put(new Coordinate(2, 1));
-    }
-
-    private Board createSceneryBoardPlayerOS() {
-        return new BoardBuilder()
+        Board boardPlayerOS = new BoardBuilder()
                 .build()
-                .put(new Coordinate(1, 1))
-                .put(new Coordinate(1, 2))
-                .put(new Coordinate(1, 3))
+                .put("O O O")
+                .put("- - -")
+                .put("- - -")
                 .getBoard();
+        boardPlayerOS.put(new Coordinate(2, 1));
     }
 
     @Test(expected = AssertionError.class)
     public void givenBoard_whenOneMoreTokenIsPutOnTheXSBoard_thenAssertionError() {
-        Board boardPlayerXS = createSceneryBoardPlayerXS();
-        boardPlayerXS.put(new Coordinate(2, 1));
-    }
-
-    private Board createSceneryBoardPlayerXS() {
-        return new BoardBuilder()
+        Board boardPlayerXS = new BoardBuilder()
                 .build()
-                .next()
-                .put(new Coordinate(1, 1))
-                .put(new Coordinate(1, 2))
-                .put(new Coordinate(1, 3))
+                .switchToNextPlayer()
+                .put("X X X")
+                .put("- - -")
+                .put("- - -")
                 .getBoard();
+        boardPlayerXS.put(new Coordinate(2, 1));
     }
 }

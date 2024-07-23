@@ -14,7 +14,7 @@ public abstract class ErrorReport {
     }
 
     public Iterator<Coordinate> iterator() {
-        return this.coordinates.iterator();
+        return coordinates.iterator();
     }
 
     public abstract void accept(ErrorReportVisitor errorReportVisitor);

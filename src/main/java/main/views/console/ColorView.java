@@ -22,12 +22,12 @@ public class ColorView {
         Terminal.getInstance().write(title + getColor(color));
     }
 
-    void writeln(String title, Player color) {
+    public void writeln(String title, Player color) {
         this.write(title, color);
         Terminal.getInstance().writeln();
     }
 
-    void writeWinner(Player color) {
+    public void writeWinner(Player color) {
         String victory = "Victoria!!!!";
         Terminal.getInstance().write(victory);
         final int MAX = 3;

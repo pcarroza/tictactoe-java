@@ -53,7 +53,7 @@ public class RemoveMethodBoardTest {
 
     @Test
     public void givenBoard_whenAnPlayerXS_PutAndRemoveAnCoordinateValid_thenIsEmptyHasToTrue() {
-        board.next();
+        board.switchToNextPlayer();
         board.put(coordinate);
         board.remove(coordinate);
         assertThat(board.isEmpty(coordinate), is(true));
