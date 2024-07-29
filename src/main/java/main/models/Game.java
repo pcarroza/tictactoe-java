@@ -7,79 +7,79 @@ public class Game {
     private final Board board;
 
     public Game(Observer observer) {
-        this.board = new Board();
-        this.board.subscribe(observer);
+        board = new Board();
+        board.subscribe(observer);
     }
 
     public void put(Coordinate target) {
-        this.board.put(target);
+        board.put(target);
     }
 
     public void remove(Coordinate origin) {
-        this.board.remove(origin);
+        board.remove(origin);
     }
 
     public Player take() {
-        return this.board.getColorCurrentPlayer();
+        return board.getColorCurrentPlayer();
     }
 
     public int getIndexCurrentPlayer() {
-        return this.board.getIndexCurrentPlayer();
+        return board.getIndexCurrentPlayer();
     }
 
     public void switchTurn() {
-        this.board.switchToNextPlayer();
+        board.switchToNextPlayer();
     }
 
     public boolean isOccupiedByCurrentPlayer(Coordinate origin) {
-        return this.board.isOccupiedByCurrentPlayer(origin);
+        return board.isOccupiedByCurrentPlayer(origin);
     }
 
     public boolean isEmpty(Coordinate target) {
-        return this.board.isEmpty(target);
+        return board.isEmpty(target);
     }
 
     public int getNumberOfPlayers() {
-        return this.board.getNumberOfPlayers();
+        return board.getNumberOfPlayers();
     }
 
     public void clear() {
-        this.board.clear();
+        board.clear();
     }
 
     public boolean isComplete() {
-        return this.board.isComplete();
+        return board.isComplete();
     }
 
     public boolean existTicTacToe() {
-        return this.board.existTicTacToe();
+        return board.existTicTacToe();
     }
 
     public Player getPlayer(Coordinate coordinate) {
-        return this.board.getPlayer(coordinate);
+        return board.getPlayer(coordinate);
     }
 
     public List<Coordinate> getEmptyCoordinatesCurrentPlayer() {
-        return this.board.getEmptyCoordinatesCurrentPlayer();
+        return board.getEmptyCoordinatesCurrentPlayer();
     }
 
     public List<Coordinate> getOccupiedCoordinatesCurrentPlayer() {
-        return this.board.getOccupiedCoordinatesCurrentPlayer();
+        return board.getOccupiedCoordinatesCurrentPlayer();
     }
 
     public void initialize() {
-        this.board.initialize();
+        board.initialize();
     }
 
     public void begin() {
-        this.board.begin();
+        board.begin();
     }
     
     public void end() {
-        this.board.end();
+        board.end();
     }
 
     public void exit() {
-        this.board.exit();
+        board.exit();
     }
 }

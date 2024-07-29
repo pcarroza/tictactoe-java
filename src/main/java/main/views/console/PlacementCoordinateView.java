@@ -4,7 +4,6 @@ import main.common.utils.Terminal;
 import main.controllers.CoordinateController;
 import main.controllers.CoordinateControllerVisitor;
 import main.models.Coordinate;
-import main.views.console.tools.GameManager;
 
 public abstract class PlacementCoordinateView implements CoordinateControllerVisitor {
 

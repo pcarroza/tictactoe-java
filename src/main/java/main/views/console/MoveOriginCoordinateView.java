@@ -4,7 +4,6 @@ import main.controllers.CoordinateController;
 import main.controllers.RandomCoordinateController;
 import main.controllers.UserCoordinateController;
 import main.models.Coordinate;
-import main.views.console.tools.GameManager;
 
 public class MoveOriginCoordinateView extends PlacementCoordinateView {
 

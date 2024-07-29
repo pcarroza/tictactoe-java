@@ -4,7 +4,6 @@ import main.controllers.CoordinateController;
 import main.controllers.RandomCoordinateController;
 import main.controllers.UserCoordinateController;
 import main.models.Coordinate;
-import main.views.console.tools.GameManager;
 
 public class MoveTargetCoordinateView extends PlacementCoordinateView {
 
@@ -12,10 +11,8 @@ public class MoveTargetCoordinateView extends PlacementCoordinateView {
 
     private Coordinate target;
 
-    public MoveTargetCoordinateView(CoordinateController coordinateController, Coordinate origin) {
+    public MoveTargetCoordinateView(CoordinateController coordinateController) {
         super(coordinateController);
-        assert origin != null;
-        this.origin = origin;
     }
 
     @Override

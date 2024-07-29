@@ -4,16 +4,15 @@ import main.controllers.MoveController;
 import main.controllers.PlacementController;
 import main.controllers.PlacementControllerVisitor;
 import main.controllers.PutController;
-import main.models.Coordinate;
-import main.views.console.tools.GameManager;
+import main.views.console.tools.GameManagerView;
 
 public class GameView implements PlacementControllerVisitor {
 
-    private final GameManager gameManager;
+    private final GameManagerView gameManagerView;
 
     public GameView(BoardView boardView) {
         assert boardView != null;
-        gameManager = new GameManager(boardView);
+        gameManagerView = new GameManagerView(boardView);
     }
 
     public void interact(PlacementController placementController) {
@@ -22,21 +21,21 @@ public class GameView implements PlacementControllerVisitor {
 
     @Override
     public void visit(PutController controller) {
-        gameManager.setView(new PutTargetCoordinateView(controller.getCoordinateController()));
-        gameManager.titleMovement("Pone ", controller.take());
-        gameManager.put(controller);
-        gameManager.nextToPlayer(controller);
-        gameManager.showGame(controller);
+        gameManagerView.setPlacementCoordinateView(new PutTargetCoordinateView(controller.getCoordinateController()));
+        gameManagerView.titleMovement("Pone ", controller.take());
+        gameManagerView.put(controller);
+        gameManagerView.nextToPlayer(controller);
+        gameManagerView.showGame(controller);
     }
 
     @Override
     public void visit(MoveController controller) {
-        gameManager.setView(new MoveOriginCoordinateView(controller.getCoordinateController()));
-        gameManager.titleMovement("Mueve ", controller.take());
-        gameManager.remove(controller);
-        gameManager.setView(new MoveTargetCoordinateView(controller.getCoordinateController(), null));
-        gameManager.put(controller);
-        gameManager.nextToPlayer(controller);
-        gameManager.showGame(controller);
+        gameManagerView.setPlacementCoordinateView(new MoveOriginCoordinateView(controller.getCoordinateController()));
+        gameManagerView.titleMovement("Mueve ", controller.take());
+        gameManagerView.remove(controller);
+        gameManagerView.setPlacementCoordinateView(new MoveTargetCoordinateView(controller.getCoordinateController()));
+        gameManagerView.put(controller);
+        gameManagerView.nextToPlayer(controller);
+        gameManagerView.showGame(controller);
     }
 }

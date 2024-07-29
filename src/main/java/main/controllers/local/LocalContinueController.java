@@ -4,8 +4,7 @@ import main.controllers.ContinueController;
 import main.controllers.OperationControllerVisitor;
 import main.models.Game;
 
-public class LocalContinueController extends LocalOperationController
-    implements ContinueController {
+public class LocalContinueController extends LocalOperationController implements ContinueController {
 
     public LocalContinueController(Game game) {
         super(game);

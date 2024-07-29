@@ -14,7 +14,7 @@ import main.views.console.PlacementCoordinateView;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class GameManager {
+public class GameManagerView {
 
     private PlacementCoordinateView view;
 
@@ -24,15 +24,15 @@ public class GameManager {
 
     private Coordinate origin;
 
-    public GameManager(BoardView boardView) {
+    public GameManagerView(BoardView boardView) {
         errorReportView = new ErrorReportView();
         this.boardView = boardView;
     }
 
-    public void setView(PlacementCoordinateView placementCoordinateView) {
+    public void setPlacementCoordinateView(PlacementCoordinateView placementCoordinateView) {
         view = placementCoordinateView;
         if (origin != null) {
-            placementCoordinateView.setCoordinateOrigin(origin);
+            view.setCoordinateOrigin(origin);
         }
     }
 

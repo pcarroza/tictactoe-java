@@ -33,7 +33,7 @@ public class CoordinateView {
     public void read(String title, Coordinate target) {
         assert title != null;
         assert target != null;
-        target.setRow(LimitedIntDialog.instance().read("Fila?", Coordinate.DIMENSION));
-        target.setColumn(LimitedIntDialog.instance().read("Columna?", Coordinate.DIMENSION));
+        target.setRow(LimitedIntDialog.instance().read("Ingrese Fila: ", Coordinate.DIMENSION));
+        target.setColumn(LimitedIntDialog.instance().read("Ingrese Columna: ", Coordinate.DIMENSION));
     }
 }
