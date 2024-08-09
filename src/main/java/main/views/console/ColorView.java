@@ -1,6 +1,6 @@
 package main.views.console;
 
-import main.models.Player;
+import main.models.Color;
 import main.common.utils.Terminal;
 
 public class ColorView {
@@ -18,16 +18,16 @@ public class ColorView {
 
     private ColorView() {}
 
-    void write(String title, Player color) {
+    void write(String title, Color color) {
         Terminal.getInstance().write(title + getColor(color));
     }
 
-    public void writeln(String title, Player color) {
+    public void writeln(String title, Color color) {
         this.write(title, color);
         Terminal.getInstance().writeln();
     }
 
-    public void writeWinner(Player color) {
+    public void writeWinner(Color color) {
         String victory = "Victoria!!!!";
         Terminal.getInstance().write(victory);
         final int MAX = 3;
@@ -37,7 +37,7 @@ public class ColorView {
         Terminal.getInstance().writeln(victory);
     }
 
-    private char getColor(Player color) {
+    private char getColor(Color color) {
         return COLORS[color.ordinal()];
     }
 }

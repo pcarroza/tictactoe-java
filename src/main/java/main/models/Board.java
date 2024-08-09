@@ -11,14 +11,14 @@ public class Board extends Subject {
 
     private static final int NUMBER_OF_PLAYERS = Constants.NUMBER_OF_PLAYERS;
 
-    public final Map<Player, Set<Coordinate>> flat;
+    public final Map<Color, Set<Coordinate>> flat;
 
     private final Turn turn;
 
     public Board() {
         flat = new HashMap<>();
         for (int i = 0; i < getNumberOfPlayers(); i++) {
-            flat.put(Player.values()[i], new HashSet<>());
+            flat.put(Color.values()[i], new HashSet<>());
         }
         turn = new Turn();
     }
@@ -73,11 +73,11 @@ public class Board extends Subject {
 
     public boolean isEmpty(Coordinate coordinate) {
         assert coordinate != null : "La 'coordinate' NO puede ser 'null'";
-        return isEmpty(Player.OS, coordinate) && isEmpty(Player.XS, coordinate);
+        return isEmpty(Color.OS, coordinate) && isEmpty(Color.XS, coordinate);
     }
 
-    private boolean isEmpty(Player player, Coordinate coordinate) {
-        return !flat.get(player).contains(coordinate);
+    private boolean isEmpty(Color color, Coordinate coordinate) {
+        return !flat.get(color).contains(coordinate);
     }
 
     public void clear() {
@@ -129,11 +129,11 @@ public class Board extends Subject {
     }
 
     public List<Coordinate> getEmptyCoordinatesCurrentPlayer() {
-        return getCoordinates(coordinate -> getPlayer(coordinate) == Player.NONE);
+        return getCoordinates(coordinate -> getColor(coordinate) == Color.NONE);
     }
 
     public List<Coordinate> getOccupiedCoordinatesCurrentPlayer() {
-        return getCoordinates(coordinate -> getPlayer(coordinate) == getColorCurrentPlayer());
+        return getCoordinates(coordinate -> getColor(coordinate) == getColorCurrentPlayer());
     }
 
     private List<Coordinate> getCoordinates(Predicate<Coordinate> predicate) {
@@ -149,19 +149,19 @@ public class Board extends Subject {
         return coordinates;
     }
 
-    public Player getPlayer(Coordinate coordinate) {
+    public Color getColor(Coordinate coordinate) {
         assert coordinate != null;
         return flat.keySet().stream()
                 .filter(color -> !isEmpty(color, coordinate))
                 .findFirst()
-                .orElse(Player.NONE);
+                .orElse(Color.NONE);
     }
 
     public int getIndexCurrentPlayer() {
         return turn.getIndexCurrentPlayer();
     }
 
-    public Player getColorCurrentPlayer() {
+    public Color getColorCurrentPlayer() {
         return turn.getCurrentPlayer();
     }
 

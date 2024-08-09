@@ -1,7 +1,7 @@
 package main.controllers.local;
 
 import main.models.Coordinate;
-import main.models.Player;
+import main.models.Color;
 import main.models.Game;
 
 class LocalController {
@@ -21,7 +21,7 @@ class LocalController {
         return game.getNumberOfPlayers();
     }
 
-    public Player take() {
+    public Color getTake() {
         return game.take();
     }
 
@@ -57,9 +57,9 @@ class LocalController {
         return game.isOccupiedByCurrentPlayer(coordinate);
     }
 
-    public Player getColor(Coordinate coordinate) {
+    public Color getColor(Coordinate coordinate) {
         assert coordinate != null;
-        return game.getPlayer(coordinate);
+        return game.getColor(coordinate);
     }
 
     public void initialize() {

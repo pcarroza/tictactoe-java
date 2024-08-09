@@ -5,7 +5,7 @@ import main.controllers.PlacementController;
 import main.controllers.PutController;
 import main.controllers.errors.ErrorReport;
 import main.models.Coordinate;
-import main.models.Player;
+import main.models.Color;
 import main.views.console.BoardView;
 import main.views.console.ColorView;
 import main.views.console.ErrorReportView;
@@ -14,7 +14,7 @@ import main.views.console.PlacementCoordinateView;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class GameManagerView {
+public class GameViewManager {
 
     private PlacementCoordinateView view;
 
@@ -24,7 +24,7 @@ public class GameManagerView {
 
     private Coordinate origin;
 
-    public GameManagerView(BoardView boardView) {
+    public GameViewManager(BoardView boardView) {
         errorReportView = new ErrorReportView();
         this.boardView = boardView;
     }
@@ -71,12 +71,12 @@ public class GameManagerView {
     public void showGame(PlacementController placementController) {
         boardView.write(placementController);
         if (placementController.existTicTacToe()) {
-            ColorView.instance().writeWinner(placementController.take());
+            ColorView.instance().writeWinner(placementController.getTake());
             placementController.end();
         }
     }
 
-    public void titleMovement(String title, Player color) {
+    public void titleMovement(String title, Color color) {
         ColorView.instance().writeln(title + " el jugador ", color);
     }
 }

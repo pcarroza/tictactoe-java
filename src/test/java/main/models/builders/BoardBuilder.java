@@ -2,7 +2,7 @@ package main.models.builders;
 
 import main.models.Board;
 import main.models.Coordinate;
-import main.models.Player;
+import main.models.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,30 +113,30 @@ public class BoardBuilder {
     }
 
     private void handleNonEmptyCell(char cell, Coordinate coordinate) {
-        Player player = null;
+        Color color = null;
         if (OS.test(cell) && board.isEmpty(coordinate)) {
-            player = Player.OS;
+            color = Color.OS;
         } else if (XS.test(cell) && board.isEmpty(coordinate)) {
-            player = Player.XS;
+            color = Color.XS;
         }
-        if (player != null) {
-            switchTurnIfNeeded(player);
+        if (color != null) {
+            switchTurnIfNeeded(color);
             board.put(coordinate);
         }
     }
 
     public BoardBuilder switchTurnToPlayerOS() {
-        switchTurnIfNeeded(Player.OS);
+        switchTurnIfNeeded(Color.OS);
         return this;
     }
 
     public BoardBuilder switchTurnToPlayerXS() {
-        switchTurnIfNeeded(Player.XS);
+        switchTurnIfNeeded(Color.XS);
         return this;
     }
 
-    private void switchTurnIfNeeded(Player player) {
-        if (board.getColorCurrentPlayer() != player) {
+    private void switchTurnIfNeeded(Color color) {
+        if (board.getColorCurrentPlayer() != color) {
             board.switchToNextPlayer();
         }
     }

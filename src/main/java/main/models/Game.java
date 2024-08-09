@@ -19,7 +19,7 @@ public class Game {
         board.remove(origin);
     }
 
-    public Player take() {
+    public Color take() {
         return board.getColorCurrentPlayer();
     }
 
@@ -55,8 +55,8 @@ public class Game {
         return board.existTicTacToe();
     }
 
-    public Player getPlayer(Coordinate coordinate) {
-        return board.getPlayer(coordinate);
+    public Color getColor(Coordinate coordinate) {
+        return board.getColor(coordinate);
     }
 
     public List<Coordinate> getEmptyCoordinatesCurrentPlayer() {

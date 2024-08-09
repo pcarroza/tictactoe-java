@@ -39,19 +39,19 @@ public class TurnTest {
 
     @Test
     public void givenTurn_whenGetTakeColorInitialGameState_thenToEqualsOS() {
-        assertThat(turn.getCurrentPlayer(), is(equalTo(Player.OS)));
+        assertThat(turn.getCurrentPlayer(), is(equalTo(Color.OS)));
     }
 
     @Test
     public void givenTurn_whenChangeTurnAndGetTakeColor_thenToEqualsXS() {
         turn.switchToNextPlayer();
-        assertThat(turn.getCurrentPlayer(), is(equalTo(Player.XS)));
+        assertThat(turn.getCurrentPlayer(), is(equalTo(Color.XS)));
     }
 
     @Test
     public void givenTurn_givenTurn_whenTheTurnIsChangedTwice_thenToEqualsOS() {
         turn.switchToNextPlayer();
         turn.switchToNextPlayer();
-        assertThat(turn.getCurrentPlayer(), is(equalTo(Player.OS)));
+        assertThat(turn.getCurrentPlayer(), is(equalTo(Color.OS)));
     }
 }
