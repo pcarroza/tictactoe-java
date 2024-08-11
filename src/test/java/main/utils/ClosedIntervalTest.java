@@ -61,4 +61,3 @@ public class ClosedIntervalTest {
         assertThat(closedInterval.isIncluded(MAX + 1), is(false));
     }
 }
-

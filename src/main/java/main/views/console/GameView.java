@@ -8,11 +8,11 @@ import main.views.console.tools.GameViewManager;
 
 public class GameView implements PlacementControllerVisitor {
 
-    private final GameViewManager manager;
+    private final GameViewManager gameViewManager;
 
     public GameView(BoardView boardView) {
         assert boardView != null;
-        manager = new GameViewManager(boardView);
+        gameViewManager = new GameViewManager(boardView);
     }
 
     public void interact(PlacementController placementController) {
@@ -21,21 +21,21 @@ public class GameView implements PlacementControllerVisitor {
 
     @Override
     public void visit(PutController controller) {
-        manager.setPlacementCoordinateView(new PutTargetCoordinateView(controller.getCoordinateController()));
-        manager.titleMovement("Pone ", controller.getTake());
-        manager.put(controller);
-        manager.nextToPlayer(controller);
-        manager.showGame(controller);
+        gameViewManager.setPlacementCoordinateView(new PutTargetCoordinateView(controller.getCoordinateController()));
+        gameViewManager.titleMovement("Pone ", controller.getTake());
+        gameViewManager.put(controller);
+        gameViewManager.nextToPlayer(controller);
+        gameViewManager.showGame(controller);
     }
 
     @Override
     public void visit(MoveController controller) {
-        manager.setPlacementCoordinateView(new MoveOriginCoordinateView(controller.getCoordinateController()));
-        manager.titleMovement("Mueve ", controller.getTake());
-        manager.remove(controller);
-        manager.setPlacementCoordinateView(new MoveTargetCoordinateView(controller.getCoordinateController()));
-        manager.put(controller);
-        manager.nextToPlayer(controller);
-        manager.showGame(controller);
+        gameViewManager.setPlacementCoordinateView(new MoveOriginCoordinateView(controller.getCoordinateController()));
+        gameViewManager.titleMovement("Mueve ", controller.getTake());
+        gameViewManager.remove(controller);
+        gameViewManager.setPlacementCoordinateView(new MoveTargetCoordinateView(controller.getCoordinateController()));
+        gameViewManager.put(controller);
+        gameViewManager.nextToPlayer(controller);
+        gameViewManager.showGame(controller);
     }
 }

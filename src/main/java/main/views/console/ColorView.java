@@ -1,7 +1,7 @@
 package main.views.console;
 
-import main.models.Color;
 import main.common.utils.Terminal;
+import main.models.Color;
 
 public class ColorView {
 
@@ -18,13 +18,13 @@ public class ColorView {
 
     private ColorView() {}
 
-    void write(String title, Color color) {
-        Terminal.getInstance().write(title + getColor(color));
-    }
-
     public void writeln(String title, Color color) {
         this.write(title, color);
         Terminal.getInstance().writeln();
+    }
+
+    public void write(String title, Color color) {
+        Terminal.getInstance().write(title + getColor(color));
     }
 
     public void writeWinner(Color color) {

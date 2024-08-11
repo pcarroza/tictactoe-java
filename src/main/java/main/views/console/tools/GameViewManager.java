@@ -52,7 +52,7 @@ public class GameViewManager {
         controller.put(target);
     }
 
-    public Coordinate getCoordinate(Function<Coordinate, ErrorReport> errorReportFunction, Supplier<Coordinate> view) {
+    private Coordinate getCoordinate(Function<Coordinate, ErrorReport> errorReportFunction, Supplier<Coordinate> view) {
         Coordinate target = view.get();
         ErrorReport errorReport = errorReportFunction.apply(target);
         if (errorReport != null) {
