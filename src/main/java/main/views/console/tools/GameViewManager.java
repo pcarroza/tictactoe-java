@@ -52,12 +52,12 @@ public class GameViewManager {
         controller.put(target);
     }
 
-    private Coordinate getCoordinate(Function<Coordinate, ErrorReport> errorReportFunction, Supplier<Coordinate> view) {
+    private Coordinate getCoordinate(Function<Coordinate, ErrorReport> errorReportCallback, Supplier<Coordinate> view) {
         Coordinate target = view.get();
-        ErrorReport errorReport = errorReportFunction.apply(target);
+        ErrorReport errorReport = errorReportCallback.apply(target);
         if (errorReport != null) {
             errorReportView.write(errorReport);
-            target = getCoordinate(errorReportFunction, view);
+            target = getCoordinate(errorReportCallback, view);
         }
         return target;
     }
