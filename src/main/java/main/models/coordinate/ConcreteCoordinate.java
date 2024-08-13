@@ -1,11 +1,10 @@
-package main.models.board;
+package main.models.coordinate;
 
 import main.common.utils.ClosedInterval;
 import main.common.utils.Direction;
 
 import java.text.MessageFormat;
 import java.util.Objects;
-import java.util.Random;
 
 public class ConcreteCoordinate implements Coordinate {
 

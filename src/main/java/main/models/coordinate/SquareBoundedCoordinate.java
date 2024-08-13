@@ -1,4 +1,4 @@
-package main.models.board;
+package main.models.coordinate;
 
 import main.common.utils.ClosedInterval;
 import main.common.utils.Direction;
