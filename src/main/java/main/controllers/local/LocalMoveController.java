@@ -2,9 +2,9 @@ package main.controllers.local;
 
 import main.controllers.OperationControllerVisitor;
 import main.controllers.PlacementControllerVisitor;
+import main.controllers.errors.ErrorGeneratorType;
 import main.controllers.errors.ErrorReport;
 import main.controllers.MoveController;
-import main.controllers.errors.ErrorGeneratorType;
 import main.models.Coordinate;
 import main.models.Game;
 

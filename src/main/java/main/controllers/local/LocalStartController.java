@@ -16,7 +16,7 @@ public class LocalStartController extends LocalOperationController implements St
     }
 
     public void start(int users) {
-        assert new ClosedInterval<>(0, getNumberOfPlayers()).isIncluded(users);
+        assert new ClosedInterval<>(0, this.getNumberOfPlayers()).isIncluded(users);
         localOperationControllerBuilder.build(users);
         this.begin();
     }
