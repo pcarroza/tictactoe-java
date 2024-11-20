@@ -29,7 +29,7 @@ public class Board extends Subject {
         assert isIncluded(coordinate.getRow()): "La 'row' debe estar entre [1 - 3]";
         assert isIncluded(coordinate.getColumn()): "La 'column' debe estar entre [1 - 3]";
 
-        flat.get(getColorCurrentPlayer()).add(coordinate);
+        flat.get(getCurrentPlayer()).add(coordinate);
 
         assert isMaxNumberOfColorInBoard() : "Hay más de 3 'Colors' en el 'Board'";
         assert isOccupiedByCurrentPlayer(coordinate) : "La casilla NO está ocupada por la " + coordinate;
@@ -44,13 +44,13 @@ public class Board extends Subject {
     }
 
     private int getLengthCoordinates() {
-        return flat.get(getColorCurrentPlayer()).size();
+        return flat.get(getCurrentPlayer()).size();
     }
 
     public void remove(Coordinate origin) {
         assert origin != null: "La coordinate no peude null";
         assert !isEmpty(origin): "El no puede estar vacío";
-        flat.get(getColorCurrentPlayer()).remove(origin);
+        flat.get(getCurrentPlayer()).remove(origin);
         assert isEmpty(origin) : "La " + origin + "debe estár eliminada.";
     }
 
@@ -62,13 +62,13 @@ public class Board extends Subject {
         return numberOfTokens == Coordinate.DIMENSION * flat.keySet().size();
     }
 
-    public void switchToNextPlayer() {
-        turn.switchToNextPlayer();
+    public void change() {
+        turn.change();
     }
 
     public boolean isOccupiedByCurrentPlayer(Coordinate coordinate) {
         assert coordinate != null;
-        return !isEmpty(getColorCurrentPlayer(), coordinate);
+        return !isEmpty(getCurrentPlayer(), coordinate);
     }
 
     public boolean isEmpty(Coordinate coordinate) {
@@ -121,7 +121,7 @@ public class Board extends Subject {
     }
 
     private Coordinate[] getArrayOfCoordinatesCurrentPlayer() {
-        return flat.get(getColorCurrentPlayer()).toArray(new Coordinate[0]);
+        return flat.get(getCurrentPlayer()).toArray(new Coordinate[0]);
     }
 
     public int getNumberOfPlayers() {
@@ -133,7 +133,7 @@ public class Board extends Subject {
     }
 
     public List<Coordinate> getOccupiedCoordinatesCurrentPlayer() {
-        return getCoordinates(coordinate -> getColor(coordinate) == getColorCurrentPlayer());
+        return getCoordinates(coordinate -> getColor(coordinate) == getCurrentPlayer());
     }
 
     private List<Coordinate> getCoordinates(Predicate<Coordinate> predicate) {
@@ -161,7 +161,7 @@ public class Board extends Subject {
         return turn.getIndexCurrentPlayer();
     }
 
-    public Color getColorCurrentPlayer() {
+    public Color getCurrentPlayer() {
         return turn.getCurrentPlayer();
     }
 

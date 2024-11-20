@@ -20,7 +20,7 @@ public class Game {
     }
 
     public Color take() {
-        return board.getColorCurrentPlayer();
+        return board.getCurrentPlayer();
     }
 
     public int getIndexCurrentPlayer() {
@@ -28,7 +28,7 @@ public class Game {
     }
 
     public void switchTurn() {
-        board.switchToNextPlayer();
+        board.change();
     }
 
     public boolean isOccupiedByCurrentPlayer(Coordinate origin) {

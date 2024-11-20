@@ -20,7 +20,7 @@ public class Turn {
         return getCurrentPlayer().ordinal();
     }
 
-    public void switchToNextPlayer() {
+    public void change() {
         this.value = (value + 1) % (Color.values().length - 1);
     }
 }

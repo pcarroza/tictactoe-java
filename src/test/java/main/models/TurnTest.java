@@ -25,15 +25,15 @@ public class TurnTest {
     @Test
     public void givenTurn_whenGetCurrentPlayerChangeTurn_thenEqualToOne() {
         final int INDEX_CURRENT_PLAYER = 1;
-        turn.switchToNextPlayer();
+        turn.change();
         assertThat(turn.getIndexCurrentPlayer(), is(equalTo(INDEX_CURRENT_PLAYER)));
     }
 
     @Test
     public void givenTurn_whenTheTurnIsChangedTwice_thenEqualToZero() {
         final int INDEX_CURRENT_PLAYER = 0;
-        turn.switchToNextPlayer();
-        turn.switchToNextPlayer();
+        turn.change();
+        turn.change();
         assertThat(turn.getIndexCurrentPlayer(), is(equalTo(INDEX_CURRENT_PLAYER)));
     }
 
@@ -44,14 +44,14 @@ public class TurnTest {
 
     @Test
     public void givenTurn_whenChangeTurnAndGetTakeColor_thenToEqualsXS() {
-        turn.switchToNextPlayer();
+        turn.change();
         assertThat(turn.getCurrentPlayer(), is(equalTo(Color.XS)));
     }
 
     @Test
     public void givenTurn_givenTurn_whenTheTurnIsChangedTwice_thenToEqualsOS() {
-        turn.switchToNextPlayer();
-        turn.switchToNextPlayer();
+        turn.change();
+        turn.change();
         assertThat(turn.getCurrentPlayer(), is(equalTo(Color.OS)));
     }
 }

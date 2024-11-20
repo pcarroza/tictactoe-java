@@ -77,7 +77,7 @@ public class BoardBuilder {
     }
 
     public BoardBuilder switchToNextPlayer() {
-        board.switchToNextPlayer();
+        board.change();
         return this;
     }
 
@@ -107,7 +107,7 @@ public class BoardBuilder {
         if (board.getOccupiedCoordinatesCurrentPlayer().contains(coordinate)) {
             board.remove(coordinate);
         } else {
-            board.switchToNextPlayer();
+            board.change();
             board.remove(coordinate);
         }
     }
@@ -136,8 +136,8 @@ public class BoardBuilder {
     }
 
     private void switchTurnIfNeeded(Color color) {
-        if (board.getColorCurrentPlayer() != color) {
-            board.switchToNextPlayer();
+        if (board.getCurrentPlayer() != color) {
+            board.change();
         }
     }
 

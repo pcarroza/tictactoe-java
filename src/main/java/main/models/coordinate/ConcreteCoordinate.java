@@ -12,8 +12,7 @@ public class ConcreteCoordinate implements Coordinate {
 
     private int column;
 
-    private static final ClosedInterval<Integer> LIMITS =
-            new ClosedInterval<>(1, main.models.Coordinate.DIMENSION);
+    private static final ClosedInterval<Integer> LIMITS = new ClosedInterval<>(1, main.models.Coordinate.DIMENSION);
 
     public ConcreteCoordinate(int row, int column) {
         this.row = row;
@@ -21,11 +20,11 @@ public class ConcreteCoordinate implements Coordinate {
     }
 
     public int getColumn() {
-        return this.column;
+        return column;
     }
 
     public int getRow() {
-        return this.row;
+        return row;
     }
 
     public void setColumn(int column) {

@@ -9,8 +9,8 @@ public abstract class TicTacToe {
     private final View view;
 
     public TicTacToe() {
-        this.view = this.getView();
-        this.logic = this.getLogic();
+        view = getView();
+        logic = getLogic();
     }
 
     protected abstract Logic getLogic();

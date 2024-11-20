@@ -9,18 +9,18 @@ public abstract class Subject {
     }
 
     public void initialize() {
-        this.observer.initialize();
+        observer.initialize();
     }
 
     public void begin() {
-        this.observer.begin();
+        observer.begin();
     }
 
     public void end() {
-        this.observer.end();
+        observer.end();
     }
 
     public void exit() {
-        this.observer.exit();
+        observer.exit();
     }
 }
