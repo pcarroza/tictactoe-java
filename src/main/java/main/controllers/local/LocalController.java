@@ -43,7 +43,7 @@ class LocalController {
         return game.existTicTacToe();
     }
 
-    public void switchTurn() {
+    public void chanteTurn() {
         game.switchTurn();
     }
 

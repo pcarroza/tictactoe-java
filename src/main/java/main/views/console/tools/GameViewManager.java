@@ -64,7 +64,7 @@ public class GameViewManager {
 
     public void nextToPlayer(PlacementController placementController) {
         if (!placementController.existTicTacToe()) {
-            placementController.switchTurn();
+            placementController.chanteTurn();
         }
     }
 
