@@ -71,7 +71,7 @@ public class GameViewManager {
     public void showGame(PlacementController placementController) {
         boardView.write(placementController);
         if (placementController.existTicTacToe()) {
-            ColorView.instance().writeWinner(placementController.getTake());
+            ColorView.instance().writeWinner(placementController.getTurn());
             placementController.end();
         }
     }

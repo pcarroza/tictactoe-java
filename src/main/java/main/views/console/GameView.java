@@ -22,7 +22,7 @@ public class GameView implements PlacementControllerVisitor {
     @Override
     public void visit(PutController controller) {
         gameViewManager.setPlacementCoordinateView(new PutTargetCoordinateView(controller.getCoordinateController()));
-        gameViewManager.titleMovement("Pone ", controller.getTake());
+        gameViewManager.titleMovement("Pone ", controller.getTurn());
         gameViewManager.put(controller);
         gameViewManager.nextToPlayer(controller);
         gameViewManager.showGame(controller);
@@ -31,7 +31,7 @@ public class GameView implements PlacementControllerVisitor {
     @Override
     public void visit(MoveController controller) {
         gameViewManager.setPlacementCoordinateView(new MoveOriginCoordinateView(controller.getCoordinateController()));
-        gameViewManager.titleMovement("Mueve ", controller.getTake());
+        gameViewManager.titleMovement("Mueve ", controller.getTurn());
         gameViewManager.remove(controller);
         gameViewManager.setPlacementCoordinateView(new MoveTargetCoordinateView(controller.getCoordinateController()));
         gameViewManager.put(controller);

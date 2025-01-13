@@ -6,7 +6,7 @@ import main.models.Coordinate;
 
 public interface PlacementController extends OperationController, PresenterController {
 
-    Color getTake();
+    Color getTurn();
 
     void put(Coordinate target);
 

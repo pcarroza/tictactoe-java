@@ -21,7 +21,7 @@ class LocalController {
         return game.getNumberOfPlayers();
     }
 
-    public Color getTake() {
+    public Color getTurn() {
         return game.take();
     }
 
