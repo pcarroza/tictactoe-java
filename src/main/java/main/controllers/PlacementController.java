@@ -16,7 +16,7 @@ public interface PlacementController extends OperationController, PresenterContr
 
     ErrorReport validateTarget(Coordinate target);
 
-    void chanteTurn();
+    void changeTurn();
 
     void end();
 

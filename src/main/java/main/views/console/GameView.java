@@ -4,7 +4,7 @@ import main.controllers.MoveController;
 import main.controllers.PlacementController;
 import main.controllers.PlacementControllerVisitor;
 import main.controllers.PutController;
-import main.views.console.tools.GameViewManager;
+import main.views.console.logic.GameViewManager;
 
 public class GameView implements PlacementControllerVisitor {
 

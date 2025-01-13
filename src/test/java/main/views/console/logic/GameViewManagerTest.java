@@ -1,4 +1,4 @@
-package main.views.console.tools;
+package main.views.console.logic;
 
 import org.junit.Before;
 import org.junit.Test;

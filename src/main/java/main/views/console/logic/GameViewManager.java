@@ -1,4 +1,4 @@
-package main.views.console.tools;
+package main.views.console.logic;
 
 import main.controllers.MoveController;
 import main.controllers.PlacementController;
@@ -64,7 +64,7 @@ public class GameViewManager {
 
     public void nextToPlayer(PlacementController placementController) {
         if (!placementController.existTicTacToe()) {
-            placementController.chanteTurn();
+            placementController.changeTurn();
         }
     }
 
