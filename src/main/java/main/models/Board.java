@@ -11,14 +11,14 @@ public class Board extends Subject {
 
     private static final int NUMBER_OF_PLAYERS = Constants.NUMBER_OF_PLAYERS;
 
-    public final Map<Color, Set<Coordinate>> flat;
+    public final Map<Color, Set<Coordinate>> piecesMap;
 
     private final Turn turn;
 
     public Board() {
-        flat = new HashMap<>();
+        piecesMap = new HashMap<>();
         for (int i = 0; i < getNumberOfPlayers(); i++) {
-            flat.put(Color.values()[i], new HashSet<>());
+            piecesMap.put(Color.values()[i], new HashSet<>());
         }
         turn = new Turn();
     }
@@ -29,7 +29,7 @@ public class Board extends Subject {
         assert isIncluded(coordinate.getRow()): "La 'row' debe estar entre [1 - 3]";
         assert isIncluded(coordinate.getColumn()): "La 'column' debe estar entre [1 - 3]";
 
-        flat.get(getCurrentPlayer()).add(coordinate);
+        piecesMap.get(getCurrentPlayer()).add(coordinate);
 
         assert isMaxNumberOfColorInBoard() : "Hay más de 3 'Colors' en el 'Board'";
         assert isOccupiedByCurrentPlayer(coordinate) : "La casilla NO está ocupada por la " + coordinate;
@@ -44,22 +44,22 @@ public class Board extends Subject {
     }
 
     private int getLengthCoordinates() {
-        return flat.get(getCurrentPlayer()).size();
+        return piecesMap.get(getCurrentPlayer()).size();
     }
 
     public void remove(Coordinate origin) {
         assert origin != null: "La coordinate no peude null";
         assert !isEmpty(origin): "El no puede estar vacío";
-        flat.get(getCurrentPlayer()).remove(origin);
+        piecesMap.get(getCurrentPlayer()).remove(origin);
         assert isEmpty(origin) : "La " + origin + "debe estár eliminada.";
     }
 
     public boolean isComplete() {
-        int numberOfTokens = flat.keySet()
+        int numberOfTokens = piecesMap.keySet()
                 .stream()
-                .mapToInt(player -> flat.get(player).size())
+                .mapToInt(player -> piecesMap.get(player).size())
                 .sum();
-        return numberOfTokens == Coordinate.DIMENSION * flat.keySet().size();
+        return numberOfTokens == Coordinate.DIMENSION * piecesMap.keySet().size();
     }
 
     public void change() {
@@ -77,11 +77,11 @@ public class Board extends Subject {
     }
 
     private boolean isEmpty(Color color, Coordinate coordinate) {
-        return !flat.get(color).contains(coordinate);
+        return !piecesMap.get(color).contains(coordinate);
     }
 
     public void clear() {
-        flat.keySet().forEach(player -> flat.get(player).clear());
+        piecesMap.keySet().forEach(player -> piecesMap.get(player).clear());
         turn.reset();
     }
 
@@ -121,7 +121,7 @@ public class Board extends Subject {
     }
 
     private Coordinate[] getArrayOfCoordinatesCurrentPlayer() {
-        return flat.get(getCurrentPlayer()).toArray(new Coordinate[0]);
+        return piecesMap.get(getCurrentPlayer()).toArray(new Coordinate[0]);
     }
 
     public int getNumberOfPlayers() {
@@ -151,7 +151,7 @@ public class Board extends Subject {
 
     public Color getColor(Coordinate coordinate) {
         assert coordinate != null;
-        return flat.keySet().stream()
+        return piecesMap.keySet().stream()
                 .filter(color -> !isEmpty(color, coordinate))
                 .findFirst()
                 .orElse(Color.NONE);
@@ -167,6 +167,6 @@ public class Board extends Subject {
 
     @Override
     public String toString() {
-        return " " + flat;
+        return " " + piecesMap;
     }
 }
