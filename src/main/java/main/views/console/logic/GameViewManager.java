@@ -62,7 +62,7 @@ public class GameViewManager {
         return target;
     }
 
-    public void nextToPlayer(PlacementController placementController) {
+    public void nextPlayer(PlacementController placementController) {
         if (!placementController.existTicTacToe()) {
             placementController.changeTurn();
         }

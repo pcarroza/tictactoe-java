@@ -24,7 +24,7 @@ public class GameView implements PlacementControllerVisitor {
         gameViewManager.setPlacementCoordinateView(new PutTargetCoordinateView(controller.getCoordinateController()));
         gameViewManager.titleMovement("Pone ", controller.getTurn());
         gameViewManager.put(controller);
-        gameViewManager.nextToPlayer(controller);
+        gameViewManager.nextPlayer(controller);
         gameViewManager.showGame(controller);
     }
 
@@ -35,7 +35,7 @@ public class GameView implements PlacementControllerVisitor {
         gameViewManager.remove(controller);
         gameViewManager.setPlacementCoordinateView(new MoveTargetCoordinateView(controller.getCoordinateController()));
         gameViewManager.put(controller);
-        gameViewManager.nextToPlayer(controller);
+        gameViewManager.nextPlayer(controller);
         gameViewManager.showGame(controller);
     }
 }
