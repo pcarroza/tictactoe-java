@@ -30,20 +30,20 @@ public class GameView implements PlacementControllerVisitor {
     }
 
     @Override
-    public void visit(PutController controller) {
-        titleMovement("Pone ", controller.take());
-        put(controller, new PutTargetCoordinateView(controller.getCoordinateController()));
-        changeToNextPlayer(controller);
-        showGame(controller);
+    public void visit(PutController putController) {
+        titleMovement("Pone ", putController.take());
+        put(putController, new PutTargetCoordinateView(putController.getCoordinateController()));
+        changeToNextPlayer(putController);
+        showGame(putController);
     }
 
     @Override
-    public void visit(MoveController controller) {
-        titleMovement("Mueve", controller.take());
-        remove(controller, new MoveOriginCoordinateView(controller.getCoordinateController()));
-        put(controller, new MoveTargetCoordinateView(controller.getCoordinateController(), origin));
-        changeToNextPlayer(controller);
-        showGame(controller);
+    public void visit(MoveController moveController) {
+        titleMovement("Mueve", moveController.take());
+        remove(moveController, new MoveOriginCoordinateView(moveController.getCoordinateController()));
+        put(moveController, new MoveTargetCoordinateView(moveController.getCoordinateController(), origin));
+        changeToNextPlayer(moveController);
+        showGame(moveController);
     }
 
     private void titleMovement(String title, Player color) {
@@ -56,8 +56,7 @@ public class GameView implements PlacementControllerVisitor {
     }
 
     private void put(MoveController controller, PlacementCoordinateView view) {
-        Coordinate target = getCoordinate(coordinate -> controller.validateTarget(origin, coordinate),
-                view::getCoordinate);
+        Coordinate target = getCoordinate(coordinate -> controller.validateTarget(origin, coordinate), view::getCoordinate);
         controller.put(target);
     }
 
@@ -78,7 +77,7 @@ public class GameView implements PlacementControllerVisitor {
 
     private void changeToNextPlayer(PlacementController placementController) {
         if (!placementController.existTicTacToe()) {
-            placementController.switchTurn();
+            placementController.changeTurn();
         }
     }
 
