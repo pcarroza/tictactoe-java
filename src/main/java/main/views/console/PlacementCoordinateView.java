@@ -9,7 +9,7 @@ abstract class PlacementCoordinateView implements CoordinateControllerVisitor {
 
     private final CoordinateController coordinateController;
 
-    public PlacementCoordinateView(CoordinateController coordinateController) {
+    PlacementCoordinateView(CoordinateController coordinateController) {
         assert coordinateController != null;
         this.coordinateController = coordinateController;
     }
