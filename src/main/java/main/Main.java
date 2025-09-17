@@ -11,8 +11,6 @@ public class Main {
 
         List<Integer> numbers =  IntStream.rangeClosed(1, 10).boxed().collect(Collectors.toList());
 
-        //System.out.println(numbers);
-
         Stream.iterate(1, i -> i <= 20, i -> i + 1).forEach(System.out::println);
 
         String rows = "- - -";

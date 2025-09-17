@@ -4,8 +4,6 @@ import main.controllers.PresenterController;
 import main.models.Coordinate;
 import main.utils.Terminal;
 
-import java.util.stream.IntStream;
-
 public class BoardView {
 
     void write(PresenterController presenter) {
