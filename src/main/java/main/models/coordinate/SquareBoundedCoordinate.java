@@ -1,13 +1,11 @@
-package main.models.board;
+package main.models.coordinate;
 
 import main.utils.ClosedInterval;
 import main.utils.Direction;
 
-import java.util.Random;
-
 public abstract class SquareBoundedCoordinate {
 
-    private Coordinate adapter;
+    private final Coordinate adapter;
 
     public SquareBoundedCoordinate(int row, int column) {
         adapter = new ConcreteCoordinate(row, column);

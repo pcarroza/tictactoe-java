@@ -1,4 +1,4 @@
-package main.models.board;
+package main.models.coordinate;
 
 import main.utils.ClosedInterval;
 import main.utils.Direction;
@@ -13,8 +13,7 @@ public class ConcreteCoordinate implements Coordinate {
 
     private int column;
 
-    private static final ClosedInterval<Integer> LIMITS =
-            new ClosedInterval<>(1, main.models.Coordinate.DIMENSION);
+    private static final ClosedInterval<Integer> LIMITS = new ClosedInterval<>(1, main.models.Coordinate.DIMENSION);
 
     public ConcreteCoordinate(int row, int column) {
         this.row = row;

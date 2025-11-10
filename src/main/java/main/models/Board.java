@@ -58,11 +58,11 @@ public class Board extends Subject {
                 .stream()
                 .mapToInt(player -> flat.get(player).size())
                 .sum();
-        return numberOfTokens == Coordinate.DIMENSION * flat.keySet().size();
+        return numberOfTokens == Coordinate.DIMENSION * flat.size();
     }
 
-    public void switchTurn() {
-        turn.switchTurn();
+    public void changeTurn() {
+        turn.change();
     }
 
     public boolean isOccupiedByCurrentPlayer(Coordinate coordinate) {

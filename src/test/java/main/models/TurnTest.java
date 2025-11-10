@@ -13,45 +13,45 @@ public class TurnTest {
 
     @Before
     public void setUp() {
-        this.turn = new Turn();
+        turn = new Turn();
     }
 
     @Test
     public void givenTurn_whenGetCurrentPlayerInitialGame_thenEqualToZero() {
         final int INDEX_CURRENT_PLAYER = 0;
-        assertThat(this.turn.getIndexCurrentPlayer(), is(equalTo(INDEX_CURRENT_PLAYER)));
+        assertThat(turn.getIndexCurrentPlayer(), is(equalTo(INDEX_CURRENT_PLAYER)));
     }
 
     @Test
     public void givenTurn_whenGetCurrentPlayerChangeTurn_thenEqualToOne() {
         final int INDEX_CURRENT_PLAYER = 1;
-        this.turn.switchTurn();
-        assertThat(this.turn.getIndexCurrentPlayer(), is(equalTo(INDEX_CURRENT_PLAYER)));
+        this.turn.change();
+        assertThat(turn.getIndexCurrentPlayer(), is(equalTo(INDEX_CURRENT_PLAYER)));
     }
 
     @Test
     public void givenTurn_whenTheTurnIsChangedTwice_thenEqualToZero() {
         final int INDEX_CURRENT_PLAYER = 0;
-        this.turn.switchTurn();
-        this.turn.switchTurn();
-        assertThat(this.turn.getIndexCurrentPlayer(), is(equalTo(INDEX_CURRENT_PLAYER)));
+        turn.change();
+        turn.change();
+        assertThat(turn.getIndexCurrentPlayer(), is(equalTo(INDEX_CURRENT_PLAYER)));
     }
 
     @Test
     public void givenTurn_whenGetTakeColorInitialGameState_thenToEqualsOS() {
-        assertThat(this.turn.getCurrentPlayer(), is(equalTo(Player.OS)));
+        assertThat(turn.getCurrentPlayer(), is(equalTo(Player.OS)));
     }
 
     @Test
     public void givenTurn_whenChangeTurnAndGetTakeColor_thenToEqualsXS() {
-        this.turn.switchTurn();
-        assertThat(this.turn.getCurrentPlayer(), is(equalTo(Player.XS)));
+        turn.change();
+        assertThat(turn.getCurrentPlayer(), is(equalTo(Player.XS)));
     }
 
     @Test
     public void givenTurn_givenTurn_whenTheTurnIsChangedTwice_thenToEqualsOS() {
-        this.turn.switchTurn();
-        this.turn.switchTurn();
-        assertThat(this.turn.getCurrentPlayer(), is(equalTo(Player.OS)));
+        turn.change();
+        turn.change();
+        assertThat(turn.getCurrentPlayer(), is(equalTo(Player.OS)));
     }
 }

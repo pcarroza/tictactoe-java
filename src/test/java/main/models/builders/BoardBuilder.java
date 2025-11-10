@@ -35,7 +35,7 @@ public class BoardBuilder {
     }
 
     public BoardBuilder switchTurn() {
-        board.switchTurn();
+        board.changeTurn();
         return this;
     }
 
@@ -65,7 +65,7 @@ public class BoardBuilder {
         if (board.getPlayerCoordinates().contains(coordinate)) {
             board.remove(coordinate);
         } else {
-            board.switchTurn();
+            board.changeTurn();
             board.remove(coordinate);
         }
     }
@@ -95,7 +95,7 @@ public class BoardBuilder {
 
     private void switchTurnIfNeeded(Player player) {
         if (board.getColorCurrentPlayer() != player) {
-            board.switchTurn();
+            board.changeTurn();
         }
     }
 

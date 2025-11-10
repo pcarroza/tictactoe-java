@@ -44,7 +44,7 @@ class LocalController {
     }
 
     public void changeTurn() {
-        game.switchTurn();
+        game.changeTurn();
     }
 
     public boolean isEmpty(Coordinate coordinate) {

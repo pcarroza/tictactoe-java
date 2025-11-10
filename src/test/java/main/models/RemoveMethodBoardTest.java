@@ -15,10 +15,8 @@ public class RemoveMethodBoardTest {
         board = new BoardBuilder().build().getBoard();
     }
 
-
     @Test
     public void given_when_then() {
 
     }
-
 }

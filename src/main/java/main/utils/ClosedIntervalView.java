@@ -1,16 +1,10 @@
 package main.utils;
 
-public class ClosedIntervalView {
+public record ClosedIntervalView(String title, ClosedInterval<Integer> closedInterval) {
 
-    private final String title;
-
-    private final ClosedInterval<Integer> closedInterval;
-
-    public ClosedIntervalView(String title, ClosedInterval<Integer> closedInterval) {
+    public ClosedIntervalView {
         assert title != null;
         assert closedInterval != null;
-        this.title = title;
-        this.closedInterval = closedInterval;
     }
 
     public void writeln() {
