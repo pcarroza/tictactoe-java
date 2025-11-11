@@ -121,7 +121,7 @@ public class Board extends Subject {
     }
 
     private Coordinate[] getCoordinatesCurrentPlayer() {
-        return this.flat.get(getColorCurrentPlayer()).toArray(new Coordinate[0]);
+        return flat.get(getColorCurrentPlayer()).toArray(new Coordinate[0]);
     }
 
     public int getNumberOfPlayers() {

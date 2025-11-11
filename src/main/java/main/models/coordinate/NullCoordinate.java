@@ -4,7 +4,6 @@ import main.utils.Direction;
 
 public class NullCoordinate implements Coordinate {
 
-
     private static NullCoordinate instance;
 
     public static Coordinate getInstance() {
