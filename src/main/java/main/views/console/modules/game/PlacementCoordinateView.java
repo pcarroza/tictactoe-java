@@ -1,0 +1,28 @@
+package main.views.console.modules.game;
+
+import main.controllers.modules.game.CoordinateController;
+import main.controllers.modules.game.CoordinateControllerVisitor;
+import main.models.Coordinate;
+import main.utils.Terminal;
+
+abstract class PlacementCoordinateView implements CoordinateControllerVisitor {
+
+    private final CoordinateController coordinateController;
+
+    PlacementCoordinateView(CoordinateController coordinateController) {
+        assert coordinateController != null;
+        this.coordinateController = coordinateController;
+    }
+
+    abstract Coordinate getCoordinate();
+
+    protected void show(String infix, Coordinate coordinate) {
+        CoordinateView.getInstance().write("La maquina " + infix + " ", coordinate);
+        Terminal.getInstance().readString(", Pulse enter para continuar");
+    }
+
+    protected CoordinateController getCoordinateController() {
+        return coordinateController;
+    }
+
+}
