@@ -1,12 +1,12 @@
 package main.views.console;
 
-import main.controllers.errors.*;
+import main.controllers.modules.game.local.errors.*;
 import main.models.Coordinate;
 import main.utils.Terminal;
 
 import java.util.Iterator;
 
-public class ErrorReportView implements ErrorReportVisitor  {
+public class ErrorReportView implements ErrorReportVisitor {
 
     public void write(ErrorReport errorReport) {
         errorReport.accept(this);

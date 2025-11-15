@@ -1,6 +1,6 @@
 package main.views.console;
 
-import main.controllers.ContinueController;
+import main.controllers.modules.game.ContinueController;
 import main.utils.YesNoDialog;
 
 public class ContinueView {

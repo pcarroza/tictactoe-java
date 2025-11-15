@@ -1,6 +1,6 @@
 package main.views.console;
 
-import main.controllers.StartController;
+import main.controllers.modules.game.StartController;
 import main.utils.LimitedIntDialog;
 
 public class StartView {

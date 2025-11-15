@@ -1,6 +1,8 @@
 package main.views.console;
 
-import main.controllers.*;
+import main.controllers.modules.game.CoordinateController;
+import main.controllers.modules.game.RandomCoordinateController;
+import main.controllers.modules.game.UserCoordinateController;
 import main.models.Coordinate;
 
 public class PutTargetCoordinateView extends PlacementCoordinateView {

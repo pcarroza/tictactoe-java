@@ -1,7 +1,7 @@
 package main.views.console;
 
-import main.controllers.CoordinateController;
-import main.controllers.CoordinateControllerVisitor;
+import main.controllers.modules.game.CoordinateController;
+import main.controllers.modules.game.CoordinateControllerVisitor;
 import main.models.Coordinate;
 import main.utils.Terminal;
 
@@ -24,5 +24,4 @@ abstract class PlacementCoordinateView implements CoordinateControllerVisitor {
     protected CoordinateController getCoordinateController() {
         return coordinateController;
     }
-
 }

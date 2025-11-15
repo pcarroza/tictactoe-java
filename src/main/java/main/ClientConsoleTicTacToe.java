@@ -1,6 +1,6 @@
 package main;
 
-import main.controllers.local.logic.LocalLogic;
+import main.controllers.modules.game.local.logic.LocalLogic;
 import main.views.console.ConsoleView;
 
 public class ClientConsoleTicTacToe extends TicTacToe {

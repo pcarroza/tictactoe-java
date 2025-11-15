@@ -10,7 +10,7 @@ public class Board extends Subject {
 
     private static final int NUMBER_OF_PLAYERS = 2;
 
-    public final Map<Player, Set<Coordinate>> flat;
+    private final Map<Player, Set<Coordinate>> flat;
 
     private final Turn turn;
 

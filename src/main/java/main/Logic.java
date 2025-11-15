@@ -1,6 +1,6 @@
 package main;
 
-import main.controllers.OperationController;
+import main.controllers.modules.game.OperationController;
 
 public interface Logic {
 

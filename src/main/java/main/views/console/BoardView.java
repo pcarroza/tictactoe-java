@@ -1,6 +1,6 @@
 package main.views.console;
 
-import main.controllers.PresenterController;
+import main.controllers.modules.game.PresenterController;
 import main.models.Coordinate;
 import main.utils.Terminal;
 

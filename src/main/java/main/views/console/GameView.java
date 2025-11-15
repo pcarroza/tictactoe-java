@@ -1,10 +1,10 @@
 package main.views.console;
 
-import main.controllers.MoveController;
-import main.controllers.PlacementController;
-import main.controllers.PlacementControllerVisitor;
-import main.controllers.PutController;
-import main.controllers.errors.ErrorReport;
+import main.controllers.modules.game.MoveController;
+import main.controllers.modules.game.PlacementController;
+import main.controllers.modules.game.PlacementControllerVisitor;
+import main.controllers.modules.game.PutController;
+import main.controllers.modules.game.local.errors.ErrorReport;
 import main.models.Player;
 import main.models.Coordinate;
 
