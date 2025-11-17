@@ -1,4 +1,4 @@
-package main.models.coordinate;
+package main.models.modules.game.coordinate;
 
 import main.utils.ClosedInterval;
 import main.utils.Direction;
@@ -13,7 +13,7 @@ public class ConcreteCoordinate implements Coordinate {
 
     private int column;
 
-    private static final ClosedInterval<Integer> LIMITS = new ClosedInterval<>(1, main.models.Coordinate.DIMENSION);
+    private static final ClosedInterval<Integer> LIMITS = new ClosedInterval<>(1, main.models.modules.game.Coordinate.DIMENSION);
 
     public ConcreteCoordinate(int row, int column) {
         this.row = row;
@@ -44,8 +44,8 @@ public class ConcreteCoordinate implements Coordinate {
 
     public void random() {
         Random random = new Random(System.currentTimeMillis());
-        setRow(random.nextInt(main.models.Coordinate.DIMENSION));
-        setColumn(random.nextInt(main.models.Coordinate.DIMENSION));
+        setRow(random.nextInt(main.models.modules.game.Coordinate.DIMENSION));
+        setColumn(random.nextInt(main.models.modules.game.Coordinate.DIMENSION));
     }
 
     @Override

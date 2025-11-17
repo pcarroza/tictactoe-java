@@ -1,4 +1,4 @@
-package main.models.coordinate;
+package main.models.modules.game.coordinate;
 
 import main.utils.Direction;
 

@@ -1,7 +1,7 @@
-package main.models;
+package main.models.modules.game;
 
-import main.models.coordinate.ConcreteCoordinate;
-import main.models.coordinate.SquareBoundedCoordinate;
+import main.models.modules.game.coordinate.ConcreteCoordinate;
+import main.models.modules.game.coordinate.SquareBoundedCoordinate;
 
 import java.util.Random;
 

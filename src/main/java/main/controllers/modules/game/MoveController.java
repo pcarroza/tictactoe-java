@@ -1,7 +1,7 @@
 package main.controllers.modules.game;
 
 import main.controllers.modules.game.errors.ErrorReport;
-import main.models.Coordinate;
+import main.models.modules.game.Coordinate;
 
 public interface MoveController extends PlacementController {
 

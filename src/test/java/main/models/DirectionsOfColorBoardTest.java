@@ -1,6 +1,7 @@
 package main.models;
 
 import main.models.builders.BoardBuilder;
+import main.models.modules.game.Board;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;

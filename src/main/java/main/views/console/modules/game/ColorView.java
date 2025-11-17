@@ -1,6 +1,6 @@
 package main.views.console.modules.game;
 
-import main.models.Player;
+import main.models.modules.game.Player;
 import main.utils.Terminal;
 
 public class ColorView {

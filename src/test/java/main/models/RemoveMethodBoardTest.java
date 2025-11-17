@@ -1,7 +1,6 @@
 package main.models;
 
-import main.models.Board;
-import main.models.Coordinate;
+import main.models.modules.game.Board;
 import main.models.builders.BoardBuilder;
 import org.junit.Before;
 import org.junit.Test;

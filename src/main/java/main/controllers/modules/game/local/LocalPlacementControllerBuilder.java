@@ -1,6 +1,6 @@
 package main.controllers.modules.game.local;
 
-import main.models.Game;
+import main.models.modules.game.Game;
 
 import java.util.Arrays;
 

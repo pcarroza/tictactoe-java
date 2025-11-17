@@ -1,5 +1,5 @@
 @startuml
-class main.models.Coordinate {
+class main.models.modules.game.Coordinate {
 + {static} int DIMENSION = 3
 # int getDimension()
 + String toString()
@@ -8,6 +8,6 @@ class main.models.Coordinate {
 }
 
 
-main.models.coordinate.SquareBoundedCoordinate <|-- main.models.Coordinate
+main.models.coordinate.SquareBoundedCoordinate <|-- main.models.modules.game.Coordinate
 
 @enduml

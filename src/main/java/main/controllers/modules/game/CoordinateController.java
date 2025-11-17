@@ -1,6 +1,6 @@
 package main.controllers.modules.game;
 
-import main.models.Coordinate;
+import main.models.modules.game.Coordinate;
 
 public interface CoordinateController {
 

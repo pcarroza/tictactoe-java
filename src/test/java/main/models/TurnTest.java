@@ -1,5 +1,7 @@
 package main.models;
 
+import main.models.modules.game.Player;
+import main.models.modules.game.Turn;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
 package main.controllers.modules.game.errors;
 
-import main.models.Coordinate;
+import main.models.modules.game.Coordinate;
 
 import java.util.List;
 
@@ -15,5 +15,3 @@ public class RepeatedCoordinateErrorReport extends ErrorReport {
         errorReportVisitor.visit(this);
     }
 }
-
-

@@ -5,8 +5,8 @@ import main.controllers.modules.game.PlacementController;
 import main.controllers.modules.game.PlacementControllerVisitor;
 import main.controllers.modules.game.PutController;
 import main.controllers.modules.game.errors.ErrorReport;
-import main.models.Player;
-import main.models.Coordinate;
+import main.models.modules.game.Player;
+import main.models.modules.game.Coordinate;
 
 import java.util.function.Function;
 import java.util.function.Supplier;

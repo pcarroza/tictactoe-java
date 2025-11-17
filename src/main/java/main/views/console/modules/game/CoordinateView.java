@@ -1,6 +1,6 @@
 package main.views.console.modules.game;
 
-import main.models.Coordinate;
+import main.models.modules.game.Coordinate;
 import main.utils.LimitedIntDialog;
 import main.utils.Terminal;
 

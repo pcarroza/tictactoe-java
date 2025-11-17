@@ -2,8 +2,8 @@ package main.controllers.modules.game.local.logic;
 
 import main.controllers.modules.game.local.LocalOperationControllerBuilder;
 import main.controllers.modules.game.OperationController;
-import main.models.Observer;
-import main.models.Game;
+import main.models.modules.game.Observer;
+import main.models.modules.game.Game;
 import main.Logic;
 
 public class LocalLogic implements Logic, Observer {

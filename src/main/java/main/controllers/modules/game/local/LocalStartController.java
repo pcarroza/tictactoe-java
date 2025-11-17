@@ -3,7 +3,7 @@ package main.controllers.modules.game.local;
 import main.controllers.modules.game.OperationControllerVisitor;
 import main.controllers.modules.game.StartController;
 import main.utils.ClosedInterval;
-import main.models.Game;
+import main.models.modules.game.Game;
 
 public class LocalStartController extends LocalOperationController implements StartController {
 

@@ -1,7 +1,7 @@
 package main.views.console.modules.game;
 
 import main.controllers.modules.game.PresenterController;
-import main.models.Coordinate;
+import main.models.modules.game.Coordinate;
 import main.utils.Terminal;
 
 public class BoardView {

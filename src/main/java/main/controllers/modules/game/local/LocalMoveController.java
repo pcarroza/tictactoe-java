@@ -5,8 +5,8 @@ import main.controllers.modules.game.PlacementControllerVisitor;
 import main.controllers.modules.game.errors.ErrorReport;
 import main.controllers.modules.game.MoveController;
 import main.controllers.modules.game.errors.ErrorGeneratorType;
-import main.models.Coordinate;
-import main.models.Game;
+import main.models.modules.game.Coordinate;
+import main.models.modules.game.Game;
 
 public class LocalMoveController extends LocalPlacementController implements MoveController {
 

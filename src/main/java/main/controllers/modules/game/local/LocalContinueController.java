@@ -2,7 +2,7 @@ package main.controllers.modules.game.local;
 
 import main.controllers.modules.game.ContinueController;
 import main.controllers.modules.game.OperationControllerVisitor;
-import main.models.Game;
+import main.models.modules.game.Game;
 
 public class LocalContinueController extends LocalOperationController
     implements ContinueController {

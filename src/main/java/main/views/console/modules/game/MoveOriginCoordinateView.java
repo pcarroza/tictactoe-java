@@ -3,7 +3,7 @@ package main.views.console.modules.game;
 import main.controllers.modules.game.CoordinateController;
 import main.controllers.modules.game.RandomCoordinateController;
 import main.controllers.modules.game.UserCoordinateController;
-import main.models.Coordinate;
+import main.models.modules.game.Coordinate;
 
 public class MoveOriginCoordinateView extends PlacementCoordinateView {
 

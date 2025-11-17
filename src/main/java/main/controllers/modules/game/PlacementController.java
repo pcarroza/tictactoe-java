@@ -1,8 +1,8 @@
 package main.controllers.modules.game;
 
 import main.controllers.modules.game.errors.ErrorReport;
-import main.models.Player;
-import main.models.Coordinate;
+import main.models.modules.game.Player;
+import main.models.modules.game.Coordinate;
 
 public interface PlacementController extends OperationController, PresenterController {
 

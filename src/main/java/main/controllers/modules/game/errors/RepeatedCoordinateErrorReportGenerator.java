@@ -1,6 +1,6 @@
 package main.controllers.modules.game.errors;
 
-import main.models.Game;
+import main.models.modules.game.Game;
 
 public class RepeatedCoordinateErrorReportGenerator extends ErrorReportGenerator {
 

@@ -1,6 +1,6 @@
 package main.utils;
 
-import main.models.Coordinate;
+import main.models.modules.game.Coordinate;
 import main.utils.builder.ClosedIntervalBuilder;
 import org.junit.Before;
 import org.junit.Test;

@@ -2,8 +2,8 @@ package main.controllers.modules.game.local;
 
 import main.controllers.modules.game.CoordinateControllerVisitor;
 import main.controllers.modules.game.UserCoordinateController;
-import main.models.Coordinate;
-import main.models.Game;
+import main.models.modules.game.Coordinate;
+import main.models.modules.game.Game;
 
 public class LocalUserCoordinateController extends LocalCoordinateController
     implements UserCoordinateController {

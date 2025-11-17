@@ -4,8 +4,8 @@ import main.controllers.modules.game.CoordinateController;
 import main.controllers.modules.game.PlacementController;
 import main.controllers.modules.game.errors.ErrorGeneratorType;
 import main.controllers.modules.game.errors.ErrorReport;
-import main.models.Coordinate;
-import main.models.Game;
+import main.models.modules.game.Coordinate;
+import main.models.modules.game.Game;
 
 public abstract class LocalPlacementController extends LocalOperationController
     implements PlacementController {

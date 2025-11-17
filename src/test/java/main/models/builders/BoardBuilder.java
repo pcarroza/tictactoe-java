@@ -1,8 +1,8 @@
 package main.models.builders;
 
-import main.models.Board;
-import main.models.Player;
-import main.models.Coordinate;
+import main.models.modules.game.Board;
+import main.models.modules.game.Player;
+import main.models.modules.game.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;

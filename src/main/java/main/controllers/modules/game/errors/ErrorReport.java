@@ -1,6 +1,6 @@
 package main.controllers.modules.game.errors;
 
-import main.models.Coordinate;
+import main.models.modules.game.Coordinate;
 
 import java.util.Iterator;
 import java.util.List;

@@ -1,8 +1,8 @@
 package main.controllers.modules.game.local;
 
-import main.models.Coordinate;
-import main.models.Player;
-import main.models.Game;
+import main.models.modules.game.Coordinate;
+import main.models.modules.game.Player;
+import main.models.modules.game.Game;
 
 class LocalController {
 
