@@ -1,9 +1,7 @@
 package main.controllers.local;
 
 import main.controllers.CoordinateController;
-import main.controllers.OperationControllerVisitor;
 import main.controllers.PlacementController;
-import main.controllers.PlacementControllerVisitor;
 import main.controllers.errors.ErrorGeneratorType;
 import main.controllers.errors.ErrorReport;
 import main.models.Coordinate;
