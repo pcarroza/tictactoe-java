@@ -6,12 +6,10 @@ import main.core.logics.game.GameLogic;
 import main.views.console.ConsoleView;
 import main.views.console.core.MenuView;
 
-import java.util.List;
-
 public class TicTacToeApp {
 
     public static void main(String[] args) {
         GameLogic game = new GameLogic(new LocalLogic(), new ConsoleView());
-        new MenuView(List.of(new StartGameCommand(game))).run();
+        new MenuView(new StartGameCommand(game)).run();
     }
 }

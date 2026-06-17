@@ -9,10 +9,12 @@ import java.util.List;
 public class MenuView {
 
     private final List<Command> commands;
+
     private boolean closed;
 
-    public MenuView(List<Command> commands) {
-        this.commands = new ArrayList<>(commands);
+    public MenuView(Command command) {
+        this.commands = new ArrayList<>();
+        this.commands.add(command);
         this.commands.add(new ExitCommand(this));
         this.closed = false;
     }
@@ -33,7 +35,7 @@ public class MenuView {
         Terminal terminal = Terminal.getInstance();
         terminal.writeln();
         for (int i = 0; i < commands.size(); i++) {
-            terminal.writeln((i + 1) + ". " + commands.get(i).getTitle());
+            terminal.writeln("[" + (i + 1) +"] " + commands.get(i).getTitle());
         }
     }
 }

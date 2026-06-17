@@ -1,0 +1,15 @@
+{
+    "mainClass": "main.core.TicTacToeApp",
+    "classPaths": [
+        "${workspaceFolder}/build/classes/java/main"
+    ],
+    "configurations": [
+        {
+            "type": "java",
+            "name": "TicTacToeApp",
+            "request": "launch",
+            "mainClass": "main.core.TicTacToeApp",
+            "projectName": "tictactoe-java"
+        }
+    ]
+}
