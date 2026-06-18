@@ -6,18 +6,19 @@ import main.shared.Terminal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Menu {
+public abstract class Menu {
 
-    private final List<Command> commands;
+    protected final List<Command> commands;
 
     private boolean closed;
 
-    public Menu(Command command) {
+    public Menu() {
         this.commands = new ArrayList<>();
-        this.commands.add(command);
         this.commands.add(new ExitCommand(this));
         this.closed = false;
     }
+
+    public abstract void setCommand();
 
     public void run() {
         do {
@@ -35,7 +36,7 @@ public class Menu {
         Terminal terminal = Terminal.getInstance();
         terminal.writeln();
         for (int i = 0; i < commands.size(); i++) {
-            terminal.writeln("[" + (i + 1) +"] " + commands.get(i).getTitle());
+            terminal.writeln("[" + (i + 1) + "] " + commands.get(i).getTitle());
         }
     }
 }

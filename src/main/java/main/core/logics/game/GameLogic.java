@@ -2,6 +2,8 @@ package main.core.logics.game;
 
 import main.controllers.Logic;
 import main.controllers.features.game.OperationController;
+import main.controllers.features.game.local.logic.LocalLogic;
+import main.views.console.ConsoleView;
 import main.views.core.View;
 
 public class GameLogic {
@@ -10,9 +12,9 @@ public class GameLogic {
 
     private final View view;
 
-    public GameLogic(Logic logic, View view) {
-        this.logic = logic;
-        this.view = view;
+    public GameLogic() {
+        this.logic = new LocalLogic();
+        this.view = new ConsoleView();
     }
 
     public void run() {
