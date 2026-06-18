@@ -1,12 +1,12 @@
 package main.core.enums;
 
-public enum CommandTitle {
+public enum Title {
 
     START_GAME("Iniciar Juego");
 
     private final String title;
 
-    CommandTitle(String title) {
+    Title(String title) {
         this.title = title;
     }
 

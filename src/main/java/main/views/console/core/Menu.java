@@ -6,13 +6,13 @@ import main.shared.Terminal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuView {
+public class Menu {
 
     private final List<Command> commands;
 
     private boolean closed;
 
-    public MenuView(Command command) {
+    public Menu(Command command) {
         this.commands = new ArrayList<>();
         this.commands.add(command);
         this.commands.add(new ExitCommand(this));

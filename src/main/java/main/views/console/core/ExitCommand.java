@@ -2,9 +2,9 @@ package main.views.console.core;
 
 class ExitCommand extends Command {
 
-    private final MenuView menuView;
+    private final Menu menuView;
 
-    ExitCommand(MenuView menuView) {
+    ExitCommand(Menu menuView) {
         super("Salir");
         this.menuView = menuView;
     }
