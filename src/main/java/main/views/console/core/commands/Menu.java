@@ -1,7 +1,8 @@
-package main.views.console.core;
+package main.views.console.core.commands;
 
 import main.shared.LimitedIntDialog;
 import main.shared.Terminal;
+import main.views.console.core.Feature;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,26 +11,22 @@ public abstract class Menu {
 
     protected final List<Command> commands;
 
-    private boolean closed;
+    private ExitCommand exitCommand;
 
     public Menu() {
         this.commands = new ArrayList<>();
-        this.commands.add(new ExitCommand(this));
-        this.closed = false;
+        exitCommand = new ExitCommand();
+        commands.add(exitCommand);
     }
 
     public abstract void setCommand();
 
-    public void run() {
+    public void execute(Feature feature) {
         do {
             show();
-            int selection = LimitedIntDialog.instance().read("Selecciona una opción", commands.size());
-            commands.get(selection - 1).execute();
-        } while (!closed);
-    }
-
-    void close() {
-        this.closed = true;
+            int option = LimitedIntDialog.instance().read("Selecciona una opción", commands.size());
+            commands.get(option - 1).execute(feature);
+        } while (!exitCommand.closed());
     }
 
     private void show() {

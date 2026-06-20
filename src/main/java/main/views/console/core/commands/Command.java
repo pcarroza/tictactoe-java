@@ -1,4 +1,6 @@
-package main.views.console.core;
+package main.views.console.core.commands;
+
+import main.views.console.core.Feature;
 
 public abstract class Command {
 
@@ -12,5 +14,5 @@ public abstract class Command {
         return title;
     }
 
-    public abstract void execute();
+    public abstract void execute(Feature feature);
 }

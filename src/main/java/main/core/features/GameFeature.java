@@ -1,20 +1,19 @@
-package main.core.logics.game;
+package main.core.features;
 
 import main.controllers.Logic;
 import main.controllers.features.game.OperationController;
-import main.controllers.features.game.local.logic.LocalLogic;
-import main.views.console.ConsoleView;
+import main.views.console.core.Feature;
 import main.views.core.View;
 
-public class GameLogic {
+public class GameFeature implements Feature {
 
     private final Logic logic;
 
     private final View view;
 
-    public GameLogic() {
-        this.logic = new LocalLogic();
-        this.view = new ConsoleView();
+    public GameFeature(Logic logic, View view) {
+        this.logic = logic;
+        this.view = view;
     }
 
     public void run() {

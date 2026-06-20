@@ -1,14 +1,10 @@
-package main.views.console;
+package main.views.console.features.game;
 
 import main.views.core.View;
 import main.controllers.features.game.ContinueController;
 import main.controllers.features.game.OperationController;
 import main.controllers.features.game.PlacementController;
 import main.controllers.features.game.StartController;
-import main.views.console.features.game.BoardView;
-import main.views.console.features.game.ContinueView;
-import main.views.console.features.game.GameView;
-import main.views.console.features.game.StartView;
 
 public class ConsoleView implements View {
 
