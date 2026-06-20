@@ -1,4 +1,4 @@
-package main.views.console.core.commands;
+package main.views.console.core.menus;
 
 import main.shared.LimitedIntDialog;
 import main.shared.Terminal;
@@ -15,13 +15,16 @@ public abstract class Menu {
 
     public Menu() {
         this.commands = new ArrayList<>();
-        exitCommand = new ExitCommand();
-        commands.add(exitCommand);
+        this.exitCommand = new ExitCommand();
     }
 
     public abstract void setCommand();
 
     public void execute(Feature feature) {
+        this.commands.clear();
+        this.setCommand();
+        this.commands.add(exitCommand);
+        this.exitCommand.reset();
         do {
             show();
             int option = LimitedIntDialog.instance().read("Selecciona una opción", commands.size());

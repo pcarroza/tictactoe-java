@@ -1,4 +1,4 @@
-package main.views.console.core.commands;
+package main.views.console.core.menus;
 
 import main.views.console.core.Feature;
 

@@ -1,4 +1,4 @@
-package main.views.console.core.commands;
+package main.views.console.core.menus;
 
 import main.controllers.Logic;
 import main.controllers.features.game.OperationController;
