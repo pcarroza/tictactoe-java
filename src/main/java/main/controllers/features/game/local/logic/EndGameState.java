@@ -4,22 +4,22 @@ import main.controllers.features.game.local.LocalContinueController;
 import main.controllers.features.game.local.LocalOperationController;
 import main.controllers.features.game.local.LocalOperationControllerBuilder;
 
-class EndState extends State {
+class EndGameState extends GameState {
 
     private final LocalContinueController localContinueController;
 
-    EndState(StatesBuilder statesBuilder, LocalOperationControllerBuilder builder) {
+    EndGameState(GameStatesBuilder statesBuilder, LocalOperationControllerBuilder builder) {
         super(statesBuilder);
         localContinueController = builder.getContinueController();
     }
 
     @Override
-    State initialize() {
+    GameState initialize() {
         return statesBuilder.getInitialState();
     }
 
     @Override
-    State exit() {
+    GameState exit() {
         return statesBuilder.getExistState();
     }
 

@@ -4,17 +4,17 @@ import main.controllers.features.game.local.LocalOperationControllerBuilder;
 import main.controllers.features.game.local.LocalOperationController;
 import main.controllers.features.game.local.LocalStartController;
 
-public class InitialState extends State {
+public class InitialGameState extends GameState {
 
     private final LocalStartController localStartController;
 
-    public InitialState(StatesBuilder statesBuilder, LocalOperationControllerBuilder builder) {
+    public InitialGameState(GameStatesBuilder statesBuilder, LocalOperationControllerBuilder builder) {
         super(statesBuilder);
         localStartController = builder.getStartController();
     }
 
     @Override
-    State begin() {
+    GameState begin() {
         return statesBuilder.getInGameState();
     }
 

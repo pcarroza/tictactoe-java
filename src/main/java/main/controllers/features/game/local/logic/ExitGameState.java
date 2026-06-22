@@ -2,9 +2,9 @@ package main.controllers.features.game.local.logic;
 
 import main.controllers.features.game.local.LocalOperationController;
 
-public class ExitState extends State {
+public class ExitGameState extends GameState {
 
-    public ExitState(StatesBuilder statesBuilder) {
+    public ExitGameState(GameStatesBuilder statesBuilder) {
         super(statesBuilder);
     }
 

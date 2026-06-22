@@ -3,6 +3,8 @@ package main.views.console.core.menus;
 import main.shared.LimitedIntDialog;
 import main.shared.Terminal;
 import main.views.console.core.Feature;
+import main.views.console.core.commands.Command;
+import main.views.console.core.commands.ExitCommand;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,24 +17,30 @@ public abstract class Menu {
 
     public Menu() {
         this.commands = new ArrayList<>();
+        this.setCommand();
         this.exitCommand = new ExitCommand();
+        this.commands.add(exitCommand);
     }
 
     public abstract void setCommand();
 
+    public void set(Feature feature) {
+        for (Command command : commands) {
+            command.set(feature);
+        }
+    }
+
     public void execute(Feature feature) {
-        this.commands.clear();
-        this.setCommand();
-        this.commands.add(exitCommand);
+        this.set(feature);
         this.exitCommand.reset();
         do {
-            show();
+            writeln();
             int option = LimitedIntDialog.instance().read("Selecciona una opción", commands.size());
-            commands.get(option - 1).execute(feature);
+            commands.get(option - 1).execute();
         } while (!exitCommand.closed());
     }
 
-    private void show() {
+    private void writeln() {
         Terminal terminal = Terminal.getInstance();
         terminal.writeln();
         for (int i = 0; i < commands.size(); i++) {

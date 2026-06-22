@@ -6,15 +6,15 @@ import main.models.features.game.Observer;
 import main.models.features.game.Game;
 import main.controllers.Logic;
 
-public class LocalLogic implements Logic, Observer {
+public class LocalGameLogic implements Logic, Observer {
 
-    private State actualState;
+    private GameState actualState;
 
-    public LocalLogic() {
+    public LocalGameLogic() {
         Game game = new Game(this);
         LocalOperationControllerBuilder builder = new LocalOperationControllerBuilder(game);
         builder.build();
-        actualState = new StatesBuilder(builder).getInitialState();
+        actualState = new GameStatesBuilder(builder).getInitialState();
     }
 
     @Override

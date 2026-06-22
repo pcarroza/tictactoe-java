@@ -1,18 +1,22 @@
-package main.views.console.core.menus;
+package main.views.console.core.commands;
 
-import main.controllers.Logic;
-import main.controllers.features.game.OperationController;
 import main.views.console.core.Feature;
-import main.views.core.View;
 
 public class StartGameCommand extends Command {
+
+    private Feature feature;
 
     public StartGameCommand() {
         super("Iniciar Juego");
     }
 
     @Override
-    public void execute(Feature feature) {
+    public void set(Feature feature) {
+        this.feature = feature;
+    }
+
+    @Override
+    public void execute() {
         feature.run();
     }
 }

@@ -3,17 +3,17 @@ package main.controllers.features.game.local.logic;
 import main.controllers.features.game.local.LocalOperationController;
 import main.controllers.features.game.local.LocalOperationControllerBuilder;
 
-public class InGameState extends State {
+public class InGameState extends GameState {
 
     private final LocalOperationControllerBuilder builder;
 
-    public InGameState(StatesBuilder statesBuilder, LocalOperationControllerBuilder builder) {
+    public InGameState(GameStatesBuilder statesBuilder, LocalOperationControllerBuilder builder) {
         super(statesBuilder);
         this.builder = builder;
     }
 
     @Override
-    State end() {
+    GameState end() {
         return statesBuilder.getEndState();
     }
 

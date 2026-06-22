@@ -2,30 +2,30 @@ package main.controllers.features.game.local.logic;
 
 import main.controllers.features.game.local.LocalOperationController;
 
-abstract class State {
+abstract class GameState {
 
-    protected StatesBuilder statesBuilder;
+    protected GameStatesBuilder statesBuilder;
 
-    protected State(StatesBuilder statesBuilder) {
+    protected GameState(GameStatesBuilder statesBuilder) {
         this.statesBuilder = statesBuilder;
     }
 
-    State initialize() {
+    GameState initialize() {
         assert false;
         return null;
     }
 
-    State begin() {
+    GameState begin() {
         assert false;
         return null;
     }
 
-    State end() {
+    GameState end() {
         assert false;
         return null;
     }
 
-    State exit() {
+    GameState exit() {
         assert false;
         return null;
     }

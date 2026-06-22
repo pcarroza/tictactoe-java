@@ -1,18 +1,18 @@
-package main.views.console.core.menus;
+package main.views.console.core.commands;
 
 import main.views.console.core.Feature;
 
-class ExitCommand extends Command {
+public class ExitCommand extends Command {
 
     private boolean closed;
 
-    protected ExitCommand() {
+    public ExitCommand() {
         super("Salir");
         this.reset();
     }
 
     @Override
-    public void execute(Feature feature) {
+    public void execute() {
         closed = true;
     }
 

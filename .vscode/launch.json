@@ -1,15 +1,15 @@
 {
-    "mainClass": "main.core.TicTacToeApp",
-    "classPaths": [
-        "${workspaceFolder}/build/classes/java/main"
-    ],
+    "version": "0.2.0",
     "configurations": [
         {
             "type": "java",
             "name": "TicTacToeApp",
             "request": "launch",
             "mainClass": "main.core.TicTacToeApp",
-            "projectName": "tictactoe-java"
+            "classPaths": [
+                "${workspaceFolder}/build/classes/java/main"
+            ],
+            "preLaunchTask": "gradle-compile"
         }
     ]
 }
