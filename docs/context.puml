@@ -1,0 +1,15 @@
+@startuml
+
+
+class Game {
+    -board: Board
+}
+
+Registry --> GameSnapshot
+GameSnapshot ..> Game
+Game --> Board
+Game ..> Coordinate
+Board ..> Coordinate
+
+
+@enduml
