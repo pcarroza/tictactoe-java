@@ -22,7 +22,7 @@ public class LocalSaveController extends LocalOperationController implements Sav
 
     @Override
     public void resume() {
-        resume();
+        getGame().resume();
     }
 
     @Override
