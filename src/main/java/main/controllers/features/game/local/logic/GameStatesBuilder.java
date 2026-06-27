@@ -12,11 +12,14 @@ public class GameStatesBuilder {
 
     private final ExitGameState exitState;
 
+    private final SaveMenuState saveMenuState;
+
     public GameStatesBuilder(LocalOperationControllerBuilder builder) {
         initialState = new InitialGameState(this, builder);
         inGameState = new InGameState(this, builder);
         finalState = new EndGameState(this, builder);
         exitState = new ExitGameState(this);
+        saveMenuState = new SaveMenuState(this, builder.getSaveController());
     }
 
     InitialGameState getInitialState() {
@@ -33,5 +36,9 @@ public class GameStatesBuilder {
 
     ExitGameState getExistState() {
         return exitState;
+    }
+
+    SaveMenuState getSaveMenuState() {
+        return saveMenuState;
     }
 }

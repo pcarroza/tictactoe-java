@@ -164,6 +164,18 @@ public class Board extends Subject {
         return turn.getCurrentPlayer();
     }
 
+    public Map<Player, Set<Coordinate>> getPositions() {
+        Map<Player, Set<Coordinate>> copy = new HashMap<>();
+        flat.forEach((player, coords) -> copy.put(player, new HashSet<>(coords)));
+        return copy;
+    }
+
+    public void restore(GameSnapshot snapshot) {
+        flat.forEach((player, coords) -> coords.clear());
+        snapshot.getPositions().forEach((player, coords) -> flat.put(player, new HashSet<>(coords)));
+        turn.set(snapshot.getCurrentPlayerIndex());
+    }
+
     @Override
     public String toString() {
         return " " + flat;

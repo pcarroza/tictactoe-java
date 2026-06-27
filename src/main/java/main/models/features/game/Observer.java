@@ -9,4 +9,8 @@ public interface Observer {
     void end();
 
     void exit();
+
+    void save();
+
+    void resume();
 }

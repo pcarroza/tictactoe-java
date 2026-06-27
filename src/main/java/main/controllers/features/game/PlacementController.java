@@ -21,4 +21,8 @@ public interface PlacementController extends OperationController, PresenterContr
     void end();
 
     void accept(PlacementControllerVisitor placementControllerVisitor);
+
+    void save();
+
+    void exit();
 }

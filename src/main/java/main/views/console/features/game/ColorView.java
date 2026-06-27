@@ -14,12 +14,18 @@ public class ColorView {
         return colorView;
     }
 
-    private static final char[] COLORS = {'o', 'x', '_'};
+    private static final char[] SYMBOLS = {'O', 'X', '·'};
+
+    private static final String RESET  = "[0m";
+    private static final String YELLOW = "[33m";
+    private static final String BLUE   = "[34m";
+    private static final String GRAY   = "[90m";
+    private static final String BOLD   = "[1m";
 
     private ColorView() {}
 
     void write(String title, Player color) {
-        Terminal.getInstance().write(title + getColor(color));
+        Terminal.getInstance().write(title + ansi(color) + getSymbol(color) + RESET);
     }
 
     void writeln(String title, Player color) {
@@ -27,17 +33,27 @@ public class ColorView {
         Terminal.getInstance().writeln();
     }
 
-    void writeWinner(Player color) {
-        String victory = "Victoria!!!!";
-        Terminal.getInstance().write(victory);
-        final int MAX = 3;
-        for (int i = 0; i < MAX; i++) {
-            Terminal.getInstance().write(getColor(color) + "! ");
-        }
-        Terminal.getInstance().writeln(victory);
+    void writeCell(Player color) {
+        Terminal.getInstance().write(ansi(color) + " " + getSymbol(color) + " " + RESET);
     }
 
-    private char getColor(Player color) {
-        return COLORS[color.ordinal()];
+    void writeWinner(Player color) {
+        Terminal terminal = Terminal.getInstance();
+        terminal.writeln();
+        terminal.writeln("  ┌─────────────────────┐");
+        terminal.write  ("  │    ¡VICTORIA!  " + BOLD + ansi(color));
+        terminal.write  ("" + getSymbol(color) + RESET);
+        terminal.writeln("    │");
+        terminal.writeln("  └─────────────────────┘");
+    }
+
+    private String ansi(Player color) {
+        if (color == Player.OS) return YELLOW;
+        if (color == Player.XS) return BLUE;
+        return GRAY;
+    }
+
+    private char getSymbol(Player color) {
+        return SYMBOLS[color.ordinal()];
     }
 }

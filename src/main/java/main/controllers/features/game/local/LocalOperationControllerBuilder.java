@@ -3,6 +3,8 @@ package main.controllers.features.game.local;
 import main.models.features.game.Game;
 import main.shared.ClosedInterval;
 
+import java.util.Arrays;
+
 public class LocalOperationControllerBuilder {
 
     private LocalStartController localStartController;
@@ -10,9 +12,11 @@ public class LocalOperationControllerBuilder {
     private LocalPlacementControllerBuilder[] builders;
 
     private LocalContinueController localContinueController;
-    
+
+    private LocalSaveController localSaveController;
+
     private final Game game;
-    
+
     public LocalOperationControllerBuilder(Game game) {
         this.game = game;
     }
@@ -21,9 +25,10 @@ public class LocalOperationControllerBuilder {
         localStartController = new LocalStartController(game, this);
         builders = new LocalPlacementControllerBuilder[game.getNumberOfPlayers()];
         localContinueController = new LocalContinueController(game);
+        localSaveController = new LocalSaveController(game, this);
     }
 
-    void build(int users) {
+    public void build(int users) {
         assert new ClosedInterval<>(0, game.getNumberOfPlayers()).isIncluded(users);
         for (int i = 0; i < game.getNumberOfPlayers(); i++) {
             if (i < users) {
@@ -37,7 +42,9 @@ public class LocalOperationControllerBuilder {
 
     public LocalPlacementController getPlacementController() {
         assert builders != null;
-        assert builders[game.getIndexCurrentPlayer()] != null;
+        Arrays.stream(builders).forEach(controller -> {
+            assert controller != null;
+        });
         return builders[game.getIndexCurrentPlayer()].getPlacementController();
     }
 
@@ -47,5 +54,13 @@ public class LocalOperationControllerBuilder {
 
     public LocalStartController getStartController() {
         return localStartController;
+    }
+
+    public LocalSaveController getSaveController() {
+        return localSaveController;
+    }
+
+    public int getUsers() {
+        return game.getNumberOfPlayers();
     }
 }

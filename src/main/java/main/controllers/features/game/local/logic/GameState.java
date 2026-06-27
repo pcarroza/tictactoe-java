@@ -30,5 +30,15 @@ abstract class GameState {
         return null;
     }
 
+    GameState save() {
+        assert false;
+        return null;
+    }
+
+    GameState resume() {
+        assert false;
+        return null;
+    }
+
     abstract LocalOperationController getController();
 }

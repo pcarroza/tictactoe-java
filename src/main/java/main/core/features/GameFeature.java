@@ -3,6 +3,7 @@ package main.core.features;
 import main.controllers.Logic;
 import main.controllers.features.game.OperationController;
 import main.core.config.AppConfig;
+import main.models.features.game.GameSnapshot;
 import main.views.console.core.Feature;
 import main.views.core.View;
 
@@ -14,6 +15,11 @@ public class GameFeature implements Feature {
 
     public GameFeature() {
         this.logic = AppConfig.logicType().create();
+        this.view = AppConfig.viewType().create();
+    }
+
+    public GameFeature(GameSnapshot snapshot) {
+        this.logic = AppConfig.logicType().create(snapshot);
         this.view = AppConfig.viewType().create();
     }
 

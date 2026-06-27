@@ -23,4 +23,8 @@ public class Turn {
     public void change() {
         this.value = (value + 1) % (Player.values().length - 1);
     }
+
+    public void set(int index) {
+        this.value = index;
+    }
 }

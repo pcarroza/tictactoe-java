@@ -7,6 +7,8 @@ import main.controllers.features.game.PutController;
 import main.controllers.features.game.errors.ErrorReport;
 import main.models.features.game.Player;
 import main.models.features.game.Coordinate;
+import main.shared.LimitedIntDialog;
+import main.shared.Terminal;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -26,7 +28,22 @@ public class GameView implements PlacementControllerVisitor {
     }
 
     public void interact(PlacementController placementController) {
-        placementController.accept(this);
+        Terminal terminal = Terminal.getInstance();
+        terminal.clear();
+        boardView.write(placementController);
+        terminal.writeln();
+        terminal.writeln("  [1] Jugar turno");
+        terminal.writeln("  [2] Guardar partida");
+        terminal.writeln("  [3] Salir");
+        terminal.writeln();
+        int option = LimitedIntDialog.instance().read("  Selecciona una opción", 3);
+        if (option == 1) {
+            placementController.accept(this);
+        } else if (option == 2) {
+            placementController.save();
+        } else {
+            placementController.exit();
+        }
     }
 
     @Override
@@ -82,6 +99,7 @@ public class GameView implements PlacementControllerVisitor {
     }
 
     private void showGame(PlacementController placementController) {
+        Terminal.getInstance().clear();
         boardView.write(placementController);
         if (placementController.existTicTacToe()) {
             ColorView.instance().writeWinner(placementController.take());

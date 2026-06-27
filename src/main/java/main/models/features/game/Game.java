@@ -1,6 +1,8 @@
 package main.models.features.game;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class Game {
 
@@ -81,5 +83,21 @@ public class Game {
 
     public void exit() {
         this.board.exit();
+    }
+
+    public void save() {
+        this.board.save();
+    }
+
+    public void resume() {
+        this.board.resume();
+    }
+
+    public Map<Player, Set<Coordinate>> getPositions() {
+        return this.board.getPositions();
+    }
+
+    public void restore(GameSnapshot snapshot) {
+        this.board.restore(snapshot);
     }
 }

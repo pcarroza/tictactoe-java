@@ -7,5 +7,6 @@ public interface OperationControllerVisitor {
     void visit(PlacementController setController);
 
     void visit(ContinueController continueController);
-}
 
+    void visit(SaveController saveController);
+}

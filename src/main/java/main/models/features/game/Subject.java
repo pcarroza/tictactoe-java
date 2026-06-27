@@ -23,4 +23,12 @@ public abstract class Subject {
     public void exit() {
         this.observer.exit();
     }
+
+    public void save() {
+        this.observer.save();
+    }
+
+    public void resume() {
+        this.observer.resume();
+    }
 }

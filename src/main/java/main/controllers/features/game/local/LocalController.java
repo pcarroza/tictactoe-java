@@ -77,4 +77,12 @@ class LocalController {
     public void exit() {
         game.exit();
     }
+
+    public void save() {
+        game.save();
+    }
+
+    public void resume() {
+        game.resume();
+    }
 }

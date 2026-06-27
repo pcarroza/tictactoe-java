@@ -18,6 +18,16 @@ public class InGameState extends GameState {
     }
 
     @Override
+    GameState exit() {
+        return statesBuilder.getExistState();
+    }
+
+    @Override
+    GameState save() {
+        return statesBuilder.getSaveMenuState();
+    }
+
+    @Override
     LocalOperationController getController() {
         return builder.getPlacementController();
     }
