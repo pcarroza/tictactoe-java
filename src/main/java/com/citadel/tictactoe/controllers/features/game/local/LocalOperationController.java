@@ -11,5 +11,13 @@ public abstract class LocalOperationController extends LocalController
         super(game);
     }
 
+    public void undo() {
+        getGame().undo();
+    }
+
+    public void redo() {
+        getGame().redo();
+    }
+
     public abstract void accept(OperationControllerVisitor visitor);
 }

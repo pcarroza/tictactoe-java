@@ -31,4 +31,13 @@ public abstract class Subject {
     public void resume() {
         this.observer.resume();
     }
+
+    public void undo() {
+        this.observer.undo();
+    }
+
+    public void redo() {
+        this.observer.redo();
+    }
+
 }

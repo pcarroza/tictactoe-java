@@ -13,12 +13,18 @@ public class Board extends Subject {
 
     private final Turn turn;
 
+    private final Deque<BoardMemento> undoStack;
+
+    private final Deque<BoardMemento> redoStack;
+
     public Board() {
         flat = new HashMap<>();
         for (int i = 0; i < getNumberOfPlayers(); i++) {
             flat.put(Player.values()[i], new HashSet<>());
         }
         turn = new Turn();
+        undoStack = new ArrayDeque<>();
+        redoStack = new ArrayDeque<>();
     }
 
     public void put(Coordinate coordinate) {
@@ -81,6 +87,8 @@ public class Board extends Subject {
     public void clear() {
         flat.keySet().forEach(player -> flat.get(player).clear());
         turn.reset();
+        undoStack.clear();
+        redoStack.clear();
     }
 
     public boolean existTicTacToe() {
@@ -174,6 +182,39 @@ public class Board extends Subject {
         flat.forEach((player, coordinates) -> coordinates.clear());
         snapshot.getPositions().forEach((player, coordinates) -> flat.put(player, new HashSet<>(coordinates)));
         turn.set(snapshot.getCurrentPlayerIndex());
+        undoStack.clear();
+        redoStack.clear();
+    }
+
+    public void pushState() {
+        undoStack.push(new BoardMemento(getPositions(), turn.getIndexCurrentPlayer()));
+        redoStack.clear();
+    }
+
+    public void revert() {
+        assert !undoStack.isEmpty();
+        redoStack.push(new BoardMemento(getPositions(), turn.getIndexCurrentPlayer()));
+        applyMemento(undoStack.pop());
+    }
+
+    public void reapply() {
+        assert !redoStack.isEmpty();
+        undoStack.push(new BoardMemento(getPositions(), turn.getIndexCurrentPlayer()));
+        applyMemento(redoStack.pop());
+    }
+
+    public boolean canRevert() {
+        return !undoStack.isEmpty();
+    }
+
+    public boolean canReapply() {
+        return !redoStack.isEmpty();
+    }
+
+    private void applyMemento(BoardMemento memento) {
+        flat.forEach((player, coordinates) -> coordinates.clear());
+        memento.positions.forEach((player, coordinates) -> flat.put(player, new HashSet<>(coordinates)));
+        turn.set(memento.turnIndex);
     }
 
     @Override
@@ -184,4 +225,18 @@ public class Board extends Subject {
     public void showFlat() {
         System.out.println(flat);
     }
+
+    private static class BoardMemento {
+
+        private final Map<Player, Set<Coordinate>> positions;
+
+        private final int turnIndex;
+
+        BoardMemento(Map<Player, Set<Coordinate>> positions, int turnIndex) {
+            this.positions = positions;
+            this.turnIndex = turnIndex;
+        }
+
+    }
+
 }

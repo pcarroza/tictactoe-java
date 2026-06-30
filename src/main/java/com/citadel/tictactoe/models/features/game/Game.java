@@ -100,4 +100,33 @@ public class Game {
     public void resume() {
         this.board.resume();
     }
+
+    public void undo() {
+        this.board.undo();
+    }
+
+    public void redo() {
+        this.board.redo();
+    }
+
+    public void pushState() {
+        this.board.pushState();
+    }
+
+    public void revert() {
+        this.board.revert();
+    }
+
+    public void reapply() {
+        this.board.reapply();
+    }
+
+    public boolean canRevert() {
+        return this.board.canRevert();
+    }
+
+    public boolean canReapply() {
+        return this.board.canReapply();
+    }
+
 }

@@ -14,11 +14,17 @@ public class GameStatesBuilder {
 
     private final SaveMenuState saveMenuState;
 
+    private final UndoMenuState undoMenuState;
+
+    private final RedoMenuState redoMenuState;
+
     public GameStatesBuilder(LocalOperationControllerBuilder builder) {
         initialState = new InitialGameState(this, builder);
         inGameState = new InGameState(this, builder);
         finalState = new EndGameState(this, builder);
         saveMenuState = new SaveMenuState(this, builder);
+        undoMenuState = new UndoMenuState(this, builder);
+        redoMenuState = new RedoMenuState(this, builder);
         exitState = new ExitGameState(this);
     }
 
@@ -41,4 +47,13 @@ public class GameStatesBuilder {
     SaveMenuState getSaveMenuState() {
         return saveMenuState;
     }
+
+    UndoMenuState getUndoMenuState() {
+        return undoMenuState;
+    }
+
+    RedoMenuState getRedoMenuState() {
+        return redoMenuState;
+    }
+
 }

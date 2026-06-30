@@ -9,4 +9,8 @@ public interface OperationControllerVisitor {
     void visit(ContinueController continueController);
 
     void visit(SaveController saveController);
+
+    void visit(UndoController undoController);
+
+    void visit(RedoController redoController);
 }

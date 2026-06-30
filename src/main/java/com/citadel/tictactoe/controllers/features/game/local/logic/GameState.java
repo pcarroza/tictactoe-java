@@ -40,5 +40,15 @@ abstract class GameState {
         return null;
     }
 
+    GameState undo() {
+        assert false;
+        return null;
+    }
+
+    GameState redo() {
+        assert false;
+        return null;
+    }
+
     abstract LocalOperationController getController();
 }

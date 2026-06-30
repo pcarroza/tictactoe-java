@@ -28,6 +28,16 @@ public class InGameState extends GameState {
     }
 
     @Override
+    GameState undo() {
+        return statesBuilder.getUndoMenuState();
+    }
+
+    @Override
+    GameState redo() {
+        return statesBuilder.getRedoMenuState();
+    }
+
+    @Override
     LocalOperationController getController() {
         return builder.getPlacementController();
     }

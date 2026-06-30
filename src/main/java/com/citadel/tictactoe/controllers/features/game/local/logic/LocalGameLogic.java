@@ -60,6 +60,16 @@ public class LocalGameLogic implements Logic, Observer {
     }
 
     @Override
+    public void undo() {
+        actualState = actualState.undo();
+    }
+
+    @Override
+    public void redo() {
+        actualState = actualState.redo();
+    }
+
+    @Override
     public OperationController getController() {
         return actualState.getController();
     }

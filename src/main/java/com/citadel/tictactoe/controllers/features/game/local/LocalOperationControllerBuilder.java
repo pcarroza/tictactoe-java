@@ -7,13 +7,17 @@ import java.util.Arrays;
 
 public class LocalOperationControllerBuilder {
 
-    private LocalStartController localStartController;
-
     private LocalPlacementControllerBuilder[] builders;
+
+    private LocalStartController localStartController;
 
     private LocalContinueController localContinueController;
 
     private LocalSaveController localSaveController;
+
+    private LocalUndoController localUndoController;
+
+    private LocalRedoController localRedoController;
 
     private final Game game;
 
@@ -26,11 +30,21 @@ public class LocalOperationControllerBuilder {
         this.gameId = gameId;
     }
 
+    public int getUsers() {
+        return numUsers;
+    }
+
+    public int getGameId() {
+        return gameId;
+    }
+
     public void build() {
         localStartController = new LocalStartController(game, this);
         builders = new LocalPlacementControllerBuilder[game.getNumberOfPlayers()];
         localContinueController = new LocalContinueController(game);
         localSaveController = new LocalSaveController(game, this);
+        localUndoController = new LocalUndoController(game);
+        localRedoController = new LocalRedoController(game);
     }
 
     public void build(int users) {
@@ -66,12 +80,12 @@ public class LocalOperationControllerBuilder {
         return localSaveController;
     }
 
-    public int getGameId() {
-        return gameId;
+    public LocalUndoController getUndoController() {
+        return localUndoController;
     }
 
-    public int getUsers() {
-        return numUsers;
+    public LocalRedoController getRedoController() {
+        return localRedoController;
     }
-
 }
+

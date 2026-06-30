@@ -16,6 +16,7 @@ public class LocalPutController extends LocalPlacementController
     @Override
     public void put(Coordinate target) {
         assert super.validateTarget(target) == null;
+        getGame().pushState();
         super.put(target);
     }
 

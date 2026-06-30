@@ -42,6 +42,7 @@ public class LocalMoveController extends LocalPlacementController implements Mov
         assert origin != null;
         assert validateOrigin(origin) == null;
         this.origin = origin;
+        getGame().pushState();
         super.remove(origin);
     }
 

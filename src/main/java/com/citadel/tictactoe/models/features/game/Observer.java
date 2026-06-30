@@ -13,4 +13,9 @@ public interface Observer {
     void save();
 
     void resume();
+
+    void undo();
+
+    void redo();
+
 }

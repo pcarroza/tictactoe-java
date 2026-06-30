@@ -34,14 +34,20 @@ public class GameView implements PlacementControllerVisitor {
         terminal.writeln();
         terminal.writeln("  [1] Jugar turno");
         terminal.writeln("  [2] Guardar partida");
-        terminal.writeln("  [3] Salir");
+        if (placementController.canUndo()) terminal.writeln("  [3] Deshacer movimiento");
+        if (placementController.canRedo()) terminal.writeln("  [4] Rehacer movimiento");
+        terminal.writeln("  [5] Salir");
         terminal.writeln();
-        int option = LimitedIntDialog.instance().read("  Selecciona una opción", 3);
+        int option = LimitedIntDialog.instance().read("  Selecciona una opción", 5);
         if (option == 1) {
             placementController.accept(this);
         } else if (option == 2) {
             placementController.save();
-        } else {
+        } else if (option == 3 && placementController.canUndo()) {
+            placementController.undo();
+        } else if (option == 4 && placementController.canRedo()) {
+            placementController.redo();
+        } else if (option == 5) {
             placementController.exit();
         }
     }

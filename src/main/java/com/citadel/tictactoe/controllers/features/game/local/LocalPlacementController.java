@@ -30,4 +30,14 @@ public abstract class LocalPlacementController extends LocalOperationController
     public CoordinateController getCoordinateController() {
         return coordinateController;
     }
+
+    @Override
+    public boolean canUndo() {
+        return getGame().canRevert();
+    }
+
+    @Override
+    public boolean canRedo() {
+        return getGame().canReapply();
+    }
 }
