@@ -68,6 +68,14 @@ public class Game {
     public List<Coordinate> playerCoordinates() {
         return this.board.getPlayerCoordinates();
     }
+    
+    public Map<Player, Set<Coordinate>> getPositions() {
+        return this.board.getPositions();
+    }
+
+    public void restore(GameSnapshot snapshot) {
+        this.board.restore(snapshot);
+    }
 
     public void initialize() {
         this.board.initialize();
@@ -91,13 +99,5 @@ public class Game {
 
     public void resume() {
         this.board.resume();
-    }
-
-    public Map<Player, Set<Coordinate>> getPositions() {
-        return this.board.getPositions();
-    }
-
-    public void restore(GameSnapshot snapshot) {
-        this.board.restore(snapshot);
     }
 }

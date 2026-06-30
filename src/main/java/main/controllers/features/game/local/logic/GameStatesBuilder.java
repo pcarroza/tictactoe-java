@@ -18,8 +18,8 @@ public class GameStatesBuilder {
         initialState = new InitialGameState(this, builder);
         inGameState = new InGameState(this, builder);
         finalState = new EndGameState(this, builder);
+        saveMenuState = new SaveMenuState(this, builder);
         exitState = new ExitGameState(this);
-        saveMenuState = new SaveMenuState(this, builder.getSaveController());
     }
 
     InitialGameState getInitialState() {
