@@ -1,0 +1,41 @@
+package com.citadel.tictactoe.views.console.features.game;
+
+import com.citadel.tictactoe.controllers.features.game.errors.*;
+import com.citadel.tictactoe.models.features.game.Coordinate;
+import com.citadel.tictactoe.shared.Terminal;
+
+import java.util.Iterator;
+
+public class ErrorReportView implements ErrorReportVisitor {
+
+    public void write(ErrorReport errorReport) {
+        errorReport.accept(this);
+    }
+
+    @Override
+    public void visit(NotEmptyErrorReport notEmptyErrorReport) {
+        write("Esta casilla está ocupada.", notEmptyErrorReport);
+    }
+
+    @Override
+    public void visit(NotPropertyErrorReport notPropertyErrorReport) {
+        write("Esta casilla no está ocupada por ninguna casilla.", notPropertyErrorReport);
+    }
+
+    @Override
+    public void visit(RepeatedCoordinateErrorReport repeatedCoordinateErrorReport) {
+        write("No se puede poner donde se quito", repeatedCoordinateErrorReport);
+    }
+
+    private void write(String message, ErrorReport errorReport) {
+        String separator = message + " Puedes optar por: ";
+        Iterator<Coordinate> coordinates = errorReport.iterator();
+        while (coordinates.hasNext()) {
+            CoordinateView.instance().write(separator, coordinates.next());
+            if (!separator.equals(", ")) {
+                separator = ", ";
+            }
+        }
+        Terminal.getInstance().writeln();
+    }
+}

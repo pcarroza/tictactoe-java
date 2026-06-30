@@ -1,0 +1,44 @@
+package com.citadel.tictactoe.controllers.features.load.local;
+
+import com.citadel.tictactoe.controllers.features.load.LoadController;
+import com.citadel.tictactoe.controllers.features.load.LoadControllerVisitor;
+import com.citadel.tictactoe.models.features.game.GameRegistry;
+import com.citadel.tictactoe.models.features.game.GameSnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class LocalLoadController implements LoadController {
+
+    private GameSnapshot selected;
+
+    @Override
+    public boolean hasGames() {
+        return GameRegistry.getInstance().size() > 0;
+    }
+
+    @Override
+    public List<String> getGameTitles() {
+        List<String> titles = new ArrayList<>();
+        for (GameSnapshot snapshot : GameRegistry.getInstance().getAll()) {
+            titles.add("Partida #" + snapshot.getGameId());
+        }
+        return titles;
+    }
+
+    @Override
+    public void select(int index) {
+        this.selected = GameRegistry.getInstance().get(index);
+    }
+
+    @Override
+    public GameSnapshot getSelected() {
+        return selected;
+    }
+
+    @Override
+    public void accept(LoadControllerVisitor visitor) {
+        visitor.visit(this);
+    }
+
+}

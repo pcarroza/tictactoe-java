@@ -11,7 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ./gradlew test --tests "main.models.features.game.BoardTest"  # run a single test class
 ```
 
-Java 17+, JUnit 4.13.1. Main class: `main.core.TicTacToeApp`.
+Java 17+, JUnit 4.13.1. Main class: `com.citadel.tictactoe.core.TicTacToeApp`.
 
 ---
 
