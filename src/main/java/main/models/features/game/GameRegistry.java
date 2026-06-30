@@ -1,32 +1,41 @@
 package main.models.features.game;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GameRegistry {
 
     private static final GameRegistry instance = new GameRegistry();
 
-    private final List<GameSnapshot> snapshots;
+    private final Map<Integer, GameSnapshot> snapshots;
+
+    private int nextGameId;
 
     private GameRegistry() {
-        this.snapshots = new ArrayList<>();
+        this.snapshots = new LinkedHashMap<>();
+        this.nextGameId = 1;
     }
 
     public static GameRegistry getInstance() {
         return instance;
     }
 
+    public int nextId() {
+        return nextGameId++;
+    }
+
     public void save(GameSnapshot snapshot) {
-        snapshots.add(snapshot);
+        snapshots.put(snapshot.getGameId(), snapshot);
     }
 
     public List<GameSnapshot> getAll() {
-        return snapshots;
+        return new ArrayList<>(snapshots.values());
     }
 
     public GameSnapshot get(int index) {
-        return snapshots.get(index);
+        return getAll().get(index);
     }
 
     public int size() {

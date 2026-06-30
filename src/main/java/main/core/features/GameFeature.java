@@ -9,27 +9,29 @@ import main.views.core.View;
 
 public class GameFeature implements Feature {
 
-    private final Logic logic;
-
-    private final View view;
+    private final GameSnapshot snapshot;
 
     public GameFeature() {
-        this.logic = AppConfig.logicType().create();
-        this.view = AppConfig.viewType().create();
+        this.snapshot = null;
     }
 
     public GameFeature(GameSnapshot snapshot) {
-        this.logic = AppConfig.logicType().create(snapshot);
-        this.view = AppConfig.viewType().create();
+        this.snapshot = snapshot;
     }
 
+    @Override
     public void run() {
+        Logic logic = snapshot == null
+                ? AppConfig.logicType().create()
+                : AppConfig.logicType().create(snapshot);
+        View view = AppConfig.viewType().create();
         OperationController controller;
         do {
-            controller = this.logic.getController();
+            controller = logic.getController();
             if (controller != null) {
-                this.view.interact(controller);
+                view.interact(controller);
             }
         } while (controller != null);
     }
+
 }

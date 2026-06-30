@@ -37,8 +37,10 @@ public class LocalSaveController extends LocalOperationController implements Sav
 
     private GameSnapshot createSnapshot() {
         return new GameSnapshot(
-            getGame().getPositions(), 
-            getGame().getIndexCurrentPlayer(), 
-            builder.getUsers());
+                getGame().getPositions(),
+                getGame().getIndexCurrentPlayer(),
+                builder.getUsers(),
+                builder.getGameId());
     }
+
 }

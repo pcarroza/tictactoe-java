@@ -17,8 +17,13 @@ public class LocalOperationControllerBuilder {
 
     private final Game game;
 
-    public LocalOperationControllerBuilder(Game game) {
+    private final int gameId;
+
+    private int numUsers;
+
+    public LocalOperationControllerBuilder(Game game, int gameId) {
         this.game = game;
+        this.gameId = gameId;
     }
 
     public void build() {
@@ -30,6 +35,7 @@ public class LocalOperationControllerBuilder {
 
     public void build(int users) {
         assert new ClosedInterval<>(0, game.getNumberOfPlayers()).isIncluded(users);
+        this.numUsers = users;
         for (int i = 0; i < game.getNumberOfPlayers(); i++) {
             if (i < users) {
                 builders[i] = new LocalUserPlacementControllerBuilder(game);
@@ -60,7 +66,12 @@ public class LocalOperationControllerBuilder {
         return localSaveController;
     }
 
-    public int getUsers() {
-        return game.getNumberOfPlayers();
+    public int getGameId() {
+        return gameId;
     }
+
+    public int getUsers() {
+        return numUsers;
+    }
+
 }

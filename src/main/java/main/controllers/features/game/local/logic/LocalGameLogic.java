@@ -4,6 +4,7 @@ import main.controllers.features.game.local.LocalOperationControllerBuilder;
 import main.controllers.features.game.OperationController;
 import main.models.features.game.Observer;
 import main.models.features.game.Game;
+import main.models.features.game.GameRegistry;
 import main.models.features.game.GameSnapshot;
 import main.controllers.Logic;
 
@@ -13,7 +14,8 @@ public class LocalGameLogic implements Logic, Observer {
 
     public LocalGameLogic() {
         Game game = new Game(this);
-        LocalOperationControllerBuilder builder = new LocalOperationControllerBuilder(game);
+        int gameId = GameRegistry.getInstance().nextId();
+        LocalOperationControllerBuilder builder = new LocalOperationControllerBuilder(game, gameId);
         builder.build();
         actualState = new GameStatesBuilder(builder).getInitialState();
     }
@@ -21,7 +23,7 @@ public class LocalGameLogic implements Logic, Observer {
     public LocalGameLogic(GameSnapshot snapshot) {
         Game game = new Game(this);
         game.restore(snapshot);
-        LocalOperationControllerBuilder builder = new LocalOperationControllerBuilder(game);
+        LocalOperationControllerBuilder builder = new LocalOperationControllerBuilder(game, snapshot.getGameId());
         builder.build();
         builder.build(snapshot.getNumUsers());
         actualState = new GameStatesBuilder(builder).getInGameState();
@@ -61,4 +63,5 @@ public class LocalGameLogic implements Logic, Observer {
     public OperationController getController() {
         return actualState.getController();
     }
+
 }

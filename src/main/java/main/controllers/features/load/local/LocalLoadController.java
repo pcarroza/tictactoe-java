@@ -20,9 +20,8 @@ public class LocalLoadController implements LoadController {
     @Override
     public List<String> getGameTitles() {
         List<String> titles = new ArrayList<>();
-        int size = GameRegistry.getInstance().size();
-        for (int i = 0; i < size; i++) {
-            titles.add("Partida " + (i + 1));
+        for (GameSnapshot snapshot : GameRegistry.getInstance().getAll()) {
+            titles.add("Partida #" + snapshot.getGameId());
         }
         return titles;
     }
@@ -41,4 +40,5 @@ public class LocalLoadController implements LoadController {
     public void accept(LoadControllerVisitor visitor) {
         visitor.visit(this);
     }
+
 }
