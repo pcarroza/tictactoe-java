@@ -27,7 +27,7 @@ public class GameRegistry {
     }
 
     public void save(GameSnapshot snapshot) {
-        snapshots.put(snapshot.getGameId(), snapshot);
+        snapshots.put(snapshot.gameId(), snapshot);
     }
 
     public List<GameSnapshot> getAll() {

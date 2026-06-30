@@ -5,7 +5,7 @@
             "type": "java",
             "name": "TicTacToeApp",
             "request": "launch",
-            "mainClass": "main.core.TicTacToeApp",
+            "mainClass": "com.citadel.tictactoe.core.TicTacToeApp",
             "classPaths": [
                 "${workspaceFolder}/build/classes/java/main"
             ],

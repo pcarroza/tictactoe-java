@@ -1,23 +1,23 @@
 package com.citadel.tictactoe.views.console.core.commands;
 
-import com.citadel.tictactoe.models.features.game.GameRegistry;
+import com.citadel.tictactoe.models.features.statistics.Statistics;
 import com.citadel.tictactoe.views.console.core.Feature;
 
-public class LoadGameCommand extends Command {
+public class ShowStatsCommand extends Command {
 
     private Feature feature;
 
-    public LoadGameCommand() {
-        super("Cargar Partida");
+    public ShowStatsCommand() {
+        super("Estadísticas");
     }
 
-    public void setLoadGame(Feature feature) {
+    public void setShowStats(Feature feature) {
         this.feature = feature;
     }
 
     @Override
     public boolean isAvailable() {
-        return GameRegistry.getInstance().size() > 0;
+        return Statistics.getInstance().getTotalGames() > 0;
     }
 
     @Override

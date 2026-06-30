@@ -8,6 +8,7 @@ import com.citadel.tictactoe.views.console.core.commands.ExitCommand;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class Menu extends Command {
 
@@ -36,20 +37,27 @@ public abstract class Menu extends Command {
     public void execute() {
         exitCommand.reset();
         do {
-            writeln();
-            int option = LimitedIntDialog.instance().read("Selecciona una opción", commands.size());
-            commands.get(option - 1).execute();
+            List<Command> available = availableCommands();
+            writeln(available);
+            int option = LimitedIntDialog.instance().read("Selecciona una opción", available.size());
+            available.get(option - 1).execute();
         } while (!exitCommand.closed());
     }
 
-    private void writeln() {
+    private List<Command> availableCommands() {
+        return commands.stream().filter(Command::isAvailable).collect(Collectors.toList());
+    }
+
+    private void writeln(List<Command> available) {
         Terminal terminal = Terminal.getInstance();
         terminal.clear();
-        for (int k = 0; k < 5; k++) terminal.writeln();
+        for (int k = 0; k < 5; k++) {
+            terminal.writeln();
+        }
         terminal.writeln("  === " + getTitle().toUpperCase() + " ===");
         terminal.writeln();
-        for (int i = 0; i < commands.size(); i++) {
-            terminal.writeln("  [" + (i + 1) + "] " + commands.get(i).getTitle());
+        for (int i = 0; i < available.size(); i++) {
+            terminal.writeln("  [" + (i + 1) + "] " + available.get(i).getTitle());
         }
         terminal.writeln();
     }

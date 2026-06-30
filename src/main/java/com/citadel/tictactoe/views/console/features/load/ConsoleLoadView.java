@@ -29,8 +29,11 @@ public class ConsoleLoadView implements LoadView {
         for (int i = 0; i < titles.size(); i++) {
             terminal.writeln("  [" + (i + 1) + "] " + titles.get(i));
         }
+        terminal.writeln("  [" + (titles.size() + 1) + "] Volver");
         terminal.writeln();
-        int option = LimitedIntDialog.instance().read("  Selecciona una partida", titles.size());
-        controller.select(option - 1);
+        int option = LimitedIntDialog.instance().read("  Selecciona una partida", titles.size() + 1);
+        if (option <= titles.size()) {
+            controller.select(option - 1);
+        }
     }
 }

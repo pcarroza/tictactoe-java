@@ -17,6 +17,8 @@ public class Board extends Subject {
 
     private final Deque<BoardMemento> redoStack;
 
+    private final MoveHistory history;
+
     public Board() {
         flat = new HashMap<>();
         for (int i = 0; i < getNumberOfPlayers(); i++) {
@@ -25,6 +27,7 @@ public class Board extends Subject {
         turn = new Turn();
         undoStack = new ArrayDeque<>();
         redoStack = new ArrayDeque<>();
+        history = new MoveHistory();
     }
 
     public void put(Coordinate coordinate) {
@@ -34,6 +37,7 @@ public class Board extends Subject {
         assert isIncluded(coordinate.getColumn()): "La 'column' debe estar entre [1 - 3]";
 
         flat.get(getColorCurrentPlayer()).add(coordinate);
+        history.record(new MoveRecord(getColorCurrentPlayer(), MoveType.PUT, coordinate, history.size() + 1));
 
         assert isMaxNumberOfColorInBoard() : "Hay más de 3 'Colors' en el 'Board'";
         assert isOccupiedByCurrentPlayer(coordinate) : "La casilla NO está ocupada por la " + coordinate;
@@ -54,6 +58,7 @@ public class Board extends Subject {
     public void remove(Coordinate origin) {
         assert origin != null: "La coordinate no peude null";
         assert !isEmpty(origin): "El no puede estar vacío";
+        history.record(new MoveRecord(getColorCurrentPlayer(), MoveType.REMOVE, origin, history.size() + 1));
         flat.get(getColorCurrentPlayer()).remove(origin);
         assert isEmpty(origin) : "La " + origin + "debe estár eliminada.";
     }
@@ -89,6 +94,7 @@ public class Board extends Subject {
         turn.reset();
         undoStack.clear();
         redoStack.clear();
+        history.clear();
     }
 
     public boolean existTicTacToe() {
@@ -180,10 +186,15 @@ public class Board extends Subject {
 
     public void restore(GameSnapshot snapshot) {
         flat.forEach((player, coordinates) -> coordinates.clear());
-        snapshot.getPositions().forEach((player, coordinates) -> flat.put(player, new HashSet<>(coordinates)));
-        turn.set(snapshot.getCurrentPlayerIndex());
+        snapshot.positions().forEach((player, coordinates) -> flat.put(player, new HashSet<>(coordinates)));
+        turn.set(snapshot.currentPlayerIndex());
         undoStack.clear();
         redoStack.clear();
+        history.clear();
+    }
+
+    public MoveHistory getMoveHistory() {
+        return history;
     }
 
     public void pushState() {
@@ -213,8 +224,8 @@ public class Board extends Subject {
 
     private void applyMemento(BoardMemento memento) {
         flat.forEach((player, coordinates) -> coordinates.clear());
-        memento.positions.forEach((player, coordinates) -> flat.put(player, new HashSet<>(coordinates)));
-        turn.set(memento.turnIndex);
+        memento.positions().forEach((player, coordinates) -> flat.put(player, new HashSet<>(coordinates)));
+        turn.set(memento.turnIndex());
     }
 
     @Override
@@ -225,18 +236,4 @@ public class Board extends Subject {
     public void showFlat() {
         System.out.println(flat);
     }
-
-    private static class BoardMemento {
-
-        private final Map<Player, Set<Coordinate>> positions;
-
-        private final int turnIndex;
-
-        BoardMemento(Map<Player, Set<Coordinate>> positions, int turnIndex) {
-            this.positions = positions;
-            this.turnIndex = turnIndex;
-        }
-
-    }
-
 }

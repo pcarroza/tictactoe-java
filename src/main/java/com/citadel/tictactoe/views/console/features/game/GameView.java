@@ -10,6 +10,8 @@ import com.citadel.tictactoe.models.features.game.Coordinate;
 import com.citadel.tictactoe.shared.LimitedIntDialog;
 import com.citadel.tictactoe.shared.Terminal;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -19,12 +21,15 @@ public class GameView implements PlacementControllerVisitor {
 
     private final BoardView boardView;
 
+    private final HistoryView historyView;
+
     private Coordinate origin;
 
     public GameView(BoardView boardView) {
         assert boardView != null;
         this.boardView = boardView;
         errorReportView = new ErrorReportView();
+        historyView = new HistoryView();
     }
 
     public void interact(PlacementController placementController) {
@@ -32,24 +37,31 @@ public class GameView implements PlacementControllerVisitor {
         terminal.clear();
         boardView.write(placementController);
         terminal.writeln();
-        terminal.writeln("  [1] Jugar turno");
-        terminal.writeln("  [2] Guardar partida");
-        if (placementController.canUndo()) terminal.writeln("  [3] Deshacer movimiento");
-        if (placementController.canRedo()) terminal.writeln("  [4] Rehacer movimiento");
-        terminal.writeln("  [5] Salir");
+        List<Runnable> options = buildOptions(placementController);
         terminal.writeln();
-        int option = LimitedIntDialog.instance().read("  Selecciona una opción", 5);
-        if (option == 1) {
-            placementController.accept(this);
-        } else if (option == 2) {
-            placementController.save();
-        } else if (option == 3 && placementController.canUndo()) {
-            placementController.undo();
-        } else if (option == 4 && placementController.canRedo()) {
-            placementController.redo();
-        } else if (option == 5) {
-            placementController.exit();
+        int choice = LimitedIntDialog.instance().read("  Selecciona una opción", options.size());
+        options.get(choice - 1).run();
+    }
+
+    private List<Runnable> buildOptions(PlacementController controller) {
+        List<Runnable> options = new ArrayList<>();
+        Terminal terminal = Terminal.getInstance();
+        addOption(terminal, options, "Jugar turno", () -> controller.accept(this));
+        addOption(terminal, options, "Guardar partida", controller::save);
+        if (controller.canUndo()) {
+            addOption(terminal, options, "Deshacer movimiento", controller::undo);
         }
+        if (controller.canRedo()) {
+            addOption(terminal, options, "Rehacer movimiento", controller::redo);
+        }
+        addOption(terminal, options, "Ver historial", () -> historyView.show(controller.getMoveHistory()));
+        addOption(terminal, options, "Salir", controller::exit);
+        return options;
+    }
+
+    private void addOption(Terminal terminal, List<Runnable> options, String label, Runnable action) {
+        options.add(action);
+        terminal.writeln("  [" + options.size() + "] " + label);
     }
 
     @Override

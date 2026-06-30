@@ -23,9 +23,9 @@ public class LocalGameLogic implements Logic, Observer {
     public LocalGameLogic(GameSnapshot snapshot) {
         Game game = new Game(this);
         game.restore(snapshot);
-        LocalOperationControllerBuilder builder = new LocalOperationControllerBuilder(game, snapshot.getGameId());
+        LocalOperationControllerBuilder builder = new LocalOperationControllerBuilder(game, snapshot.gameId());
         builder.build();
-        builder.build(snapshot.getNumUsers());
+        builder.build(snapshot.numUsers());
         actualState = new GameStatesBuilder(builder).getInGameState();
     }
 

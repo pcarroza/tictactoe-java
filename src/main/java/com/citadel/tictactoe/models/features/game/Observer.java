@@ -17,5 +17,4 @@ public interface Observer {
     void undo();
 
     void redo();
-
 }

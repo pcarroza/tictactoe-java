@@ -1,8 +1,9 @@
 package com.citadel.tictactoe.controllers.features.game.local;
 
 import com.citadel.tictactoe.models.features.game.Coordinate;
-import com.citadel.tictactoe.models.features.game.Player;
 import com.citadel.tictactoe.models.features.game.Game;
+import com.citadel.tictactoe.models.features.game.MoveHistory;
+import com.citadel.tictactoe.models.features.game.Player;
 
 class LocalController {
 
@@ -84,5 +85,9 @@ class LocalController {
 
     public void resume() {
         game.resume();
+    }
+
+    public MoveHistory getMoveHistory() {
+        return game.getMoveHistory();
     }
 }

@@ -9,7 +9,9 @@ public class BoardView {
     void write(PresenterController presenter) {
         assert presenter != null;
         Terminal terminal = Terminal.getInstance();
-        for (int k = 0; k < 5; k++) terminal.writeln();
+        for (int k = 0; k < 5; k++) {
+            terminal.writeln();
+        }
         terminal.writeln("      1   2   3  ");
         terminal.writeln("    ┌───┬───┬───┐");
         for (int i = 1; i <= Coordinate.DIMENSION; i++) {

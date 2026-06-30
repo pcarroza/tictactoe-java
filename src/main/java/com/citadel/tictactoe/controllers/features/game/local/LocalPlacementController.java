@@ -6,6 +6,7 @@ import com.citadel.tictactoe.controllers.features.game.errors.ErrorGeneratorType
 import com.citadel.tictactoe.controllers.features.game.errors.ErrorReport;
 import com.citadel.tictactoe.models.features.game.Coordinate;
 import com.citadel.tictactoe.models.features.game.Game;
+import com.citadel.tictactoe.models.features.statistics.Statistics;
 
 public abstract class LocalPlacementController extends LocalOperationController
     implements PlacementController {
@@ -29,6 +30,12 @@ public abstract class LocalPlacementController extends LocalOperationController
     @Override
     public CoordinateController getCoordinateController() {
         return coordinateController;
+    }
+
+    @Override
+    public void end() {
+        Statistics.getInstance().recordWin(take());
+        super.end();
     }
 
     @Override

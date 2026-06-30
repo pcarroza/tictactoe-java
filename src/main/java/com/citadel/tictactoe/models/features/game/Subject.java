@@ -39,5 +39,4 @@ public abstract class Subject {
     public void redo() {
         this.observer.redo();
     }
-
 }

@@ -21,7 +21,7 @@ public class LocalLoadController implements LoadController {
     public List<String> getGameTitles() {
         List<String> titles = new ArrayList<>();
         for (GameSnapshot snapshot : GameRegistry.getInstance().getAll()) {
-            titles.add("Partida #" + snapshot.getGameId());
+            titles.add("Partida #" + snapshot.gameId());
         }
         return titles;
     }

@@ -68,5 +68,4 @@ public class ConsoleView implements View {
     public void visit(RedoController redoController) {
         redoView.interact(redoController);
     }
-
 }

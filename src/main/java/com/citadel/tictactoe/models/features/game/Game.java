@@ -77,6 +77,26 @@ public class Game {
         this.board.restore(snapshot);
     }
 
+    public void pushState() {
+        this.board.pushState();
+    }
+
+    public void revert() {
+        this.board.revert();
+    }
+
+    public void reapply() {
+        this.board.reapply();
+    }
+
+    public boolean canRevert() {
+        return this.board.canRevert();
+    }
+
+    public boolean canReapply() {
+        return this.board.canReapply();
+    }
+
     public void initialize() {
         this.board.initialize();
     }
@@ -109,24 +129,7 @@ public class Game {
         this.board.redo();
     }
 
-    public void pushState() {
-        this.board.pushState();
+    public MoveHistory getMoveHistory() {
+        return this.board.getMoveHistory();
     }
-
-    public void revert() {
-        this.board.revert();
-    }
-
-    public void reapply() {
-        this.board.reapply();
-    }
-
-    public boolean canRevert() {
-        return this.board.canRevert();
-    }
-
-    public boolean canReapply() {
-        return this.board.canReapply();
-    }
-
 }

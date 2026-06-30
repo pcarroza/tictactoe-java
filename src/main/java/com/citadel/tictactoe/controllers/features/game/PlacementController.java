@@ -1,8 +1,9 @@
 package com.citadel.tictactoe.controllers.features.game;
 
 import com.citadel.tictactoe.controllers.features.game.errors.ErrorReport;
-import com.citadel.tictactoe.models.features.game.Player;
 import com.citadel.tictactoe.models.features.game.Coordinate;
+import com.citadel.tictactoe.models.features.game.MoveHistory;
+import com.citadel.tictactoe.models.features.game.Player;
 
 public interface PlacementController extends OperationController, PresenterController {
 
@@ -31,6 +32,8 @@ public interface PlacementController extends OperationController, PresenterContr
     void redo();
 
     boolean canRedo();
+
+    MoveHistory getMoveHistory();
 
     void accept(PlacementControllerVisitor placementControllerVisitor);
 }

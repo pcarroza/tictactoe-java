@@ -13,6 +13,10 @@ public abstract class Command {
     public void set(Feature feature) {
     }
 
+    public boolean isAvailable() {
+        return true;
+    }
+
     public String getTitle() {
         return title;
     }
