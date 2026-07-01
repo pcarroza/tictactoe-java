@@ -1,6 +1,6 @@
 package com.citadel.tictactoe.controllers.features.game.local.logic;
 
-import com.citadel.tictactoe.controllers.features.game.local.LocalOperationControllerBuilder;
+import com.citadel.tictactoe.controllers.features.game.local.builders.LocalOperationControllerBuilder;
 
 public class GameStatesBuilder {
 
@@ -55,5 +55,4 @@ public class GameStatesBuilder {
     RedoMenuState getRedoMenuState() {
         return redoMenuState;
     }
-
 }

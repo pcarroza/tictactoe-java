@@ -4,10 +4,10 @@ import com.citadel.tictactoe.controllers.features.game.ContinueController;
 import com.citadel.tictactoe.controllers.features.game.OperationControllerVisitor;
 import com.citadel.tictactoe.models.features.game.Game;
 
-public class LocalContinueController extends LocalOperationController
+public class LocalGameContinueController extends LocalGameOperationController
     implements ContinueController {
 
-    public LocalContinueController(Game game) {
+    public LocalGameContinueController(Game game) {
         super(game);
     }
 

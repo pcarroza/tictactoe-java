@@ -2,11 +2,14 @@ package com.citadel.tictactoe.views.console.core.menus;
 
 import com.citadel.tictactoe.views.console.core.Feature;
 import com.citadel.tictactoe.views.console.core.commands.LoadGameCommand;
+import com.citadel.tictactoe.views.console.core.commands.ReplayGameCommand;
 import com.citadel.tictactoe.views.console.core.commands.ShowStatsCommand;
 
 public class MainMenu extends Menu {
 
     private LoadGameCommand loadGameCommand;
+
+    private ReplayGameCommand replayGameCommand;
 
     private ShowStatsCommand showStatsCommand;
 
@@ -19,12 +22,18 @@ public class MainMenu extends Menu {
         commands.add(new GameMenu());
         loadGameCommand = new LoadGameCommand();
         commands.add(loadGameCommand);
+        replayGameCommand = new ReplayGameCommand();
+        commands.add(replayGameCommand);
         showStatsCommand = new ShowStatsCommand();
         commands.add(showStatsCommand);
     }
 
     public void setLoadGame(Feature feature) {
         loadGameCommand.setLoadGame(feature);
+    }
+
+    public void setReplay(Feature feature) {
+        replayGameCommand.setReplay(feature);
     }
 
     public void setShowStats(Feature feature) {

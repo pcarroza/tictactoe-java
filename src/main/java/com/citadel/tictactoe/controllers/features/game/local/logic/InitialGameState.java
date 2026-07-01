@@ -1,12 +1,12 @@
 package com.citadel.tictactoe.controllers.features.game.local.logic;
 
-import com.citadel.tictactoe.controllers.features.game.local.LocalOperationControllerBuilder;
-import com.citadel.tictactoe.controllers.features.game.local.LocalOperationController;
-import com.citadel.tictactoe.controllers.features.game.local.LocalStartController;
+import com.citadel.tictactoe.controllers.features.game.local.builders.LocalOperationControllerBuilder;
+import com.citadel.tictactoe.controllers.features.game.local.LocalGameOperationController;
+import com.citadel.tictactoe.controllers.features.game.local.LocalGameStartController;
 
 public class InitialGameState extends GameState {
 
-    private final LocalStartController localStartController;
+    private final LocalGameStartController localStartController;
 
     public InitialGameState(GameStatesBuilder statesBuilder, LocalOperationControllerBuilder builder) {
         super(statesBuilder);
@@ -19,7 +19,7 @@ public class InitialGameState extends GameState {
     }
 
     @Override
-    LocalOperationController getController() {
+    LocalGameOperationController getController() {
         return localStartController;
     }
 }

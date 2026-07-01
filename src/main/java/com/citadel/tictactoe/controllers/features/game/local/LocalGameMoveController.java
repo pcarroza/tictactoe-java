@@ -8,11 +8,11 @@ import com.citadel.tictactoe.controllers.features.game.errors.ErrorGeneratorType
 import com.citadel.tictactoe.models.features.game.Coordinate;
 import com.citadel.tictactoe.models.features.game.Game;
 
-public class LocalMoveController extends LocalPlacementController implements MoveController {
+public class LocalGameMoveController extends LocalGamePlacementController implements MoveController {
 
     private Coordinate origin;
 
-    LocalMoveController(Game game, LocalCoordinateController coordinateController) {
+    public LocalGameMoveController(Game game, LocalCoordinateController coordinateController) {
         super(game, coordinateController);
     }
 

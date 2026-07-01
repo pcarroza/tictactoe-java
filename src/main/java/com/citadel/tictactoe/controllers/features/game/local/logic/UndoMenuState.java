@@ -1,11 +1,11 @@
 package com.citadel.tictactoe.controllers.features.game.local.logic;
 
-import com.citadel.tictactoe.controllers.features.game.local.LocalOperationController;
-import com.citadel.tictactoe.controllers.features.game.local.LocalOperationControllerBuilder;
+import com.citadel.tictactoe.controllers.features.game.local.LocalGameOperationController;
+import com.citadel.tictactoe.controllers.features.game.local.builders.LocalOperationControllerBuilder;
 
 class UndoMenuState extends GameState {
 
-    private final LocalOperationController undoController;
+    private final LocalGameOperationController undoController;
 
     UndoMenuState(GameStatesBuilder statesBuilder, LocalOperationControllerBuilder builder) {
         super(statesBuilder);
@@ -18,7 +18,7 @@ class UndoMenuState extends GameState {
     }
 
     @Override
-    LocalOperationController getController() {
+    LocalGameOperationController getController() {
         return undoController;
     }
 

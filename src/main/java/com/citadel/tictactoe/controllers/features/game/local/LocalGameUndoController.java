@@ -1,18 +1,18 @@
 package com.citadel.tictactoe.controllers.features.game.local;
 
 import com.citadel.tictactoe.controllers.features.game.OperationControllerVisitor;
-import com.citadel.tictactoe.controllers.features.game.RedoController;
+import com.citadel.tictactoe.controllers.features.game.UndoController;
 import com.citadel.tictactoe.models.features.game.Game;
 
-public class LocalRedoController extends LocalOperationController implements RedoController {
+public class LocalGameUndoController extends LocalGameOperationController implements UndoController {
 
-    LocalRedoController(Game game) {
+    public LocalGameUndoController(Game game) {
         super(game);
     }
 
     @Override
-    public void redo() {
-        getGame().reapply();
+    public void undo() {
+        getGame().revert();
         getGame().resume();
     }
 

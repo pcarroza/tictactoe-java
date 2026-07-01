@@ -68,7 +68,7 @@ public class Game {
     public List<Coordinate> playerCoordinates() {
         return this.board.getPlayerCoordinates();
     }
-    
+
     public Map<Player, Set<Coordinate>> getPositions() {
         return this.board.getPositions();
     }
@@ -97,6 +97,10 @@ public class Game {
         return this.board.canReapply();
     }
 
+    public MoveHistory getMoveHistory() {
+        return this.board.getMoveHistory();
+    }
+
     public void initialize() {
         this.board.initialize();
     }
@@ -104,7 +108,7 @@ public class Game {
     public void begin() {
         this.board.begin();
     }
-    
+
     public void end() {
         this.board.end();
     }
@@ -127,9 +131,5 @@ public class Game {
 
     public void redo() {
         this.board.redo();
-    }
-
-    public MoveHistory getMoveHistory() {
-        return this.board.getMoveHistory();
     }
 }

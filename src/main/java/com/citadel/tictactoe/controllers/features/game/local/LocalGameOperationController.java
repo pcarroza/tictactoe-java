@@ -1,13 +1,13 @@
 package com.citadel.tictactoe.controllers.features.game.local;
 
-import com.citadel.tictactoe.controllers.features.game.OperationController;
+import com.citadel.tictactoe.controllers.features.game.GameOperationController;
 import com.citadel.tictactoe.controllers.features.game.OperationControllerVisitor;
 import com.citadel.tictactoe.models.features.game.Game;
 
-public abstract class LocalOperationController extends LocalController
-    implements OperationController {
+public abstract class LocalGameOperationController extends LocalController
+    implements GameOperationController {
 
-    protected LocalOperationController(Game game) {
+    protected LocalGameOperationController(Game game) {
         super(game);
     }
 

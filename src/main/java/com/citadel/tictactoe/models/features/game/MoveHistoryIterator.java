@@ -22,7 +22,9 @@ public class MoveHistoryIterator implements Iterator<MoveRecord> {
 
     @Override
     public MoveRecord next() {
-        if (!hasNext()) throw new NoSuchElementException();
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        }
         return records.get(index++);
     }
 }

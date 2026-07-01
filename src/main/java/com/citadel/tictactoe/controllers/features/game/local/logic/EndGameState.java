@@ -1,12 +1,12 @@
 package com.citadel.tictactoe.controllers.features.game.local.logic;
 
-import com.citadel.tictactoe.controllers.features.game.local.LocalContinueController;
-import com.citadel.tictactoe.controllers.features.game.local.LocalOperationController;
-import com.citadel.tictactoe.controllers.features.game.local.LocalOperationControllerBuilder;
+import com.citadel.tictactoe.controllers.features.game.local.LocalGameContinueController;
+import com.citadel.tictactoe.controllers.features.game.local.LocalGameOperationController;
+import com.citadel.tictactoe.controllers.features.game.local.builders.LocalOperationControllerBuilder;
 
 class EndGameState extends GameState {
 
-    private final LocalContinueController localContinueController;
+    private final LocalGameContinueController localContinueController;
 
     EndGameState(GameStatesBuilder statesBuilder, LocalOperationControllerBuilder builder) {
         super(statesBuilder);
@@ -24,7 +24,7 @@ class EndGameState extends GameState {
     }
 
     @Override
-    LocalOperationController getController() {
+    LocalGameOperationController getController() {
         return localContinueController;
     }
 }

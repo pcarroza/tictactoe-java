@@ -1,7 +1,7 @@
 package com.citadel.tictactoe.controllers.features.game.local.logic;
 
-import com.citadel.tictactoe.controllers.features.game.local.LocalOperationControllerBuilder;
-import com.citadel.tictactoe.controllers.features.game.OperationController;
+import com.citadel.tictactoe.controllers.features.game.local.builders.LocalOperationControllerBuilder;
+import com.citadel.tictactoe.controllers.features.game.GameOperationController;
 import com.citadel.tictactoe.models.features.game.Observer;
 import com.citadel.tictactoe.models.features.game.Game;
 import com.citadel.tictactoe.models.features.game.GameRegistry;
@@ -70,8 +70,7 @@ public class LocalGameLogic implements Logic, Observer {
     }
 
     @Override
-    public OperationController getController() {
+    public GameOperationController getController() {
         return actualState.getController();
     }
-
 }

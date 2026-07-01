@@ -1,6 +1,6 @@
 package com.citadel.tictactoe.controllers.features.game;
 
-public interface RedoController extends OperationController {
+public interface RedoController extends GameOperationController {
 
     void redo();
 

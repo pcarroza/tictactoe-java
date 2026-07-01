@@ -6,10 +6,10 @@ import com.citadel.tictactoe.controllers.features.game.PutController;
 import com.citadel.tictactoe.models.features.game.Coordinate;
 import com.citadel.tictactoe.models.features.game.Game;
 
-public class LocalPutController extends LocalPlacementController
+public class LocalGamePutController extends LocalGamePlacementController
     implements PutController {
 
-    LocalPutController(Game game, LocalCoordinateController localCoordinateController) {
+    public LocalGamePutController(Game game, LocalCoordinateController localCoordinateController) {
         super(game, localCoordinateController);
     }
 

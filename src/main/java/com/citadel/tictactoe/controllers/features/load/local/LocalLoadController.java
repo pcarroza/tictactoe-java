@@ -40,5 +40,4 @@ public class LocalLoadController implements LoadController {
     public void accept(LoadControllerVisitor visitor) {
         visitor.visit(this);
     }
-
 }

@@ -1,6 +1,6 @@
 package com.citadel.tictactoe.controllers.features.game;
 
-public interface SaveController extends OperationController {
+public interface SaveController extends GameOperationController {
 
     void save();
 

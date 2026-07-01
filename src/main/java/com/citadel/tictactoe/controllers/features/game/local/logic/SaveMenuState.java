@@ -1,12 +1,12 @@
 package com.citadel.tictactoe.controllers.features.game.local.logic;
 
-import com.citadel.tictactoe.controllers.features.game.local.LocalOperationController;
-import com.citadel.tictactoe.controllers.features.game.local.LocalOperationControllerBuilder;
-import com.citadel.tictactoe.controllers.features.game.local.LocalSaveController;
+import com.citadel.tictactoe.controllers.features.game.local.LocalGameOperationController;
+import com.citadel.tictactoe.controllers.features.game.local.builders.LocalOperationControllerBuilder;
+import com.citadel.tictactoe.controllers.features.game.local.LocalGameSaveController;
 
 class SaveMenuState extends GameState {
 
-    private final LocalSaveController localSaveController;
+    private final LocalGameSaveController localSaveController;
 
     SaveMenuState(GameStatesBuilder statesBuilder, LocalOperationControllerBuilder builder) {
         super(statesBuilder);
@@ -24,7 +24,7 @@ class SaveMenuState extends GameState {
     }
 
     @Override
-    LocalOperationController getController() {
+    LocalGameOperationController getController() {
         return localSaveController;
     }
 }

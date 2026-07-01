@@ -63,6 +63,10 @@ class LocalController {
         return game.getColor(coordinate);
     }
 
+    public MoveHistory getMoveHistory() {
+        return game.getMoveHistory();
+    }
+
     public void initialize() {
         game.initialize();
     }
@@ -85,9 +89,5 @@ class LocalController {
 
     public void resume() {
         game.resume();
-    }
-
-    public MoveHistory getMoveHistory() {
-        return game.getMoveHistory();
     }
 }

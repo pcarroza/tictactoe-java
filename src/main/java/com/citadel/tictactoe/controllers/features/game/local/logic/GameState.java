@@ -1,6 +1,6 @@
 package com.citadel.tictactoe.controllers.features.game.local.logic;
 
-import com.citadel.tictactoe.controllers.features.game.local.LocalOperationController;
+import com.citadel.tictactoe.controllers.features.game.local.LocalGameOperationController;
 
 abstract class GameState {
 
@@ -50,5 +50,5 @@ abstract class GameState {
         return null;
     }
 
-    abstract LocalOperationController getController();
+    abstract LocalGameOperationController getController();
 }

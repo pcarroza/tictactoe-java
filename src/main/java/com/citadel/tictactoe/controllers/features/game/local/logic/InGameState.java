@@ -1,7 +1,7 @@
 package com.citadel.tictactoe.controllers.features.game.local.logic;
 
-import com.citadel.tictactoe.controllers.features.game.local.LocalOperationController;
-import com.citadel.tictactoe.controllers.features.game.local.LocalOperationControllerBuilder;
+import com.citadel.tictactoe.controllers.features.game.local.LocalGameOperationController;
+import com.citadel.tictactoe.controllers.features.game.local.builders.LocalOperationControllerBuilder;
 
 public class InGameState extends GameState {
 
@@ -38,7 +38,7 @@ public class InGameState extends GameState {
     }
 
     @Override
-    LocalOperationController getController() {
+    LocalGameOperationController getController() {
         return builder.getPlacementController();
     }
 }

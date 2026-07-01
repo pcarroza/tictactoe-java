@@ -2,14 +2,15 @@ package com.citadel.tictactoe.controllers.features.game.local;
 
 import com.citadel.tictactoe.controllers.features.game.OperationControllerVisitor;
 import com.citadel.tictactoe.controllers.features.game.StartController;
+import com.citadel.tictactoe.controllers.features.game.local.builders.LocalOperationControllerBuilder;
 import com.citadel.tictactoe.shared.ClosedInterval;
 import com.citadel.tictactoe.models.features.game.Game;
 
-public class LocalStartController extends LocalOperationController implements StartController {
+public class LocalGameStartController extends LocalGameOperationController implements StartController {
 
     private final LocalOperationControllerBuilder localOperationControllerBuilder;
 
-    public LocalStartController(Game game, LocalOperationControllerBuilder builder) {
+    public LocalGameStartController(Game game, LocalOperationControllerBuilder builder) {
         super(game);
         assert builder != null;
         localOperationControllerBuilder = builder;

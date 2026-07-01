@@ -1,5 +1,6 @@
-package com.citadel.tictactoe.controllers.features.game.local;
+package com.citadel.tictactoe.controllers.features.game.local.builders;
 
+import com.citadel.tictactoe.controllers.features.game.local.*;
 import com.citadel.tictactoe.models.features.game.Game;
 import com.citadel.tictactoe.shared.ClosedInterval;
 
@@ -9,15 +10,15 @@ public class LocalOperationControllerBuilder {
 
     private LocalPlacementControllerBuilder[] builders;
 
-    private LocalStartController localStartController;
+    private LocalGameStartController localStartController;
 
-    private LocalContinueController localContinueController;
+    private LocalGameContinueController localContinueController;
 
-    private LocalSaveController localSaveController;
+    private LocalGameSaveController localSaveController;
 
-    private LocalUndoController localUndoController;
+    private LocalGameUndoController localUndoController;
 
-    private LocalRedoController localRedoController;
+    private LocalGameRedoController localRedoController;
 
     private final Game game;
 
@@ -39,12 +40,12 @@ public class LocalOperationControllerBuilder {
     }
 
     public void build() {
-        localStartController = new LocalStartController(game, this);
+        localStartController = new LocalGameStartController(game, this);
         builders = new LocalPlacementControllerBuilder[game.getNumberOfPlayers()];
-        localContinueController = new LocalContinueController(game);
-        localSaveController = new LocalSaveController(game, this);
-        localUndoController = new LocalUndoController(game);
-        localRedoController = new LocalRedoController(game);
+        localContinueController = new LocalGameContinueController(game);
+        localSaveController = new LocalGameSaveController(game, this);
+        localUndoController = new LocalGameUndoController(game);
+        localRedoController = new LocalGameRedoController(game);
     }
 
     public void build(int users) {
@@ -60,7 +61,7 @@ public class LocalOperationControllerBuilder {
         }
     }
 
-    public LocalPlacementController getPlacementController() {
+    public LocalGamePlacementController getPlacementController() {
         assert builders != null;
         Arrays.stream(builders).forEach(controller -> {
             assert controller != null;
@@ -68,23 +69,23 @@ public class LocalOperationControllerBuilder {
         return builders[game.getIndexCurrentPlayer()].getPlacementController();
     }
 
-    public LocalContinueController getContinueController() {
+    public LocalGameContinueController getContinueController() {
         return localContinueController;
     }
 
-    public LocalStartController getStartController() {
+    public LocalGameStartController getStartController() {
         return localStartController;
     }
 
-    public LocalSaveController getSaveController() {
+    public LocalGameSaveController getSaveController() {
         return localSaveController;
     }
 
-    public LocalUndoController getUndoController() {
+    public LocalGameUndoController getUndoController() {
         return localUndoController;
     }
 
-    public LocalRedoController getRedoController() {
+    public LocalGameRedoController getRedoController() {
         return localRedoController;
     }
 }

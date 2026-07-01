@@ -1,6 +1,6 @@
 package com.citadel.tictactoe.controllers.features.game.local.logic;
 
-import com.citadel.tictactoe.controllers.features.game.local.LocalOperationController;
+import com.citadel.tictactoe.controllers.features.game.local.LocalGameOperationController;
 
 public class ExitGameState extends GameState {
 
@@ -9,7 +9,7 @@ public class ExitGameState extends GameState {
     }
 
     @Override
-    LocalOperationController getController() {
+    LocalGameOperationController getController() {
         return null;
     }
 }

@@ -1,13 +1,7 @@
 package com.citadel.tictactoe.views.console.features.game;
 
+import com.citadel.tictactoe.controllers.features.game.*;
 import com.citadel.tictactoe.views.core.View;
-import com.citadel.tictactoe.controllers.features.game.ContinueController;
-import com.citadel.tictactoe.controllers.features.game.OperationController;
-import com.citadel.tictactoe.controllers.features.game.PlacementController;
-import com.citadel.tictactoe.controllers.features.game.RedoController;
-import com.citadel.tictactoe.controllers.features.game.SaveController;
-import com.citadel.tictactoe.controllers.features.game.StartController;
-import com.citadel.tictactoe.controllers.features.game.UndoController;
 
 public class ConsoleView implements View {
 
@@ -34,7 +28,7 @@ public class ConsoleView implements View {
     }
 
     @Override
-    public void interact(OperationController operationController) {
+    public void interact(GameOperationController operationController) {
         assert operationController != null;
         operationController.accept(this);
     }

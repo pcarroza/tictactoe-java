@@ -24,6 +24,12 @@ public class MoveHistory implements Iterable<MoveRecord> {
         return records.size();
     }
 
+    public MoveHistory copy() {
+        MoveHistory copy = new MoveHistory();
+        forEach(copy::record);
+        return copy;
+    }
+
     @Override
     public Iterator<MoveRecord> iterator() {
         return new MoveHistoryIterator(new ArrayList<>(records));

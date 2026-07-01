@@ -1,8 +1,8 @@
 package com.citadel.tictactoe.controllers;
 
-import com.citadel.tictactoe.controllers.features.game.OperationController;
+import com.citadel.tictactoe.controllers.features.game.GameOperationController;
 
 public interface Logic {
 
-    OperationController getController();
+    GameOperationController getController();
 }

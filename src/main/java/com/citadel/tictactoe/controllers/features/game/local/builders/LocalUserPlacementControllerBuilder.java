@@ -1,5 +1,7 @@
-package com.citadel.tictactoe.controllers.features.game.local;
+package com.citadel.tictactoe.controllers.features.game.local.builders;
 
+import com.citadel.tictactoe.controllers.features.game.local.LocalCoordinateController;
+import com.citadel.tictactoe.controllers.features.game.local.LocalUserCoordinateController;
 import com.citadel.tictactoe.models.features.game.Game;
 
 public class LocalUserPlacementControllerBuilder extends LocalPlacementControllerBuilder {
