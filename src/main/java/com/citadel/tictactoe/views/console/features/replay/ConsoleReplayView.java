@@ -4,8 +4,8 @@ import com.citadel.tictactoe.controllers.features.replay.ReplayController;
 import com.citadel.tictactoe.models.features.game.Coordinate;
 import com.citadel.tictactoe.models.features.game.Player;
 import com.citadel.tictactoe.shared.LimitedIntDialog;
-import com.citadel.tictactoe.views.core.ReplayView;
 import com.citadel.tictactoe.shared.Terminal;
+import com.citadel.tictactoe.views.core.ReplayView;
 
 import java.util.ArrayList;
 import java.util.List;

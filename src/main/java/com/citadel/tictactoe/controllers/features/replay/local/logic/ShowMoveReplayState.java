@@ -1,26 +1,19 @@
-package com.citadel.tictactoe.controllers.features.replay.local;
+package com.citadel.tictactoe.controllers.features.replay.local.logic;
 
 import com.citadel.tictactoe.controllers.features.replay.ReplayController;
+import com.citadel.tictactoe.controllers.features.replay.local.LocalReplayController;
 import com.citadel.tictactoe.models.features.game.Coordinate;
-import com.citadel.tictactoe.models.features.game.MoveRecord;
 import com.citadel.tictactoe.models.features.game.Player;
-
-import java.util.List;
+import com.citadel.tictactoe.models.features.game.ReplayBoard;
 
 class ShowMoveReplayState extends ReplayState {
 
     private final ReplayBoard replayBoard;
 
-    private final List<MoveRecord> records;
-
-    private int position;
-
     private final ExitReplayState exit;
 
-    ShowMoveReplayState(List<MoveRecord> records, ExitReplayState exit) {
-        this.replayBoard = new ReplayBoard();
-        this.records = records;
-        this.position = 0;
+    ShowMoveReplayState(ReplayBoard replayBoard, ExitReplayState exit) {
+        this.replayBoard = replayBoard;
         this.exit = exit;
     }
 
@@ -31,13 +24,13 @@ class ShowMoveReplayState extends ReplayState {
 
     @Override
     ReplayState next() {
-        replayBoard.apply(records.get(position++));
+        replayBoard.next();
         return this;
     }
 
     @Override
     ReplayState previous() {
-        replayBoard.reverse(records.get(--position));
+        replayBoard.previous();
         return this;
     }
 
@@ -53,22 +46,21 @@ class ShowMoveReplayState extends ReplayState {
 
     @Override
     int getPosition() {
-        return position;
+        return replayBoard.getPosition();
     }
 
     @Override
     int getTotal() {
-        return records.size();
+        return replayBoard.getTotal();
     }
 
     @Override
     boolean hasNext() {
-        return position < records.size();
+        return replayBoard.hasNext();
     }
 
     @Override
     boolean hasPrevious() {
-        return position > 0;
+        return replayBoard.hasPrevious();
     }
-
 }

@@ -1,12 +1,12 @@
 package com.citadel.tictactoe.controllers.features.game.local.logic;
 
-import com.citadel.tictactoe.controllers.features.game.local.builders.LocalOperationControllerBuilder;
+import com.citadel.tictactoe.controllers.Logic;
 import com.citadel.tictactoe.controllers.features.game.GameOperationController;
-import com.citadel.tictactoe.models.features.game.Observer;
+import com.citadel.tictactoe.controllers.features.game.local.builders.LocalOperationControllerBuilder;
 import com.citadel.tictactoe.models.features.game.Game;
 import com.citadel.tictactoe.models.features.game.GameRegistry;
 import com.citadel.tictactoe.models.features.game.GameSnapshot;
-import com.citadel.tictactoe.controllers.Logic;
+import com.citadel.tictactoe.models.features.game.Observer;
 
 public class LocalGameLogic implements Logic, Observer {
 

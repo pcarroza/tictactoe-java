@@ -5,8 +5,8 @@ import com.citadel.tictactoe.controllers.features.game.PlacementController;
 import com.citadel.tictactoe.controllers.features.game.PlacementControllerVisitor;
 import com.citadel.tictactoe.controllers.features.game.PutController;
 import com.citadel.tictactoe.controllers.features.game.errors.ErrorReport;
-import com.citadel.tictactoe.models.features.game.Player;
 import com.citadel.tictactoe.models.features.game.Coordinate;
+import com.citadel.tictactoe.models.features.game.Player;
 import com.citadel.tictactoe.shared.LimitedIntDialog;
 import com.citadel.tictactoe.shared.Terminal;
 

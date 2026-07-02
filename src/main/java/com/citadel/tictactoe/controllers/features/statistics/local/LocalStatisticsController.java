@@ -2,6 +2,8 @@ package com.citadel.tictactoe.controllers.features.statistics.local;
 
 import com.citadel.tictactoe.controllers.features.statistics.StatisticsController;
 import com.citadel.tictactoe.models.features.game.Player;
+import com.citadel.tictactoe.models.features.player.PlayerProfile;
+import com.citadel.tictactoe.models.features.player.ProfileRegistry;
 import com.citadel.tictactoe.models.features.statistics.Statistics;
 
 public class LocalStatisticsController implements StatisticsController {
@@ -14,5 +16,12 @@ public class LocalStatisticsController implements StatisticsController {
     @Override
     public int getTotalGames() {
         return Statistics.getInstance().getTotalGames();
+    }
+
+    @Override
+    public String getName(Player player) {
+        return ProfileRegistry.getInstance().findByToken(player)
+                .map(PlayerProfile::name)
+                .orElse(player == Player.XS ? "X" : "O");
     }
 }

@@ -1,9 +1,9 @@
 package com.citadel.tictactoe.controllers.features.game.local;
 
+import com.citadel.tictactoe.controllers.features.game.MoveController;
 import com.citadel.tictactoe.controllers.features.game.OperationControllerVisitor;
 import com.citadel.tictactoe.controllers.features.game.PlacementControllerVisitor;
 import com.citadel.tictactoe.controllers.features.game.errors.ErrorReport;
-import com.citadel.tictactoe.controllers.features.game.MoveController;
 import com.citadel.tictactoe.controllers.features.game.validation.CoordinateValidator;
 import com.citadel.tictactoe.models.features.game.Coordinate;
 import com.citadel.tictactoe.models.features.game.Game;

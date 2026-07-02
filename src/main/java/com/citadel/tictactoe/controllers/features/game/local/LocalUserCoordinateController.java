@@ -23,7 +23,7 @@ public class LocalUserCoordinateController extends LocalCoordinateController
     }
 
     @Override
-    public void accept(CoordinateControllerVisitor visitor) {
-        visitor.visit(this);
+    public void accept(CoordinateControllerVisitor coordinateControllerVisitor) {
+        coordinateControllerVisitor.visit(this);
     }
 }

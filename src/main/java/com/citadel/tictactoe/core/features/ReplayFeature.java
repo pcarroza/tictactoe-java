@@ -1,8 +1,8 @@
 package com.citadel.tictactoe.core.features;
 
 import com.citadel.tictactoe.controllers.features.replay.ReplayController;
-import com.citadel.tictactoe.controllers.features.replay.local.LocalReplayLogic;
 import com.citadel.tictactoe.controllers.features.replay.local.LocalSelectReplayController;
+import com.citadel.tictactoe.controllers.features.replay.local.logic.LocalReplayLogic;
 import com.citadel.tictactoe.core.config.AppConfig;
 import com.citadel.tictactoe.models.features.game.MoveHistory;
 import com.citadel.tictactoe.views.console.core.Feature;

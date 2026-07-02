@@ -2,6 +2,7 @@ package com.citadel.tictactoe.controllers.features.replay.local;
 
 import com.citadel.tictactoe.controllers.features.replay.ReplayController;
 import com.citadel.tictactoe.controllers.features.replay.ReplayControllerVisitor;
+import com.citadel.tictactoe.controllers.features.replay.local.logic.LocalReplayLogic;
 import com.citadel.tictactoe.models.features.game.Coordinate;
 import com.citadel.tictactoe.models.features.game.Player;
 
@@ -9,7 +10,7 @@ public class LocalReplayController implements ReplayController {
 
     private final LocalReplayLogic logic;
 
-    LocalReplayController(LocalReplayLogic logic) {
+    public LocalReplayController(LocalReplayLogic logic) {
         this.logic = logic;
     }
 
@@ -19,8 +20,8 @@ public class LocalReplayController implements ReplayController {
     }
 
     @Override
-    public Player getColor(Coordinate coordiante) {
-        return logic.getColor(coordiante);
+    public Player getColor(Coordinate coordinate) {
+        return logic.getColor(coordinate);
     }
 
     @Override

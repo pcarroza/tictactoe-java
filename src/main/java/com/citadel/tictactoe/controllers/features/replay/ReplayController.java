@@ -22,5 +22,4 @@ public interface ReplayController {
     void previous();
 
     void exit();
-
 }

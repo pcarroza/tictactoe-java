@@ -1,12 +1,6 @@
 package com.citadel.tictactoe.views.console.features.game.decorator;
 
-import com.citadel.tictactoe.controllers.features.game.ContinueController;
-import com.citadel.tictactoe.controllers.features.game.GameOperationController;
-import com.citadel.tictactoe.controllers.features.game.PlacementController;
-import com.citadel.tictactoe.controllers.features.game.RedoController;
-import com.citadel.tictactoe.controllers.features.game.SaveController;
-import com.citadel.tictactoe.controllers.features.game.StartController;
-import com.citadel.tictactoe.controllers.features.game.UndoController;
+import com.citadel.tictactoe.controllers.features.game.*;
 import com.citadel.tictactoe.views.core.GameView;
 
 public abstract class ViewDecorator implements GameView {

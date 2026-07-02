@@ -1,7 +1,7 @@
 package com.citadel.tictactoe.game;
 
-import com.citadel.tictactoe.models.features.game.Board;
 import com.citadel.tictactoe.game.builders.BoardBuilder;
+import com.citadel.tictactoe.models.features.game.Board;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;

@@ -1,8 +1,8 @@
 package com.citadel.tictactoe.game;
 
+import com.citadel.tictactoe.game.builders.BoardBuilder;
 import com.citadel.tictactoe.models.features.game.Board;
 import com.citadel.tictactoe.models.features.game.Coordinate;
-import com.citadel.tictactoe.game.builders.BoardBuilder;
 import org.junit.Test;
 
 public class AssertionErrorBoardPutMethodTest {

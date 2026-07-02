@@ -5,11 +5,11 @@ import com.citadel.tictactoe.views.console.features.game.decorator.DebugView;
 import com.citadel.tictactoe.views.console.features.game.decorator.TimestampedView;
 import com.citadel.tictactoe.views.console.features.game.decorator.TurnNumberedView;
 import com.citadel.tictactoe.views.console.features.load.ConsoleLoadView;
+import com.citadel.tictactoe.views.console.features.player.ConsoleProfileView;
 import com.citadel.tictactoe.views.console.features.replay.ConsoleReplayView;
 import com.citadel.tictactoe.views.console.features.replay.ConsoleSelectReplayView;
 import com.citadel.tictactoe.views.console.features.statistics.ConsoleStatisticsView;
 import com.citadel.tictactoe.views.core.*;
-import com.citadel.tictactoe.views.core.GameView;
 
 public enum ViewType {
 
@@ -38,6 +38,11 @@ public enum ViewType {
         public SelectReplayView createSelectReplayView() {
             return new ConsoleSelectReplayView();
         }
+
+        @Override
+        public ProfileView createProfileView() {
+            return new ConsoleProfileView();
+        }
     };
 
     public abstract GameView create();
@@ -49,4 +54,6 @@ public enum ViewType {
     public abstract ReplayView createReplayView();
 
     public abstract SelectReplayView createSelectReplayView();
+
+    public abstract ProfileView createProfileView();
 }

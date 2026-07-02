@@ -1,8 +1,8 @@
 package com.citadel.tictactoe.controllers.features.game.local.logic;
 
-import com.citadel.tictactoe.controllers.features.game.local.builders.LocalOperationControllerBuilder;
 import com.citadel.tictactoe.controllers.features.game.local.LocalGameOperationController;
 import com.citadel.tictactoe.controllers.features.game.local.LocalGameStartController;
+import com.citadel.tictactoe.controllers.features.game.local.builders.LocalOperationControllerBuilder;
 
 public class InitialGameState extends GameState {
 

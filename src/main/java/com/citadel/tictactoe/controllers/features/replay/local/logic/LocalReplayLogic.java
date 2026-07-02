@@ -1,4 +1,4 @@
-package com.citadel.tictactoe.controllers.features.replay.local;
+package com.citadel.tictactoe.controllers.features.replay.local.logic;
 
 import com.citadel.tictactoe.controllers.features.replay.ReplayController;
 import com.citadel.tictactoe.models.features.game.Coordinate;
@@ -13,35 +13,35 @@ public class LocalReplayLogic {
         this.state = new ReplayStatesBuilder(history).getShowMoveState();
     }
 
-    void next() {
+    public void next() {
         state = state.next();
     }
 
-    void previous() {
+    public void previous() {
         state = state.previous();
     }
 
-    void exit() {
+    public void exit() {
         state = state.exit();
     }
 
-    Player getColor(Coordinate coordinate) {
+    public Player getColor(Coordinate coordinate) {
         return state.getColor(coordinate);
     }
 
-    int getPosition() {
+    public int getPosition() {
         return state.getPosition();
     }
 
-    int getTotal() {
+    public int getTotal() {
         return state.getTotal();
     }
 
-    boolean hasNext() {
+    public boolean hasNext() {
         return state.hasNext();
     }
 
-    boolean hasPrevious() {
+    public boolean hasPrevious() {
         return state.hasPrevious();
     }
     

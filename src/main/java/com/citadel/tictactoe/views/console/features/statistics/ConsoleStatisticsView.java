@@ -18,8 +18,8 @@ public class ConsoleStatisticsView implements StatisticsView {
         terminal.writeln("  === ESTADÍSTICAS DE SESIÓN ===");
         terminal.writeln();
         terminal.writeln("  Partidas jugadas : " + controller.getTotalGames());
-        terminal.writeln("  Victorias X      : " + controller.getWins(Player.XS));
-        terminal.writeln("  Victorias O      : " + controller.getWins(Player.OS));
+        terminal.writeln("  Victorias " + controller.getName(Player.XS) + " : " + controller.getWins(Player.XS));
+        terminal.writeln("  Victorias " + controller.getName(Player.OS) + " : " + controller.getWins(Player.OS));
         terminal.writeln();
         terminal.writeln("  [1] Volver");
         terminal.writeln();

@@ -1,8 +1,8 @@
 package com.citadel.tictactoe.views.console.features.game;
 
+import com.citadel.tictactoe.controllers.features.game.CoordinateController;
 import com.citadel.tictactoe.controllers.features.game.RandomCoordinateController;
 import com.citadel.tictactoe.controllers.features.game.UserCoordinateController;
-import com.citadel.tictactoe.controllers.features.game.CoordinateController;
 import com.citadel.tictactoe.models.features.game.Coordinate;
 
 public class MoveTargetCoordinateView extends PlacementCoordinateView {
