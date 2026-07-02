@@ -4,16 +4,24 @@ import com.citadel.tictactoe.controllers.features.game.OperationControllerVisito
 import com.citadel.tictactoe.controllers.features.game.PlacementControllerVisitor;
 import com.citadel.tictactoe.controllers.features.game.errors.ErrorReport;
 import com.citadel.tictactoe.controllers.features.game.MoveController;
-import com.citadel.tictactoe.controllers.features.game.errors.ErrorGeneratorType;
+import com.citadel.tictactoe.controllers.features.game.validation.CoordinateValidator;
 import com.citadel.tictactoe.models.features.game.Coordinate;
 import com.citadel.tictactoe.models.features.game.Game;
 
 public class LocalGameMoveController extends LocalGamePlacementController implements MoveController {
 
+    private final CoordinateValidator originValidator;
+
     private Coordinate origin;
 
-    public LocalGameMoveController(Game game, LocalCoordinateController coordinateController) {
-        super(game, coordinateController);
+    public LocalGameMoveController(
+            Game game,
+            LocalCoordinateController coordinateController,
+            CoordinateValidator targetValidator,
+            CoordinateValidator originValidator) {
+        super(game, coordinateController, targetValidator);
+        assert originValidator != null;
+        this.originValidator = originValidator;
     }
 
     @Override
@@ -27,14 +35,7 @@ public class LocalGameMoveController extends LocalGamePlacementController implem
 
     @Override
     public ErrorReport validateTarget(Coordinate origin, Coordinate target) {
-        ErrorReport errorReport = super.validateTarget(target);
-        if (errorReport != null) {
-            return errorReport;
-        }
-        if (origin.equals(target)) {
-            return ErrorGeneratorType.REPEATED_COORDINATE.getErrorReport(this.getGame());
-        }
-        return null;
+        return super.validateTarget(target, origin);
     }
 
     @Override
@@ -49,10 +50,7 @@ public class LocalGameMoveController extends LocalGamePlacementController implem
     @Override
     public ErrorReport validateOrigin(Coordinate origin) {
         assert origin != null;
-        if (!this.isOccupiedByCurrentPlayer(origin)) {
-            return ErrorGeneratorType.NOT_PROPERTY.getErrorReport(this.getGame());
-        }
-        return null;
+        return originValidator.validate(origin, null, getGame());
     }
 
     @Override

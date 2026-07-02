@@ -33,7 +33,7 @@ Each layer has its own `core/` sub-package for intra-layer contracts shared betw
 
 ## Key Patterns
 
-**Double Dispatch (Visitor)** — the central dispatch mechanism between controllers and views. A `View.interact(controller)` calls `controller.accept(this)`, which calls back `view.visit(concreteController)`. Adding a new controller type requires: new interface, new `visit()` overload in the visitor interface, and implementation in every concrete visitor. `instanceof` and `switch` by type are prohibited everywhere.
+**Double Dispatch (Visitor)** — the central dispatch mechanism between controllers and views. A `View.interact(controller)` calls `controller.accept(this)`, which calls back `gameView.visit(concreteController)`. Adding a new controller type requires: new interface, new `visit()` overload in the visitor interface, and implementation in every concrete visitor. `instanceof` and `switch` by type are prohibited everywhere.
 
 **State Machine** — `LocalGameLogic` drives the game loop. States (`InitialGameState`, `InGameState`, `SaveMenuState`, `EndGameState`, `ExitGameState`) are built by `GameStatesBuilder` and held in `LocalGameLogic`. Each state returns a controller via `getController()`; `ExitGameState` returns `null` to end the loop. Transitions fire via `Observer`: `Board extends Subject` notifies `LocalGameLogic implements Observer` on every board mutation. `GameState` base class has `save()`/`resume()` that `assert false` by default — only states that support the transition override them.
 
@@ -41,7 +41,7 @@ Each layer has its own `core/` sub-package for intra-layer contracts shared betw
 
 **Command + Menu chrome** — `Command` (abstract) has a no-op `set(Feature)` and abstract `execute()`. Only commands that need a feature override `set()`. `Menu.set(feature)` distributes to all commands uniformly. `MainMenu` is the top-level chrome containing a `GameMenu` sub-menu and `LoadGameCommand`.
 
-**AppConfig** — `TicTacToeApp` sets `LogicType` and `ViewType` once; every feature reads them. Adding a new logic or view implementation means adding one enum constant, not touching features.
+**AppConfig** — `TicTacToeApp` sets `LogicType` and `ViewType` once; every feature reads them. Adding a new logic or gameView implementation means adding one enum constant, not touching features.
 
 ---
 
@@ -56,7 +56,7 @@ TicTacToeApp → AppConfig.set(LOCAL, CONSOLE)
 GameFeature.run():
   do {
     controller = logic.getController()   // current state decides controller type
-    view.interact(controller)            // double dispatch
+    gameView.interact(controller)            // double dispatch
   } while (controller != null)          // ExitGameState returns null
 ```
 

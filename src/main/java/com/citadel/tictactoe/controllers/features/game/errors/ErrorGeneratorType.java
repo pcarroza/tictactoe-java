@@ -16,8 +16,4 @@ public enum ErrorGeneratorType {
     public ErrorReport getErrorReport(Game game) {
         return this.errorReportGenerator.getErrorReport(game);
     }
-
-    public static void main(String[] args) {
-        ErrorGeneratorType.NOT_EMPTY.getErrorReport(null);
-    }
 }

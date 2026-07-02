@@ -205,7 +205,7 @@ class DebugView extends ViewDecorator { ... }
 
 ### Composición en GameFeature
 ```java
-View view = new TimestampedView(
+View gameView = new TimestampedView(
     new TurnNumberedView(
         AppConfig.viewType().create()));
 ```

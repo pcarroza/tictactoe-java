@@ -4,6 +4,10 @@ import com.citadel.tictactoe.controllers.features.game.local.LocalCoordinateCont
 import com.citadel.tictactoe.controllers.features.game.local.LocalGameMoveController;
 import com.citadel.tictactoe.controllers.features.game.local.LocalGamePlacementController;
 import com.citadel.tictactoe.controllers.features.game.local.LocalGamePutController;
+import com.citadel.tictactoe.controllers.features.game.validation.CoordinateValidator;
+import com.citadel.tictactoe.controllers.features.game.validation.OccupiedValidator;
+import com.citadel.tictactoe.controllers.features.game.validation.OwnPieceValidator;
+import com.citadel.tictactoe.controllers.features.game.validation.RepeatedCoordinateValidator;
 import com.citadel.tictactoe.models.features.game.Game;
 
 import java.util.Arrays;
@@ -27,8 +31,15 @@ public abstract class LocalPlacementControllerBuilder {
         for (int i = 0; i < game.getNumberOfPlayers(); i++) {
             assert localCoordinateControllers[i] != null;
         }
-        controllers[0] = new LocalGamePutController(game, localCoordinateControllers[0]);
-        controllers[1] = new LocalGameMoveController(game, localCoordinateControllers[1]);
+        CoordinateValidator putTargetChain = new OccupiedValidator();
+
+        CoordinateValidator moveTargetChain = new OccupiedValidator();
+        moveTargetChain.setNext(new RepeatedCoordinateValidator());
+
+        CoordinateValidator moveOriginChain = new OwnPieceValidator();
+
+        controllers[0] = new LocalGamePutController(game, localCoordinateControllers[0], putTargetChain);
+        controllers[1] = new LocalGameMoveController(game, localCoordinateControllers[1], moveTargetChain, moveOriginChain);
     }
 
     LocalGamePlacementController getPlacementController() {

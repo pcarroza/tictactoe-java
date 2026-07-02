@@ -1,13 +1,13 @@
 package com.citadel.tictactoe.views.console.features.game;
 
 import com.citadel.tictactoe.controllers.features.game.*;
-import com.citadel.tictactoe.views.core.View;
+import com.citadel.tictactoe.views.core.GameView;
 
-public class ConsoleView implements View {
+public class ConsoleGameView implements GameView {
 
     private final StartView startView;
 
-    private final GameView gameView;
+    private final com.citadel.tictactoe.views.console.features.game.GameView gameView;
 
     private final ContinueView continueView;
 
@@ -17,10 +17,10 @@ public class ConsoleView implements View {
 
     private final RedoView redoView;
 
-    public ConsoleView() {
+    public ConsoleGameView() {
         BoardView boardView = new BoardView();
         startView = new StartView(boardView);
-        gameView = new GameView(boardView);
+        gameView = new com.citadel.tictactoe.views.console.features.game.GameView(boardView);
         continueView = new ContinueView();
         saveView = new SaveView();
         undoView = new UndoView();

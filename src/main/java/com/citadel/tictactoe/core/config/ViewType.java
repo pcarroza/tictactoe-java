@@ -1,22 +1,22 @@
 package com.citadel.tictactoe.core.config;
 
-import com.citadel.tictactoe.views.console.features.game.ConsoleView;
+import com.citadel.tictactoe.views.console.features.game.ConsoleGameView;
+import com.citadel.tictactoe.views.console.features.game.decorator.DebugView;
+import com.citadel.tictactoe.views.console.features.game.decorator.TimestampedView;
+import com.citadel.tictactoe.views.console.features.game.decorator.TurnNumberedView;
 import com.citadel.tictactoe.views.console.features.load.ConsoleLoadView;
 import com.citadel.tictactoe.views.console.features.replay.ConsoleReplayView;
 import com.citadel.tictactoe.views.console.features.replay.ConsoleSelectReplayView;
 import com.citadel.tictactoe.views.console.features.statistics.ConsoleStatisticsView;
-import com.citadel.tictactoe.views.core.LoadView;
-import com.citadel.tictactoe.views.core.ReplayView;
-import com.citadel.tictactoe.views.core.SelectReplayView;
-import com.citadel.tictactoe.views.core.StatisticsView;
-import com.citadel.tictactoe.views.core.View;
+import com.citadel.tictactoe.views.core.*;
+import com.citadel.tictactoe.views.core.GameView;
 
 public enum ViewType {
 
     CONSOLE {
         @Override
-        public View create() {
-            return new ConsoleView();
+        public GameView create() {
+            return new DebugView(new TimestampedView(new TurnNumberedView(new ConsoleGameView())));
         }
 
         @Override
@@ -40,7 +40,7 @@ public enum ViewType {
         }
     };
 
-    public abstract View create();
+    public abstract GameView create();
 
     public abstract LoadView createLoadView();
 
