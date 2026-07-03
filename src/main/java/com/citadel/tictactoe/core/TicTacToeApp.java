@@ -10,6 +10,7 @@ public class TicTacToeApp {
 
     public static void main(String[] args) {
         AppConfig.set(LogicType.LOCAL, ViewType.CONSOLE);
+        EventWiring.wire();
         MainMenu menu = new MainMenu();
         menu.set(new GameFeature());
         menu.setLoadGame(new LoadFeature());
