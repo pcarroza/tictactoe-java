@@ -4,6 +4,7 @@ import com.citadel.tictactoe.views.console.core.Feature;
 import com.citadel.tictactoe.views.console.core.commands.LoadGameCommand;
 import com.citadel.tictactoe.views.console.core.commands.ProfileCommand;
 import com.citadel.tictactoe.views.console.core.commands.ReplayGameCommand;
+import com.citadel.tictactoe.views.console.core.commands.ShowAchievementsCommand;
 import com.citadel.tictactoe.views.console.core.commands.ShowStatsCommand;
 
 public class MainMenu extends Menu {
@@ -15,6 +16,8 @@ public class MainMenu extends Menu {
     private ShowStatsCommand showStatsCommand;
 
     private ProfileCommand profileCommand;
+
+    private ShowAchievementsCommand showAchievementsCommand;
 
     public MainMenu() {
         super("Menú Principal");
@@ -31,6 +34,8 @@ public class MainMenu extends Menu {
         commands.add(showStatsCommand);
         profileCommand = new ProfileCommand();
         commands.add(profileCommand);
+        showAchievementsCommand = new ShowAchievementsCommand();
+        commands.add(showAchievementsCommand);
     }
 
     public void setLoadGame(Feature feature) {
@@ -47,5 +52,9 @@ public class MainMenu extends Menu {
 
     public void setProfile(Feature feature) {
         profileCommand.setProfile(feature);
+    }
+
+    public void setShowAchievements(Feature feature) {
+        showAchievementsCommand.setShowAchievements(feature);
     }
 }

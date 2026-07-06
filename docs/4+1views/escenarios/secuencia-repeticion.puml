@@ -1,0 +1,27 @@
+@startuml secuencia-repeticion
+actor Jugador
+participant ReplayFeature
+participant LocalSelectReplayController
+participant SelectReplayView
+participant LocalReplayLogic
+participant ReplayController
+participant ConsoleReplayView
+
+Jugador -> ReplayFeature : selecciona "Repetir partida"
+ReplayFeature -> LocalSelectReplayController : new
+ReplayFeature -> SelectReplayView : interact(controller)
+Jugador -> SelectReplayView : elige partida
+ReplayFeature -> LocalSelectReplayController : getSelected()
+LocalSelectReplayController --> ReplayFeature : MoveHistory
+
+ReplayFeature -> LocalReplayLogic : new LocalReplayLogic(history)
+loop mientras controller != null
+  ReplayFeature -> LocalReplayLogic : getController()
+  LocalReplayLogic --> ReplayFeature : ReplayController
+  ReplayFeature -> ConsoleReplayView : interact(controller)
+  ConsoleReplayView -> ReplayController : accept(this)
+  ConsoleReplayView -> ReplayController : getPosition() / getTotal() / getColor(...)
+  Jugador -> ConsoleReplayView : elige Siguiente/Anterior/Salir
+  ConsoleReplayView -> ReplayController : next() / previous() / exit()
+end
+@enduml

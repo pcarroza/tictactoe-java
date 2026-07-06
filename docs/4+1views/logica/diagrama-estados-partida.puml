@@ -1,0 +1,40 @@
+@startuml diagrama-estados-partida
+title Máquina de estados — Partida (GameState)
+
+[*] --> InitialGameState : nueva partida
+[*] --> InGameState : partida cargada (GameSnapshot)
+
+state InitialGameState
+state InGameState
+state SaveMenuState
+state UndoMenuState
+state RedoMenuState
+state EndGameState
+state ExitGameState
+
+InitialGameState --> InGameState : begin()
+InGameState --> EndGameState : end()
+InGameState --> SaveMenuState : save()
+InGameState --> UndoMenuState : undo()
+InGameState --> RedoMenuState : redo()
+InGameState --> ExitGameState : exit()
+SaveMenuState --> InGameState : resume()
+SaveMenuState --> ExitGameState : exit()
+UndoMenuState --> InGameState : resume()
+RedoMenuState --> InGameState : resume()
+EndGameState --> InitialGameState : initialize()
+EndGameState --> ExitGameState : exit()
+ExitGameState --> [*]
+
+note right of ExitGameState
+  getController() devuelve null:
+  termina el bucle de GameFeature.run()
+end note
+
+note right of InGameState
+  Cualquier transición no listada desde un estado
+  (p.ej. begin() en InGameState) dispara assert false
+  en GameState — ver patron-estado.puml para la
+  estructura de clases completa
+end note
+@enduml

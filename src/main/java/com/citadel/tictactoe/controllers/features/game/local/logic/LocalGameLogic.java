@@ -1,7 +1,8 @@
 package com.citadel.tictactoe.controllers.features.game.local.logic;
 
-import com.citadel.tictactoe.controllers.Logic;
+import com.citadel.tictactoe.controllers.features.game.Logic;
 import com.citadel.tictactoe.controllers.features.game.GameOperationController;
+import com.citadel.tictactoe.controllers.features.game.local.ai.AiDifficulty;
 import com.citadel.tictactoe.controllers.features.game.local.builders.LocalOperationControllerBuilder;
 import com.citadel.tictactoe.models.features.game.Game;
 import com.citadel.tictactoe.models.features.game.GameRegistry;
@@ -25,7 +26,7 @@ public class LocalGameLogic implements Logic, Observer {
         game.restore(snapshot);
         LocalOperationControllerBuilder builder = new LocalOperationControllerBuilder(game, snapshot.gameId());
         builder.build();
-        builder.build(snapshot.getNumberUsers());
+        builder.build(snapshot.getNumberUsers(), AiDifficulty.EASY);
         actualState = new GameStatesBuilder(builder).getInGameState();
     }
 
@@ -71,6 +72,6 @@ public class LocalGameLogic implements Logic, Observer {
 
     @Override
     public GameOperationController getController() {
-        return actualState.getController();
+        return TimedControllerFactory.wrap(actualState.getController());
     }
 }

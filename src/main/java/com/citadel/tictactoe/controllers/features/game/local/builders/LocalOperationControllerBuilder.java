@@ -1,6 +1,7 @@
 package com.citadel.tictactoe.controllers.features.game.local.builders;
 
 import com.citadel.tictactoe.controllers.features.game.local.*;
+import com.citadel.tictactoe.controllers.features.game.local.ai.AiDifficulty;
 import com.citadel.tictactoe.models.features.game.Game;
 import com.citadel.tictactoe.shared.ClosedInterval;
 
@@ -48,14 +49,14 @@ public class LocalOperationControllerBuilder {
         localRedoController = new LocalGameRedoController(game);
     }
 
-    public void build(int users) {
+    public void build(int users, AiDifficulty difficulty) {
         assert new ClosedInterval<>(0, game.getNumberOfPlayers()).isIncluded(users);
         this.numUsers = users;
         for (int i = 0; i < game.getNumberOfPlayers(); i++) {
             if (i < users) {
                 builders[i] = new LocalUserPlacementControllerBuilder(game);
             } else {
-                builders[i] = new LocalRandomPlacementControllerBuilder(game);
+                builders[i] = new LocalAiPlacementControllerBuilder(game, difficulty);
             }
             builders[i].buildPlacementController();
         }

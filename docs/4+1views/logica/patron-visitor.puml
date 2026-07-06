@@ -1,0 +1,81 @@
+@startuml patron-visitor
+left to right direction
+hide empty members
+
+interface GameOperationController {
+  +accept(OperationControllerVisitor)
+}
+
+interface OperationControllerVisitor {
+  +visit(StartController)
+  +visit(PlacementController)
+  +visit(ContinueController)
+  +visit(SaveController)
+  +visit(UndoController)
+  +visit(RedoController)
+}
+
+interface PresenterController {
+  +getColor(Coordinate)
+}
+
+interface PlacementController {
+  +accept(PlacementControllerVisitor)
+  +put(Coordinate)
+  +validateTarget(Coordinate)
+}
+
+interface PlacementControllerVisitor {
+  +visit(PutController)
+  +visit(MoveController)
+}
+
+interface PutController
+interface MoveController {
+  +remove(Coordinate)
+  +validateOrigin(Coordinate)
+}
+
+interface CoordinateController {
+  +accept(CoordinateControllerVisitor)
+  +getOrigin()
+  +getTarget()
+}
+
+interface CoordinateControllerVisitor {
+  +visit(UserCoordinateController)
+  +visit(RandomCoordinateController)
+}
+
+interface UserCoordinateController
+interface RandomCoordinateController {
+  +getTarget(Coordinate origin)
+}
+
+interface GameView
+
+GameOperationController <|-- PlacementController
+PresenterController <|-- PlacementController
+PlacementController <|-- PutController
+PlacementController <|-- MoveController
+GameOperationController ..> OperationControllerVisitor : accept(visitor)
+PlacementController ..> PlacementControllerVisitor : accept(visitor)
+CoordinateController ..> CoordinateControllerVisitor : accept(visitor)
+PlacementController --> CoordinateController : getCoordinateController()
+CoordinateController <|-- UserCoordinateController
+CoordinateController <|-- RandomCoordinateController
+
+GameView ..|> OperationControllerVisitor
+GameView ..|> PlacementControllerVisitor
+GameView ..|> CoordinateControllerVisitor
+
+note top of GameOperationController
+  Cadena 1: qué pantalla mostrar por turno
+end note
+note top of PlacementController
+  Cadena 2: Colocar vs Mover
+end note
+note top of CoordinateController
+  Cadena 3: coordenada de usuario vs IA
+end note
+@enduml

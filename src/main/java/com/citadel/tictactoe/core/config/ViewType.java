@@ -1,5 +1,6 @@
 package com.citadel.tictactoe.core.config;
 
+import com.citadel.tictactoe.views.console.features.achievements.ConsoleAchievementsView;
 import com.citadel.tictactoe.views.console.features.game.ConsoleGameView;
 import com.citadel.tictactoe.views.console.features.game.decorator.DebugView;
 import com.citadel.tictactoe.views.console.features.game.decorator.TimestampedView;
@@ -15,7 +16,7 @@ public enum ViewType {
 
     CONSOLE {
         @Override
-        public GameView create() {
+        public GameView createGameView() {
             return new DebugView(new TimestampedView(new TurnNumberedView(new ConsoleGameView())));
         }
 
@@ -43,9 +44,14 @@ public enum ViewType {
         public ProfileView createProfileView() {
             return new ConsoleProfileView();
         }
+
+        @Override
+        public AchievementsView createAchievementsView() {
+            return new ConsoleAchievementsView();
+        }
     };
 
-    public abstract GameView create();
+    public abstract GameView createGameView();
 
     public abstract LoadView createLoadView();
 
@@ -56,4 +62,6 @@ public enum ViewType {
     public abstract SelectReplayView createSelectReplayView();
 
     public abstract ProfileView createProfileView();
+
+    public abstract AchievementsView createAchievementsView();
 }

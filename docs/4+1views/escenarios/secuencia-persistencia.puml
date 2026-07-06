@@ -1,0 +1,25 @@
+@startuml secuencia-persistencia
+actor Jugador
+participant LoadFeature
+participant LocalLoadController
+participant ConsoleLoadView
+participant GameFeature
+
+Jugador -> LoadFeature : selecciona "Cargar partida"
+LoadFeature -> LocalLoadController : new
+LoadFeature -> ConsoleLoadView : interact(controller)
+ConsoleLoadView -> LocalLoadController : accept(this)
+LocalLoadController -> ConsoleLoadView : visit(controller)
+ConsoleLoadView -> LocalLoadController : hasGames()
+ConsoleLoadView -> LocalLoadController : getGameTitles()
+ConsoleLoadView -> Jugador : muestra lista
+Jugador -> ConsoleLoadView : elige partida
+ConsoleLoadView -> LocalLoadController : select(indice)
+LoadFeature -> LocalLoadController : getSelected()
+LocalLoadController --> LoadFeature : GameSnapshot
+LoadFeature -> GameFeature : new GameFeature(snapshot).run()
+note right of GameFeature
+  Continúa igual que secuencia-partida.puml,
+  pero LocalGameLogic arranca en InGameState
+end note
+@enduml

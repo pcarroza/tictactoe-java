@@ -4,11 +4,14 @@ import com.citadel.tictactoe.core.config.AppConfig;
 import com.citadel.tictactoe.core.config.LogicType;
 import com.citadel.tictactoe.core.config.ViewType;
 import com.citadel.tictactoe.core.features.*;
+import com.citadel.tictactoe.models.persistence.Persistence;
+import com.citadel.tictactoe.models.persistence.PersistenceType;
 import com.citadel.tictactoe.views.console.core.menus.MainMenu;
 
 public class TicTacToeApp {
 
     public static void main(String[] args) {
+        Persistence.configure(PersistenceType.SQLITE);
         AppConfig.set(LogicType.LOCAL, ViewType.CONSOLE);
         EventWiring.wire();
         MainMenu menu = new MainMenu();
@@ -17,6 +20,7 @@ public class TicTacToeApp {
         menu.setReplay(new ReplayFeature());
         menu.setShowStats(new StatisticsFeature());
         menu.setProfile(new ProfileFeature());
+        menu.setShowAchievements(new AchievementsFeature());
         menu.execute();
     }
 }

@@ -1,0 +1,13 @@
+@startuml persistencia
+
+left to right direction
+actor Jugador
+
+rectangle "Persistencia" {
+  usecase "Ver partidas guardadas" as UC1
+  usecase "Cargar partida guardada" as UC2
+}
+
+Jugador --> UC2
+UC2 .> UC1 : <<include>>
+@enduml

@@ -1,0 +1,35 @@
+@startuml paquetes-capas
+skinparam packageStyle rectangle
+
+package "events" as events
+package "libs" as libs
+package "models" as models
+package "controllers" as controllers
+package "views" as views
+package "core" as core
+
+models --> libs
+controllers --> models
+controllers --> libs
+controllers --> events
+views --> controllers
+views --> models
+views --> libs
+views --> events
+core --> controllers
+core --> views
+core --> models
+core --> libs
+core --> events
+
+note bottom of events
+  Sin dependencias — hoja del grafo.
+  Cualquier capa puede importarlo.
+end note
+
+note bottom of core
+  Composition Root — única capa que conoce
+  implementaciones concretas de todas las demás.
+  Nadie la importa (DAG sin ciclos).
+end note
+@enduml

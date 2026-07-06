@@ -1,0 +1,10 @@
+@startuml estadisticas
+left to right direction
+actor Jugador
+
+rectangle "Estadísticas" {
+  usecase "Consultar estadísticas de la sesión" as UC1
+}
+
+Jugador --> UC1
+@enduml

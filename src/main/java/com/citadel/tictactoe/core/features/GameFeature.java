@@ -1,6 +1,6 @@
 package com.citadel.tictactoe.core.features;
 
-import com.citadel.tictactoe.controllers.Logic;
+import com.citadel.tictactoe.controllers.features.game.Logic;
 import com.citadel.tictactoe.controllers.features.game.GameOperationController;
 import com.citadel.tictactoe.core.config.AppConfig;
 import com.citadel.tictactoe.models.features.game.GameSnapshot;
@@ -24,7 +24,7 @@ public class GameFeature implements Feature {
         Logic logic = snapshot == null
                 ? AppConfig.logicType().create()
                 : AppConfig.logicType().create(snapshot);
-        GameView gameView = AppConfig.viewType().create();
+        GameView gameView = AppConfig.viewType().createGameView();
         GameOperationController controller;
         do {
             controller = logic.getController();
@@ -33,5 +33,4 @@ public class GameFeature implements Feature {
             }
         } while (controller != null);
     }
-
 }

@@ -9,6 +9,8 @@ public class Board extends Subject {
 
     private static final int NUMBER_OF_PLAYERS = 2;
 
+    private static final List<List<Coordinate>> LINES = buildLines();
+
     public final Map<Player, Set<Coordinate>> flat;
 
     private final Turn turn;
@@ -33,8 +35,8 @@ public class Board extends Subject {
     public void put(Coordinate coordinate) {
         assert coordinate != null : "La 'coordinate' NO puede ser 'null'";
         assert isEmpty(coordinate) : "La casilla debe estar vacía " + coordinate;
-        assert isIncluded(coordinate.getRow()): "La 'row' debe estar entre [1 - 3]";
-        assert isIncluded(coordinate.getColumn()): "La 'column' debe estar entre [1 - 3]";
+        assert isIncluded(coordinate.getRow()) : "La 'row' debe estar entre [1 - 3]";
+        assert isIncluded(coordinate.getColumn()) : "La 'column' debe estar entre [1 - 3]";
 
         flat.get(getColorCurrentPlayer()).add(coordinate);
         history.record(new MoveRecord(getColorCurrentPlayer(), MoveType.PUT, coordinate, history.size() + 1));
@@ -56,19 +58,46 @@ public class Board extends Subject {
     }
 
     public void remove(Coordinate origin) {
-        assert origin != null: "La coordinate no peude null";
-        assert !isEmpty(origin): "El no puede estar vacío";
+        assert origin != null : "La coordinate no peude null";
+        assert !isEmpty(origin) : "El no puede estar vacío";
         history.record(new MoveRecord(getColorCurrentPlayer(), MoveType.REMOVE, origin, history.size() + 1));
         flat.get(getColorCurrentPlayer()).remove(origin);
         assert isEmpty(origin) : "La " + origin + "debe estár eliminada.";
     }
 
     public boolean isComplete() {
-        int numberOfTokens = flat.keySet()
-                .stream()
-                .mapToInt(player -> flat.get(player).size())
-                .sum();
+        return isFull(flat);
+    }
+
+    // Pura: no depende del tablero real, solo del mapa recibido. Permite evaluar
+    // posiciones hipotéticas (p.ej. búsqueda de la IA) sin mutar el Board real.
+    public boolean isFull(Map<Player, Set<Coordinate>> positions) {
+        int numberOfTokens = positions.values().stream().mapToInt(Set::size).sum();
         return numberOfTokens == Coordinate.DIMENSION * flat.size();
+    }
+
+    // Pura: comprueba si el conjunto recibido contiene alguna línea de victoria
+    // completa,
+    // sin depender del turno actual ni del tablero real (mismo uso que isFull).
+    public boolean hasLine(Set<Coordinate> owned) {
+        return LINES.stream().anyMatch(owned::containsAll);
+    }
+
+    private static List<List<Coordinate>> buildLines() {
+        List<List<Coordinate>> lines = new ArrayList<>();
+        for (int i = 1; i <= Coordinate.DIMENSION; i++) {
+            List<Coordinate> rowLine = new ArrayList<>();
+            List<Coordinate> columnLine = new ArrayList<>();
+            for (int j = 1; j <= Coordinate.DIMENSION; j++) {
+                rowLine.add(new Coordinate(i, j));
+                columnLine.add(new Coordinate(j, i));
+            }
+            lines.add(rowLine);
+            lines.add(columnLine);
+        }
+        lines.add(List.of(new Coordinate(1, 1), new Coordinate(2, 2), new Coordinate(3, 3)));
+        lines.add(List.of(new Coordinate(1, 3), new Coordinate(2, 2), new Coordinate(3, 1)));
+        return lines;
     }
 
     public void changeTurn() {

@@ -1,0 +1,10 @@
+@startuml logros
+left to right direction
+actor Jugador
+
+rectangle "Logros" {
+  usecase "Consultar logros desbloqueados" as UC1
+}
+
+Jugador --> UC1
+@enduml

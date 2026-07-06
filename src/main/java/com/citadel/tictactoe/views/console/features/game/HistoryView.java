@@ -30,7 +30,7 @@ class HistoryView {
     private String format(MoveRecord record) {
         String action = record.type() == MoveType.PUT ? "pone en" : "retira de";
         String player = record.player().name();
-        String coord = "[" + record.coordinate().getRow() + "," + record.coordinate().getColumn() + "]";
-        return "  " + record.turn() + ". " + player + " " + action + " " + coord;
+        String coordinate = "[" + record.coordinate().getRow() + "," + record.coordinate().getColumn() + "]";
+        return "  " + record.turn() + ". " + player + " " + action + " " + coordinate;
     }
 }

@@ -1,0 +1,18 @@
+@startuml secuencia-perfil
+actor Jugador
+participant ProfileFeature
+participant LocalProfileController
+participant ConsoleProfileView
+participant ProfileRegistry
+
+Jugador -> ProfileFeature : selecciona "Perfil"
+ProfileFeature -> LocalProfileController : new
+ProfileFeature -> ConsoleProfileView : interact(controller)
+ConsoleProfileView -> LocalProfileController : getName(XS) / getName(OS)
+LocalProfileController -> ProfileRegistry : findByToken(player)
+ConsoleProfileView -> Jugador : muestra nombres actuales
+Jugador -> ConsoleProfileView : elige "Cambiar nombre de X/O"
+ConsoleProfileView -> Jugador : pide nuevo nombre
+ConsoleProfileView -> LocalProfileController : setName(token, nombre)
+LocalProfileController -> ProfileRegistry : register(new PlayerProfile(token, nombre))
+@enduml

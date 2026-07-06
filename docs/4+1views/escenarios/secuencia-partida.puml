@@ -1,0 +1,54 @@
+@startuml secuencia-partida
+actor Jugador
+participant GameFeature
+participant LocalGameLogic
+participant TimedControllerFactory
+participant "GameView\n(decorado)" as DecoratedView
+participant "views.console.features.game.GameView" as InnerView
+participant PlacementController
+participant EventManager
+
+loop mientras controller != null
+  GameFeature -> LocalGameLogic : getController()
+  LocalGameLogic -> TimedControllerFactory : wrap(actualState.getController())
+  note right of TimedControllerFactory
+    Envuelve en TimedPlacementController
+    solo si es fase Put (ver patron-decorator.puml)
+  end note
+  TimedControllerFactory --> LocalGameLogic : controller
+  LocalGameLogic --> GameFeature : controller
+
+  GameFeature -> DecoratedView : interact(controller)
+  note right of DecoratedView
+    Cadena Debug→Timestamped→TurnNumbered→Console
+    elidida aquí (ver patron-decorator.puml)
+  end note
+  DecoratedView -> InnerView : interact(placementController)
+  Jugador -> InnerView : elige "Jugar turno"
+  InnerView -> PlacementController : accept(this)
+  PlacementController -> InnerView : visit(putController) / visit(moveController)
+
+  loop hasta coordenada válida
+    Jugador -> InnerView : introduce coordenada
+    InnerView -> PlacementController : validateTarget(coord)
+  end
+  InnerView -> PlacementController : put(target)
+  note right of PlacementController
+    Si es TimedPlacementController y expiró
+    el límite, target se sustituye por
+    una coordenada aleatoria válida
+  end note
+
+  InnerView -> PlacementController : existTicTacToe()?
+  alt hay ganador
+    InnerView -> PlacementController : end()
+    PlacementController -> EventManager : publish(GameEndedEvent)
+    note right of EventManager
+      Estadísticas, Historial y Logros se enteran
+      aquí (ver patron-observer-y-eventos.puml)
+    end note
+  else no hay ganador
+    InnerView -> PlacementController : changeTurn()
+  end
+end
+@enduml

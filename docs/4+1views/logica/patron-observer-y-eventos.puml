@@ -1,0 +1,55 @@
+@startuml patron-observer-y-eventos
+hide empty members
+
+interface Subject {
+  +subscribe(Observer)
+}
+interface Observer {
+  +initialize()
+  +begin()
+  +end()
+  +exit()
+  +save()
+  +resume()
+  +undo()
+  +redo()
+}
+class Board
+class LocalGameLogic
+
+Subject <|-- Board
+Observer <|.. LocalGameLogic
+Board o-> Observer : notifica
+LocalGameLogic ..> Board : suscrito a
+
+note bottom of Board
+  Observer — transiciones DENTRO
+  del mismo turno (intra-feature)
+end note
+
+class EventManager {
+  +subscribe(Class, Listener)
+  +publish(Object)
+}
+class GameEndedEvent {
+  +winner: Player
+  +history: MoveHistory
+}
+class LocalGamePlacementController
+class EventWiring
+class Statistics
+class GameHistoryRegistry
+class AchievementTracker
+
+LocalGamePlacementController ..> EventManager : publish(GameEndedEvent)
+LocalGamePlacementController ..> GameEndedEvent : crea
+EventWiring ..> EventManager : subscribe(GameEndedEvent, ...)
+EventManager ..> Statistics : notifica
+EventManager ..> GameHistoryRegistry : notifica
+EventManager ..> AchievementTracker : notifica
+
+note bottom of EventManager
+  Event Bus — comunicación ENTRE
+  features que no se conocen (cross-feature)
+end note
+@enduml

@@ -1,0 +1,46 @@
+@startuml patron-decorator
+hide empty members
+
+interface GameView
+abstract class ViewDecorator {
+  #wrapped: GameView
+}
+class DebugView
+class TimestampedView
+class TurnNumberedView
+class ConsoleGameView
+
+GameView <|.. ViewDecorator
+ViewDecorator <|-- DebugView
+ViewDecorator <|-- TimestampedView
+ViewDecorator <|-- TurnNumberedView
+GameView <|.. ConsoleGameView
+ViewDecorator o-> GameView : wrapped
+
+note bottom of ViewDecorator
+  Composición real (ViewType.CONSOLE.createGameView()):
+  new DebugView(new TimestampedView(
+    new TurnNumberedView(new ConsoleGameView())))
+end note
+
+interface PlacementController
+abstract class ForwardingPlacementController {
+  #delegate: PlacementController
+}
+interface PutController
+class TimedPlacementController {
+  -deadline: Instant
+  +put(Coordinate)
+}
+
+PlacementController <|.. ForwardingPlacementController
+ForwardingPlacementController <|-- TimedPlacementController
+PutController <|.. TimedPlacementController
+ForwardingPlacementController o-> PlacementController : delegate
+
+note bottom of TimedPlacementController
+  Envuelto solo en fase Put (TimedControllerFactory),
+  límite de 15s. Si expira, put(target) se
+  sustituye por una coordenada aleatoria válida.
+end note
+@enduml

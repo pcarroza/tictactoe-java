@@ -1,6 +1,7 @@
 package com.citadel.tictactoe.core;
 
 import com.citadel.tictactoe.events.EventManager;
+import com.citadel.tictactoe.models.features.achievements.AchievementTracker;
 import com.citadel.tictactoe.models.features.game.GameHistoryRegistry;
 import com.citadel.tictactoe.models.features.game.events.GameEndedEvent;
 import com.citadel.tictactoe.models.features.statistics.Statistics;
@@ -13,5 +14,8 @@ public class EventWiring {
 
         EventManager.getInstance().subscribe(GameEndedEvent.class,
                 event -> GameHistoryRegistry.getInstance().record(event.history()));
+
+        EventManager.getInstance().subscribe(GameEndedEvent.class,
+                event -> AchievementTracker.getInstance().onGameEnded(event));
     }
 }

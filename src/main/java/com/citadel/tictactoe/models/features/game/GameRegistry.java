@@ -1,21 +1,18 @@
 package com.citadel.tictactoe.models.features.game;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import com.citadel.tictactoe.models.persistence.Persistence;
+import com.citadel.tictactoe.models.persistence.service.GameSnapshotService;
+
 import java.util.List;
-import java.util.Map;
 
 public class GameRegistry {
 
     private static final GameRegistry instance = new GameRegistry();
 
-    private final Map<Integer, GameSnapshot> snapshots;
-
-    private int nextGameId;
+    private final GameSnapshotService service;
 
     private GameRegistry() {
-        this.snapshots = new LinkedHashMap<>();
-        this.nextGameId = 1;
+        this.service = new GameSnapshotService(Persistence.daoFactory().createGameDao());
     }
 
     public static GameRegistry getInstance() {
@@ -23,22 +20,22 @@ public class GameRegistry {
     }
 
     public int nextId() {
-        return nextGameId++;
+        return service.nextId();
     }
 
     public void save(GameSnapshot snapshot) {
-        snapshots.put(snapshot.gameId(), snapshot);
+        service.save(snapshot);
     }
 
     public List<GameSnapshot> getAll() {
-        return new ArrayList<>(snapshots.values());
+        return service.findAll();
     }
 
     public GameSnapshot get(int index) {
-        return getAll().get(index);
+        return service.get(index);
     }
 
     public int size() {
-        return snapshots.size();
+        return service.size();
     }
 }

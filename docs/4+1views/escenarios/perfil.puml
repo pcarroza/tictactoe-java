@@ -1,0 +1,13 @@
+@startuml perfil
+
+left to right direction
+actor Jugador
+
+rectangle "Perfil" {
+  usecase "Consultar nombre de jugador" as UC1
+  usecase "Asignar nombre a un jugador" as UC2
+}
+
+Jugador --> UC1
+Jugador --> UC2
+@enduml

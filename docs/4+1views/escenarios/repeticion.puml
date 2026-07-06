@@ -1,0 +1,13 @@
+@startuml repeticion
+actor Jugador
+
+rectangle "Repetición" {
+  usecase "Seleccionar partida a repetir" as UC1
+  usecase "Reproducir movimientos" as UC2
+  usecase "Salir de la repetición" as UC3
+}
+
+Jugador --> UC2
+Jugador --> UC3
+UC2 .> UC1 : <<include>>
+@enduml

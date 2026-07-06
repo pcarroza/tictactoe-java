@@ -1,0 +1,29 @@
+@startuml paquetes-casos-de-uso
+skinparam packageStyle rectangle
+
+actor Jugador
+
+package "Partida" as Partida
+package "Persistencia" as Persistencia
+package "Repetición" as Repeticion
+package "Estadísticas" as Estadisticas
+package "Logros" as Logros
+package "Perfil" as Perfil
+
+Jugador --> Partida
+Jugador --> Persistencia
+Jugador --> Repeticion
+Jugador --> Estadisticas
+Jugador --> Logros
+Jugador --> Perfil
+
+Persistencia ..> Partida : <<extend>>\ncontinúa la partida cargada
+Repeticion ..> Partida : <<uses>>\nreproduce el historial de una partida
+Partida ..> Logros : <<uses>>\npublica GameEndedEvent
+Partida ..> Estadisticas : <<uses>>\npublica GameEndedEvent
+
+note bottom of Logros
+  Se actualiza vía EventManager (Event Bus),
+  no por llamada directa desde Partida
+end note
+@enduml

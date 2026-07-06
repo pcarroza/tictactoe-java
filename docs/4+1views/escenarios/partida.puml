@@ -1,0 +1,33 @@
+@startuml partida
+left to right direction
+actor Jugador
+
+rectangle "Partida" {
+  usecase "Iniciar partida nueva" as UC1
+  usecase "Jugar turno" as UC2
+  usecase "Colocar ficha" as UC2a
+  usecase "Mover ficha" as UC2b
+  usecase "Deshacer jugada" as UC3
+  usecase "Rehacer jugada" as UC4
+  usecase "Guardar partida" as UC5
+  usecase "Salir de la partida" as UC6
+  usecase "Continuar tras fin de partida" as UC7
+}
+
+Jugador --> UC1
+Jugador --> UC2
+Jugador --> UC3
+Jugador --> UC4
+Jugador --> UC5
+Jugador --> UC6
+Jugador --> UC7
+
+UC2 <|-- UC2a
+UC2 <|-- UC2b
+note right of UC2a
+  Se elige Colocar o Mover según
+  si el tablero está completo
+end note
+
+UC1 .> UC2 : <<include>>
+@enduml

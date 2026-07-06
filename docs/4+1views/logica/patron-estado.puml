@@ -1,0 +1,67 @@
+@startuml patron-estado
+hide empty members
+
+abstract class GameState {
+  #statesBuilder: GameStatesBuilder
+  +initialize(): GameState
+  +begin(): GameState
+  +end(): GameState
+  +exit(): GameState
+  +save(): GameState
+  +resume(): GameState
+  +undo(): GameState
+  +redo(): GameState
+  {abstract} +getController()
+}
+note right of GameState
+  Todas las transiciones no
+  sobreescritas lanzan assert false
+end note
+
+class InitialGameState
+class InGameState
+class EndGameState
+class SaveMenuState
+class UndoMenuState
+class RedoMenuState
+class ExitGameState
+note bottom of ExitGameState
+  getController() devuelve null:
+  fin del bucle de juego
+end note
+
+GameState <|-- InitialGameState
+GameState <|-- InGameState
+GameState <|-- EndGameState
+GameState <|-- SaveMenuState
+GameState <|-- UndoMenuState
+GameState <|-- RedoMenuState
+GameState <|-- ExitGameState
+
+class GameStatesBuilder
+GameStatesBuilder --> InitialGameState
+GameStatesBuilder --> InGameState
+GameStatesBuilder --> EndGameState
+GameStatesBuilder --> SaveMenuState
+GameStatesBuilder --> UndoMenuState
+GameStatesBuilder --> RedoMenuState
+GameStatesBuilder --> ExitGameState
+
+class LocalGameLogic {
+  -actualState: GameState
+}
+LocalGameLogic --> GameState : actualState
+
+InitialGameState --> InGameState : begin()
+InGameState --> EndGameState : end()
+InGameState --> ExitGameState : exit()
+InGameState --> SaveMenuState : save()
+InGameState --> UndoMenuState : undo()
+InGameState --> RedoMenuState : redo()
+EndGameState --> InitialGameState : initialize()
+EndGameState --> ExitGameState : exit()
+SaveMenuState --> InGameState : resume()
+SaveMenuState --> ExitGameState : exit()
+UndoMenuState --> InGameState : resume()
+RedoMenuState --> InGameState : resume()
+@enduml

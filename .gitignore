@@ -140,6 +140,9 @@ fabric.properties
 hs_err_pid*
 replay_pid*
 
+### Project data ###
+data/
+
 ### Gradle ###
 .gradle
 **/build/

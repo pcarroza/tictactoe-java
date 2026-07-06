@@ -53,6 +53,14 @@ public class Game {
         return this.board.isComplete();
     }
 
+    public boolean isFull(Map<Player, Set<Coordinate>> positions) {
+        return this.board.isFull(positions);
+    }
+
+    public boolean hasLine(Set<Coordinate> owned) {
+        return this.board.hasLine(owned);
+    }
+
     public boolean existTicTacToe() {
         return this.board.existTicTacToe();
     }

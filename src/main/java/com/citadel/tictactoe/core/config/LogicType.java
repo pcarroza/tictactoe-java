@@ -1,6 +1,6 @@
 package com.citadel.tictactoe.core.config;
 
-import com.citadel.tictactoe.controllers.Logic;
+import com.citadel.tictactoe.controllers.features.game.Logic;
 import com.citadel.tictactoe.controllers.features.game.local.logic.LocalGameLogic;
 import com.citadel.tictactoe.models.features.game.GameSnapshot;
 

@@ -1,7 +1,9 @@
 package com.citadel.tictactoe.views.console.features.game;
 
 import com.citadel.tictactoe.controllers.features.game.StartController;
+import com.citadel.tictactoe.controllers.features.game.local.ai.AiDifficulty;
 import com.citadel.tictactoe.shared.LimitedIntDialog;
+import com.citadel.tictactoe.shared.YesNoDialog;
 
 public class StartView {
 
@@ -13,7 +15,13 @@ public class StartView {
 
     public void interact(StartController startController) {
         int users = LimitedIntDialog.instance().read("¿Cúantos Jugadores?", 0, 2);
-        startController.start(users);
+        AiDifficulty difficulty = users < 2 ? readDifficulty() : AiDifficulty.EASY;
+        startController.start(users, difficulty);
         boardView.write(startController);
+    }
+
+    private AiDifficulty readDifficulty() {
+        boolean hard = YesNoDialog.instance().read("¿IA en modo difícil?");
+        return hard ? AiDifficulty.HARD : AiDifficulty.EASY;
     }
 }

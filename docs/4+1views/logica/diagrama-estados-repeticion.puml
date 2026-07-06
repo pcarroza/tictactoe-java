@@ -1,0 +1,25 @@
+@startuml diagrama-estados-repeticion
+title Máquina de estados — Repetición (ReplayState)
+
+[*] --> ShowMoveReplayState
+
+state ShowMoveReplayState
+state ExitReplayState
+
+ShowMoveReplayState --> ShowMoveReplayState : next() / previous()
+ShowMoveReplayState --> ExitReplayState : exit()
+ExitReplayState --> ExitReplayState : exit()
+ExitReplayState --> [*]
+
+note right of ShowMoveReplayState
+  next()/previous() delegan en ReplayBoard (cursor
+  sobre el historial de movimientos) sin cambiar de estado
+end note
+
+note right of ExitReplayState
+  getController() devuelve null: termina el bucle de
+  ReplayFeature.run(). A diferencia de GameState, no hay
+  Subject/Observer de por medio — LocalReplayLogic
+  despacha directo sobre el estado (ver secuencia-repeticion.puml)
+end note
+@enduml

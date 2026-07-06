@@ -1,7 +1,7 @@
 package com.citadel.tictactoe.views.console.features.game;
 
 import com.citadel.tictactoe.controllers.features.game.CoordinateController;
-import com.citadel.tictactoe.controllers.features.game.RandomCoordinateController;
+import com.citadel.tictactoe.controllers.features.game.MachineCoordinateController;
 import com.citadel.tictactoe.controllers.features.game.UserCoordinateController;
 import com.citadel.tictactoe.models.features.game.Coordinate;
 
@@ -30,8 +30,8 @@ public class MoveTargetCoordinateView extends PlacementCoordinateView {
     }
 
     @Override
-    public void visit(RandomCoordinateController randomCoordinateController) {
-        target = randomCoordinateController.getTarget(origin);
+    public void visit(MachineCoordinateController machineCoordinateController) {
+        target = machineCoordinateController.getTarget(origin);
         super.show("pone en: ", target);
     }
 }
