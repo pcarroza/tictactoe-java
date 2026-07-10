@@ -21,20 +21,20 @@ public class ReplayFeature implements Feature {
 
     private MoveHistory selectGame() {
         LocalSelectReplayController controller = new LocalSelectReplayController();
-        SelectReplayView view = AppConfig.viewType().createSelectReplayView();
-        view.interact(controller);
+        SelectReplayView selectReplayView = AppConfig.viewType().createSelectReplayView();
+        selectReplayView.interact(controller);
         return controller.getSelected();
     }
 
     private void replay(MoveHistory history) {
-        LocalReplayLogic logic = new LocalReplayLogic(history);
-        ReplayView view = AppConfig.viewType().createReplayView();
-        ReplayController controller;
+        LocalReplayLogic localReplayLogic = new LocalReplayLogic(history);
+        ReplayView replayView = AppConfig.viewType().createReplayView();
+        ReplayController replayController;
         do {
-            controller = logic.getController();
-            if (controller != null) {
-                view.interact(controller);
+            replayController = localReplayLogic.getController();
+            if (replayController != null) {
+                replayView.interact(replayController);
             }
-        } while (controller != null);
+        } while (replayController != null);
     }
 }

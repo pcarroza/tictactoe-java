@@ -10,7 +10,7 @@ public class ProfileFeature implements Feature {
     @Override
     public void run() {
         LocalProfileController controller = new LocalProfileController();
-        ProfileView view = AppConfig.viewType().createProfileView();
-        view.interact(controller);
+        ProfileView profileView = AppConfig.viewType().createProfileView();
+        profileView.interact(controller);
     }
 }

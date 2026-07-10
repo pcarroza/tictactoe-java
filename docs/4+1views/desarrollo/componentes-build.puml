@@ -1,0 +1,31 @@
+@startuml componentes-build
+skinparam componentStyle rectangle
+
+node "Gradle (build.gradle) — módulo único" as gradle {
+  folder "src/main/java" as main
+  folder "src/test/java" as test
+}
+
+component "com.citadel.tictactoe" as app
+component "gson\n2.11.0" as gson
+component "sqlite-jdbc\n3.53.2.0" as sqlite
+component "junit\n4.13.1" as junit
+
+main -down-> app
+test -down-> app
+
+app ..> gson : implementation\n(JsonGameDao, JsonStatisticsDao)
+app ..> sqlite : implementation\n(SqliteGameDao, SqliteStatisticsDao)
+test ..> junit : testImplementation
+
+note bottom of gradle
+  Un único módulo, sin submódulos ni artefactos
+  separados (sin multi-project build)
+end note
+
+note right of app
+  application.mainClass apunta a
+  'main.core.TicTacToeApp' — desactualizado,
+  la clase real es com.citadel.tictactoe.core.TicTacToeApp
+end note
+@enduml

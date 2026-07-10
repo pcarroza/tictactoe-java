@@ -5,13 +5,10 @@ import com.citadel.tictactoe.views.console.core.Feature;
 
 public class LoadGameCommand extends Command {
 
-    private Feature feature;
+    private final Feature feature;
 
-    public LoadGameCommand() {
+    public LoadGameCommand(Feature feature) {
         super("Cargar Partida");
-    }
-
-    public void setLoadGame(Feature feature) {
         this.feature = feature;
     }
 

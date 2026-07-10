@@ -4,13 +4,10 @@ import com.citadel.tictactoe.views.console.core.Feature;
 
 public class ShowAchievementsCommand extends Command {
 
-    private Feature feature;
+    private final Feature feature;
 
-    public ShowAchievementsCommand() {
+    public ShowAchievementsCommand(Feature feature) {
         super("Logros");
-    }
-
-    public void setShowAchievements(Feature feature) {
         this.feature = feature;
     }
 

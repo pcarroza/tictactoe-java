@@ -6,10 +6,6 @@ public class GameMenu extends Menu {
 
     public GameMenu() {
         super("Juego");
-    }
-
-    @Override
-    public void setCommand() {
         commands.add(new StartGameCommand());
     }
 }

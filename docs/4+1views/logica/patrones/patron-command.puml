@@ -1,0 +1,94 @@
+@startuml patron-command
+hide empty members
+
+abstract class Command {
+  -title: String
+  +set(Feature)
+  +isAvailable(): boolean
+  {abstract} +execute()
+}
+abstract class Menu {
+  #commands: List<Command>
+  -exitCommand: ExitCommand
+  +set(Feature)
+  +execute()
+}
+class MainMenu {
+  +MainMenu(MainMenuFeatures)
+}
+class MainMenuFeatures <<record>> {
+  +loadFeature: Feature
+  +replayFeature: Feature
+  +statsFeature: Feature
+  +profileFeature: Feature
+  +achievementsFeature: Feature
+}
+class GameMenu
+class ExitCommand
+class StartGameCommand {
+  +set(Feature)
+}
+class LoadGameCommand {
+  -feature: Feature
+  +LoadGameCommand(Feature)
+}
+class ReplayGameCommand {
+  -feature: Feature
+  +ReplayGameCommand(Feature)
+}
+class ShowStatsCommand {
+  -feature: Feature
+  +ShowStatsCommand(Feature)
+}
+class ProfileCommand {
+  -feature: Feature
+  +ProfileCommand(Feature)
+}
+class ShowAchievementsCommand {
+  -feature: Feature
+  +ShowAchievementsCommand(Feature)
+}
+
+Command <|-- Menu
+Menu <|-- MainMenu
+Menu <|-- GameMenu
+Command <|-- ExitCommand
+Command <|-- StartGameCommand
+Command <|-- LoadGameCommand
+Command <|-- ReplayGameCommand
+Command <|-- ShowStatsCommand
+Command <|-- ProfileCommand
+Command <|-- ShowAchievementsCommand
+
+MainMenu ..> MainMenuFeatures : recibe por constructor
+MainMenu ..> GameMenu : crea, agrega a commands
+MainMenu ..> LoadGameCommand : crea, agrega a commands
+MainMenu ..> ReplayGameCommand : crea, agrega a commands
+MainMenu ..> ShowStatsCommand : crea, agrega a commands
+MainMenu ..> ProfileCommand : crea, agrega a commands
+MainMenu ..> ShowAchievementsCommand : crea, agrega a commands
+GameMenu ..> StartGameCommand : crea, agrega a commands
+
+note bottom of Menu
+  execute() es un bucle: muestra los Command con
+  isAvailable()==true, delega en el elegido,
+  hasta que ExitCommand marca closed().
+  set(Feature) difunde a todos los commands hijos.
+end note
+
+note right of MainMenuFeatures
+  Parameter Object — agrupa las 5 Feature
+  para no superar el límite de 3 parámetros
+  del constructor de MainMenu
+end note
+
+note right of StartGameCommand
+  Único caso que sobrescribe Command.set(Feature):
+  es hijo único (junto a ExitCommand, no-op) de
+  GameMenu, así que el broadcast no es ambiguo.
+  Los demás comandos reciben su Feature por
+  constructor porque son 5 hermanos directos de
+  MainMenu — un solo set(Feature) de Menu les
+  pisaría el valor entre sí.
+end note
+@enduml

@@ -1,0 +1,25 @@
+@startuml despliegue
+node "Máquina del jugador" {
+  node "JVM (./gradlew run)" {
+    artifact "TicTacToeApp" as app
+  }
+  file "Terminal\n(stdin/stdout)" as terminal
+  database "data/*.db\n(SQLite embebido)" as sqliteDb
+  artifact "data/*.json" as jsonFiles
+  artifact "data/*.ser" as serFiles
+}
+
+app <--> terminal : E/S bloqueante, un solo hilo
+app --> sqliteDb : PersistenceType.SQLITE\n(sqlite-jdbc, mismo proceso)
+app --> jsonFiles : PersistenceType.JSON\n(Gson)
+app --> serFiles : PersistenceType.FILE\n(ObjectStream)
+
+note bottom of "Máquina del jugador"
+  Un único nodo, un único proceso JVM.
+  SQLite es embebido: no hay proceso de
+  base de datos aparte ni red — corre
+  en el mismo proceso que "app".
+  PersistenceType.IN_MEMORY (sin artefacto
+  en disco) no se representa aquí.
+end note
+@enduml

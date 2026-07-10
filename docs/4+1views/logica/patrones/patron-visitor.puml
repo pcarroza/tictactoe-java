@@ -44,12 +44,17 @@ interface CoordinateController {
 
 interface CoordinateControllerVisitor {
   +visit(UserCoordinateController)
-  +visit(RandomCoordinateController)
+  +visit(MachineCoordinateController)
 }
 
 interface UserCoordinateController
-interface RandomCoordinateController {
+interface MachineCoordinateController {
   +getTarget(Coordinate origin)
+}
+
+class LocalUserCoordinateController
+class LocalAiCoordinateController {
+  -strategy: AiStrategy
 }
 
 interface GameView
@@ -63,7 +68,9 @@ PlacementController ..> PlacementControllerVisitor : accept(visitor)
 CoordinateController ..> CoordinateControllerVisitor : accept(visitor)
 PlacementController --> CoordinateController : getCoordinateController()
 CoordinateController <|-- UserCoordinateController
-CoordinateController <|-- RandomCoordinateController
+CoordinateController <|-- MachineCoordinateController
+UserCoordinateController <|.. LocalUserCoordinateController
+MachineCoordinateController <|.. LocalAiCoordinateController
 
 GameView ..|> OperationControllerVisitor
 GameView ..|> PlacementControllerVisitor
@@ -77,5 +84,8 @@ note top of PlacementController
 end note
 note top of CoordinateController
   Cadena 3: coordenada de usuario vs IA
+end note
+note bottom of LocalAiCoordinateController
+  Cómo decide la jugada: ver patron-strategy-ia.puml
 end note
 @enduml

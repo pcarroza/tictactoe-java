@@ -11,8 +11,8 @@ public class LoadFeature implements Feature {
     @Override
     public void run() {
         LocalLoadController controller = new LocalLoadController();
-        LoadView view = AppConfig.viewType().createLoadView();
-        view.interact(controller);
+        LoadView loadView = AppConfig.viewType().createLoadView();
+        loadView.interact(controller);
         GameSnapshot selected = controller.getSelected();
         if (selected != null) {
             new GameFeature(selected).run();

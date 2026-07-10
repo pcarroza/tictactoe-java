@@ -9,15 +9,13 @@ import com.citadel.tictactoe.models.features.game.Coordinate;
 import com.citadel.tictactoe.models.features.game.Game;
 import com.citadel.tictactoe.models.features.game.events.GameEndedEvent;
 
-public abstract class LocalGamePlacementController extends LocalGameOperationController
-    implements PlacementController {
+public abstract class LocalGamePlacementController extends LocalGameOperationController implements PlacementController {
 
     private final LocalCoordinateController coordinateController;
 
     private final CoordinateValidator targetValidator;
 
-    public LocalGamePlacementController(Game game, LocalCoordinateController coordinateController,
-            CoordinateValidator targetValidator) {
+    public LocalGamePlacementController(Game game, LocalCoordinateController coordinateController, CoordinateValidator targetValidator) {
         super(game);
         assert coordinateController != null;
         assert targetValidator != null;

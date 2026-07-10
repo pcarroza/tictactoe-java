@@ -2,24 +2,24 @@
 skinparam packageStyle rectangle
 
 package "events" as events
-package "libs" as libs
+package "shared" as shared
 package "models" as models
 package "controllers" as controllers
 package "views" as views
 package "core" as core
 
-models --> libs
+models --> shared
 controllers --> models
-controllers --> libs
+controllers --> shared
 controllers --> events
 views --> controllers
 views --> models
-views --> libs
+views --> shared
 views --> events
 core --> controllers
 core --> views
 core --> models
-core --> libs
+core --> shared
 core --> events
 
 note bottom of events

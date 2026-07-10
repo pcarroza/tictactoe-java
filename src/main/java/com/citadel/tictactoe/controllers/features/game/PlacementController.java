@@ -27,9 +27,9 @@ public interface PlacementController extends GameOperationController, PresenterC
 
     void undo();
 
-    boolean canUndo();
-
     void redo();
+
+    boolean canUndo();
 
     boolean canRedo();
 

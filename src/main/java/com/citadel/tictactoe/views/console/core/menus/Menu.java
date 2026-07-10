@@ -19,12 +19,8 @@ public abstract class Menu extends Command {
     protected Menu(String title) {
         super(title);
         this.commands = new ArrayList<>();
-        this.setCommand();
         this.exitCommand = new ExitCommand();
-        this.commands.add(exitCommand);
     }
-
-    public abstract void setCommand();
 
     @Override
     public void set(Feature feature) {
@@ -45,7 +41,9 @@ public abstract class Menu extends Command {
     }
 
     private List<Command> availableCommands() {
-        return commands.stream().filter(Command::isAvailable).collect(Collectors.toList());
+        List<Command> available = commands.stream().filter(Command::isAvailable).collect(Collectors.toCollection(ArrayList::new));
+        available.add(exitCommand);
+        return available;
     }
 
     private void writeln(List<Command> available) {

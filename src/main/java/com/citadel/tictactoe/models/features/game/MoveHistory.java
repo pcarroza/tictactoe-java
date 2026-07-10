@@ -25,9 +25,9 @@ public class MoveHistory implements Iterable<MoveRecord> {
     }
 
     public MoveHistory copy() {
-        MoveHistory copy = new MoveHistory();
-        forEach(copy::record);
-        return copy;
+        MoveHistory moveHistory = new MoveHistory();
+        forEach(moveHistory::record);
+        return moveHistory;
     }
 
     @Override

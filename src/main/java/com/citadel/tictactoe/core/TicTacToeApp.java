@@ -7,6 +7,7 @@ import com.citadel.tictactoe.core.features.*;
 import com.citadel.tictactoe.models.persistence.Persistence;
 import com.citadel.tictactoe.models.persistence.PersistenceType;
 import com.citadel.tictactoe.views.console.core.menus.MainMenu;
+import com.citadel.tictactoe.views.console.core.menus.MainMenuFeatures;
 
 public class TicTacToeApp {
 
@@ -14,13 +15,14 @@ public class TicTacToeApp {
         Persistence.configure(PersistenceType.SQLITE);
         AppConfig.set(LogicType.LOCAL, ViewType.CONSOLE);
         EventWiring.wire();
-        MainMenu menu = new MainMenu();
+        MainMenuFeatures features = new MainMenuFeatures(
+                new LoadFeature(),
+                new ReplayFeature(),
+                new StatisticsFeature(),
+                new ProfileFeature(),
+                new AchievementsFeature());
+        MainMenu menu = new MainMenu(features);
         menu.set(new GameFeature());
-        menu.setLoadGame(new LoadFeature());
-        menu.setReplay(new ReplayFeature());
-        menu.setShowStats(new StatisticsFeature());
-        menu.setProfile(new ProfileFeature());
-        menu.setShowAchievements(new AchievementsFeature());
         menu.execute();
     }
 }

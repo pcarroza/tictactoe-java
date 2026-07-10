@@ -10,7 +10,7 @@ public class StatisticsFeature implements Feature {
     @Override
     public void run() {
         LocalStatisticsController controller = new LocalStatisticsController();
-        StatisticsView view = AppConfig.viewType().createStatisticsView();
-        view.interact(controller);
+        StatisticsView statisticsView = AppConfig.viewType().createStatisticsView();
+        statisticsView.interact(controller);
     }
 }

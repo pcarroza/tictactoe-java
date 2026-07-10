@@ -5,13 +5,10 @@ import com.citadel.tictactoe.views.console.core.Feature;
 
 public class ReplayGameCommand extends Command {
 
-    private Feature feature;
+    private final Feature feature;
 
-    public ReplayGameCommand() {
+    public ReplayGameCommand(Feature feature) {
         super("Reproducir Partida");
-    }
-
-    public void setReplay(Feature feature) {
         this.feature = feature;
     }
 

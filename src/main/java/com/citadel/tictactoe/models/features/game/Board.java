@@ -69,16 +69,11 @@ public class Board extends Subject {
         return isFull(flat);
     }
 
-    // Pura: no depende del tablero real, solo del mapa recibido. Permite evaluar
-    // posiciones hipotéticas (p.ej. búsqueda de la IA) sin mutar el Board real.
     public boolean isFull(Map<Player, Set<Coordinate>> positions) {
         int numberOfTokens = positions.values().stream().mapToInt(Set::size).sum();
         return numberOfTokens == Coordinate.DIMENSION * flat.size();
     }
 
-    // Pura: comprueba si el conjunto recibido contiene alguna línea de victoria
-    // completa,
-    // sin depender del turno actual ni del tablero real (mismo uso que isFull).
     public boolean hasLine(Set<Coordinate> owned) {
         return LINES.stream().anyMatch(owned::containsAll);
     }

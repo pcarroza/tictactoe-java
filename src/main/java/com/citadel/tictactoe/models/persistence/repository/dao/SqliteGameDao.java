@@ -4,9 +4,6 @@ import com.citadel.tictactoe.models.features.game.GameSnapshot;
 import com.citadel.tictactoe.models.persistence.entities.GameSnapshotEntity;
 import com.citadel.tictactoe.models.persistence.entities.MoveRecordEntity;
 
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,118 +23,89 @@ public class SqliteGameDao implements GameDao {
 
     public SqliteGameDao(Path file) {
         this.file = file;
-        createDirectory();
+        FileSupport.createDirectory(file);
         createSchema();
     }
 
     @Override
     public int nextId() {
-        Connection connection = SqliteSupport.open(file);
-        try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT COALESCE(MAX(game_id), 0) + 1 AS next_id FROM games")) {
-            resultSet.next();
-            return resultSet.getInt("next_id");
-        } catch (SQLException e) {
-            throw new UncheckedSqlException(e);
-        } finally {
-            closeQuietly(connection);
-        }
+        return SqliteSupport.withConnection(file, connection -> {
+            try (Statement statement = connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery("SELECT COALESCE(MAX(game_id), 0) + 1 AS next_id FROM games")) {
+                resultSet.next();
+                return resultSet.getInt("next_id");
+            }
+        });
     }
 
     @Override
     public void save(GameSnapshot snapshot) {
         GameSnapshotEntity entity = GameSnapshotMapper.toEntity(snapshot);
-        Connection connection = SqliteSupport.open(file);
-        try {
-            connection.setAutoCommit(false);
+        SqliteSupport.inTransaction(file, connection -> {
             deleteChildren(connection, entity.gameId());
             upsertGame(connection, entity);
             insertPlayers(connection, entity);
             insertPositions(connection, entity);
             insertMoves(connection, entity);
-            connection.commit();
-        } catch (SQLException e) {
-            rollback(connection, e);
-            throw new UncheckedSqlException(e);
-        } finally {
-            closeQuietly(connection);
-        }
+        });
     }
 
     @Override
     public List<GameSnapshot> findAll() {
-        Connection connection = SqliteSupport.open(file);
-        try {
-            List<int[]> gameRows = queryGames(connection);
+        return SqliteSupport.withConnection(file, connection -> {
+            List<GameRow> gameRows = queryGames(connection);
             Map<Integer, Set<String>> playersByGame = queryPlayers(connection);
             Map<Integer, Map<String, List<int[]>>> positionsByGame = queryPositions(connection, playersByGame);
             Map<Integer, List<MoveRecordEntity>> movesByGame = queryMoves(connection);
             return assembleSnapshots(gameRows, positionsByGame, movesByGame);
-        } catch (SQLException e) {
-            throw new UncheckedSqlException(e);
-        } finally {
-            closeQuietly(connection);
-        }
+        });
     }
 
-    private List<GameSnapshot> assembleSnapshots(List<int[]> gameRows,
+    private List<GameSnapshot> assembleSnapshots(List<GameRow> gameRows,
             Map<Integer, Map<String, List<int[]>>> positionsByGame,
             Map<Integer, List<MoveRecordEntity>> movesByGame) {
         List<GameSnapshot> result = new ArrayList<>();
-        for (int[] row : gameRows) {
-            int gameId = row[0];
+        for (GameRow row : gameRows) {
             GameSnapshotEntity entity = new GameSnapshotEntity(
-                    gameId,
-                    positionsByGame.getOrDefault(gameId, new LinkedHashMap<>()),
-                    row[1],
-                    row[2],
-                    movesByGame.getOrDefault(gameId, new ArrayList<>()));
+                    row.gameId(),
+                    positionsByGame.getOrDefault(row.gameId(), new LinkedHashMap<>()),
+                    row.currentPlayerIndex(),
+                    row.numberUsers(),
+                    movesByGame.getOrDefault(row.gameId(), new ArrayList<>()));
             result.add(GameSnapshotMapper.toDomain(entity));
         }
         return result;
     }
 
-    private void createDirectory() {
-        try {
-            if (file.getParent() != null) {
-                Files.createDirectories(file.getParent());
-            }
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-    }
-
     private void createSchema() {
-        Connection connection = SqliteSupport.open(file);
-        try (Statement statement = connection.createStatement()) {
-            statement.execute("CREATE TABLE IF NOT EXISTS games (" +
-                    "game_id INTEGER PRIMARY KEY, " +
-                    "current_player_index INTEGER NOT NULL, " +
-                    "number_users INTEGER NOT NULL)");
-            statement.execute("CREATE TABLE IF NOT EXISTS game_players (" +
-                    "game_id INTEGER NOT NULL REFERENCES games(game_id) ON DELETE CASCADE, " +
-                    "player TEXT NOT NULL, " +
-                    "PRIMARY KEY (game_id, player))");
-            statement.execute("CREATE TABLE IF NOT EXISTS positions (" +
-                    "game_id INTEGER NOT NULL REFERENCES games(game_id) ON DELETE CASCADE, " +
-                    "player TEXT NOT NULL, " +
-                    "row_index INTEGER NOT NULL, " +
-                    "col_index INTEGER NOT NULL)");
-            statement.execute("CREATE INDEX IF NOT EXISTS idx_positions_game_id ON positions(game_id)");
-            statement.execute("CREATE TABLE IF NOT EXISTS moves (" +
-                    "game_id INTEGER NOT NULL REFERENCES games(game_id) ON DELETE CASCADE, " +
-                    "seq INTEGER NOT NULL, " +
-                    "player TEXT NOT NULL, " +
-                    "type TEXT NOT NULL, " +
-                    "row_index INTEGER NOT NULL, " +
-                    "col_index INTEGER NOT NULL, " +
-                    "turn INTEGER NOT NULL)");
-            statement.execute("CREATE INDEX IF NOT EXISTS idx_moves_game_id ON moves(game_id)");
-        } catch (SQLException e) {
-            throw new UncheckedSqlException(e);
-        } finally {
-            closeQuietly(connection);
-        }
+        SqliteSupport.withConnection(file, connection -> {
+            try (Statement statement = connection.createStatement()) {
+                statement.execute("CREATE TABLE IF NOT EXISTS games (" +
+                        "game_id INTEGER PRIMARY KEY, " +
+                        "current_player_index INTEGER NOT NULL, " +
+                        "number_users INTEGER NOT NULL)");
+                statement.execute("CREATE TABLE IF NOT EXISTS game_players (" +
+                        "game_id INTEGER NOT NULL REFERENCES games(game_id) ON DELETE CASCADE, " +
+                        "player TEXT NOT NULL, " +
+                        "PRIMARY KEY (game_id, player))");
+                statement.execute("CREATE TABLE IF NOT EXISTS positions (" +
+                        "game_id INTEGER NOT NULL REFERENCES games(game_id) ON DELETE CASCADE, " +
+                        "player TEXT NOT NULL, " +
+                        "row_index INTEGER NOT NULL, " +
+                        "col_index INTEGER NOT NULL)");
+                statement.execute("CREATE INDEX IF NOT EXISTS idx_positions_game_id ON positions(game_id)");
+                statement.execute("CREATE TABLE IF NOT EXISTS moves (" +
+                        "game_id INTEGER NOT NULL REFERENCES games(game_id) ON DELETE CASCADE, " +
+                        "seq INTEGER NOT NULL, " +
+                        "player TEXT NOT NULL, " +
+                        "type TEXT NOT NULL, " +
+                        "row_index INTEGER NOT NULL, " +
+                        "col_index INTEGER NOT NULL, " +
+                        "turn INTEGER NOT NULL)");
+                statement.execute("CREATE INDEX IF NOT EXISTS idx_moves_game_id ON moves(game_id)");
+            }
+            return null;
+        });
     }
 
     private void deleteChildren(Connection connection, int gameId) throws SQLException {
@@ -217,14 +185,14 @@ public class SqliteGameDao implements GameDao {
         statement.addBatch();
     }
 
-    private List<int[]> queryGames(Connection connection) throws SQLException {
-        List<int[]> rows = new ArrayList<>();
+    private List<GameRow> queryGames(Connection connection) throws SQLException {
+        List<GameRow> rows = new ArrayList<>();
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(
                      "SELECT game_id, current_player_index, number_users FROM games ORDER BY game_id")) {
             while (resultSet.next()) {
-                rows.add(new int[]{resultSet.getInt("game_id"), resultSet.getInt("current_player_index"),
-                        resultSet.getInt("number_users")});
+                rows.add(new GameRow(resultSet.getInt("game_id"), resultSet.getInt("current_player_index"),
+                        resultSet.getInt("number_users")));
             }
         }
         return rows;
@@ -294,19 +262,6 @@ public class SqliteGameDao implements GameDao {
                         resultSet.getInt("col_index"), resultSet.getInt("turn")));
     }
 
-    private void rollback(Connection connection, SQLException original) {
-        try {
-            connection.rollback();
-        } catch (SQLException suppressed) {
-            original.addSuppressed(suppressed);
-        }
-    }
-
-    private void closeQuietly(Connection connection) {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            throw new UncheckedSqlException(e);
-        }
+    private record GameRow(int gameId, int currentPlayerIndex, int numberUsers) {
     }
 }

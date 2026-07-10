@@ -9,16 +9,16 @@ import java.util.Map;
 
 public class StatisticsService {
 
-    private final StatisticsDao dao;
+    private final StatisticsDao statisticsDao;
 
-    public StatisticsService(StatisticsDao dao) {
-        this.dao = dao;
+    public StatisticsService(StatisticsDao statisticsDao) {
+        this.statisticsDao = statisticsDao;
     }
 
     public void recordWin(Player player) {
         Map<Player, Integer> wins = new EnumMap<>(currentWins());
         wins.merge(player, 1, Integer::sum);
-        dao.save(new StatisticsDto(wins));
+        statisticsDao.save(new StatisticsDto(wins));
     }
 
     public int getWins(Player player) {
@@ -30,6 +30,6 @@ public class StatisticsService {
     }
 
     private Map<Player, Integer> currentWins() {
-        return dao.load().map(StatisticsDto::wins).orElseGet(() -> new EnumMap<>(Player.class));
+        return statisticsDao.load().map(StatisticsDto::wins).orElseGet(() -> new EnumMap<>(Player.class));
     }
 }

@@ -5,13 +5,10 @@ import com.citadel.tictactoe.views.console.core.Feature;
 
 public class ShowStatsCommand extends Command {
 
-    private Feature feature;
+    private final Feature feature;
 
-    public ShowStatsCommand() {
+    public ShowStatsCommand(Feature feature) {
         super("Estadísticas");
-    }
-
-    public void setShowStats(Feature feature) {
         this.feature = feature;
     }
 

@@ -22,4 +22,57 @@ class SqliteSupport {
             throw new UncheckedSqlException(e);
         }
     }
+
+    static <T> T withConnection(Path file, SqlFunction<T> action) {
+        Connection connection = open(file);
+        try {
+            return action.apply(connection);
+        } catch (SQLException e) {
+            throw new UncheckedSqlException(e);
+        } finally {
+            closeQuietly(connection);
+        }
+    }
+
+    static void inTransaction(Path file, SqlAction action) {
+        withConnection(file, connection -> {
+            connection.setAutoCommit(false);
+            try {
+                action.run(connection);
+                connection.commit();
+                return null;
+            } catch (SQLException e) {
+                rollback(connection, e);
+                throw e;
+            }
+        });
+    }
+
+    private static void rollback(Connection connection, SQLException original) {
+        try {
+            connection.rollback();
+        } catch (SQLException suppressed) {
+            original.addSuppressed(suppressed);
+        }
+    }
+
+    private static void closeQuietly(Connection connection) {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new UncheckedSqlException(e);
+        }
+    }
+
+    @FunctionalInterface
+    interface SqlFunction<T> {
+
+        T apply(Connection connection) throws SQLException;
+    }
+
+    @FunctionalInterface
+    interface SqlAction {
+
+        void run(Connection connection) throws SQLException;
+    }
 }

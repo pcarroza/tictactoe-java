@@ -25,15 +25,13 @@ public class LocalOperationControllerBuilder {
 
     private final int gameId;
 
-    private int numUsers;
-
     public LocalOperationControllerBuilder(Game game, int gameId) {
         this.game = game;
         this.gameId = gameId;
     }
 
     public int getUsers() {
-        return numUsers;
+        return game.getNumberOfPlayers();
     }
 
     public int getGameId() {
@@ -51,7 +49,6 @@ public class LocalOperationControllerBuilder {
 
     public void build(int users, AiDifficulty difficulty) {
         assert new ClosedInterval<>(0, game.getNumberOfPlayers()).isIncluded(users);
-        this.numUsers = users;
         for (int i = 0; i < game.getNumberOfPlayers(); i++) {
             if (i < users) {
                 builders[i] = new LocalUserPlacementControllerBuilder(game);

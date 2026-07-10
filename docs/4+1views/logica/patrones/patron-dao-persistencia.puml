@@ -1,0 +1,120 @@
+@startuml patron-dao-persistencia
+hide empty members
+
+class Persistence {
+  {static} +configure(PersistenceType)
+  {static} +daoFactory(): DaoFactory
+}
+enum PersistenceType {
+  IN_MEMORY
+  FILE
+  JSON
+  SQLITE
+  {abstract} +createDaoFactory(): DaoFactory
+}
+
+interface DaoFactory {
+  +createGameDao(): GameDao
+  +createStatisticsDao(): StatisticsDao
+}
+class InMemoryDaoFactory
+class FileDaoFactory
+class JsonDaoFactory
+class SqliteDaoFactory
+
+interface GameDao {
+  +nextId(): int
+  +save(GameSnapshot)
+  +findAll(): List<GameSnapshot>
+}
+interface StatisticsDao {
+  +load(): Optional<StatisticsDto>
+  +save(StatisticsDto)
+}
+
+Persistence ..> PersistenceType
+Persistence --> DaoFactory : daoFactory
+PersistenceType ..> DaoFactory : createDaoFactory()
+DaoFactory <|.. InMemoryDaoFactory
+DaoFactory <|.. FileDaoFactory
+DaoFactory <|.. JsonDaoFactory
+DaoFactory <|.. SqliteDaoFactory
+FileDaoFactory ..> GameDao : createGameDao()
+FileDaoFactory ..> StatisticsDao : createStatisticsDao()
+
+abstract class AbstractFileDao<T> {
+  -codec: FileCodec<T>
+  #readOrDefault(T): T
+  #write(T)
+}
+interface FileCodec<T> {
+  +read(Path): T
+  +write(Path, T)
+}
+class GsonCodec
+class ObjectStreamCodec
+abstract class AbstractGameFileDao
+abstract class AbstractStatisticsFileDao
+class FileGameDao
+class JsonGameDao
+class FileStatisticsDao
+class JsonStatisticsDao
+
+AbstractFileDao o-> FileCodec : codec
+FileCodec <|.. GsonCodec
+FileCodec <|.. ObjectStreamCodec
+AbstractFileDao <|-- AbstractGameFileDao
+AbstractFileDao <|-- AbstractStatisticsFileDao
+GameDao <|.. AbstractGameFileDao
+StatisticsDao <|.. AbstractStatisticsFileDao
+AbstractGameFileDao <|-- FileGameDao
+AbstractGameFileDao <|-- JsonGameDao
+AbstractStatisticsFileDao <|-- FileStatisticsDao
+AbstractStatisticsFileDao <|-- JsonStatisticsDao
+
+class SqliteGameDao
+class SqliteStatisticsDao
+class SqliteSupport {
+  {static} +withConnection(Path, SqlFunction<T>): T
+  {static} +inTransaction(Path, SqlAction)
+}
+GameDao <|.. SqliteGameDao
+StatisticsDao <|.. SqliteStatisticsDao
+SqliteGameDao ..> SqliteSupport
+SqliteStatisticsDao ..> SqliteSupport
+
+class GameSnapshotService {
+  -gameDao: GameDao
+}
+class StatisticsService {
+  -statisticsDao: StatisticsDao
+}
+GameSnapshotService o-> GameDao
+StatisticsService o-> StatisticsDao
+
+note bottom of DaoFactory
+  Abstract Factory — cada PersistenceType
+  produce una familia consistente de
+  GameDao + StatisticsDao (misma tecnología)
+end note
+
+note bottom of FileCodec
+  Strategy — FileGameDao usa ObjectStreamCodec,
+  JsonGameDao usa GsonCodec; AbstractFileDao
+  no sabe cuál (Template Method: readOrDefault/
+  write delegan la serialización real al codec)
+end note
+
+note bottom of SqliteSupport
+  Extract Method — centraliza apertura/cierre
+  de Connection y commit/rollback de transacción,
+  antes duplicado en SqliteGameDao y
+  SqliteStatisticsDao
+end note
+
+note bottom of GameSnapshotService
+  Capa de servicio — features (LoadFeature,
+  ReplayFeature, StatisticsFeature) dependen
+  de estos servicios, nunca directo del DAO
+end note
+@enduml

@@ -9,21 +9,19 @@ import com.citadel.tictactoe.views.core.GameView;
 
 public class GameFeature implements Feature {
 
-    private final GameSnapshot snapshot;
+    private final GameSnapshot gameSnapshot;
 
     public GameFeature() {
-        this.snapshot = null;
+        this.gameSnapshot = null;
     }
 
-    public GameFeature(GameSnapshot snapshot) {
-        this.snapshot = snapshot;
+    public GameFeature(GameSnapshot gameSnapshot) {
+        this.gameSnapshot = gameSnapshot;
     }
 
     @Override
     public void run() {
-        Logic logic = snapshot == null
-                ? AppConfig.logicType().create()
-                : AppConfig.logicType().create(snapshot);
+        Logic logic = gameSnapshot == null ? AppConfig.logicType().create() : AppConfig.logicType().create(gameSnapshot);
         GameView gameView = AppConfig.viewType().createGameView();
         GameOperationController controller;
         do {

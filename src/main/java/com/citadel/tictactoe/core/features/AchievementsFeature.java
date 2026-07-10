@@ -10,7 +10,7 @@ public class AchievementsFeature implements Feature {
     @Override
     public void run() {
         LocalAchievementsController controller = new LocalAchievementsController();
-        AchievementsView view = AppConfig.viewType().createAchievementsView();
-        view.interact(controller);
+        AchievementsView achievementsView = AppConfig.viewType().createAchievementsView();
+        achievementsView.interact(controller);
     }
 }

@@ -4,13 +4,10 @@ import com.citadel.tictactoe.views.console.core.Feature;
 
 public class ProfileCommand extends Command {
 
-    private Feature feature;
+    private final Feature feature;
 
-    public ProfileCommand() {
+    public ProfileCommand(Feature feature) {
         super("Perfiles de Jugador");
-    }
-
-    public void setProfile(Feature feature) {
         this.feature = feature;
     }
 

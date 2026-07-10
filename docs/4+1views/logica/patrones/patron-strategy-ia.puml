@@ -1,0 +1,62 @@
+@startuml patron-strategy-ia
+hide empty members
+
+interface AiStrategy {
+  +chooseTarget(Game): Coordinate
+  +chooseOrigin(Game): Coordinate
+  +chooseMoveTarget(Game, Coordinate): Coordinate
+}
+class RandomAiStrategy
+class MinimaxAiStrategy
+
+enum AiDifficulty {
+  EASY
+  HARD
+  {abstract} +createStrategy(): AiStrategy
+}
+
+class LocalAiCoordinateController {
+  -strategy: AiStrategy
+}
+class StartView
+
+AiStrategy <|.. RandomAiStrategy
+AiStrategy <|.. MinimaxAiStrategy
+AiDifficulty ..> AiStrategy : createStrategy()
+LocalAiCoordinateController o-> AiStrategy : strategy
+StartView ..> AiDifficulty : elige (YesNoDialog)
+
+note bottom of AiDifficulty
+  Cada constante implementa createStrategy()
+  (Strategy seleccionado por un enum, sin
+  if/switch en el código cliente):
+  EASY -> RandomAiStrategy, HARD -> MinimaxAiStrategy
+end note
+
+note bottom of RandomAiStrategy
+  chooseTarget/chooseOrigin/chooseMoveTarget:
+  elige uniformemente entre las coordenadas
+  válidas disponibles
+end note
+
+note bottom of MinimaxAiStrategy
+  chooseTarget: minimax completo (fase Put,
+  el tablero decrece en posibilidades).
+  chooseOrigin/chooseMoveTarget: heurística de
+  una jugada (gana ya si puede) — el minimax
+  completo no termina en la fase de deslizamiento
+  porque el número de fichas es constante.
+end note
+
+note right of LocalAiCoordinateController
+  Implementa MachineCoordinateController
+  (ver patron-visitor.puml) delegando las
+  3 decisiones en el AiStrategy compuesto
+end note
+
+note bottom of StartView
+  Solo pregunta dificultad si la partida
+  es 1 jugador contra la máquina; con
+  2 jugadores humanos no hay AiStrategy
+end note
+@enduml

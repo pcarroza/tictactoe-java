@@ -7,22 +7,22 @@ import java.util.List;
 
 public class GameSnapshotService {
 
-    private final GameDao dao;
+    private final GameDao gameDao;
 
-    public GameSnapshotService(GameDao dao) {
-        this.dao = dao;
+    public GameSnapshotService(GameDao gameDao) {
+        this.gameDao = gameDao;
     }
 
     public int nextId() {
-        return dao.nextId();
+        return gameDao.nextId();
     }
 
-    public void save(GameSnapshot snapshot) {
-        dao.save(snapshot);
+    public void save(GameSnapshot gameSnapshot) {
+        gameDao.save(gameSnapshot);
     }
 
     public List<GameSnapshot> findAll() {
-        return dao.findAll();
+        return gameDao.findAll();
     }
 
     public GameSnapshot get(int index) {

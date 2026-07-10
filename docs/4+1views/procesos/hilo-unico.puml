@@ -1,0 +1,34 @@
+@startuml hilo-unico
+title Vista de Procesos — un único hilo
+
+participant "Thread: main" as main
+participant TicTacToeApp
+participant "MainMenu (Menu.execute())" as menu
+participant Terminal
+participant "GameFeature.run()" as game
+
+main -> TicTacToeApp : main(args)
+TicTacToeApp -> menu : execute()
+loop bucle de menú
+  menu -> Terminal : LimitedIntDialog.read() — bloqueante (stdin)
+  Terminal --> menu : opción elegida
+  menu -> game : StartGameCommand.execute() -> feature.run()
+  loop mientras controller != null
+    game -> Terminal : lee coordenada — bloqueante (stdin)
+    note right of game
+      TimedPlacementController.put() compara
+      Instant.now() contra el deadline recién
+      DESPUÉS de que el read() bloqueante
+      retorna — no hay un hilo de reloj real
+      (ver ../logica/patrones/patron-decorator.puml)
+    end note
+  end
+end
+
+note over main
+  Todo el programa corre en el hilo "main" de la JVM:
+  sin hilos de trabajo, sin pools, sin sincronización.
+  Los DAO (File/Json/Sqlite) también bloquean este
+  mismo hilo al leer/escribir en disco.
+end note
+@enduml
