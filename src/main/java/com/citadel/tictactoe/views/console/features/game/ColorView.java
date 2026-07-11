@@ -5,15 +5,6 @@ import com.citadel.tictactoe.shared.Terminal;
 
 public class ColorView {
 
-    private static ColorView colorView;
-
-    public static ColorView instance() {
-        if (colorView == null) {
-            colorView = new ColorView();
-        }
-        return colorView;
-    }
-
     private static final char[] SYMBOLS = {'O', 'X', '·'};
 
     private static final String RESET  = "[0m";
@@ -21,8 +12,6 @@ public class ColorView {
     private static final String BLUE   = "[34m";
     private static final String GRAY   = "[90m";
     private static final String BOLD   = "[1m";
-
-    private ColorView() {}
 
     void write(String title, Player color) {
         Terminal.getInstance().write(title + ansi(color) + getSymbol(color) + RESET);

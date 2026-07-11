@@ -6,8 +6,14 @@ import com.citadel.tictactoe.models.features.achievements.AchievementTracker;
 
 public class LocalAchievementsController implements AchievementsController {
 
+    private final AchievementTracker achievementTracker;
+
+    public LocalAchievementsController(AchievementTracker achievementTracker) {
+        this.achievementTracker = achievementTracker;
+    }
+
     @Override
     public boolean isUnlocked(Achievement achievement) {
-        return AchievementTracker.getInstance().getUnlocked().contains(achievement);
+        return achievementTracker.getUnlocked().contains(achievement);
     }
 }

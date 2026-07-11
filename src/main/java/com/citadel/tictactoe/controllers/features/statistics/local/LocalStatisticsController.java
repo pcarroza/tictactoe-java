@@ -8,19 +8,28 @@ import com.citadel.tictactoe.models.features.statistics.Statistics;
 
 public class LocalStatisticsController implements StatisticsController {
 
+    private final Statistics statistics;
+
+    private final ProfileRegistry profileRegistry;
+
+    public LocalStatisticsController(Statistics statistics, ProfileRegistry profileRegistry) {
+        this.statistics = statistics;
+        this.profileRegistry = profileRegistry;
+    }
+
     @Override
     public int getWins(Player player) {
-        return Statistics.getInstance().getWins(player);
+        return statistics.getWins(player);
     }
 
     @Override
     public int getTotalGames() {
-        return Statistics.getInstance().getTotalGames();
+        return statistics.getTotalGames();
     }
 
     @Override
     public String getName(Player player) {
-        return ProfileRegistry.getInstance().findByToken(player)
+        return profileRegistry.findByToken(player)
                 .map(PlayerProfile::name)
                 .orElse(player == Player.XS ? "X" : "O");
     }

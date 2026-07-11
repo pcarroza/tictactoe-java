@@ -8,14 +8,13 @@ import com.citadel.tictactoe.models.features.statistics.Statistics;
 
 public class EventWiring {
 
-    public static void wire() {
+    public static void wire(Statistics statistics, GameHistoryRegistry gameHistoryRegistry, AchievementTracker achievementTracker) {
         EventManager.getInstance().subscribe(GameEndedEvent.class,
-                event -> Statistics.getInstance().recordWin(event.winner()));
+                event -> statistics.recordWin(event.winner()));
 
         EventManager.getInstance().subscribe(GameEndedEvent.class,
-                event -> GameHistoryRegistry.getInstance().record(event.history()));
+                event -> gameHistoryRegistry.record(event.history()));
 
-        EventManager.getInstance().subscribe(GameEndedEvent.class,
-                event -> AchievementTracker.getInstance().onGameEnded(event));
+        EventManager.getInstance().subscribe(GameEndedEvent.class, achievementTracker::onGameEnded);
     }
 }

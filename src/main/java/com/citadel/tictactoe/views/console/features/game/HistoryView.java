@@ -3,10 +3,16 @@ package com.citadel.tictactoe.views.console.features.game;
 import com.citadel.tictactoe.models.features.game.MoveHistory;
 import com.citadel.tictactoe.models.features.game.MoveRecord;
 import com.citadel.tictactoe.models.features.game.MoveType;
-import com.citadel.tictactoe.shared.LimitedIntDialog;
 import com.citadel.tictactoe.shared.Terminal;
+import com.citadel.tictactoe.views.console.core.ConsoleContext;
 
 class HistoryView {
+
+    private final ConsoleContext consoleContext;
+
+    HistoryView(ConsoleContext consoleContext) {
+        this.consoleContext = consoleContext;
+    }
 
     void show(MoveHistory history) {
         Terminal terminal = Terminal.getInstance();
@@ -24,7 +30,7 @@ class HistoryView {
         terminal.writeln();
         terminal.writeln("  [1] Volver");
         terminal.writeln();
-        LimitedIntDialog.instance().read("  Selecciona una opción", 1);
+        consoleContext.limitedIntDialog().read("  Selecciona una opción", 1);
     }
 
     private String format(MoveRecord record) {

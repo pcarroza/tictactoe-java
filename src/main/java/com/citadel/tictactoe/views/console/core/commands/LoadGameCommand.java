@@ -1,6 +1,5 @@
 package com.citadel.tictactoe.views.console.core.commands;
 
-import com.citadel.tictactoe.models.features.game.GameRegistry;
 import com.citadel.tictactoe.views.console.core.Feature;
 
 public class LoadGameCommand extends Command {
@@ -14,7 +13,7 @@ public class LoadGameCommand extends Command {
 
     @Override
     public boolean isAvailable() {
-        return GameRegistry.getInstance().size() > 0;
+        return feature.isAvailable();
     }
 
     @Override

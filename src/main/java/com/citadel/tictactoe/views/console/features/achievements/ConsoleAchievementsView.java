@@ -2,11 +2,17 @@ package com.citadel.tictactoe.views.console.features.achievements;
 
 import com.citadel.tictactoe.controllers.features.achievements.AchievementsController;
 import com.citadel.tictactoe.models.features.achievements.Achievement;
-import com.citadel.tictactoe.shared.LimitedIntDialog;
 import com.citadel.tictactoe.shared.Terminal;
+import com.citadel.tictactoe.views.console.core.ConsoleContext;
 import com.citadel.tictactoe.views.core.AchievementsView;
 
 public class ConsoleAchievementsView implements AchievementsView {
+
+    private final ConsoleContext consoleContext;
+
+    public ConsoleAchievementsView(ConsoleContext consoleContext) {
+        this.consoleContext = consoleContext;
+    }
 
     @Override
     public void interact(AchievementsController controller) {
@@ -24,6 +30,6 @@ public class ConsoleAchievementsView implements AchievementsView {
         terminal.writeln();
         terminal.writeln("  [1] Volver");
         terminal.writeln();
-        LimitedIntDialog.instance().read("  Selecciona una opción", 1);
+        consoleContext.limitedIntDialog().read("  Selecciona una opción", 1);
     }
 }

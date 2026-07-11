@@ -3,6 +3,7 @@ package com.citadel.tictactoe.controllers.features.game.local.builders;
 import com.citadel.tictactoe.controllers.features.game.local.*;
 import com.citadel.tictactoe.controllers.features.game.local.ai.AiDifficulty;
 import com.citadel.tictactoe.models.features.game.Game;
+import com.citadel.tictactoe.models.features.game.GameRegistry;
 import com.citadel.tictactoe.shared.ClosedInterval;
 
 import java.util.Arrays;
@@ -25,9 +26,12 @@ public class LocalOperationControllerBuilder {
 
     private final int gameId;
 
-    public LocalOperationControllerBuilder(Game game, int gameId) {
+    private final GameRegistry gameRegistry;
+
+    public LocalOperationControllerBuilder(Game game, int gameId, GameRegistry gameRegistry) {
         this.game = game;
         this.gameId = gameId;
+        this.gameRegistry = gameRegistry;
     }
 
     public int getUsers() {
@@ -42,7 +46,7 @@ public class LocalOperationControllerBuilder {
         localStartController = new LocalGameStartController(game, this);
         builders = new LocalPlacementControllerBuilder[game.getNumberOfPlayers()];
         localContinueController = new LocalGameContinueController(game);
-        localSaveController = new LocalGameSaveController(game, this);
+        localSaveController = new LocalGameSaveController(game, this, gameRegistry);
         localUndoController = new LocalGameUndoController(game);
         localRedoController = new LocalGameRedoController(game);
     }

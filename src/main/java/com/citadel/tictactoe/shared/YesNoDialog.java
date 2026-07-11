@@ -4,16 +4,7 @@ import java.util.function.Predicate;
 
 public class YesNoDialog {
 
-    private static YesNoDialog yesNoDialog;
-
     private static final Predicate<Character> CORRECT_ANSWERS = c -> c == 's'  || c == 'S' || c == 'n' || c == 'N' ;
-
-    public static YesNoDialog instance() {
-        if (yesNoDialog == null) {
-            yesNoDialog = new YesNoDialog();
-        }
-        return yesNoDialog;
-    }
 
     public boolean read(String title) {
         assert title != null;

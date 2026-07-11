@@ -10,17 +10,23 @@ import java.util.List;
 
 public class LocalLoadController implements LoadController {
 
+    private final GameRegistry gameRegistry;
+
     private GameSnapshot selected;
+
+    public LocalLoadController(GameRegistry gameRegistry) {
+        this.gameRegistry = gameRegistry;
+    }
 
     @Override
     public boolean hasGames() {
-        return GameRegistry.getInstance().size() > 0;
+        return gameRegistry.size() > 0;
     }
 
     @Override
     public List<String> getGameTitles() {
         List<String> titles = new ArrayList<>();
-        for (GameSnapshot snapshot : GameRegistry.getInstance().getAll()) {
+        for (GameSnapshot snapshot : gameRegistry.getAll()) {
             titles.add("Partida #" + snapshot.gameId());
         }
         return titles;
@@ -28,7 +34,7 @@ public class LocalLoadController implements LoadController {
 
     @Override
     public void select(int index) {
-        this.selected = GameRegistry.getInstance().get(index);
+        this.selected = gameRegistry.get(index);
     }
 
     @Override

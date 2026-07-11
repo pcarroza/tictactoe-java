@@ -8,16 +8,10 @@ import java.util.Optional;
 
 public class ProfileRegistry {
 
-    private static final ProfileRegistry instance = new ProfileRegistry();
-
     private final Map<Player, PlayerProfile> profiles;
 
-    private ProfileRegistry() {
+    public ProfileRegistry() {
         this.profiles = new EnumMap<>(Player.class);
-    }
-
-    public static ProfileRegistry getInstance() {
-        return instance;
     }
 
     public void register(PlayerProfile profile) {

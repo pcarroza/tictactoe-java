@@ -11,11 +11,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AchievementTrackerTest {
 
-    private final AchievementTracker tracker = AchievementTracker.getInstance();
+    private AchievementTracker tracker;
 
     @Before
     public void setUp() {
-        tracker.reset();
+        tracker = new AchievementTracker();
     }
 
     @Test

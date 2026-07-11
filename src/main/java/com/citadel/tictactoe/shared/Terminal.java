@@ -3,18 +3,13 @@ package com.citadel.tictactoe.shared;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class Terminal {
+public enum Terminal {
 
-    private static Terminal terminal;
+    INSTANCE;
 
     public static Terminal getInstance() {
-        if (terminal == null) {
-            terminal = new Terminal();
-        }
-        return terminal;
+        return INSTANCE;
     }
-
-    private Terminal() {}
 
     private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 

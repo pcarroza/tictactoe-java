@@ -4,12 +4,23 @@ import com.citadel.tictactoe.controllers.features.replay.ReplayController;
 import com.citadel.tictactoe.controllers.features.replay.local.LocalSelectReplayController;
 import com.citadel.tictactoe.controllers.features.replay.local.logic.LocalReplayLogic;
 import com.citadel.tictactoe.core.config.AppConfig;
+import com.citadel.tictactoe.models.features.game.GameHistoryRegistry;
 import com.citadel.tictactoe.models.features.game.MoveHistory;
+import com.citadel.tictactoe.views.console.core.ConsoleContext;
 import com.citadel.tictactoe.views.console.core.Feature;
 import com.citadel.tictactoe.views.core.ReplayView;
 import com.citadel.tictactoe.views.core.SelectReplayView;
 
 public class ReplayFeature implements Feature {
+
+    private final GameHistoryRegistry gameHistoryRegistry;
+
+    private final ConsoleContext consoleContext;
+
+    public ReplayFeature(GameHistoryRegistry gameHistoryRegistry, ConsoleContext consoleContext) {
+        this.gameHistoryRegistry = gameHistoryRegistry;
+        this.consoleContext = consoleContext;
+    }
 
     @Override
     public void run() {
@@ -19,16 +30,21 @@ public class ReplayFeature implements Feature {
         }
     }
 
+    @Override
+    public boolean isAvailable() {
+        return gameHistoryRegistry.size() > 0;
+    }
+
     private MoveHistory selectGame() {
-        LocalSelectReplayController controller = new LocalSelectReplayController();
-        SelectReplayView selectReplayView = AppConfig.viewType().createSelectReplayView();
+        LocalSelectReplayController controller = new LocalSelectReplayController(gameHistoryRegistry);
+        SelectReplayView selectReplayView = AppConfig.viewType().createSelectReplayView(consoleContext);
         selectReplayView.interact(controller);
         return controller.getSelected();
     }
 
     private void replay(MoveHistory history) {
         LocalReplayLogic localReplayLogic = new LocalReplayLogic(history);
-        ReplayView replayView = AppConfig.viewType().createReplayView();
+        ReplayView replayView = AppConfig.viewType().createReplayView(consoleContext);
         ReplayController replayController;
         do {
             replayController = localReplayLogic.getController();

@@ -11,14 +11,17 @@ public class LocalGameSaveController extends LocalGameOperationController implem
 
     private final LocalOperationControllerBuilder builder;
 
-    public LocalGameSaveController(Game game, LocalOperationControllerBuilder builder) {
+    private final GameRegistry gameRegistry;
+
+    public LocalGameSaveController(Game game, LocalOperationControllerBuilder builder, GameRegistry gameRegistry) {
         super(game);
         this.builder = builder;
+        this.gameRegistry = gameRegistry;
     }
 
     @Override
     public void save() {
-        GameRegistry.getInstance().save(createSnapshot());
+        gameRegistry.save(createSnapshot());
     }
 
     @Override

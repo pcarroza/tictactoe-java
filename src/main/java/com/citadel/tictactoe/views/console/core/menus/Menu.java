@@ -1,7 +1,7 @@
 package com.citadel.tictactoe.views.console.core.menus;
 
-import com.citadel.tictactoe.shared.LimitedIntDialog;
 import com.citadel.tictactoe.shared.Terminal;
+import com.citadel.tictactoe.views.console.core.ConsoleContext;
 import com.citadel.tictactoe.views.console.core.Feature;
 import com.citadel.tictactoe.views.console.core.commands.Command;
 import com.citadel.tictactoe.views.console.core.commands.ExitCommand;
@@ -16,10 +16,13 @@ public abstract class Menu extends Command {
 
     private final ExitCommand exitCommand;
 
-    protected Menu(String title) {
+    private final ConsoleContext consoleContext;
+
+    protected Menu(String title, ConsoleContext consoleContext) {
         super(title);
         this.commands = new ArrayList<>();
         this.exitCommand = new ExitCommand();
+        this.consoleContext = consoleContext;
     }
 
     @Override
@@ -35,7 +38,7 @@ public abstract class Menu extends Command {
         do {
             List<Command> available = availableCommands();
             writeln(available);
-            int option = LimitedIntDialog.instance().read("Selecciona una opción", available.size());
+            int option = consoleContext.limitedIntDialog().read("Selecciona una opción", available.size());
             available.get(option - 1).execute();
         } while (!exitCommand.closed());
     }

@@ -1,8 +1,13 @@
 package com.citadel.tictactoe.views.console.features.game;
 
 import com.citadel.tictactoe.controllers.features.game.RedoController;
+import com.citadel.tictactoe.views.console.core.ConsoleContext;
 
 class RedoView extends ConfirmMenuView<RedoController> {
+
+    RedoView(ConsoleContext consoleContext) {
+        super(consoleContext);
+    }
 
     @Override
     String getTitle() {

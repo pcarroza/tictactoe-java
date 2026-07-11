@@ -4,13 +4,14 @@ import com.citadel.tictactoe.controllers.features.game.CoordinateController;
 import com.citadel.tictactoe.controllers.features.game.MachineCoordinateController;
 import com.citadel.tictactoe.controllers.features.game.UserCoordinateController;
 import com.citadel.tictactoe.models.features.game.Coordinate;
+import com.citadel.tictactoe.views.console.core.ConsoleContext;
 
 public class MoveOriginCoordinateView extends PlacementCoordinateView {
 
     private Coordinate origin;
 
-    public MoveOriginCoordinateView(CoordinateController coordinateController) {
-        super(coordinateController);
+    public MoveOriginCoordinateView(CoordinateController coordinateController, ConsoleContext consoleContext) {
+        super(coordinateController, consoleContext);
     }
 
     @Override
@@ -22,7 +23,7 @@ public class MoveOriginCoordinateView extends PlacementCoordinateView {
 
     @Override
     public void visit(UserCoordinateController userCoordinateController) {
-        CoordinateView.getInstance().read("De", origin);
+        getConsoleContext().coordinateView().read("De", origin);
     }
 
     @Override

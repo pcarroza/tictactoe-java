@@ -3,10 +3,17 @@ package com.citadel.tictactoe.views.console.features.game;
 import com.citadel.tictactoe.controllers.features.game.errors.*;
 import com.citadel.tictactoe.models.features.game.Coordinate;
 import com.citadel.tictactoe.shared.Terminal;
+import com.citadel.tictactoe.views.console.core.ConsoleContext;
 
 import java.util.Iterator;
 
 public class ErrorReportView implements ErrorReportVisitor {
+
+    private final ConsoleContext consoleContext;
+
+    public ErrorReportView(ConsoleContext consoleContext) {
+        this.consoleContext = consoleContext;
+    }
 
     public void write(ErrorReport errorReport) {
         errorReport.accept(this);
@@ -31,7 +38,7 @@ public class ErrorReportView implements ErrorReportVisitor {
         String separator = message + " Puedes optar por: ";
         Iterator<Coordinate> coordinates = errorReport.iterator();
         while (coordinates.hasNext()) {
-            CoordinateView.instance().write(separator, coordinates.next());
+            consoleContext.coordinateView().write(separator, coordinates.next());
             if (!separator.equals(", ")) {
                 separator = ", ";
             }

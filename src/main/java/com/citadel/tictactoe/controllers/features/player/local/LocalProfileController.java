@@ -7,15 +7,21 @@ import com.citadel.tictactoe.models.features.player.ProfileRegistry;
 
 public class LocalProfileController implements ProfileController {
 
+    private final ProfileRegistry profileRegistry;
+
+    public LocalProfileController(ProfileRegistry profileRegistry) {
+        this.profileRegistry = profileRegistry;
+    }
+
     @Override
     public String getName(Player token) {
-        return ProfileRegistry.getInstance().findByToken(token)
+        return profileRegistry.findByToken(token)
                 .map(PlayerProfile::name)
                 .orElse(token == Player.XS ? "X" : "O");
     }
 
     @Override
     public void setName(Player token, String name) {
-        ProfileRegistry.getInstance().register(new PlayerProfile(token, name));
+        profileRegistry.register(new PlayerProfile(token, name));
     }
 }

@@ -7,19 +7,13 @@ import java.util.Map;
 
 public class GameHistoryRegistry {
 
-    private static final GameHistoryRegistry instance = new GameHistoryRegistry();
-
     private final Map<Integer, MoveHistory> histories;
 
     private int nextId;
 
-    private GameHistoryRegistry() {
+    public GameHistoryRegistry() {
         this.histories = new LinkedHashMap<>();
         this.nextId = 1;
-    }
-
-    public static GameHistoryRegistry getInstance() {
-        return instance;
     }
 
     public void record(MoveHistory history) {

@@ -1,5 +1,6 @@
 package com.citadel.tictactoe.views.console.core.menus;
 
+import com.citadel.tictactoe.views.console.core.ConsoleContext;
 import com.citadel.tictactoe.views.console.core.commands.LoadGameCommand;
 import com.citadel.tictactoe.views.console.core.commands.ProfileCommand;
 import com.citadel.tictactoe.views.console.core.commands.ReplayGameCommand;
@@ -8,9 +9,9 @@ import com.citadel.tictactoe.views.console.core.commands.ShowStatsCommand;
 
 public class MainMenu extends Menu {
 
-    public MainMenu(MainMenuFeatures features) {
-        super("Menú Principal");
-        commands.add(new GameMenu());
+    public MainMenu(MainMenuFeatures features, ConsoleContext consoleContext) {
+        super("Menú Principal", consoleContext);
+        commands.add(new GameMenu(consoleContext));
         commands.add(new LoadGameCommand(features.loadFeature()));
         commands.add(new ReplayGameCommand(features.replayFeature()));
         commands.add(new ShowStatsCommand(features.statsFeature()));

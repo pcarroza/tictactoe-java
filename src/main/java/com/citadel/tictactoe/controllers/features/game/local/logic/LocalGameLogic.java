@@ -13,18 +13,18 @@ public class LocalGameLogic implements Logic, Observer {
 
     private GameState actualState;
 
-    public LocalGameLogic() {
+    public LocalGameLogic(GameRegistry gameRegistry) {
         Game game = new Game(this);
-        int gameId = GameRegistry.getInstance().nextId();
-        LocalOperationControllerBuilder builder = new LocalOperationControllerBuilder(game, gameId);
+        int gameId = gameRegistry.nextId();
+        LocalOperationControllerBuilder builder = new LocalOperationControllerBuilder(game, gameId, gameRegistry);
         builder.build();
         actualState = new GameStatesBuilder(builder).getInitialState();
     }
 
-    public LocalGameLogic(GameSnapshot snapshot) {
+    public LocalGameLogic(GameSnapshot snapshot, GameRegistry gameRegistry) {
         Game game = new Game(this);
         game.restore(snapshot);
-        LocalOperationControllerBuilder builder = new LocalOperationControllerBuilder(game, snapshot.gameId());
+        LocalOperationControllerBuilder builder = new LocalOperationControllerBuilder(game, snapshot.gameId(), gameRegistry);
         builder.build();
         builder.build(snapshot.getNumberUsers(), AiDifficulty.EASY);
         actualState = new GameStatesBuilder(builder).getInGameState();

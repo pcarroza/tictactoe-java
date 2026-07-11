@@ -2,11 +2,17 @@ package com.citadel.tictactoe.views.console.features.player;
 
 import com.citadel.tictactoe.controllers.features.player.ProfileController;
 import com.citadel.tictactoe.models.features.game.Player;
-import com.citadel.tictactoe.shared.LimitedIntDialog;
 import com.citadel.tictactoe.shared.Terminal;
+import com.citadel.tictactoe.views.console.core.ConsoleContext;
 import com.citadel.tictactoe.views.core.ProfileView;
 
 public class ConsoleProfileView implements ProfileView {
+
+    private final ConsoleContext consoleContext;
+
+    public ConsoleProfileView(ConsoleContext consoleContext) {
+        this.consoleContext = consoleContext;
+    }
 
     @Override
     public void interact(ProfileController controller) {
@@ -24,7 +30,7 @@ public class ConsoleProfileView implements ProfileView {
         terminal.writeln("  [2] Cambiar nombre de O");
         terminal.writeln("  [3] Volver");
         terminal.writeln();
-        int option = LimitedIntDialog.instance().read("  Selecciona una opción", 3);
+        int option = consoleContext.limitedIntDialog().read("  Selecciona una opción", 3);
         if (option == 1) {
             rename(controller, Player.XS, terminal);
         } else if (option == 2) {

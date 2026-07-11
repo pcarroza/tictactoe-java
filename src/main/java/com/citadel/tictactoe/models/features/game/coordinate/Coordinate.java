@@ -4,7 +4,7 @@ import com.citadel.tictactoe.models.features.game.Direction;
 
 public interface Coordinate {
 
-    Coordinate NULL = NullCoordinate.getInstance();
+    Coordinate NULL = new NullCoordinate();
 
     boolean isNull();
 

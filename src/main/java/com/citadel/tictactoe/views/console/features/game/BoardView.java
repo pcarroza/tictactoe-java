@@ -3,8 +3,15 @@ package com.citadel.tictactoe.views.console.features.game;
 import com.citadel.tictactoe.controllers.features.game.PresenterController;
 import com.citadel.tictactoe.models.features.game.Coordinate;
 import com.citadel.tictactoe.shared.Terminal;
+import com.citadel.tictactoe.views.console.core.ConsoleContext;
 
 public class BoardView {
+
+    private final ConsoleContext consoleContext;
+
+    public BoardView(ConsoleContext consoleContext) {
+        this.consoleContext = consoleContext;
+    }
 
     void write(PresenterController presenter) {
         assert presenter != null;
@@ -17,7 +24,7 @@ public class BoardView {
         for (int i = 1; i <= Coordinate.DIMENSION; i++) {
             terminal.write("  " + i + " │");
             for (int j = 1; j <= Coordinate.DIMENSION; j++) {
-                ColorView.instance().writeCell(presenter.getColor(new Coordinate(i, j)));
+                consoleContext.colorView().writeCell(presenter.getColor(new Coordinate(i, j)));
                 terminal.write("│");
             }
             terminal.writeln();

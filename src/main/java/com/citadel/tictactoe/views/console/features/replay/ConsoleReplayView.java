@@ -3,14 +3,20 @@ package com.citadel.tictactoe.views.console.features.replay;
 import com.citadel.tictactoe.controllers.features.replay.ReplayController;
 import com.citadel.tictactoe.models.features.game.Coordinate;
 import com.citadel.tictactoe.models.features.game.Player;
-import com.citadel.tictactoe.shared.LimitedIntDialog;
 import com.citadel.tictactoe.shared.Terminal;
+import com.citadel.tictactoe.views.console.core.ConsoleContext;
 import com.citadel.tictactoe.views.core.ReplayView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ConsoleReplayView implements ReplayView {
+
+    private final ConsoleContext consoleContext;
+
+    public ConsoleReplayView(ConsoleContext consoleContext) {
+        this.consoleContext = consoleContext;
+    }
 
     @Override
     public void interact(ReplayController controller) {
@@ -24,7 +30,7 @@ public class ConsoleReplayView implements ReplayView {
         showHeader(terminal, controller);
         showBoard(terminal, controller);
         List<Runnable> options = buildOptions(terminal, controller);
-        int choice = LimitedIntDialog.instance().read("  Selecciona una opción", options.size());
+        int choice = consoleContext.limitedIntDialog().read("  Selecciona una opción", options.size());
         options.get(choice - 1).run();
     }
 

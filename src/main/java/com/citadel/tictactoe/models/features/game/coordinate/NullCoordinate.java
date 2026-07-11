@@ -4,19 +4,9 @@ import com.citadel.tictactoe.models.features.game.Direction;
 
 public class NullCoordinate implements Coordinate {
 
-
-    private static NullCoordinate instance;
-
-    public static Coordinate getInstance() {
-        if (instance == null) {
-            instance = new NullCoordinate();
-        }
-        return instance;
-    }
-
     @Override
     public boolean isNull() {
-        return false;
+        return true;
     }
 
     @Override

@@ -10,8 +10,6 @@ import java.util.Set;
 
 public class AchievementTracker {
 
-    private static final AchievementTracker instance = new AchievementTracker();
-
     private final EnumSet<Achievement> unlocked = EnumSet.noneOf(Achievement.class);
 
     private final Map<Player, Integer> streaks = new EnumMap<>(Player.class);
@@ -19,10 +17,6 @@ public class AchievementTracker {
     private int gamesPlayed;
 
     private Player lastWinner;
-
-    public static AchievementTracker getInstance() {
-        return instance;
-    }
 
     public void onGameEnded(GameEndedEvent event) {
         gamesPlayed++;
@@ -50,12 +44,5 @@ public class AchievementTracker {
 
     public Set<Achievement> getUnlocked() {
         return EnumSet.copyOf(unlocked);
-    }
-
-    void reset() {
-        unlocked.clear();
-        streaks.clear();
-        gamesPlayed = 0;
-        lastWinner = null;
     }
 }

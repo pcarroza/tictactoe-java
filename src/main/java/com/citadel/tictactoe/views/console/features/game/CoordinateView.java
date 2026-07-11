@@ -6,22 +6,10 @@ import com.citadel.tictactoe.shared.Terminal;
 
 public class CoordinateView {
 
-    private static CoordinateView coordinateView;
+    private final LimitedIntDialog limitedIntDialog;
 
-    public static CoordinateView getInstance() {
-        if (coordinateView == null) {
-            coordinateView = new CoordinateView();
-        }
-        return coordinateView;
-    }
-
-    private CoordinateView() {}
-
-    public static CoordinateView instance() {
-        if (coordinateView != null) {
-            coordinateView = new CoordinateView();
-        }
-        return coordinateView;
+    public CoordinateView(LimitedIntDialog limitedIntDialog) {
+        this.limitedIntDialog = limitedIntDialog;
     }
 
     public void write(String title, Coordinate coordinate) {
@@ -33,7 +21,7 @@ public class CoordinateView {
     public void read(String title, Coordinate target) {
         assert title != null;
         assert target != null;
-        target.setRow(LimitedIntDialog.instance().read("Fila?", Coordinate.DIMENSION));
-        target.setColumn(LimitedIntDialog.instance().read("Columna?", Coordinate.DIMENSION));
+        target.setRow(limitedIntDialog.read("Fila?", Coordinate.DIMENSION));
+        target.setColumn(limitedIntDialog.read("Columna?", Coordinate.DIMENSION));
     }
 }

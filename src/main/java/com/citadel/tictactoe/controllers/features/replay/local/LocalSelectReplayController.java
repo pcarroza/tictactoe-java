@@ -10,17 +10,23 @@ import java.util.List;
 
 public class LocalSelectReplayController implements SelectReplayController {
 
+    private final GameHistoryRegistry gameHistoryRegistry;
+
     private MoveHistory selected;
+
+    public LocalSelectReplayController(GameHistoryRegistry gameHistoryRegistry) {
+        this.gameHistoryRegistry = gameHistoryRegistry;
+    }
 
     @Override
     public boolean hasGames() {
-        return GameHistoryRegistry.getInstance().size() > 0;
+        return gameHistoryRegistry.size() > 0;
     }
 
     @Override
     public List<String> getGameTitles() {
         List<String> titles = new ArrayList<>();
-        List<MoveHistory> histories = GameHistoryRegistry.getInstance().getAll();
+        List<MoveHistory> histories = gameHistoryRegistry.getAll();
         for (int i = 0; i < histories.size(); i++) {
             titles.add("Partida #" + (i + 1));
         }
@@ -29,7 +35,7 @@ public class LocalSelectReplayController implements SelectReplayController {
 
     @Override
     public void select(int index) {
-        this.selected = GameHistoryRegistry.getInstance().get(index);
+        this.selected = gameHistoryRegistry.get(index);
     }
 
     @Override
