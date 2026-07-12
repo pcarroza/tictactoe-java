@@ -24,8 +24,8 @@ note bottom of gradle
 end note
 
 note right of app
-  application.mainClass apunta a
-  'main.core.TicTacToeApp' — desactualizado,
-  la clase real es com.citadel.tictactoe.core.TicTacToeApp
+  application.mainClass apunta correctamente a
+  com.citadel.tictactoe.core.TicTacToeApp
+  (verificado ejecutando ./gradlew run, 2026-07-10)
 end note
 @enduml

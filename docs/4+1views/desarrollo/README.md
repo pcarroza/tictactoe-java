@@ -16,7 +16,7 @@ dependencies {
 }
 ```
 
-**Bug conocido**: `application.mainClass` en `build.gradle` está fijado a `'main.core.TicTacToeApp'`, pero la clase real es `com.citadel.tictactoe.core.TicTacToeApp`. `./gradlew run` sigue funcionando porque Gradle resuelve la tarea `run` vía el classpath sin re-verificar el `mainClass` en cada ejecución en algunos casos, pero cualquier tarea que dependa estrictamente de ese valor (por ejemplo, generar un JAR ejecutable con `jar { manifest { attributes 'Main-Class': ... } }`) fallaría. Corregir a `'com.citadel.tictactoe.core.TicTacToeApp'`.
+**Bug ya no reproduce** (verificado 2026-07-10): `application.mainClass` en `build.gradle` apunta correctamente a `'com.citadel.tictactoe.core.TicTacToeApp'`. `./gradlew run`/`./gradlew build` se ejecutaron con éxito repetidas veces en la sesión de refactor de Singleton (arranque JavaFX y consola), sin ningún error de clase no encontrada.
 
 ## Árbol de paquetes
 

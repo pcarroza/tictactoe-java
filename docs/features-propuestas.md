@@ -13,7 +13,7 @@ Catálogo de features educativas para ampliar el proyecto. Cada una introduce un
 | 3 | Lógica en red | Proxy | ⬜ Pendiente |
 | 4 | Validación por cadena | Chain of Responsibility | ✅ Implementada |
 | 5 | Vista decorada | Decorator | ✅ Implementada |
-| 6 | Perfiles de jugador | Singleton + DAO | ✅ Implementada |
+| 6 | Perfiles de jugador | DAO (ProfileRegistry ya no es Singleton, ver nota) | ✅ Implementada |
 | 7 | Logros | Observer (Event Bus) | ✅ Implementada |
 | 8 | Reloj por turno | Decorator | ✅ Implementada |
 | 9 | IA con dificultad (EASY/HARD) | Strategy | ✅ Implementada |
@@ -237,16 +237,17 @@ View gameView = new TimestampedView(
 
 ## 6. Perfiles de Jugador ✅
 
-**Patrón que profundiza:** Singleton (ProfileRegistry), DAO  
 **Patrón nuevo:** DAO (Data Access Object)
 
 ### Estado actual
-Implementado en `models/features/player/` (`PlayerProfile`, `ProfileRegistry` Singleton), `controllers/features/player/` (`ProfileController`/`LocalProfileController`), `views/console/features/player/ConsoleProfileView.java`, `core/features/ProfileFeature.java`, `views/console/core/commands/ProfileCommand.java`. Se integra con la persistencia real (feature 10 más abajo), no con almacenamiento en memoria puro como sugería el diseño original.
+Implementado en `models/features/player/` (`PlayerProfile`, `ProfileRegistry`), `controllers/features/player/` (`ProfileController`/`LocalProfileController`), `views/console/features/player/ConsoleProfileView.java`, `core/features/ProfileFeature.java`, `views/console/core/commands/ProfileCommand.java`. Se integra con la persistencia real (feature 10 más abajo), no con almacenamiento en memoria puro como sugería el diseño original.
 
 ### Descripción
-Nombre personalizado, color preferido y estadísticas por jugador. Un `ProfileRegistry` (Singleton) gestiona los perfiles en memoria. Se integra con `StatisticsFeature`.
+Nombre personalizado, color preferido y estadísticas por jugador. Un `ProfileRegistry` gestiona los perfiles en memoria. Se integra con `StatisticsFeature`.
 
-### Diseño original propuesto (referencia histórica)
+**Actualizado 2026-07-10:** `ProfileRegistry` dejó de ser Singleton en la auditoría/refactor de patrones — no pasaba el gate de `.agents/steering/05-pattern-gates.md` (es un repositorio de datos, no infraestructura). Ahora se construye una vez en `TicTacToeApp.main()` y se inyecta por constructor en `ProfileFeature`/`StatisticsFeature`. Ver `docs/4+1views/logica/patrones/patron-dao-persistencia.puml`.
+
+### Diseño original propuesto (referencia histórica — ya no vigente)
 ```java
 // models/features/player/
 public class PlayerProfile {
@@ -256,6 +257,8 @@ public class PlayerProfile {
     private int gamesPlayed;
 }
 
+// Diseño original: Singleton. Descartado en el refactor de
+// 2026-07-10 — ver .agents/steering/05-pattern-gates.md
 public class ProfileRegistry {
     private static ProfileRegistry instance;
     private final List<PlayerProfile> profiles;
@@ -345,7 +348,7 @@ Reemplaza el `GameRegistry`/`Statistics` en memoria original. `PersistenceType` 
 
 ### Archivos
 ```
-models/persistence/{Persistence,PersistenceType}.java
+models/persistence/PersistenceType.java
 models/persistence/repository/factory/{DaoFactory,FileDaoFactory,JsonDaoFactory,SqliteDaoFactory,InMemoryDaoFactory}.java
 models/persistence/repository/dao/  (GameDao, StatisticsDao, AbstractFileDao, FileCodec, GsonCodec,
                                       ObjectStreamCodec, AbstractGameFileDao, AbstractStatisticsFileDao,
@@ -354,6 +357,8 @@ models/persistence/service/{GameSnapshotService,StatisticsService}.java
 ```
 
 Ver `docs/4+1views/logica/patrones/patron-dao-persistencia.puml`.
+
+**Nota (2026-07-10):** `Persistence` (el holder estático que envolvía `PersistenceType`) fue eliminado en el refactor de Singleton — `TicTacToeApp.main()` llama a `PersistenceType.SQLITE.createDaoFactory()` directamente y construye `GameRegistry`/`Statistics` con el DAO resultante, sin ningún holder global de por medio.
 
 ---
 
@@ -368,7 +373,10 @@ Patrones ya implementados:
   ✅ Builder
   ✅ Command + Menu
   ✅ Null Object (NullCoordinate)
-  ✅ Singleton
+  ✅ Singleton                 ← solo Terminal (Enum) y EventManager desde 2026-07-10;
+                                 las otras 10 clases que lo usaban se inyectan ahora
+                                 (ver .agents/steering/05-pattern-gates.md)
+  ✅ Context Object            ← ConsoleContext (Feature 6, 7, 9, 10 y la vista de partida)
   ✅ Iterator                  ← Feature 1 (Replay)
   ✅ Chain of Responsibility   ← Feature 4 (Validación)
   ✅ Decorator                 ← Feature 5 (Vista) y Feature 8 (Reloj por turno)

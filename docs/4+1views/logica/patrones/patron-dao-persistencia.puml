@@ -1,9 +1,8 @@
 @startuml patron-dao-persistencia
 hide empty members
 
-class Persistence {
-  {static} +configure(PersistenceType)
-  {static} +daoFactory(): DaoFactory
+class TicTacToeApp {
+  {static} +main(String[])
 }
 enum PersistenceType {
   IN_MEMORY
@@ -32,8 +31,8 @@ interface StatisticsDao {
   +save(StatisticsDto)
 }
 
-Persistence ..> PersistenceType
-Persistence --> DaoFactory : daoFactory
+TicTacToeApp ..> PersistenceType : SQLITE.createDaoFactory()
+TicTacToeApp --> DaoFactory : daoFactory (variable local)
 PersistenceType ..> DaoFactory : createDaoFactory()
 DaoFactory <|.. InMemoryDaoFactory
 DaoFactory <|.. FileDaoFactory
@@ -92,6 +91,17 @@ class StatisticsService {
 GameSnapshotService o-> GameDao
 StatisticsService o-> StatisticsDao
 
+class GameRegistry {
+  +GameRegistry(GameDao)
+}
+class Statistics {
+  +Statistics(StatisticsDao)
+}
+GameRegistry o-> GameSnapshotService
+Statistics o-> StatisticsService
+TicTacToeApp ..> GameRegistry : new(daoFactory.createGameDao())
+TicTacToeApp ..> Statistics : new(daoFactory.createStatisticsDao())
+
 note bottom of DaoFactory
   Abstract Factory — cada PersistenceType
   produce una familia consistente de
@@ -113,8 +123,18 @@ note bottom of SqliteSupport
 end note
 
 note bottom of GameSnapshotService
-  Capa de servicio — features (LoadFeature,
-  ReplayFeature, StatisticsFeature) dependen
-  de estos servicios, nunca directo del DAO
+  Capa de servicio, encapsulada dentro de
+  GameRegistry/Statistics — nadie fuera de
+  ellos toca el DAO ni el Service directamente
+end note
+
+note bottom of GameRegistry
+  Ya NO es Singleton (hasta el refactor de
+  2026-07-10 tenía getInstance() y llamaba
+  internamente a un holder estático Persistence,
+  hoy eliminado). Se construye una única vez en
+  TicTacToeApp.main() y se inyecta por constructor
+  hacia LoadFeature/GameFeature/StatisticsFeature.
+  Ver .agents/steering/05-pattern-gates.md
 end note
 @enduml

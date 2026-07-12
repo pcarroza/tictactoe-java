@@ -10,12 +10,14 @@ abstract class Command {
 abstract class Menu {
   #commands: List<Command>
   -exitCommand: ExitCommand
+  -consoleContext: ConsoleContext
   +set(Feature)
   +execute()
 }
 class MainMenu {
-  +MainMenu(MainMenuFeatures)
+  +MainMenu(MainMenuFeatures, ConsoleContext)
 }
+class ConsoleContext <<record>>
 class MainMenuFeatures <<record>> {
   +loadFeature: Feature
   +replayFeature: Feature
@@ -23,7 +25,9 @@ class MainMenuFeatures <<record>> {
   +profileFeature: Feature
   +achievementsFeature: Feature
 }
-class GameMenu
+class GameMenu {
+  +GameMenu(ConsoleContext)
+}
 class ExitCommand
 class StartGameCommand {
   +set(Feature)
@@ -60,6 +64,7 @@ Command <|-- ShowStatsCommand
 Command <|-- ProfileCommand
 Command <|-- ShowAchievementsCommand
 
+Menu o-> ConsoleContext : consoleContext
 MainMenu ..> MainMenuFeatures : recibe por constructor
 MainMenu ..> GameMenu : crea, agrega a commands
 MainMenu ..> LoadGameCommand : crea, agrega a commands
@@ -90,5 +95,16 @@ note right of StartGameCommand
   constructor porque son 5 hermanos directos de
   MainMenu — un solo set(Feature) de Menu les
   pisaría el valor entre sí.
+end note
+
+note bottom of ConsoleContext
+  Context Object introducido en el refactor de
+  Singleton de 2026-07-10 — agrupa ColorView,
+  LimitedIntDialog, YesNoDialog y CoordinateView
+  (antes 4 Singletons sueltos, sin necesidad real
+  de serlo). Se construye una vez en
+  TicTacToeApp.main() y se enhebra por constructor
+  hasta las ~30 vistas de consola que lo necesitan.
+  Ver patron-context-object.puml
 end note
 @enduml

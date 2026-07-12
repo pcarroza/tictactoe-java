@@ -17,6 +17,7 @@ Organizada en 3 subcarpetas por tipo de diagrama:
 | `patrones/patron-decorator.puml` | Los dos árboles de Decorator del proyecto: vistas (`ViewDecorator`) y el reloj por turno (`TimedPlacementController`) | `views/console/features/game/decorator/`, `controllers/features/game/local/` |
 | `patrones/patron-observer-y-eventos.puml` | Contraste entre Observer (transiciones intra-turno, `Board`↔`LocalGameLogic`) y Event Bus (comunicación cross-feature, `EventManager`) | `models/features/game/Subject.java`, `events/EventManager.java` |
 | `patrones/patron-command.puml` | Jerarquía `Command`/`Menu` que arma el menú principal | `views/console/core/commands/`, `views/console/core/menus/` |
+| `patrones/patron-context-object.puml` | `ConsoleContext` agrupando `ColorView`/`LimitedIntDialog`/`YesNoDialog`/`CoordinateView` (ex-Singletons) e inyectado desde `TicTacToeApp.main()` | `views/console/core/ConsoleContext.java` |
 | `estados/patron-estado.puml` | Máquina de estados completa: Initial, InGame, End, Save, Undo, Redo, Exit | `controllers/features/game/local/logic/` |
 | `estados/diagrama-estados-partida.puml` | Diagrama de estados nativo (comportamiento) de la partida — complementa `patron-estado.puml` (estructura de clases) | `controllers/features/game/local/logic/` |
 | `estados/diagrama-estados-repeticion.puml` | Diagrama de estados nativo de la repetición | `controllers/features/replay/local/logic/` |

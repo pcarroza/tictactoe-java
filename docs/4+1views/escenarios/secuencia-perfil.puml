@@ -6,7 +6,7 @@ participant ConsoleProfileView
 participant ProfileRegistry
 
 Jugador -> ProfileFeature : selecciona "Perfil"
-ProfileFeature -> LocalProfileController : new
+ProfileFeature -> LocalProfileController : new(profileRegistry)
 ProfileFeature -> ConsoleProfileView : interact(controller)
 ConsoleProfileView -> LocalProfileController : getName(XS) / getName(OS)
 LocalProfileController -> ProfileRegistry : findByToken(player)

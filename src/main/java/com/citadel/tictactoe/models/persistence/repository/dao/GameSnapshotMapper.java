@@ -20,32 +20,60 @@ import java.util.Set;
 class GameSnapshotMapper {
 
     static GameSnapshotEntity toEntity(GameSnapshot snapshot) {
-        Map<String, List<int[]>> positions = new LinkedHashMap<>();
-        snapshot.positions().forEach((player, coordinates) -> {
-            List<int[]> cells = new ArrayList<>();
-            coordinates.forEach(coordinate -> cells.add(new int[]{coordinate.getRow(), coordinate.getColumn()}));
-            positions.put(player.name(), cells);
-        });
-        List<MoveRecordEntity> history = new ArrayList<>();
-        snapshot.history().forEach(record -> history.add(new MoveRecordEntity(
-                record.player().name(), record.type().name(),
-                record.coordinate().getRow(), record.coordinate().getColumn(), record.turn())));
-        return new GameSnapshotEntity(snapshot.gameId(), positions, snapshot.currentPlayerIndex(),
-                snapshot.getNumberUsers(), history);
+        return new GameSnapshotEntity(
+                snapshot.gameId(),
+                positionsToEntity(snapshot.positions()),
+                snapshot.currentPlayerIndex(),
+                snapshot.getNumberUsers(),
+                historyToEntity(snapshot.history()));
     }
 
     static GameSnapshot toDomain(GameSnapshotEntity entity) {
-        Map<Player, Set<Coordinate>> positions = new EnumMap<>(Player.class);
-        entity.positions().forEach((playerName, cells) -> {
-            Set<Coordinate> coordinates = new HashSet<>();
-            cells.forEach(cell -> coordinates.add(new Coordinate(cell[0], cell[1])));
-            positions.put(Player.valueOf(playerName), coordinates);
-        });
-        MoveHistory history = new MoveHistory();
-        entity.history().forEach(record -> history.record(new MoveRecord(
+        return new GameSnapshot(
+                positionsToDomain(entity.positions()),
+                entity.currentPlayerIndex(),
+                entity.numberUsers(),
+                entity.gameId(),
+                historyToDomain(entity.history()));
+    }
+
+    private static Map<String, List<int[]>> positionsToEntity(Map<Player, Set<Coordinate>> positions) {
+        Map<String, List<int[]>> entity = new LinkedHashMap<>();
+        positions.forEach((player, coordinates) -> entity.put(player.name(), coordinatesToCells(coordinates)));
+        return entity;
+    }
+
+    private static List<int[]> coordinatesToCells(Set<Coordinate> coordinates) {
+        List<int[]> cells = new ArrayList<>();
+        coordinates.forEach(coordinate -> cells.add(new int[]{coordinate.getRow(), coordinate.getColumn()}));
+        return cells;
+    }
+
+    private static List<MoveRecordEntity> historyToEntity(MoveHistory history) {
+        List<MoveRecordEntity> entity = new ArrayList<>();
+        history.forEach(record -> entity.add(new MoveRecordEntity(
+                record.player().name(), record.type().name(),
+                record.coordinate().getRow(), record.coordinate().getColumn(), record.turn())));
+        return entity;
+    }
+
+    private static Map<Player, Set<Coordinate>> positionsToDomain(Map<String, List<int[]>> positions) {
+        Map<Player, Set<Coordinate>> domain = new EnumMap<>(Player.class);
+        positions.forEach((playerName, cells) -> domain.put(Player.valueOf(playerName), cellsToCoordinates(cells)));
+        return domain;
+    }
+
+    private static Set<Coordinate> cellsToCoordinates(List<int[]> cells) {
+        Set<Coordinate> coordinates = new HashSet<>();
+        cells.forEach(cell -> coordinates.add(new Coordinate(cell[0], cell[1])));
+        return coordinates;
+    }
+
+    private static MoveHistory historyToDomain(List<MoveRecordEntity> history) {
+        MoveHistory domain = new MoveHistory();
+        history.forEach(record -> domain.record(new MoveRecord(
                 Player.valueOf(record.player()), MoveType.valueOf(record.type()),
                 new Coordinate(record.row(), record.column()), record.turn())));
-        return new GameSnapshot(positions, entity.currentPlayerIndex(), entity.numberUsers(),
-                entity.gameId(), history);
+        return domain;
     }
 }

@@ -1,0 +1,79 @@
+@startuml patron-context-object
+hide empty members
+
+class ConsoleContext <<record>> {
+  +colorView: ColorView
+  +limitedIntDialog: LimitedIntDialog
+  +yesNoDialog: YesNoDialog
+  +coordinateView: CoordinateView
+}
+class ColorView
+class LimitedIntDialog
+class YesNoDialog
+class CoordinateView {
+  +CoordinateView(LimitedIntDialog)
+}
+
+ConsoleContext o-> ColorView
+ConsoleContext o-> LimitedIntDialog
+ConsoleContext o-> YesNoDialog
+ConsoleContext o-> CoordinateView
+CoordinateView o-> LimitedIntDialog : lee fila/columna
+
+class TicTacToeApp {
+  {static} +main(String[])
+}
+TicTacToeApp ..> ConsoleContext : new(...) — una sola vez
+
+class GameFeature
+class LoadFeature
+class StatisticsFeature
+class ReplayFeature
+class ProfileFeature
+class AchievementsFeature
+class MainMenu
+class GameMenu
+
+TicTacToeApp ..> GameFeature : new(gameRegistry, consoleContext)
+TicTacToeApp ..> LoadFeature : new(gameRegistry, consoleContext)
+TicTacToeApp ..> StatisticsFeature : new(statistics, profileRegistry, consoleContext)
+TicTacToeApp ..> ReplayFeature : new(gameHistoryRegistry, consoleContext)
+TicTacToeApp ..> ProfileFeature : new(profileRegistry, consoleContext)
+TicTacToeApp ..> AchievementsFeature : new(achievementTracker, consoleContext)
+TicTacToeApp ..> MainMenu : new(features, consoleContext)
+MainMenu ..> GameMenu : new(consoleContext)
+
+class ConsoleGameView
+class BoardView
+class StartView
+
+GameFeature ..> ConsoleGameView : ViewType.CONSOLE.createGameView(consoleContext)
+ConsoleGameView ..> BoardView : new(consoleContext)
+ConsoleGameView ..> StartView : new(boardView, consoleContext)
+
+note bottom of ConsoleContext
+  Context Object — sustituye a 4 Singletons
+  (ColorView, LimitedIntDialog, YesNoDialog,
+  CoordinateView) que no necesitaban serlo: eran
+  stateless, sin lógica de negocio, sin ningún
+  escenario previsible de múltiples instancias.
+  Refactor de Singleton, 2026-07-10 — ver
+  .agents/steering/05-pattern-gates.md
+end note
+
+note bottom of CoordinateView
+  Depende de LimitedIntDialog para leer fila/
+  columna. Antes del refactor esa dependencia
+  estaba oculta detrás de LimitedIntDialog
+  .instance(); ahora es explícita por constructor
+end note
+
+note right of TicTacToeApp
+  Raíz de composición — el único lugar del
+  proyecto que instancia ConsoleContext.
+  Se enhebra hacia abajo por ~30 clases de
+  vista de consola (no todas se muestran aquí;
+  ver patron-decorator.puml y patron-command.puml
+  para dos ramas concretas de esa cadena)
+end note
+@enduml

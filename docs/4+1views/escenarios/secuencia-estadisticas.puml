@@ -7,7 +7,7 @@ participant Statistics
 participant ProfileRegistry
 
 Jugador -> StatisticsFeature : selecciona "Estadísticas"
-StatisticsFeature -> LocalStatisticsController : new
+StatisticsFeature -> LocalStatisticsController : new(statistics, profileRegistry)
 StatisticsFeature -> ConsoleStatisticsView : interact(controller)
 ConsoleStatisticsView -> LocalStatisticsController : getTotalGames()
 LocalStatisticsController -> Statistics : getTotalGames()

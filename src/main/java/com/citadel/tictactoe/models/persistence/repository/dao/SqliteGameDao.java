@@ -188,10 +188,11 @@ public class SqliteGameDao implements GameDao {
     private List<GameRow> queryGames(Connection connection) throws SQLException {
         List<GameRow> rows = new ArrayList<>();
         try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(
-                     "SELECT game_id, current_player_index, number_users FROM games ORDER BY game_id")) {
+             ResultSet resultSet = statement.executeQuery("SELECT game_id, current_player_index, number_users FROM games ORDER BY game_id")) {
             while (resultSet.next()) {
-                rows.add(new GameRow(resultSet.getInt("game_id"), resultSet.getInt("current_player_index"),
+                rows.add(new GameRow(
+                        resultSet.getInt("game_id"),
+                        resultSet.getInt("current_player_index"),
                         resultSet.getInt("number_users")));
             }
         }
@@ -203,8 +204,9 @@ public class SqliteGameDao implements GameDao {
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("SELECT game_id, player FROM game_players")) {
             while (resultSet.next()) {
-                playersByGame.computeIfAbsent(resultSet.getInt("game_id"), id -> new LinkedHashSet<>())
-                        .add(resultSet.getString("player"));
+                playersByGame.computeIfAbsent(
+                        resultSet.getInt("game_id"),
+                        id -> new LinkedHashSet<>()).add(resultSet.getString("player"));
             }
         }
         return playersByGame;
@@ -231,8 +233,7 @@ public class SqliteGameDao implements GameDao {
         return positionsByGame;
     }
 
-    private void addPositionRow(Map<Integer, Map<String, List<int[]>>> positionsByGame, ResultSet resultSet)
-            throws SQLException {
+    private void addPositionRow(Map<Integer, Map<String, List<int[]>>> positionsByGame, ResultSet resultSet) throws SQLException {
         int gameId = resultSet.getInt("game_id");
         positionsByGame.computeIfAbsent(gameId, id -> new LinkedHashMap<>())
                 .computeIfAbsent(resultSet.getString("player"), p -> new ArrayList<>())
@@ -242,8 +243,7 @@ public class SqliteGameDao implements GameDao {
     private Map<Integer, List<MoveRecordEntity>> queryMoves(Connection connection) throws SQLException {
         Map<Integer, List<MoveRecordEntity>> movesByGame = new LinkedHashMap<>();
         try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(
-                     "SELECT game_id, player, type, row_index, col_index, turn FROM moves " + "ORDER BY game_id, seq")) {
+             ResultSet resultSet = statement.executeQuery("SELECT game_id, player, type, row_index, col_index, turn FROM moves " + "ORDER BY game_id, seq")) {
             while (resultSet.next()) {
                 addMoveRow(movesByGame, resultSet);
             }
@@ -251,17 +251,16 @@ public class SqliteGameDao implements GameDao {
         return movesByGame;
     }
 
-    private void addMoveRow(Map<Integer, List<MoveRecordEntity>> movesByGame, ResultSet resultSet)
-            throws SQLException {
+    private void addMoveRow(Map<Integer, List<MoveRecordEntity>> movesByGame, ResultSet resultSet) throws SQLException {
         int gameId = resultSet.getInt("game_id");
         movesByGame.computeIfAbsent(gameId, id -> new ArrayList<>())
                 .add(new MoveRecordEntity(
                         resultSet.getString("player"),
                         resultSet.getString("type"),
                         resultSet.getInt("row_index"),
-                        resultSet.getInt("col_index"), resultSet.getInt("turn")));
+                        resultSet.getInt("col_index"),
+                        resultSet.getInt("turn")));
     }
 
-    private record GameRow(int gameId, int currentPlayerIndex, int numberUsers) {
-    }
+    private record GameRow(int gameId, int currentPlayerIndex, int numberUsers) {}
 }

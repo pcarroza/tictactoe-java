@@ -18,9 +18,12 @@ GameView <|.. ConsoleGameView
 ViewDecorator o-> GameView : wrapped
 
 note bottom of ViewDecorator
-  Composición real (ViewType.CONSOLE.createGameView()):
+  Composición real (ViewType.CONSOLE.createGameView(consoleContext)):
   new DebugView(new TimestampedView(
-    new TurnNumberedView(new ConsoleGameView())))
+    new TurnNumberedView(new ConsoleGameView(consoleContext))))
+  ConsoleGameView recibe ConsoleContext y lo reenvía a
+  BoardView/StartView/GameView/ContinueView/SaveView/
+  Undo·RedoView — ver patron-context-object.puml
 end note
 
 interface PlacementController

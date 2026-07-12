@@ -6,7 +6,7 @@ participant ConsoleAchievementsView
 participant AchievementTracker
 
 Jugador -> AchievementsFeature : selecciona "Logros"
-AchievementsFeature -> LocalAchievementsController : new
+AchievementsFeature -> LocalAchievementsController : new(achievementTracker)
 AchievementsFeature -> ConsoleAchievementsView : interact(controller)
 loop por cada Achievement
   ConsoleAchievementsView -> LocalAchievementsController : isUnlocked(achievement)

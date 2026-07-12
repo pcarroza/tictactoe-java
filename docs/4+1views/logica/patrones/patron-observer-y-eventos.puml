@@ -50,6 +50,19 @@ EventManager ..> AchievementTracker : notifica
 
 note bottom of EventManager
   Event Bus — comunicación ENTRE
-  features que no se conocen (cross-feature)
+  features que no se conocen (cross-feature).
+  EventManager sigue siendo Singleton (Enum,
+  desde el refactor de 2026-07-10) — decisión
+  explícita, no automática (ver
+  .agents/steering/05-pattern-gates.md)
+end note
+
+note bottom of EventWiring
+  wire(Statistics, GameHistoryRegistry,
+  AchievementTracker) — las 3 instancias llegan
+  inyectadas desde TicTacToeApp.main(), ya no
+  se obtienen vía getInstance(). Statistics,
+  GameHistoryRegistry y AchievementTracker
+  dejaron de ser Singleton en el mismo refactor.
 end note
 @enduml
