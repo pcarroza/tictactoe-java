@@ -18,22 +18,22 @@ public class ProfileRegistryTest {
     }
 
     @Test
-    public void givenNoProfileRegistered_whenFindByToken_thenEmpty() {
-        assertThat(registry.findByToken(Player.XS).isPresent(), is(false));
+    public void givenNoProfileRegistered_whenFindBy_thenEmpty() {
+        assertThat(registry.findBy(Player.XS).isPresent(), is(false));
     }
 
     @Test
-    public void givenProfileRegistered_whenFindByToken_thenReturnsIt() {
+    public void givenProfileRegistered_whenFindBy_thenReturnsIt() {
         registry.register(new PlayerProfile(Player.XS, "Pablo"));
 
-        assertThat(registry.findByToken(Player.XS).map(PlayerProfile::name), is(equalTo(java.util.Optional.of("Pablo"))));
+        assertThat(registry.findBy(Player.XS).map(PlayerProfile::name), is(equalTo(java.util.Optional.of("Pablo"))));
     }
 
     @Test
-    public void givenProfileRegisteredTwice_whenFindByToken_thenLatestWins() {
+    public void givenProfileRegisteredTwice_whenFindBy_thenLatestWins() {
         registry.register(new PlayerProfile(Player.XS, "Pablo"));
         registry.register(new PlayerProfile(Player.XS, "Carroza"));
 
-        assertThat(registry.findByToken(Player.XS).map(PlayerProfile::name), is(equalTo(java.util.Optional.of("Carroza"))));
+        assertThat(registry.findBy(Player.XS).map(PlayerProfile::name), is(equalTo(java.util.Optional.of("Carroza"))));
     }
 }

@@ -4,14 +4,14 @@ import com.citadel.tictactoe.controllers.features.game.CoordinateController;
 import com.citadel.tictactoe.controllers.features.game.MachineCoordinateController;
 import com.citadel.tictactoe.controllers.features.game.UserCoordinateController;
 import com.citadel.tictactoe.models.features.game.Coordinate;
-import com.citadel.tictactoe.views.console.core.ConsoleContext;
+import com.citadel.tictactoe.shared.LimitedIntDialog;
 
 public class PutTargetCoordinateView extends PlacementCoordinateView {
 
     private Coordinate target;
 
-    public PutTargetCoordinateView(CoordinateController coordinateController, ConsoleContext consoleContext) {
-        super(coordinateController, consoleContext);
+    public PutTargetCoordinateView(CoordinateController coordinateController) {
+        super(coordinateController);
     }
 
     @Override
@@ -23,7 +23,7 @@ public class PutTargetCoordinateView extends PlacementCoordinateView {
 
     @Override
     public void visit(UserCoordinateController userCoordinateController) {
-        getConsoleContext().coordinateView().read("En ", target);
+        new CoordinateView(new LimitedIntDialog()).read("En ", target);
     }
 
     @Override

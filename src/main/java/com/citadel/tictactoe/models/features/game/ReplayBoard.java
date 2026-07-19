@@ -1,8 +1,9 @@
 package com.citadel.tictactoe.models.features.game;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ReplayBoard {
+public class ReplayBoard extends ReplaySubject {
 
     private final Board board;
 
@@ -10,10 +11,19 @@ public class ReplayBoard {
 
     private int position;
 
-    public ReplayBoard(List<MoveRecord> records) {
+    public ReplayBoard(MoveHistory history, ReplayObserver observer) {
         this.board = new Board();
-        this.records = records;
+        this.records = collectRecords(history);
         this.position = 0;
+        subscribe(observer);
+    }
+
+    private static List<MoveRecord> collectRecords(Iterable<MoveRecord> history) {
+        List<MoveRecord> list = new ArrayList<>();
+        for (MoveRecord record : history) {
+            list.add(record);
+        }
+        return list;
     }
 
     public void next() {

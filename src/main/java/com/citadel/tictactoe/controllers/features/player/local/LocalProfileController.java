@@ -15,7 +15,7 @@ public class LocalProfileController implements ProfileController {
 
     @Override
     public String getName(Player token) {
-        return profileRegistry.findByToken(token)
+        return profileRegistry.findBy(token)
                 .map(PlayerProfile::name)
                 .orElse(token == Player.XS ? "X" : "O");
     }

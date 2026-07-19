@@ -44,7 +44,7 @@ public class LocalSelectReplayController implements SelectReplayController {
     }
 
     @Override
-    public void accept(SelectReplayControllerVisitor visitor) {
-        visitor.visit(this);
+    public void accept(SelectReplayControllerVisitor selectReplayControllerVisitor) {
+        selectReplayControllerVisitor.visit(this);
     }
 }

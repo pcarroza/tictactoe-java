@@ -5,7 +5,6 @@ import com.citadel.tictactoe.controllers.features.game.GameOperationController;
 import com.citadel.tictactoe.core.config.AppConfig;
 import com.citadel.tictactoe.models.features.game.GameRegistry;
 import com.citadel.tictactoe.models.features.game.GameSnapshot;
-import com.citadel.tictactoe.views.console.core.ConsoleContext;
 import com.citadel.tictactoe.views.console.core.Feature;
 import com.citadel.tictactoe.views.core.GameView;
 
@@ -15,16 +14,13 @@ public class GameFeature implements Feature {
 
     private final GameRegistry gameRegistry;
 
-    private final ConsoleContext consoleContext;
-
-    public GameFeature(GameRegistry gameRegistry, ConsoleContext consoleContext) {
-        this(null, gameRegistry, consoleContext);
+    public GameFeature(GameRegistry gameRegistry) {
+        this(null, gameRegistry);
     }
 
-    public GameFeature(GameSnapshot gameSnapshot, GameRegistry gameRegistry, ConsoleContext consoleContext) {
+    public GameFeature(GameSnapshot gameSnapshot, GameRegistry gameRegistry) {
         this.gameSnapshot = gameSnapshot;
         this.gameRegistry = gameRegistry;
-        this.consoleContext = consoleContext;
     }
 
     @Override
@@ -32,7 +28,7 @@ public class GameFeature implements Feature {
         Logic logic = gameSnapshot == null
                 ? AppConfig.logicType().create(gameRegistry)
                 : AppConfig.logicType().create(gameSnapshot, gameRegistry);
-        GameView gameView = AppConfig.viewType().createGameView(consoleContext);
+        GameView gameView = AppConfig.viewType().createGameView();
         GameOperationController controller;
         do {
             controller = logic.getController();

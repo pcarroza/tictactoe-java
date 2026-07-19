@@ -1,19 +1,13 @@
 package com.citadel.tictactoe.views.console.features.game;
 
+import com.citadel.tictactoe.shared.LimitedIntDialog;
 import com.citadel.tictactoe.shared.Terminal;
-import com.citadel.tictactoe.views.console.core.ConsoleContext;
 
 abstract class ConfirmMenuView<T> {
 
-    private final ConsoleContext consoleContext;
-
-    ConfirmMenuView(ConsoleContext consoleContext) {
-        this.consoleContext = consoleContext;
-    }
-
     void interact(T controller) {
         showHeader();
-        int option = consoleContext.limitedIntDialog().read("  Selecciona una opción", 2);
+        int option = new LimitedIntDialog().read("  Selecciona una opción", 2);
         if (option == 1) {
             confirm(controller);
         } else {

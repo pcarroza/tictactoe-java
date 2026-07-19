@@ -6,7 +6,6 @@ import com.citadel.tictactoe.controllers.features.replay.local.logic.LocalReplay
 import com.citadel.tictactoe.core.config.AppConfig;
 import com.citadel.tictactoe.models.features.game.GameHistoryRegistry;
 import com.citadel.tictactoe.models.features.game.MoveHistory;
-import com.citadel.tictactoe.views.console.core.ConsoleContext;
 import com.citadel.tictactoe.views.console.core.Feature;
 import com.citadel.tictactoe.views.core.ReplayView;
 import com.citadel.tictactoe.views.core.SelectReplayView;
@@ -15,11 +14,8 @@ public class ReplayFeature implements Feature {
 
     private final GameHistoryRegistry gameHistoryRegistry;
 
-    private final ConsoleContext consoleContext;
-
-    public ReplayFeature(GameHistoryRegistry gameHistoryRegistry, ConsoleContext consoleContext) {
+    public ReplayFeature(GameHistoryRegistry gameHistoryRegistry) {
         this.gameHistoryRegistry = gameHistoryRegistry;
-        this.consoleContext = consoleContext;
     }
 
     @Override
@@ -37,14 +33,14 @@ public class ReplayFeature implements Feature {
 
     private MoveHistory selectGame() {
         LocalSelectReplayController controller = new LocalSelectReplayController(gameHistoryRegistry);
-        SelectReplayView selectReplayView = AppConfig.viewType().createSelectReplayView(consoleContext);
+        SelectReplayView selectReplayView = AppConfig.viewType().createSelectReplayView();
         selectReplayView.interact(controller);
         return controller.getSelected();
     }
 
     private void replay(MoveHistory history) {
         LocalReplayLogic localReplayLogic = new LocalReplayLogic(history);
-        ReplayView replayView = AppConfig.viewType().createReplayView(consoleContext);
+        ReplayView replayView = AppConfig.viewType().createReplayView();
         ReplayController replayController;
         do {
             replayController = localReplayLogic.getController();

@@ -7,8 +7,8 @@ import com.citadel.tictactoe.controllers.features.game.PutController;
 import com.citadel.tictactoe.controllers.features.game.errors.ErrorReport;
 import com.citadel.tictactoe.models.features.game.Coordinate;
 import com.citadel.tictactoe.models.features.game.Player;
+import com.citadel.tictactoe.shared.LimitedIntDialog;
 import com.citadel.tictactoe.shared.Terminal;
-import com.citadel.tictactoe.views.console.core.ConsoleContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,16 +23,13 @@ public class GameView implements PlacementControllerVisitor {
 
     private final HistoryView historyView;
 
-    private final ConsoleContext consoleContext;
-
     private Coordinate origin;
 
-    public GameView(BoardView boardView, ConsoleContext consoleContext) {
+    public GameView(BoardView boardView) {
         assert boardView != null;
         this.boardView = boardView;
-        this.consoleContext = consoleContext;
-        errorReportView = new ErrorReportView(consoleContext);
-        historyView = new HistoryView(consoleContext);
+        errorReportView = new ErrorReportView();
+        historyView = new HistoryView();
     }
 
     public void interact(PlacementController placementController) {
@@ -42,7 +39,7 @@ public class GameView implements PlacementControllerVisitor {
         terminal.writeln();
         List<Runnable> options = buildOptions(placementController);
         terminal.writeln();
-        int choice = consoleContext.limitedIntDialog().read("  Selecciona una opción", options.size());
+        int choice = new LimitedIntDialog().read("  Selecciona una opción", options.size());
         options.get(choice - 1).run();
     }
 
@@ -70,7 +67,7 @@ public class GameView implements PlacementControllerVisitor {
     @Override
     public void visit(PutController putController) {
         titleMovement("Pone ", putController.take());
-        put(putController, new PutTargetCoordinateView(putController.getCoordinateController(), consoleContext));
+        put(putController, new PutTargetCoordinateView(putController.getCoordinateController()));
         changeToNextPlayer(putController);
         showGame(putController);
     }
@@ -78,14 +75,14 @@ public class GameView implements PlacementControllerVisitor {
     @Override
     public void visit(MoveController moveController) {
         titleMovement("Mueve", moveController.take());
-        remove(moveController, new MoveOriginCoordinateView(moveController.getCoordinateController(), consoleContext));
-        put(moveController, new MoveTargetCoordinateView(moveController.getCoordinateController(), origin, consoleContext));
+        remove(moveController, new MoveOriginCoordinateView(moveController.getCoordinateController()));
+        put(moveController, new MoveTargetCoordinateView(moveController.getCoordinateController(), origin));
         changeToNextPlayer(moveController);
         showGame(moveController);
     }
 
     private void titleMovement(String title, Player color) {
-        consoleContext.colorView().writeln(title + " el jugador ", color);
+        new ColorView().writeln(title + " el jugador ", color);
     }
 
     private void remove(MoveController controller, PlacementCoordinateView view) {
@@ -123,7 +120,7 @@ public class GameView implements PlacementControllerVisitor {
         Terminal.getInstance().clear();
         boardView.write(placementController);
         if (placementController.existTicTacToe()) {
-            consoleContext.colorView().writeWinner(placementController.take());
+            new ColorView().writeWinner(placementController.take());
             placementController.end();
         }
     }

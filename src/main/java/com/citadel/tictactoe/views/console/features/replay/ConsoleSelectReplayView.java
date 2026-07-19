@@ -1,19 +1,13 @@
 package com.citadel.tictactoe.views.console.features.replay;
 
 import com.citadel.tictactoe.controllers.features.replay.SelectReplayController;
+import com.citadel.tictactoe.shared.LimitedIntDialog;
 import com.citadel.tictactoe.shared.Terminal;
-import com.citadel.tictactoe.views.console.core.ConsoleContext;
 import com.citadel.tictactoe.views.core.SelectReplayView;
 
 import java.util.List;
 
 public class ConsoleSelectReplayView implements SelectReplayView {
-
-    private final ConsoleContext consoleContext;
-
-    public ConsoleSelectReplayView(ConsoleContext consoleContext) {
-        this.consoleContext = consoleContext;
-    }
 
     @Override
     public void interact(SelectReplayController controller) {
@@ -37,7 +31,7 @@ public class ConsoleSelectReplayView implements SelectReplayView {
         }
         terminal.writeln("  [" + (titles.size() + 1) + "] Volver");
         terminal.writeln();
-        int option = consoleContext.limitedIntDialog().read("  Selecciona una partida", titles.size() + 1);
+        int option = new LimitedIntDialog().read("  Selecciona una partida", titles.size() + 1);
         if (option <= titles.size()) {
             controller.select(option - 1);
         }

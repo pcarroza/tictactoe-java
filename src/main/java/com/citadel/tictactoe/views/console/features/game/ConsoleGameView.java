@@ -1,7 +1,6 @@
 package com.citadel.tictactoe.views.console.features.game;
 
 import com.citadel.tictactoe.controllers.features.game.*;
-import com.citadel.tictactoe.views.console.core.ConsoleContext;
 import com.citadel.tictactoe.views.core.GameView;
 
 public class ConsoleGameView implements GameView {
@@ -18,14 +17,14 @@ public class ConsoleGameView implements GameView {
 
     private final RedoView redoView;
 
-    public ConsoleGameView(ConsoleContext consoleContext) {
-        BoardView boardView = new BoardView(consoleContext);
-        startView = new StartView(boardView, consoleContext);
-        gameView = new com.citadel.tictactoe.views.console.features.game.GameView(boardView, consoleContext);
-        continueView = new ContinueView(consoleContext);
-        saveView = new SaveView(consoleContext);
-        undoView = new UndoView(consoleContext);
-        redoView = new RedoView(consoleContext);
+    public ConsoleGameView() {
+        BoardView boardView = new BoardView();
+        startView = new StartView(boardView);
+        gameView = new com.citadel.tictactoe.views.console.features.game.GameView(boardView);
+        continueView = new ContinueView();
+        saveView = new SaveView();
+        undoView = new UndoView();
+        redoView = new RedoView();
     }
 
     @Override

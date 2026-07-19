@@ -18,7 +18,7 @@ public class ProfileRegistry {
         profiles.put(profile.token(), profile);
     }
 
-    public Optional<PlayerProfile> findByToken(Player token) {
+    public Optional<PlayerProfile> findBy(Player token) {
         return Optional.ofNullable(profiles.get(token));
     }
 }

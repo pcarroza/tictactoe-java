@@ -2,16 +2,16 @@ package com.citadel.tictactoe.controllers.features.replay.local;
 
 import com.citadel.tictactoe.controllers.features.replay.ReplayController;
 import com.citadel.tictactoe.controllers.features.replay.ReplayControllerVisitor;
-import com.citadel.tictactoe.controllers.features.replay.local.logic.LocalReplayLogic;
 import com.citadel.tictactoe.models.features.game.Coordinate;
 import com.citadel.tictactoe.models.features.game.Player;
+import com.citadel.tictactoe.models.features.game.ReplayBoard;
 
 public class LocalReplayController implements ReplayController {
 
-    private final LocalReplayLogic logic;
+    private final ReplayBoard replayBoard;
 
-    public LocalReplayController(LocalReplayLogic logic) {
-        this.logic = logic;
+    public LocalReplayController(ReplayBoard replayBoard) {
+        this.replayBoard = replayBoard;
     }
 
     @Override
@@ -21,41 +21,41 @@ public class LocalReplayController implements ReplayController {
 
     @Override
     public Player getColor(Coordinate coordinate) {
-        return logic.getColor(coordinate);
+        return replayBoard.getColor(coordinate);
     }
 
     @Override
     public int getPosition() {
-        return logic.getPosition();
+        return replayBoard.getPosition();
     }
 
     @Override
     public int getTotal() {
-        return logic.getTotal();
+        return replayBoard.getTotal();
     }
 
     @Override
     public boolean hasNext() {
-        return logic.hasNext();
+        return replayBoard.hasNext();
     }
 
     @Override
     public boolean hasPrevious() {
-        return logic.hasPrevious();
+        return replayBoard.hasPrevious();
     }
 
     @Override
     public void next() {
-        logic.next();
+        replayBoard.next();
     }
 
     @Override
     public void previous() {
-        logic.previous();
+        replayBoard.previous();
     }
 
     @Override
     public void exit() {
-        logic.exit();
+        replayBoard.exit();
     }
 }

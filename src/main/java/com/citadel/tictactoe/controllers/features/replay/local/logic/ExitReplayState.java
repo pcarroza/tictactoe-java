@@ -5,7 +5,7 @@ import com.citadel.tictactoe.controllers.features.replay.ReplayController;
 class ExitReplayState extends ReplayState {
 
     @Override
-    ReplayController getController(LocalReplayLogic logic) {
+    ReplayController getController() {
         return null;
     }
 

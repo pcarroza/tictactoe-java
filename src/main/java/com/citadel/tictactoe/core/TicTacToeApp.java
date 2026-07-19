@@ -12,13 +12,8 @@ import com.citadel.tictactoe.models.features.player.ProfileRegistry;
 import com.citadel.tictactoe.models.features.statistics.Statistics;
 import com.citadel.tictactoe.models.persistence.PersistenceType;
 import com.citadel.tictactoe.models.persistence.repository.factory.DaoFactory;
-import com.citadel.tictactoe.shared.LimitedIntDialog;
-import com.citadel.tictactoe.shared.YesNoDialog;
-import com.citadel.tictactoe.views.console.core.ConsoleContext;
 import com.citadel.tictactoe.views.console.core.menus.MainMenu;
 import com.citadel.tictactoe.views.console.core.menus.MainMenuFeatures;
-import com.citadel.tictactoe.views.console.features.game.ColorView;
-import com.citadel.tictactoe.views.console.features.game.CoordinateView;
 import javafx.application.Application;
 
 public class TicTacToeApp {
@@ -42,21 +37,14 @@ public class TicTacToeApp {
             return;
         }
 
-        LimitedIntDialog limitedIntDialog = new LimitedIntDialog();
-        ConsoleContext consoleContext = new ConsoleContext(
-                new ColorView(),
-                limitedIntDialog,
-                new YesNoDialog(),
-                new CoordinateView(limitedIntDialog));
-
         MainMenuFeatures features = new MainMenuFeatures(
-                new LoadFeature(gameRegistry, consoleContext),
-                new ReplayFeature(gameHistoryRegistry, consoleContext),
-                new StatisticsFeature(statistics, profileRegistry, consoleContext),
-                new ProfileFeature(profileRegistry, consoleContext),
-                new AchievementsFeature(achievementTracker, consoleContext));
-        MainMenu menu = new MainMenu(features, consoleContext);
-        menu.set(new GameFeature(gameRegistry, consoleContext));
+                new LoadFeature(gameRegistry),
+                new ReplayFeature(gameHistoryRegistry),
+                new StatisticsFeature(statistics, profileRegistry),
+                new ProfileFeature(profileRegistry),
+                new AchievementsFeature(achievementTracker));
+        MainMenu menu = new MainMenu(features);
+        menu.set(new GameFeature(gameRegistry));
         menu.execute();
     }
 }

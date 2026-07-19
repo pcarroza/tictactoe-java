@@ -1,19 +1,13 @@
 package com.citadel.tictactoe.views.console.features.load;
 
 import com.citadel.tictactoe.controllers.features.load.LoadController;
+import com.citadel.tictactoe.shared.LimitedIntDialog;
 import com.citadel.tictactoe.shared.Terminal;
-import com.citadel.tictactoe.views.console.core.ConsoleContext;
 import com.citadel.tictactoe.views.core.LoadView;
 
 import java.util.List;
 
 public class ConsoleLoadView implements LoadView {
-
-    private final ConsoleContext consoleContext;
-
-    public ConsoleLoadView(ConsoleContext consoleContext) {
-        this.consoleContext = consoleContext;
-    }
 
     @Override
     public void interact(LoadController controller) {
@@ -37,7 +31,7 @@ public class ConsoleLoadView implements LoadView {
         }
         terminal.writeln("  [" + (titles.size() + 1) + "] Volver");
         terminal.writeln();
-        int option = consoleContext.limitedIntDialog().read("  Selecciona una partida", titles.size() + 1);
+        int option = new LimitedIntDialog().read("  Selecciona una partida", titles.size() + 1);
         if (option <= titles.size()) {
             controller.select(option - 1);
         }

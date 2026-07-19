@@ -18,7 +18,7 @@ public class JavaFxTicTacToeApp extends Application {
     @Override
     public void start(Stage stage) {
         Logic logic = AppConfig.logicType().create(gameRegistry);
-        JavaFxGameView gameView = (JavaFxGameView) AppConfig.viewType().createGameView(null);
+        JavaFxGameView gameView = (JavaFxGameView) AppConfig.viewType().createGameView();
         gameView.bind(logic, stage);
         gameView.advance();
     }
