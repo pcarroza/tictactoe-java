@@ -5,14 +5,14 @@ participant "Thread: main" as main
 participant TicTacToeApp
 participant "MainMenu (Menu.execute())" as menu
 participant Terminal
-participant "GameFeature.run()" as game
+participant "GameModule.run()" as game
 
 main -> TicTacToeApp : main(args)
 TicTacToeApp -> menu : execute()
 loop bucle de menú
   menu -> Terminal : LimitedIntDialog.read() — bloqueante (stdin)
   Terminal --> menu : opción elegida
-  menu -> game : StartGameCommand.execute() -> feature.run()
+  menu -> game : StartGameCommand.execute() -> module.run()
   loop mientras controller != null
     game -> Terminal : lee coordenada — bloqueante (stdin)
     note right of game

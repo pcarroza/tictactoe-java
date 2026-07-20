@@ -1,6 +1,6 @@
 package com.citadel.tictactoe.views.console.core.commands;
 
-import com.citadel.tictactoe.views.console.core.Feature;
+import com.citadel.tictactoe.views.console.core.Module;
 
 public abstract class Command {
 
@@ -10,7 +10,7 @@ public abstract class Command {
         this.title = title;
     }
 
-    public void set(Feature feature) {
+    public void set(Module module) {
     }
 
     public boolean isAvailable() {

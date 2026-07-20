@@ -1,22 +1,22 @@
 package com.citadel.tictactoe.views.console.core.commands;
 
-import com.citadel.tictactoe.views.console.core.Feature;
+import com.citadel.tictactoe.views.console.core.Module;
 
 public class StartGameCommand extends Command {
 
-    private Feature feature;
+    private Module module;
 
     public StartGameCommand() {
         super("Iniciar Juego");
     }
 
     @Override
-    public void set(Feature feature) {
-        this.feature = feature;
+    public void set(Module module) {
+        this.module = module;
     }
 
     @Override
     public void execute() {
-        feature.run();
+        module.run();
     }
 }

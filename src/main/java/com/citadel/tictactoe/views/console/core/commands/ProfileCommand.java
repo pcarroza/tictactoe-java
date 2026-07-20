@@ -1,18 +1,18 @@
 package com.citadel.tictactoe.views.console.core.commands;
 
-import com.citadel.tictactoe.views.console.core.Feature;
+import com.citadel.tictactoe.views.console.core.Module;
 
 public class ProfileCommand extends Command {
 
-    private final Feature feature;
+    private final Module module;
 
-    public ProfileCommand(Feature feature) {
+    public ProfileCommand(Module module) {
         super("Perfiles de Jugador");
-        this.feature = feature;
+        this.module = module;
     }
 
     @Override
     public void execute() {
-        feature.run();
+        module.run();
     }
 }

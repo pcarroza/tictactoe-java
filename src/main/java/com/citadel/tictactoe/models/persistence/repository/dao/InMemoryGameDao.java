@@ -1,6 +1,6 @@
 package com.citadel.tictactoe.models.persistence.repository.dao;
 
-import com.citadel.tictactoe.models.features.game.GameSnapshot;
+import com.citadel.tictactoe.models.modules.game.GameSnapshot;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

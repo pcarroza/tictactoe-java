@@ -1,13 +1,13 @@
 @startuml secuencia-persistencia
 actor Jugador
-participant LoadFeature
+participant LoadModule
 participant LocalLoadController
 participant ConsoleLoadView
-participant GameFeature
+participant GameModule
 
-Jugador -> LoadFeature : selecciona "Cargar partida"
-LoadFeature -> LocalLoadController : new(gameRegistry)
-LoadFeature -> ConsoleLoadView : interact(controller)
+Jugador -> LoadModule : selecciona "Cargar partida"
+LoadModule -> LocalLoadController : new(gameRegistry)
+LoadModule -> ConsoleLoadView : interact(controller)
 ConsoleLoadView -> LocalLoadController : accept(this)
 LocalLoadController -> ConsoleLoadView : visit(controller)
 ConsoleLoadView -> LocalLoadController : hasGames()
@@ -15,14 +15,14 @@ ConsoleLoadView -> LocalLoadController : getGameTitles()
 ConsoleLoadView -> Jugador : muestra lista
 Jugador -> ConsoleLoadView : elige partida
 ConsoleLoadView -> LocalLoadController : select(indice)
-LoadFeature -> LocalLoadController : getSelected()
-LocalLoadController --> LoadFeature : GameSnapshot
-LoadFeature -> GameFeature : new GameFeature(snapshot, gameRegistry, consoleContext).run()
-note right of GameFeature
+LoadModule -> LocalLoadController : getSelected()
+LocalLoadController --> LoadModule : GameSnapshot
+LoadModule -> GameModule : new GameModule(snapshot, gameRegistry, consoleContext).run()
+note right of GameModule
   Continúa igual que secuencia-partida.puml,
   pero LocalGameLogic arranca en InGameState.
   gameRegistry y consoleContext son los mismos
-  que LoadFeature recibió por constructor —
+  que LoadModule recibió por constructor —
   nunca se leen vía getInstance()
 end note
 @enduml

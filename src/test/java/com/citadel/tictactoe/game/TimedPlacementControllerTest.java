@@ -1,16 +1,16 @@
 package com.citadel.tictactoe.game;
 
-import com.citadel.tictactoe.controllers.features.game.CoordinateController;
-import com.citadel.tictactoe.controllers.features.game.MoveController;
-import com.citadel.tictactoe.controllers.features.game.OperationControllerVisitor;
-import com.citadel.tictactoe.controllers.features.game.PlacementControllerVisitor;
-import com.citadel.tictactoe.controllers.features.game.PutController;
-import com.citadel.tictactoe.controllers.features.game.errors.ErrorReport;
-import com.citadel.tictactoe.controllers.features.game.errors.ErrorReportVisitor;
-import com.citadel.tictactoe.controllers.features.game.local.TimedPlacementController;
-import com.citadel.tictactoe.models.features.game.Coordinate;
-import com.citadel.tictactoe.models.features.game.MoveHistory;
-import com.citadel.tictactoe.models.features.game.Player;
+import com.citadel.tictactoe.controllers.modules.game.CoordinateController;
+import com.citadel.tictactoe.controllers.modules.game.MoveController;
+import com.citadel.tictactoe.controllers.modules.game.OperationControllerVisitor;
+import com.citadel.tictactoe.controllers.modules.game.PlacementControllerVisitor;
+import com.citadel.tictactoe.controllers.modules.game.PutController;
+import com.citadel.tictactoe.controllers.modules.game.errors.ErrorReport;
+import com.citadel.tictactoe.controllers.modules.game.errors.ErrorReportVisitor;
+import com.citadel.tictactoe.controllers.modules.game.local.TimedPlacementController;
+import com.citadel.tictactoe.models.modules.game.Coordinate;
+import com.citadel.tictactoe.models.modules.game.MoveHistory;
+import com.citadel.tictactoe.models.modules.game.Player;
 import org.junit.Test;
 
 import java.time.Duration;

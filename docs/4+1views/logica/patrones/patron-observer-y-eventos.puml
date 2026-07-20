@@ -24,7 +24,7 @@ LocalGameLogic ..> Board : suscrito a
 
 note bottom of Board
   Observer — transiciones DENTRO
-  del mismo turno (intra-feature)
+  del mismo turno (intra-module)
 end note
 
 class EventManager {
@@ -50,7 +50,7 @@ EventManager ..> AchievementTracker : notifica
 
 note bottom of EventManager
   Event Bus — comunicación ENTRE
-  features que no se conocen (cross-feature).
+  modules que no se conocen (cross-module).
   EventManager sigue siendo Singleton (Enum,
   desde el refactor de 2026-07-10) — decisión
   explícita, no automática (ver

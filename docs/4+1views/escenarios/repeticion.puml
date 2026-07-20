@@ -1,4 +1,6 @@
 @startuml repeticion
+
+left to right direction
 actor Jugador
 
 rectangle "Repetición" {

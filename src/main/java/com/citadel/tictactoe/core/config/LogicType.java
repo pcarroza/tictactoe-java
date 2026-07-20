@@ -1,9 +1,9 @@
 package com.citadel.tictactoe.core.config;
 
-import com.citadel.tictactoe.controllers.features.game.Logic;
-import com.citadel.tictactoe.controllers.features.game.local.logic.LocalGameLogic;
-import com.citadel.tictactoe.models.features.game.GameRegistry;
-import com.citadel.tictactoe.models.features.game.GameSnapshot;
+import com.citadel.tictactoe.controllers.modules.game.Logic;
+import com.citadel.tictactoe.controllers.modules.game.local.logic.LocalGameLogic;
+import com.citadel.tictactoe.models.modules.game.GameRegistry;
+import com.citadel.tictactoe.models.modules.game.GameSnapshot;
 
 public enum LogicType {
 

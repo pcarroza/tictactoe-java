@@ -1,6 +1,6 @@
 package com.citadel.tictactoe.shared;
 
-import com.citadel.tictactoe.models.features.game.Coordinate;
+import com.citadel.tictactoe.models.modules.game.Coordinate;
 import com.citadel.tictactoe.shared.builder.ClosedIntervalBuilder;
 import org.junit.Before;
 import org.junit.Test;

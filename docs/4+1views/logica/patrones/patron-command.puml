@@ -3,7 +3,7 @@ hide empty members
 
 abstract class Command {
   -title: String
-  +set(Feature)
+  +set(Module)
   +isAvailable(): boolean
   {abstract} +execute()
 }
@@ -11,46 +11,46 @@ abstract class Menu {
   #commands: List<Command>
   -exitCommand: ExitCommand
   -consoleContext: ConsoleContext
-  +set(Feature)
+  +set(Module)
   +execute()
 }
 class MainMenu {
-  +MainMenu(MainMenuFeatures, ConsoleContext)
+  +MainMenu(MainMenuModules, ConsoleContext)
 }
 class ConsoleContext <<record>>
-class MainMenuFeatures <<record>> {
-  +loadFeature: Feature
-  +replayFeature: Feature
-  +statsFeature: Feature
-  +profileFeature: Feature
-  +achievementsFeature: Feature
+class MainMenuModules <<record>> {
+  +loadModule: Module
+  +replayModule: Module
+  +statsModule: Module
+  +profileModule: Module
+  +achievementsModule: Module
 }
 class GameMenu {
   +GameMenu(ConsoleContext)
 }
 class ExitCommand
 class StartGameCommand {
-  +set(Feature)
+  +set(Module)
 }
 class LoadGameCommand {
-  -feature: Feature
-  +LoadGameCommand(Feature)
+  -module: Module
+  +LoadGameCommand(Module)
 }
 class ReplayGameCommand {
-  -feature: Feature
-  +ReplayGameCommand(Feature)
+  -module: Module
+  +ReplayGameCommand(Module)
 }
 class ShowStatsCommand {
-  -feature: Feature
-  +ShowStatsCommand(Feature)
+  -module: Module
+  +ShowStatsCommand(Module)
 }
 class ProfileCommand {
-  -feature: Feature
-  +ProfileCommand(Feature)
+  -module: Module
+  +ProfileCommand(Module)
 }
 class ShowAchievementsCommand {
-  -feature: Feature
-  +ShowAchievementsCommand(Feature)
+  -module: Module
+  +ShowAchievementsCommand(Module)
 }
 
 Command <|-- Menu
@@ -65,7 +65,7 @@ Command <|-- ProfileCommand
 Command <|-- ShowAchievementsCommand
 
 Menu o-> ConsoleContext : consoleContext
-MainMenu ..> MainMenuFeatures : recibe por constructor
+MainMenu ..> MainMenuModules : recibe por constructor
 MainMenu ..> GameMenu : crea, agrega a commands
 MainMenu ..> LoadGameCommand : crea, agrega a commands
 MainMenu ..> ReplayGameCommand : crea, agrega a commands
@@ -78,22 +78,22 @@ note bottom of Menu
   execute() es un bucle: muestra los Command con
   isAvailable()==true, delega en el elegido,
   hasta que ExitCommand marca closed().
-  set(Feature) difunde a todos los commands hijos.
+  set(Module) difunde a todos los commands hijos.
 end note
 
-note right of MainMenuFeatures
-  Parameter Object — agrupa las 5 Feature
+note right of MainMenuModules
+  Parameter Object — agrupa las 5 Module
   para no superar el límite de 3 parámetros
   del constructor de MainMenu
 end note
 
 note right of StartGameCommand
-  Único caso que sobrescribe Command.set(Feature):
+  Único caso que sobrescribe Command.set(Module):
   es hijo único (junto a ExitCommand, no-op) de
   GameMenu, así que el broadcast no es ambiguo.
-  Los demás comandos reciben su Feature por
+  Los demás comandos reciben su Module por
   constructor porque son 5 hermanos directos de
-  MainMenu — un solo set(Feature) de Menu les
+  MainMenu — un solo set(Module) de Menu les
   pisaría el valor entre sí.
 end note
 

@@ -1,9 +1,9 @@
 package com.citadel.tictactoe.persistence;
 
-import com.citadel.tictactoe.models.features.game.Coordinate;
-import com.citadel.tictactoe.models.features.game.GameSnapshot;
-import com.citadel.tictactoe.models.features.game.MoveHistory;
-import com.citadel.tictactoe.models.features.game.Player;
+import com.citadel.tictactoe.models.modules.game.Coordinate;
+import com.citadel.tictactoe.models.modules.game.GameSnapshot;
+import com.citadel.tictactoe.models.modules.game.MoveHistory;
+import com.citadel.tictactoe.models.modules.game.Player;
 import com.citadel.tictactoe.models.persistence.repository.dao.InMemoryGameDao;
 import org.junit.Before;
 import org.junit.Test;

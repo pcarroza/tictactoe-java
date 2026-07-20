@@ -1,11 +1,11 @@
 package com.citadel.tictactoe.models.persistence.repository.dao;
 
-import com.citadel.tictactoe.models.features.game.Coordinate;
-import com.citadel.tictactoe.models.features.game.GameSnapshot;
-import com.citadel.tictactoe.models.features.game.MoveHistory;
-import com.citadel.tictactoe.models.features.game.MoveRecord;
-import com.citadel.tictactoe.models.features.game.MoveType;
-import com.citadel.tictactoe.models.features.game.Player;
+import com.citadel.tictactoe.models.modules.game.Coordinate;
+import com.citadel.tictactoe.models.modules.game.GameSnapshot;
+import com.citadel.tictactoe.models.modules.game.MoveHistory;
+import com.citadel.tictactoe.models.modules.game.MoveRecord;
+import com.citadel.tictactoe.models.modules.game.MoveType;
+import com.citadel.tictactoe.models.modules.game.Player;
 import com.citadel.tictactoe.models.persistence.entities.GameSnapshotEntity;
 import com.citadel.tictactoe.models.persistence.entities.MoveRecordEntity;
 

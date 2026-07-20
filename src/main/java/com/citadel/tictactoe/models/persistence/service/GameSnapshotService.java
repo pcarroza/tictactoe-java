@@ -1,6 +1,6 @@
 package com.citadel.tictactoe.models.persistence.service;
 
-import com.citadel.tictactoe.models.features.game.GameSnapshot;
+import com.citadel.tictactoe.models.modules.game.GameSnapshot;
 import com.citadel.tictactoe.models.persistence.repository.dao.GameDao;
 
 import java.util.List;

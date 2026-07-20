@@ -28,7 +28,7 @@ ExitGameState --> [*]
 
 note right of ExitGameState
   getController() devuelve null:
-  termina el bucle de GameFeature.run()
+  termina el bucle de GameModule.run()
 end note
 
 note right of InGameState

@@ -1,6 +1,6 @@
 package com.citadel.tictactoe.views.core;
 
-import com.citadel.tictactoe.controllers.features.statistics.StatisticsController;
+import com.citadel.tictactoe.controllers.modules.statistics.StatisticsController;
 
 public interface StatisticsView {
 

@@ -8,13 +8,13 @@ import com.citadel.tictactoe.views.console.core.commands.ShowStatsCommand;
 
 public class MainMenu extends Menu {
 
-    public MainMenu(MainMenuFeatures features) {
+    public MainMenu(MainMenuModules modules) {
         super("Menú Principal");
         commands.add(new GameMenu());
-        commands.add(new LoadGameCommand(features.loadFeature()));
-        commands.add(new ReplayGameCommand(features.replayFeature()));
-        commands.add(new ShowStatsCommand(features.statsFeature()));
-        commands.add(new ProfileCommand(features.profileFeature()));
-        commands.add(new ShowAchievementsCommand(features.achievementsFeature()));
+        commands.add(new LoadGameCommand(modules.loadModule()));
+        commands.add(new ReplayGameCommand(modules.replayModule()));
+        commands.add(new ShowStatsCommand(modules.statsModule()));
+        commands.add(new ProfileCommand(modules.profileModule()));
+        commands.add(new ShowAchievementsCommand(modules.achievementsModule()));
     }
 }

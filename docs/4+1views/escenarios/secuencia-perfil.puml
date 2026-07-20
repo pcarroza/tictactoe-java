@@ -1,13 +1,13 @@
 @startuml secuencia-perfil
 actor Jugador
-participant ProfileFeature
+participant ProfileModule
 participant LocalProfileController
 participant ConsoleProfileView
 participant ProfileRegistry
 
-Jugador -> ProfileFeature : selecciona "Perfil"
-ProfileFeature -> LocalProfileController : new(profileRegistry)
-ProfileFeature -> ConsoleProfileView : interact(controller)
+Jugador -> ProfileModule : selecciona "Perfil"
+ProfileModule -> LocalProfileController : new(profileRegistry)
+ProfileModule -> ConsoleProfileView : interact(controller)
 ConsoleProfileView -> LocalProfileController : getName(XS) / getName(OS)
 LocalProfileController -> ProfileRegistry : findByToken(player)
 ConsoleProfileView -> Jugador : muestra nombres actuales

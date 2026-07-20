@@ -24,17 +24,17 @@ Fuente de verdad: `src/main/java/com/citadel/tictactoe/`. Los 6 paquetes raíz f
 
 ```
 com.citadel.tictactoe/
-  events/       — EventManager (Event Bus cross-feature)
+  events/       — EventManager (Event Bus cross-module)
   shared/       — Terminal, LimitedIntDialog, YesNoDialog, ClosedInterval(View)
                   (equivalente al "libs" del DAG de CLAUDE.md — mismo rol,
                   nombre de paquete físico distinto; ver nota más abajo)
   models/       — entidades de dominio + persistence/ (DAO, Repository, Service)
-  controllers/  — lógica de cada feature (game, replay, achievements, ...)
+  controllers/  — lógica de cada module (game, replay, achievements, ...)
   views/        — presentación consola + decoradores
-  core/         — composition root (TicTacToeApp, AppConfig, EventWiring, features/*)
+  core/         — composition root (TicTacToeApp, AppConfig, EventWiring, modules/*)
 ```
 
-Cada paquete de `controllers/`, `views/` y `models/` se subdivide en `features/<nombre>/`, con una carpeta `local/` para la implementación concreta cuando aplica (p. ej. `controllers/features/game/local/`). Las features nunca se importan entre sí — solo vía `EventManager` o `AppManager.navigateTo()`.
+Cada paquete de `controllers/`, `views/` y `models/` se subdivide en `modules/<nombre>/`, con una carpeta `local/` para la implementación concreta cuando aplica (p. ej. `controllers/modules/game/local/`). Los módulos nunca se importan entre sí — solo vía `EventManager` o `AppManager.navigateTo()`.
 
 **Nota de nomenclatura**: `CLAUDE.md` y `.agents/design/package-dependency.md` llaman a esta capa base "`libs`"; el paquete físico en el código se llama `shared`. Es el mismo rol en el DAG (hoja sin dependencias, base utilities) — si se retoca esa documentación, unificar el nombre.
 

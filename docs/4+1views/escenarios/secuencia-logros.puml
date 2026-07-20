@@ -1,13 +1,13 @@
 @startuml secuencia-logros
 actor Jugador
-participant AchievementsFeature
+participant AchievementsModule
 participant LocalAchievementsController
 participant ConsoleAchievementsView
 participant AchievementTracker
 
-Jugador -> AchievementsFeature : selecciona "Logros"
-AchievementsFeature -> LocalAchievementsController : new(achievementTracker)
-AchievementsFeature -> ConsoleAchievementsView : interact(controller)
+Jugador -> AchievementsModule : selecciona "Logros"
+AchievementsModule -> LocalAchievementsController : new(achievementTracker)
+AchievementsModule -> ConsoleAchievementsView : interact(controller)
 loop por cada Achievement
   ConsoleAchievementsView -> LocalAchievementsController : isUnlocked(achievement)
   LocalAchievementsController -> AchievementTracker : getUnlocked().contains(achievement)

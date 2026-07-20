@@ -1,24 +1,24 @@
 @startuml secuencia-partida
 actor Jugador
-participant GameFeature
+participant GameModule
 participant LocalGameLogic
 participant TimedControllerFactory
 participant "GameView\n(decorado)" as DecoratedView
-participant "views.console.features.game.GameView" as InnerView
+participant "views.console.modules.game.GameView" as InnerView
 participant PlacementController
 participant EventManager
 
 loop mientras controller != null
-  GameFeature -> LocalGameLogic : getController()
+  GameModule -> LocalGameLogic : getController()
   LocalGameLogic -> TimedControllerFactory : wrap(actualState.getController())
   note right of TimedControllerFactory
     Envuelve en TimedPlacementController
     solo si es fase Put (ver patron-decorator.puml)
   end note
   TimedControllerFactory --> LocalGameLogic : controller
-  LocalGameLogic --> GameFeature : controller
+  LocalGameLogic --> GameModule : controller
 
-  GameFeature -> DecoratedView : interact(controller)
+  GameModule -> DecoratedView : interact(controller)
   note right of DecoratedView
     Cadena Debug→Timestamped→TurnNumbered→Console
     elidida aquí (ver patron-decorator.puml)

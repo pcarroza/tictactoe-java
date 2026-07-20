@@ -134,7 +134,7 @@ note bottom of GameRegistry
   internamente a un holder estático Persistence,
   hoy eliminado). Se construye una única vez en
   TicTacToeApp.main() y se inyecta por constructor
-  hacia LoadFeature/GameFeature/StatisticsFeature.
+  hacia LoadModule/GameModule/StatisticsModule.
   Ver .agents/steering/05-pattern-gates.md
 end note
 @enduml

@@ -18,7 +18,7 @@ end note
 
 note right of ExitReplayState
   getController() devuelve null: termina el bucle de
-  ReplayFeature.run(). A diferencia de GameState, no hay
+  ReplayModule.run(). A diferencia de GameState, no hay
   Subject/Observer de por medio — LocalReplayLogic
   despacha directo sobre el estado (ver secuencia-repeticion.puml)
 end note

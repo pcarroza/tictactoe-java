@@ -1,8 +1,8 @@
 package com.citadel.tictactoe.game.builders;
 
-import com.citadel.tictactoe.models.features.game.Board;
-import com.citadel.tictactoe.models.features.game.Coordinate;
-import com.citadel.tictactoe.models.features.game.Player;
+import com.citadel.tictactoe.models.modules.game.Board;
+import com.citadel.tictactoe.models.modules.game.Coordinate;
+import com.citadel.tictactoe.models.modules.game.Player;
 
 import java.util.ArrayList;
 import java.util.List;

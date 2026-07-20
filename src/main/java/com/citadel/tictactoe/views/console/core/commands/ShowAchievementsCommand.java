@@ -1,18 +1,18 @@
 package com.citadel.tictactoe.views.console.core.commands;
 
-import com.citadel.tictactoe.views.console.core.Feature;
+import com.citadel.tictactoe.views.console.core.Module;
 
 public class ShowAchievementsCommand extends Command {
 
-    private final Feature feature;
+    private final Module module;
 
-    public ShowAchievementsCommand(Feature feature) {
+    public ShowAchievementsCommand(Module module) {
         super("Logros");
-        this.feature = feature;
+        this.module = module;
     }
 
     @Override
     public void execute() {
-        feature.run();
+        module.run();
     }
 }

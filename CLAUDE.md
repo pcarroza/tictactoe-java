@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ./gradlew run          # run the app (requires interactive stdin)
 ./gradlew build        # compile + test
 ./gradlew test         # run all tests
-./gradlew test --tests "main.models.features.game.BoardTest"  # run a single test class
+./gradlew test --tests "com.citadel.tictactoe.models.modules.game.GameRegistryTest"  # run a single test class
 ```
 
 Java 17+, JUnit 4.13.1. Main class: `com.citadel.tictactoe.core.TicTacToeApp`.
@@ -25,9 +25,9 @@ views          ← controllers, models, libs, events
 core           ← everything (composition root only)
 ```
 
-**Hard rule:** `models/`, `controllers/`, and `views/` must never import from `main.core.*`. Features never import each other — they communicate only via `EventManager.publish/subscribe` or `AppManager.navigateTo()`.
+**Hard rule:** `models/`, `controllers/`, and `views/` must never import from `com.citadel.tictactoe.core.*`. Modules never import each other — they communicate only via `EventManager.publish/subscribe` or `AppManager.navigateTo()`.
 
-Each layer has its own `core/` sub-package for intra-layer contracts shared between features. Feature packages (`features/game/`, `features/load/`, etc.) never cross-import.
+Each layer has its own `core/` sub-package for intra-layer contracts shared between modules. Module packages (`modules/game/`, `modules/load/`, etc.) never cross-import.
 
 ---
 
@@ -39,9 +39,9 @@ Each layer has its own `core/` sub-package for intra-layer contracts shared betw
 
 **Observer** — `Subject` + `Observer` are in `models/`. `Observer` declares `update()`, `save()`, and `resume()`. `Board` is the subject; `LocalGameLogic` is the observer.
 
-**Command + Menu chrome** — `Command` (abstract) has a no-op `set(Feature)` and abstract `execute()`. Only commands that need a feature override `set()`. `Menu.set(feature)` distributes to all commands uniformly. `MainMenu` is the top-level chrome containing a `GameMenu` sub-menu and `LoadGameCommand`.
+**Command + Menu chrome** — `Command` (abstract) has a no-op `set(Module)` and abstract `execute()`. Only commands that need a module override `set()`. `Menu.set(module)` distributes to all commands uniformly. `MainMenu` is the top-level chrome containing a `GameMenu` sub-menu and `LoadGameCommand`.
 
-**AppConfig** — `TicTacToeApp` sets `LogicType` and `ViewType` once; every feature reads them. Adding a new logic or gameView implementation means adding one enum constant, not touching features.
+**AppConfig** — `TicTacToeApp` sets `LogicType` and `ViewType` once; every module reads them. Adding a new logic or gameView implementation means adding one enum constant, not touching modules.
 
 ---
 
@@ -50,10 +50,10 @@ Each layer has its own `core/` sub-package for intra-layer contracts shared betw
 ```
 TicTacToeApp → AppConfig.set(LOCAL, CONSOLE)
              → MainMenu
-                 → StartGameCommand → GameFeature.run()
-                 → LoadGameCommand  → LoadFeature.run() → GameFeature(snapshot).run()
+                 → StartGameCommand → GameModule.run()
+                 → LoadGameCommand  → LoadModule.run() → GameModule(snapshot).run()
 
-GameFeature.run():
+GameModule.run():
   do {
     controller = logic.getController()   // current state decides controller type
     gameView.interact(controller)            // double dispatch
@@ -88,12 +88,12 @@ InGameState --[save()]--> SaveMenuState --[resume()]--> InGameState
 
 ---
 
-## Adding a New Feature
+## Adding a New Module
 
-1. `controllers/features/<name>/` — interfaces + `local/` implementation
-2. `views/console/features/<name>/` — concrete views
-3. `core/features/<Name>Feature.java` — implements `Feature`, reads `AppConfig`
+1. `controllers/modules/<name>/` — interfaces + `local/` implementation
+2. `views/console/modules/<name>/` — concrete views
+3. `core/modules/<Name>Module.java` — implements `Module`, reads `AppConfig`
 4. `views/console/core/commands/Start<Name>Command.java` — extends `Command`
 5. Wire the command into `MainMenu` (or a sub-menu)
 
-Features in `controllers/` expose only interfaces. `core/` wires the concrete implementations.
+Modules in `controllers/` expose only interfaces. `core/` wires the concrete implementations.

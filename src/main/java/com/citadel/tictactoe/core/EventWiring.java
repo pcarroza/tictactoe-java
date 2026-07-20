@@ -1,10 +1,10 @@
 package com.citadel.tictactoe.core;
 
 import com.citadel.tictactoe.events.EventManager;
-import com.citadel.tictactoe.models.features.achievements.AchievementTracker;
-import com.citadel.tictactoe.models.features.game.GameHistoryRegistry;
-import com.citadel.tictactoe.models.features.game.events.GameEndedEvent;
-import com.citadel.tictactoe.models.features.statistics.Statistics;
+import com.citadel.tictactoe.models.modules.achievements.AchievementTracker;
+import com.citadel.tictactoe.models.modules.game.GameHistoryRegistry;
+import com.citadel.tictactoe.models.modules.game.events.GameEndedEvent;
+import com.citadel.tictactoe.models.modules.statistics.Statistics;
 
 public class EventWiring {
 

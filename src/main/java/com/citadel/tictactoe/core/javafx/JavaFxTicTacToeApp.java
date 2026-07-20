@@ -1,9 +1,9 @@
 package com.citadel.tictactoe.core.javafx;
 
-import com.citadel.tictactoe.controllers.features.game.Logic;
+import com.citadel.tictactoe.controllers.modules.game.Logic;
 import com.citadel.tictactoe.core.config.AppConfig;
-import com.citadel.tictactoe.models.features.game.GameRegistry;
-import com.citadel.tictactoe.views.javafx.features.game.JavaFxGameView;
+import com.citadel.tictactoe.models.modules.game.GameRegistry;
+import com.citadel.tictactoe.views.javafx.modules.game.JavaFxGameView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

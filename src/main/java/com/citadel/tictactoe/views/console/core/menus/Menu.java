@@ -2,7 +2,7 @@ package com.citadel.tictactoe.views.console.core.menus;
 
 import com.citadel.tictactoe.shared.LimitedIntDialog;
 import com.citadel.tictactoe.shared.Terminal;
-import com.citadel.tictactoe.views.console.core.Feature;
+import com.citadel.tictactoe.views.console.core.Module;
 import com.citadel.tictactoe.views.console.core.commands.Command;
 import com.citadel.tictactoe.views.console.core.commands.ExitCommand;
 
@@ -23,9 +23,9 @@ public abstract class Menu extends Command {
     }
 
     @Override
-    public void set(Feature feature) {
+    public void set(Module module) {
         for (Command command : commands) {
-            command.set(feature);
+            command.set(module);
         }
     }
 

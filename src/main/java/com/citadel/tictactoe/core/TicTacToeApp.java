@@ -3,17 +3,17 @@ package com.citadel.tictactoe.core;
 import com.citadel.tictactoe.core.config.AppConfig;
 import com.citadel.tictactoe.core.config.LogicType;
 import com.citadel.tictactoe.core.config.ViewType;
-import com.citadel.tictactoe.core.features.*;
 import com.citadel.tictactoe.core.javafx.JavaFxTicTacToeApp;
-import com.citadel.tictactoe.models.features.achievements.AchievementTracker;
-import com.citadel.tictactoe.models.features.game.GameHistoryRegistry;
-import com.citadel.tictactoe.models.features.game.GameRegistry;
-import com.citadel.tictactoe.models.features.player.ProfileRegistry;
-import com.citadel.tictactoe.models.features.statistics.Statistics;
+import com.citadel.tictactoe.core.modules.*;
+import com.citadel.tictactoe.models.modules.achievements.AchievementTracker;
+import com.citadel.tictactoe.models.modules.game.GameHistoryRegistry;
+import com.citadel.tictactoe.models.modules.game.GameRegistry;
+import com.citadel.tictactoe.models.modules.player.ProfileRegistry;
+import com.citadel.tictactoe.models.modules.statistics.Statistics;
 import com.citadel.tictactoe.models.persistence.PersistenceType;
 import com.citadel.tictactoe.models.persistence.repository.factory.DaoFactory;
 import com.citadel.tictactoe.views.console.core.menus.MainMenu;
-import com.citadel.tictactoe.views.console.core.menus.MainMenuFeatures;
+import com.citadel.tictactoe.views.console.core.menus.MainMenuModules;
 import javafx.application.Application;
 
 public class TicTacToeApp {
@@ -37,14 +37,14 @@ public class TicTacToeApp {
             return;
         }
 
-        MainMenuFeatures features = new MainMenuFeatures(
-                new LoadFeature(gameRegistry),
-                new ReplayFeature(gameHistoryRegistry),
-                new StatisticsFeature(statistics, profileRegistry),
-                new ProfileFeature(profileRegistry),
-                new AchievementsFeature(achievementTracker));
-        MainMenu menu = new MainMenu(features);
-        menu.set(new GameFeature(gameRegistry));
+        MainMenuModules modules = new MainMenuModules(
+                new LoadModule(gameRegistry),
+                new ReplayModule(gameHistoryRegistry),
+                new StatisticsModule(statistics, profileRegistry),
+                new ProfileModule(profileRegistry),
+                new AchievementsModule(achievementTracker));
+        MainMenu menu = new MainMenu(modules);
+        menu.set(new GameModule(gameRegistry));
         menu.execute();
     }
 }

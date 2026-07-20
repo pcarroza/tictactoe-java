@@ -1,14 +1,14 @@
 @startuml secuencia-estadisticas
 actor Jugador
-participant StatisticsFeature
+participant StatisticsModule
 participant LocalStatisticsController
 participant ConsoleStatisticsView
 participant Statistics
 participant ProfileRegistry
 
-Jugador -> StatisticsFeature : selecciona "Estadísticas"
-StatisticsFeature -> LocalStatisticsController : new(statistics, profileRegistry)
-StatisticsFeature -> ConsoleStatisticsView : interact(controller)
+Jugador -> StatisticsModule : selecciona "Estadísticas"
+StatisticsModule -> LocalStatisticsController : new(statistics, profileRegistry)
+StatisticsModule -> ConsoleStatisticsView : interact(controller)
 ConsoleStatisticsView -> LocalStatisticsController : getTotalGames()
 LocalStatisticsController -> Statistics : getTotalGames()
 ConsoleStatisticsView -> LocalStatisticsController : getWins(XS) / getWins(OS)
@@ -16,4 +16,5 @@ LocalStatisticsController -> Statistics : getWins(player)
 ConsoleStatisticsView -> LocalStatisticsController : getName(XS) / getName(OS)
 LocalStatisticsController -> ProfileRegistry : findByToken(player)
 ConsoleStatisticsView -> Jugador : muestra estadísticas
+
 @enduml

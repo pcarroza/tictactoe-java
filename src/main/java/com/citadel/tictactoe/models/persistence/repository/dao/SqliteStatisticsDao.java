@@ -1,6 +1,6 @@
 package com.citadel.tictactoe.models.persistence.repository.dao;
 
-import com.citadel.tictactoe.models.features.game.Player;
+import com.citadel.tictactoe.models.modules.game.Player;
 import com.citadel.tictactoe.models.persistence.models.StatisticsDto;
 
 import java.nio.file.Path;

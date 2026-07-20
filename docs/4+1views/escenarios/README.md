@@ -4,12 +4,12 @@ El actor único es **Jugador** (app de consola, un solo usuario). `paquetes-caso
 
 | Archivo | Dominio | Disparado por (código) |
 |---|---|---|
-| `partida.puml` | Partida | `GameMenu` → `StartGameCommand` → `GameFeature` |
-| `persistencia.puml` | Persistencia | `LoadGameCommand` → `LoadFeature` |
-| `repeticion.puml` | Repetición | `ReplayGameCommand` → `ReplayFeature` |
-| `estadisticas.puml` | Estadísticas | `ShowStatsCommand` → `StatisticsFeature` |
-| `logros.puml` | Logros | `ShowAchievementsCommand` → `AchievementsFeature` |
-| `perfil.puml` | Perfil | `ProfileCommand` → `ProfileFeature` |
+| `partida.puml` | Partida | `GameMenu` → `StartGameCommand` → `GameModule` |
+| `persistencia.puml` | Persistencia | `LoadGameCommand` → `LoadModule` |
+| `repeticion.puml` | Repetición | `ReplayGameCommand` → `ReplayModule` |
+| `estadisticas.puml` | Estadísticas | `ShowStatsCommand` → `StatisticsModule` |
+| `logros.puml` | Logros | `ShowAchievementsCommand` → `AchievementsModule` |
+| `perfil.puml` | Perfil | `ProfileCommand` → `ProfileModule` |
 
 Todos estos comandos se registran en `views/console/core/menus/MainMenu.java`.
 

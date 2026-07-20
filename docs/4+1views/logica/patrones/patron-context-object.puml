@@ -25,29 +25,29 @@ class TicTacToeApp {
 }
 TicTacToeApp ..> ConsoleContext : new(...) — una sola vez
 
-class GameFeature
-class LoadFeature
-class StatisticsFeature
-class ReplayFeature
-class ProfileFeature
-class AchievementsFeature
+class GameModule
+class LoadModule
+class StatisticsModule
+class ReplayModule
+class ProfileModule
+class AchievementsModule
 class MainMenu
 class GameMenu
 
-TicTacToeApp ..> GameFeature : new(gameRegistry, consoleContext)
-TicTacToeApp ..> LoadFeature : new(gameRegistry, consoleContext)
-TicTacToeApp ..> StatisticsFeature : new(statistics, profileRegistry, consoleContext)
-TicTacToeApp ..> ReplayFeature : new(gameHistoryRegistry, consoleContext)
-TicTacToeApp ..> ProfileFeature : new(profileRegistry, consoleContext)
-TicTacToeApp ..> AchievementsFeature : new(achievementTracker, consoleContext)
-TicTacToeApp ..> MainMenu : new(features, consoleContext)
+TicTacToeApp ..> GameModule : new(gameRegistry, consoleContext)
+TicTacToeApp ..> LoadModule : new(gameRegistry, consoleContext)
+TicTacToeApp ..> StatisticsModule : new(statistics, profileRegistry, consoleContext)
+TicTacToeApp ..> ReplayModule : new(gameHistoryRegistry, consoleContext)
+TicTacToeApp ..> ProfileModule : new(profileRegistry, consoleContext)
+TicTacToeApp ..> AchievementsModule : new(achievementTracker, consoleContext)
+TicTacToeApp ..> MainMenu : new(modules, consoleContext)
 MainMenu ..> GameMenu : new(consoleContext)
 
 class ConsoleGameView
 class BoardView
 class StartView
 
-GameFeature ..> ConsoleGameView : ViewType.CONSOLE.createGameView(consoleContext)
+GameModule ..> ConsoleGameView : ViewType.CONSOLE.createGameView(consoleContext)
 ConsoleGameView ..> BoardView : new(consoleContext)
 ConsoleGameView ..> StartView : new(boardView, consoleContext)
 

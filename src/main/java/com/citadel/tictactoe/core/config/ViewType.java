@@ -1,17 +1,17 @@
 package com.citadel.tictactoe.core.config;
 
-import com.citadel.tictactoe.views.console.features.achievements.ConsoleAchievementsView;
-import com.citadel.tictactoe.views.console.features.game.ConsoleGameView;
-import com.citadel.tictactoe.views.console.features.game.decorator.DebugView;
-import com.citadel.tictactoe.views.console.features.game.decorator.TimestampedView;
-import com.citadel.tictactoe.views.console.features.game.decorator.TurnNumberedView;
-import com.citadel.tictactoe.views.console.features.load.ConsoleLoadView;
-import com.citadel.tictactoe.views.console.features.player.ConsoleProfileView;
-import com.citadel.tictactoe.views.console.features.replay.ConsoleReplayView;
-import com.citadel.tictactoe.views.console.features.replay.ConsoleSelectReplayView;
-import com.citadel.tictactoe.views.console.features.statistics.ConsoleStatisticsView;
+import com.citadel.tictactoe.views.console.modules.achievements.ConsoleAchievementsView;
+import com.citadel.tictactoe.views.console.modules.game.ConsoleGameView;
+import com.citadel.tictactoe.views.console.modules.game.decorator.DebugView;
+import com.citadel.tictactoe.views.console.modules.game.decorator.TimestampedView;
+import com.citadel.tictactoe.views.console.modules.game.decorator.TurnNumberedView;
+import com.citadel.tictactoe.views.console.modules.load.ConsoleLoadView;
+import com.citadel.tictactoe.views.console.modules.player.ConsoleProfileView;
+import com.citadel.tictactoe.views.console.modules.replay.ConsoleReplayView;
+import com.citadel.tictactoe.views.console.modules.replay.ConsoleSelectReplayView;
+import com.citadel.tictactoe.views.console.modules.statistics.ConsoleStatisticsView;
 import com.citadel.tictactoe.views.core.*;
-import com.citadel.tictactoe.views.javafx.features.game.JavaFxGameView;
+import com.citadel.tictactoe.views.javafx.modules.game.JavaFxGameView;
 
 public enum ViewType {
 

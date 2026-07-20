@@ -1,7 +1,7 @@
 package com.citadel.tictactoe.game;
 
-import com.citadel.tictactoe.models.features.game.Player;
-import com.citadel.tictactoe.models.features.game.Turn;
+import com.citadel.tictactoe.models.modules.game.Player;
+import com.citadel.tictactoe.models.modules.game.Turn;
 import org.junit.Before;
 import org.junit.Test;
 
