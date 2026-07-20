@@ -43,7 +43,7 @@ public class LocalLoadController implements LoadController {
     }
 
     @Override
-    public void accept(LoadControllerVisitor visitor) {
-        visitor.visit(this);
+    public void accept(LoadControllerVisitor loadControllerVisitor) {
+        loadControllerVisitor.visit(this);
     }
 }

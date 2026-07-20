@@ -20,7 +20,6 @@ class JavaFxStartView {
         CheckBox hardAi = new CheckBox("IA en modo difícil (solo si hay menos de 2 jugadores)");
         Button confirm = new Button("Comenzar");
         confirm.setOnAction(event -> confirm(startController, players.getValue(), hardAi.isSelected(), onDone));
-
         VBox box = new VBox(12, new Label("¿Cuántos jugadores? (0 = IA vs IA)"), players, hardAi, confirm);
         box.setAlignment(Pos.CENTER);
         stage.setScene(new Scene(box, 600, 600));

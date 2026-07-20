@@ -15,11 +15,6 @@ public class LocalReplayController implements ReplayController {
     }
 
     @Override
-    public void accept(ReplayControllerVisitor visitor) {
-        visitor.visit(this);
-    }
-
-    @Override
     public Player getColor(Coordinate coordinate) {
         return replayBoard.getColor(coordinate);
     }
@@ -57,5 +52,10 @@ public class LocalReplayController implements ReplayController {
     @Override
     public void exit() {
         replayBoard.exit();
+    }
+
+    @Override
+    public void accept(ReplayControllerVisitor replayControllerVisitor) {
+        replayControllerVisitor.visit(this);
     }
 }

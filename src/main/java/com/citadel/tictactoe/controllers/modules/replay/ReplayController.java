@@ -5,8 +5,6 @@ import com.citadel.tictactoe.models.modules.game.Player;
 
 public interface ReplayController {
 
-    void accept(ReplayControllerVisitor visitor);
-
     Player getColor(Coordinate coordiante);
 
     int getPosition();
@@ -22,4 +20,6 @@ public interface ReplayController {
     void previous();
 
     void exit();
+
+    void accept(ReplayControllerVisitor visitor);
 }

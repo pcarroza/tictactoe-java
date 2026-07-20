@@ -52,8 +52,11 @@ class GameSnapshotMapper {
     private static List<MoveRecordEntity> historyToEntity(MoveHistory history) {
         List<MoveRecordEntity> entity = new ArrayList<>();
         history.forEach(record -> entity.add(new MoveRecordEntity(
-                record.player().name(), record.type().name(),
-                record.coordinate().getRow(), record.coordinate().getColumn(), record.turn())));
+                record.player().name(),
+                record.type().name(),
+                record.coordinate().getRow(),
+                record.coordinate().getColumn(),
+                record.turn())));
         return entity;
     }
 
@@ -71,8 +74,8 @@ class GameSnapshotMapper {
 
     private static MoveHistory historyToDomain(List<MoveRecordEntity> history) {
         MoveHistory domain = new MoveHistory();
-        history.forEach(record -> domain.record(new MoveRecord(
-                Player.valueOf(record.player()), MoveType.valueOf(record.type()),
+        history.forEach(record -> domain.record(
+                new MoveRecord(Player.valueOf(record.player()), MoveType.valueOf(record.type()),
                 new Coordinate(record.row(), record.column()), record.turn())));
         return domain;
     }

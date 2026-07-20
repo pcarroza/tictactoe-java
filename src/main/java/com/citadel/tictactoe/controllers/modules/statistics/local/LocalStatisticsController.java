@@ -10,11 +10,11 @@ public class LocalStatisticsController implements StatisticsController {
 
     private final Statistics statistics;
 
-    private final ProfileRegistry registry;
+    private final ProfileRegistry profileRegistry;
 
-    public LocalStatisticsController(Statistics statistics, ProfileRegistry registry) {
+    public LocalStatisticsController(Statistics statistics, ProfileRegistry profileRegistry) {
         this.statistics = statistics;
-        this.registry = registry;
+        this.profileRegistry = profileRegistry;
     }
 
     @Override
@@ -29,6 +29,6 @@ public class LocalStatisticsController implements StatisticsController {
 
     @Override
     public String getName(Player player) {
-        return registry.findBy(player).map(PlayerProfile::name).orElse(player == Player.XS ? "X" : "O");
+        return profileRegistry.findBy(player).map(PlayerProfile::name).orElse(player == Player.XS ? "X" : "O");
     }
 }

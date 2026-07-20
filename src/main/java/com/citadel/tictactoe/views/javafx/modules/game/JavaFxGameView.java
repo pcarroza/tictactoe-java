@@ -35,9 +35,9 @@ public class JavaFxGameView implements GameView {
     }
 
     @Override
-    public void interact(GameOperationController operationController) {
-        assert operationController != null;
-        operationController.accept(this);
+    public void interact(GameOperationController gameOperationController) {
+        assert gameOperationController != null;
+        gameOperationController.accept(this);
     }
 
     @Override

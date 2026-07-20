@@ -59,8 +59,9 @@ class JavaFxPlacementView implements PlacementControllerVisitor {
     }
 
     private void requestMoveTarget(MoveController moveController, Coordinate origin) {
-        new JavaFxMoveTargetCoordinateRequest(boardView, origin)
-                .request(moveController.getCoordinateController(), target -> tryMoveTarget(moveController, origin, target));
+        new JavaFxMoveTargetCoordinateRequest(boardView, origin).request(
+                moveController.getCoordinateController(),
+                target -> tryMoveTarget(moveController, origin, target));
     }
 
     private void tryMoveTarget(MoveController moveController, Coordinate origin, Coordinate target) {
