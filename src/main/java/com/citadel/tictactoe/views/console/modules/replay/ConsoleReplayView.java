@@ -63,16 +63,16 @@ public class ConsoleReplayView implements ReplayView {
     private List<Runnable> buildOptions(Terminal terminal, ReplayController controller) {
         List<Runnable> options = new ArrayList<>();
         if (controller.hasNext()) {
-            addOption(terminal, options, "Siguiente", controller::next);
+            add(terminal, options, "Siguiente", controller::next);
         }
         if (controller.hasPrevious()) {
-            addOption(terminal, options, "Anterior", controller::previous);
+            add(terminal, options, "Anterior", controller::previous);
         }
-        addOption(terminal, options, "Salir", controller::exit);
+        add(terminal, options, "Salir", controller::exit);
         return options;
     }
 
-    private void addOption(Terminal terminal, List<Runnable> options, String label, Runnable action) {
+    private void add(Terminal terminal, List<Runnable> options, String label, Runnable action) {
         options.add(action);
         terminal.writeln("  [" + options.size() + "] " + label);
     }

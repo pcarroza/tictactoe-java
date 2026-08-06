@@ -46,20 +46,20 @@ public class GameView implements PlacementControllerVisitor {
     private List<Runnable> buildOptions(PlacementController controller) {
         List<Runnable> options = new ArrayList<>();
         Terminal terminal = Terminal.getInstance();
-        addOption(terminal, options, "Jugar turno", () -> controller.accept(this));
-        addOption(terminal, options, "Guardar partida", controller::save);
+        add(terminal, options, "Jugar turno", () -> controller.accept(this));
+        add(terminal, options, "Guardar partida", controller::save);
         if (controller.canUndo()) {
-            addOption(terminal, options, "Deshacer movimiento", controller::undo);
+            add(terminal, options, "Deshacer movimiento", controller::undo);
         }
         if (controller.canRedo()) {
-            addOption(terminal, options, "Rehacer movimiento", controller::redo);
+            add(terminal, options, "Rehacer movimiento", controller::redo);
         }
-        addOption(terminal, options, "Ver historial", () -> historyView.show(controller.getMoveHistory()));
-        addOption(terminal, options, "Salir", controller::exit);
+        add(terminal, options, "Ver historial", () -> historyView.show(controller.getMoveHistory()));
+        add(terminal, options, "Salir", controller::exit);
         return options;
     }
 
-    private void addOption(Terminal terminal, List<Runnable> options, String label, Runnable action) {
+    private void add(Terminal terminal, List<Runnable> options, String label, Runnable action) {
         options.add(action);
         terminal.writeln("  [" + options.size() + "] " + label);
     }
