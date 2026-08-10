@@ -29,6 +29,9 @@ public class TicTacToeApp {
         AchievementTracker achievementTracker = new AchievementTracker();
 
         AppConfig.set(LogicType.LOCAL, VIEW_TYPE);
+
+
+        
         EventWiring.wire(statistics, gameHistoryRegistry, achievementTracker);
 
         if (VIEW_TYPE == ViewType.JAVAFX) {
