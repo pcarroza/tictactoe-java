@@ -6,22 +6,22 @@ import com.citadel.tictactoe.models.persistence.service.StatisticsService;
 
 public class Statistics {
 
-    private final StatisticsService service;
+    private final StatisticsService statisticsService;
 
     public Statistics(StatisticsDao statisticsDao) {
-        this.service = new StatisticsService(statisticsDao);
+        this.statisticsService = new StatisticsService(statisticsDao);
     }
 
     public void recordWin(Player player) {
         assert player != Player.NONE;
-        service.recordWin(player);
+        statisticsService.recordWin(player);
     }
 
     public int getWins(Player player) {
-        return service.getWins(player);
+        return statisticsService.getWins(player);
     }
 
     public int getTotalGames() {
-        return service.getTotalGames();
+        return statisticsService.getTotalGames();
     }
 }
